@@ -1,0 +1,458 @@
+#N canvas 525 331 556 382 12;
+#X obj 22 14 cnv 15 500 200 empty empty empty 20 12 0 14 -262004 -66577
+0;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array sine 259 float 5;
+#A 0 -0.0195666 0 0.0195666 0.0391215 0.0586528 0.0781487 0.0975976
+0.116988 0.136307 0.155545 0.174689 0.193727 0.212649 0.231443 0.250097
+0.268601 0.286943 0.305112 0.323098 0.340888 0.358474 0.375843 0.392986
+0.409892 0.426552 0.442954 0.45909 0.474949 0.490522 0.5058 0.520773
+0.535432 0.549768 0.563774 0.57744 0.590758 0.60372 0.616319 0.628546
+0.640395 0.651858 0.662928 0.673599 0.683864 0.693718 0.703153 0.712165
+0.720748 0.728897 0.736606 0.743872 0.75069 0.757056 0.762966 0.768416
+0.773403 0.777924 0.781977 0.785559 0.788668 0.791301 0.793458 0.795137
+0.796337 0.797057 0.797297 0.797057 0.796337 0.795137 0.793458 0.791301
+0.788668 0.785559 0.781978 0.777925 0.773404 0.768416 0.762966 0.757057
+0.750691 0.743873 0.736607 0.728898 0.720749 0.712166 0.703154 0.693719
+0.683865 0.6736 0.662929 0.651859 0.640396 0.628547 0.61632 0.603722
+0.590759 0.577441 0.563775 0.54977 0.535433 0.520774 0.505801 0.490524
+0.474951 0.459092 0.442956 0.426554 0.409894 0.392988 0.375845 0.358476
+0.34089 0.323099 0.305114 0.286945 0.268603 0.250099 0.231445 0.212651
+0.193729 0.174691 0.155547 0.136309 0.11699 0.0975997 0.0781508 0.0586549
+0.0391236 0.0195688 2.1157e-06 -0.0195645 -0.0391194 -0.0586507 -0.0781466
+-0.0975955 -0.116986 -0.136305 -0.155543 -0.174687 -0.193725 -0.212647
+-0.231441 -0.250095 -0.268599 -0.286941 -0.30511 -0.323096 -0.340886
+-0.358472 -0.375841 -0.392984 -0.409891 -0.42655 -0.442953 -0.459088
+-0.474947 -0.49052 -0.505798 -0.520771 -0.53543 -0.549767 -0.563772
+-0.577438 -0.590757 -0.603719 -0.616317 -0.628545 -0.640394 -0.651857
+-0.662927 -0.673598 -0.683863 -0.693717 -0.703152 -0.712164 -0.720747
+-0.728896 -0.736606 -0.743872 -0.75069 -0.757055 -0.762965 -0.768415
+-0.773403 -0.777924 -0.781977 -0.785559 -0.788667 -0.791301 -0.793458
+-0.795137 -0.796337 -0.797057 -0.797297 -0.797057 -0.796337 -0.795137
+-0.793458 -0.791302 -0.788668 -0.78556 -0.781978 -0.777925 -0.773404
+-0.768417 -0.762967 -0.757057 -0.750692 -0.743874 -0.736608 -0.728898
+-0.72075 -0.712167 -0.703155 -0.69372 -0.683867 -0.673601 -0.66293
+-0.65186 -0.640397 -0.628549 -0.616321 -0.603723 -0.590761 -0.577443
+-0.563777 -0.549771 -0.535435 -0.520776 -0.505803 -0.490525 -0.474952
+-0.459093 -0.442958 -0.426555 -0.409896 -0.39299 -0.375847 -0.358477
+-0.340892 -0.323101 -0.305116 -0.286947 -0.268605 -0.250101 -0.231447
+-0.212653 -0.193731 -0.174693 -0.155549 -0.136312 -0.116992 -0.0976018
+-0.0781529 -0.058657 -0.0391257 -0.0195709 -4.2314e-06 0.0195624;
+#X coords 0 1 258 -1 150 70 1 0 0;
+#X restore 35 247 graph;
+#X obj 466 41 vsl 40 135 0 255 0 0 empty output_rcv output 0 -9 0 10
+-262144 -1 -1 6726 1;
+#X obj 41 41 hsl 75 15 0 1 0 1 rate rate_rcv rate -2 -8 0 10 -262144
+-1 -1 1363 1;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array random 128 float 3;
+#A 0 0.64 0.64 0.64 0.64 0.64 0.64 -0.86 -0.86 -0.86 -0.86 -0.86 -0.86
+-0.86 -0.04 -0.04 -0.04 -0.04 -0.04 -0.04 -0.65 -0.65 -0.65 -0.65 -0.65
+-0.65 -0.65 0.15 0.15 0.15 0.15 0.15 0.15 -0.34 -0.34 -0.34 -0.34 -0.34
+-0.34 -0.34 0.66 0.66 0.66 0.66 0.66 0.66 0.66 -0.42 -0.42 -0.42 -0.42
+-0.42 -0.42 0.54 0.54 0.54 0.54 0.54 0.54 0.54 -0.45 -0.45 -0.45 -0.45
+-0.45 -0.45 -0.2 -0.2 -0.2 -0.2 -0.2 -0.2 -0.2 0.59 0.59 0.59 0.59
+0.59 0.59 -0.91 -0.91 -0.91 -0.91 -0.91 -0.91 -0.91 -0.27 -0.27 -0.27
+-0.27 -0.27 -0.27 -0.27 0.65 0.65 0.65 0.65 0.65 0.65 0.25 0.25 0.25
+0.25 0.25 0.25 0.25 -0.44 -0.44 -0.44 -0.44 -0.44 -0.44 -0.35 -0.35
+-0.35 -0.35 -0.35 -0.35 -0.35 0.21 0.21 0.21 0.21 0.21 0.21 0.47 0.47
+0.47 0.47;
+#X coords 0 1 127 -1 150 70 1 0 0;
+#X restore 195 247 graph;
+#N canvas 437 100 967 778 make_random 0;
+#X obj 90 168 until;
+#X obj 90 196 t b b;
+#X msg 133 235 1;
+#X obj 138 264 + 0;
+#X floatatom 176 264 5 0 0 0 - - -;
+#X msg 176 236 0;
+#X obj 119 104 t b b;
+#X obj 121 69 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 77 525 / 100;
+#X obj 74 453 random 200;
+#X obj 80 555 - 1;
+#X obj 74 585 tabwrite random;
+#X obj 148 11 loadbang;
+#X obj 108 369 change;
+#X obj 95 392 t b;
+#X obj 61 487 f;
+#X floatatom 240 217 5 0 0 0 - - -;
+#X obj 231 102 t b f;
+#X obj 252 5 r random_density;
+#X obj 240 193 expr 128/$f1;
+#X obj 251 30 * 32;
+#X obj 298 316 /;
+#X floatatom 298 340 5 0 0 0 - - -;
+#X obj 309 371 i;
+#X obj 320 430 s resolution;
+#X floatatom 139 509 5 0 0 0 - - -;
+#X obj 251 54 clip 1 127;
+#X floatatom 255 397 5 0 0 0 - - -;
+#X msg 83 135 128;
+#X obj 195 299 - 1;
+#X msg 219 523 -1;
+#X obj 350 81 f;
+#X obj 349 50 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 176 137 s made_random;
+#X obj 30 12 r loop_end;
+#X obj 34 58 spigot;
+#X obj 76 35 r re_random;
+#X connect 0 0 1 0;
+#X connect 1 0 15 0;
+#X connect 1 1 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 3 1;
+#X connect 4 0 21 0;
+#X connect 4 0 29 0;
+#X connect 5 0 4 0;
+#X connect 6 0 28 0;
+#X connect 6 1 5 0;
+#X connect 7 0 6 0;
+#X connect 7 0 33 0;
+#X connect 8 0 10 0;
+#X connect 9 0 15 1;
+#X connect 10 0 11 0;
+#X connect 12 0 7 0;
+#X connect 13 0 14 0;
+#X connect 14 0 9 0;
+#X connect 15 0 8 0;
+#X connect 16 0 21 1;
+#X connect 17 0 7 0;
+#X connect 17 1 19 0;
+#X connect 18 0 20 0;
+#X connect 19 0 16 0;
+#X connect 20 0 26 0;
+#X connect 21 0 22 0;
+#X connect 22 0 23 0;
+#X connect 23 0 27 0;
+#X connect 25 0 11 0;
+#X connect 26 0 17 0;
+#X connect 26 0 31 1;
+#X connect 27 0 13 0;
+#X connect 27 0 24 0;
+#X connect 28 0 0 0;
+#X connect 29 0 11 1;
+#X connect 30 0 11 1;
+#X connect 31 0 17 0;
+#X connect 32 0 31 0;
+#X connect 34 0 35 0;
+#X connect 35 0 7 0;
+#X connect 36 0 35 1;
+#X restore 370 250 pd make_random;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array result 128 float 5;
+#A 0 29 33 37 42 47 52 0 0 0 0 0 5 10 57 61 66 71 75 80 53 58 62 67
+71 75 79 124 128 132 135 139 143 123 126 130 133 136 140 143 197 200
+203 205 208 210 213 160 162 164 166 168 170 220 221 222 224 225 226
+227 178 178 179 179 180 180 193 193 193 192 192 191 191 230 229 228
+227 225 224 146 144 142 140 138 136 134 166 163 161 158 156 153 150
+193 190 186 183 180 176 152 148 144 140 137 133 129 90 86 82 78 73
+69 68 64 59 55 50 45 41 64 59 54 49 44 39 48 43 38 28;
+#X coords 0 255 127 0 300 140 1 0 0;
+#X restore 166 38 graph;
+#N canvas 829 378 1122 401 sinesum_method 0;
+#X obj 405 323 random 1000;
+#X obj 405 346 / 1000;
+#X obj 350 295 random 1000;
+#X obj 350 318 / 1000;
+#X obj 285 260 random 1000;
+#X obj 285 283 / 1000;
+#X obj 190 261 random 1000;
+#X obj 190 284 / 1000;
+#X obj 178 163 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 29 404 \; array1 normalize \$1;
+#X obj 70 328 r depth;
+#X obj 25 367 f;
+#X obj 245 406 pack 0 0 0 0 0 0 0 0, f 65;
+#X obj 680 320 random 1000;
+#X obj 680 343 / 1000;
+#X obj 625 292 random 1000;
+#X obj 625 315 / 1000;
+#X obj 560 257 random 1000;
+#X obj 560 280 / 1000;
+#X obj 465 258 random 1000;
+#X obj 465 281 / 1000;
+#X obj 193 193 t b b b b b b b b b;
+#X text 220 161 alternative method;
+#X obj 59 22 r depth;
+#X obj 68 92 f;
+#X obj 132 42 t b;
+#X obj 132 18 r random_density;
+#X msg 69 124 \; sine sinesum 256 \$1;
+#X msg 226 456 \; sine sinesum 256 1 \$1 \$2 \$3 \$4 \$5 \$6 \$7 \$8
+;
+#X obj 173 58 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 283 15;
+#X connect 0 0 1 0;
+#X connect 1 0 12 3;
+#X connect 2 0 3 0;
+#X connect 3 0 12 2;
+#X connect 4 0 5 0;
+#X connect 5 0 12 1;
+#X connect 6 0 7 0;
+#X connect 7 0 12 0;
+#X connect 8 0 21 0;
+#X connect 10 0 11 1;
+#X connect 11 0 9 0;
+#X connect 12 0 28 0;
+#X connect 13 0 14 0;
+#X connect 14 0 12 7;
+#X connect 15 0 16 0;
+#X connect 16 0 12 6;
+#X connect 17 0 18 0;
+#X connect 18 0 12 5;
+#X connect 19 0 20 0;
+#X connect 20 0 12 4;
+#X connect 21 0 11 0;
+#X connect 21 1 6 0;
+#X connect 21 2 4 0;
+#X connect 21 3 2 0;
+#X connect 21 4 0 0;
+#X connect 21 5 19 0;
+#X connect 21 6 17 0;
+#X connect 21 7 15 0;
+#X connect 21 8 13 0;
+#X connect 23 0 24 0;
+#X connect 24 0 27 0;
+#X connect 25 0 24 0;
+#X connect 26 0 25 0;
+#X connect 29 0 24 0;
+#X restore 370 273 pd sinesum_method;
+#X obj 207 334 hsl 75 15 0 1 0 1 random_density random_density_rcv
+random_density -2 -8 0 10 -262144 -1 -1 4500 1;
+#N canvas 582 66 1104 756 read_result 0;
+#X floatatom 96 280 5 0 0 0 - - -;
+#X obj 100 383 i;
+#X floatatom 100 407 5 0 0 0 - - -;
+#X obj 99 676 s output_rcv;
+#X obj 87 172 metro 2;
+#X obj 92 145 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X msg 87 196 1;
+#X obj 92 225 + 0;
+#X floatatom 96 251 5 0 0 0 - - -;
+#X floatatom 148 139 5 0 0 0 - - -;
+#X msg 130 197 0;
+#X floatatom 141 51 5 0 0 0 - - -;
+#X floatatom 146 107 5 0 0 0 - - -;
+#X obj 139 24 r rate;
+#X obj 142 351 tabread result;
+#X msg 97 615 \$1 \$2;
+#X obj 116 568 pack 0 0;
+#X obj 97 638 line;
+#X floatatom 163 531 5 0 0 0 - - -;
+#X text 207 530 smoothing;
+#X obj 391 341 s output_rcv;
+#X obj 369 59 r rate;
+#X obj 384 159 sel 0 1;
+#X obj 377 191 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 445 182 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 397 228 0;
+#X msg 437 227 255;
+#X obj 509 172 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg 529 214 1;
+#X obj 509 296 change;
+#X msg 495 224 0;
+#X obj 97 305 % 128;
+#X obj 254 446 r resolution;
+#X floatatom 254 470 5 0 0 0 - - -;
+#X obj 260 352 s current_loc;
+#X obj 194 217 * 128;
+#X floatatom 194 241 5 0 0 0 - - -;
+#X text 291 533 comment;
+#X obj 415 522 * 200;
+#X floatatom 423 599 5 0 0 0 - - -;
+#X obj 414 476 r random_depth;
+#X obj 416 553 + 5;
+#X obj 548 473 r rate;
+#X obj 530 544 abs;
+#X floatatom 529 579 5 0 0 0 - - -;
+#X floatatom 571 540 5 0 0 0 - - -;
+#X obj 533 515 - 1;
+#X obj 400 637 *;
+#X obj 529 602 t b f;
+#X obj 146 85 expr 10/$f1;
+#X obj 678 28 random 100;
+#X obj 674 127 < 0;
+#X obj 699 57 r snack_chance;
+#X obj 699 105 i;
+#X obj 675 161 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 676 201 sel 1;
+#X msg 663 237 0;
+#X obj 706 273 delay;
+#X msg 706 297 1;
+#X obj 40 40 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 685 350 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 718 352 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 722 236 * 30;
+#X obj 700 81 * 5;
+#X obj 223 278 sel 0;
+#X obj 223 302 s loop_end;
+#X connect 0 0 31 0;
+#X connect 1 0 2 0;
+#X connect 2 0 16 0;
+#X connect 4 0 6 0;
+#X connect 4 0 50 0;
+#X connect 5 0 4 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 8 0 7 1;
+#X connect 8 0 0 0;
+#X connect 9 0 4 1;
+#X connect 9 0 35 0;
+#X connect 9 0 62 0;
+#X connect 10 0 8 0;
+#X connect 11 0 49 0;
+#X connect 12 0 9 0;
+#X connect 13 0 11 0;
+#X connect 14 0 1 0;
+#X connect 15 0 17 0;
+#X connect 16 0 15 0;
+#X connect 17 0 3 0;
+#X connect 18 0 16 1;
+#X connect 21 0 22 0;
+#X connect 22 0 23 0;
+#X connect 22 1 24 0;
+#X connect 22 2 27 0;
+#X connect 23 0 25 0;
+#X connect 23 0 30 0;
+#X connect 24 0 26 0;
+#X connect 24 0 30 0;
+#X connect 25 0 20 0;
+#X connect 26 0 20 0;
+#X connect 27 0 28 0;
+#X connect 28 0 29 0;
+#X connect 29 0 5 0;
+#X connect 30 0 29 0;
+#X connect 31 0 14 0;
+#X connect 31 0 34 0;
+#X connect 31 0 64 0;
+#X connect 32 0 33 0;
+#X connect 35 0 36 0;
+#X connect 38 0 41 0;
+#X connect 39 0 47 0;
+#X connect 40 0 38 0;
+#X connect 41 0 39 0;
+#X connect 42 0 46 0;
+#X connect 43 0 44 0;
+#X connect 44 0 48 0;
+#X connect 46 0 43 0;
+#X connect 46 0 45 0;
+#X connect 47 0 18 0;
+#X connect 48 0 47 0;
+#X connect 48 1 47 1;
+#X connect 49 0 12 0;
+#X connect 50 0 51 0;
+#X connect 51 0 54 0;
+#X connect 52 0 63 0;
+#X connect 53 0 51 1;
+#X connect 54 0 55 0;
+#X connect 55 0 56 0;
+#X connect 55 0 57 0;
+#X connect 55 0 60 0;
+#X connect 56 0 5 0;
+#X connect 57 0 58 0;
+#X connect 57 0 61 0;
+#X connect 58 0 5 0;
+#X connect 62 0 57 1;
+#X connect 63 0 53 0;
+#X connect 64 0 65 0;
+#X restore 370 227 pd read_result;
+#N canvas 393 23 1293 687 combine_arrays 0;
+#X obj 239 63 r random_depth;
+#X obj 213 504 *;
+#X floatatom 213 527 5 0 0 0 - - -;
+#X obj 215 556 * 255;
+#X obj 216 583 i;
+#X floatatom 216 607 5 0 0 0 - - -;
+#X obj 184 453 tabread random;
+#X floatatom 192 478 5 0 0 0 - - -;
+#X obj 203 232 until;
+#X msg 195 196 259;
+#X msg 189 268 1;
+#X obj 194 297 + 0;
+#X floatatom 194 321 5 0 0 0 - - -;
+#X msg 232 269 0;
+#X obj 237 162 t b b f;
+#X obj 80 552 * 255;
+#X obj 81 579 i;
+#X floatatom 81 603 5 0 0 0 - - -;
+#X obj 165 647 +;
+#X obj 162 388 t f f f;
+#X obj 132 709 tabwrite result;
+#X obj 229 134 f;
+#X obj 161 60 r depth;
+#X obj 161 83 t b;
+#X obj 75 682 clip 0 255;
+#X obj 123 32 r random_density;
+#X obj 81 476 tabread sine;
+#X obj 261 103 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 332 80 r made_random;
+#X obj 324 355 hsl 75 15 0 1 0 1 random_depth random_depth_rcv random_depth
+-2 -8 0 10 -262144 -1 -1 1500 1;
+#X obj 433 358 hsl 75 15 0 1 0 1 depth depth_rcv depth -2 -8 0 10 -262144
+-1 -1 5900 1;
+#X obj 432 238 r combo_depth;
+#X obj 551 273 s depth_rcv;
+#X obj 432 262 - 1;
+#X obj 434 292 abs;
+#X obj 434 316 s random_depth_rcv;
+#X connect 0 0 21 0;
+#X connect 1 0 2 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 5 0 18 1;
+#X connect 6 0 7 0;
+#X connect 7 0 1 0;
+#X connect 8 0 10 0;
+#X connect 9 0 8 0;
+#X connect 10 0 11 0;
+#X connect 11 0 12 0;
+#X connect 12 0 11 1;
+#X connect 12 0 19 0;
+#X connect 13 0 12 0;
+#X connect 14 0 9 0;
+#X connect 14 1 13 0;
+#X connect 14 2 1 1;
+#X connect 15 0 16 0;
+#X connect 16 0 17 0;
+#X connect 17 0 18 0;
+#X connect 18 0 24 0;
+#X connect 19 0 26 0;
+#X connect 19 1 6 0;
+#X connect 19 2 20 1;
+#X connect 21 0 14 0;
+#X connect 22 0 23 0;
+#X connect 23 0 21 0;
+#X connect 24 0 20 0;
+#X connect 25 0 23 0;
+#X connect 26 0 15 0;
+#X connect 27 0 21 0;
+#X connect 28 0 27 0;
+#X connect 31 0 32 0;
+#X connect 31 0 33 0;
+#X connect 33 0 34 0;
+#X connect 34 0 35 0;
+#X restore 371 297 pd combine_arrays;
+#X obj 169 179 hsl 295 8 0 127 0 0 empty current_loc empty -2 -8 0
+10 -262144 -1 -1 6250 1;
+#X obj 41 90 hsl 75 15 0 1 0 1 combo_depth combo_depth_rcv combo_depth
+-2 -8 0 10 -262144 -1 -1 5900 1;
+#X obj 40 142 hsl 75 15 0 1 0 1 snack_chance snack_chance_rcv snack_chance
+-2 -8 0 10 -262144 -1 -1 0 1;
+#X obj 38 187 tgl 15 1 re_random re_random_rcv re_random 17 7 0 10
+-262144 -1 -1 1 1;
