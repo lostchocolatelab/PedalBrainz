@@ -100,14 +100,17 @@ void setRandoms() {
 
 void loop() {
 
+    //Potentiometer Top Right Rate Random
     valuePotentiometerA0 = potentiometerA0.read();
-    Serial.println("potentiometerA0: ");
-    Serial.println(valuePotentiometerA0);
+    //Serial.println("potentiometerA0: ");
+    //Serial.println(valuePotentiometerA0);
 
+    //Potentiometer Top Left Depth Random
     valuePotentiometerA1 = potentiometerA1.read();
     //Serial.println("potentiometerA1: ");
     //Serial.println(valuePotentiometerA1);
 
+    //Potentiometer Bottom Right Rate 
     valuePotentiometerA2 = potentiometerA2.read();
     //Serial.println("potentiometerA2: ");
     //Serial.println(valuePotentiometerA2);
