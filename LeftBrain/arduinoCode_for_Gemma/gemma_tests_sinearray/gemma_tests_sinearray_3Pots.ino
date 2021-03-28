@@ -16,12 +16,15 @@ int color;
 int targetSpeed = 1000; // length of the cycle, so bigger number is slower
 float randomAmount;
 
+//Potentiometer Top Right Rate Random A0
 /* Creating the object for reading the value from a potentiometer. */
 AnalogIn potentiometerA0(A0, BIT8);
 
+//Potentiometer Top Left Depth Random A1
 /* Creating the object for reading the value from a potentiometer. */
 AnalogIn potentiometerA1(A1, BIT8);
 
+//Potentiometer Bottom Right Rate A2
 /* Creating the object for reading the value from a potentiometer. */
 AnalogIn potentiometerA2(A2, BIT8);
 
@@ -100,17 +103,17 @@ void setRandoms() {
 
 void loop() {
 
-    //Potentiometer Top Right Rate Random
+    //Potentiometer Top Right Rate Random A0
     valuePotentiometerA0 = potentiometerA0.read();
     //Serial.println("potentiometerA0: ");
     //Serial.println(valuePotentiometerA0);
 
-    //Potentiometer Top Left Depth Random
+    //Potentiometer Top Left Depth Random A1
     valuePotentiometerA1 = potentiometerA1.read();
     //Serial.println("potentiometerA1: ");
     //Serial.println(valuePotentiometerA1);
 
-    //Potentiometer Bottom Right Rate 
+    //Potentiometer Bottom Right Rate A2
     valuePotentiometerA2 = potentiometerA2.read();
     //Serial.println("potentiometerA2: ");
     //Serial.println(valuePotentiometerA2);
