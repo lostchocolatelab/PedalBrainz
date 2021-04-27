@@ -1,5 +1,15 @@
 #include <Adafruit_DotStar.h>
 
+
+// TO-DO:
+// - make it so the length can be something other than 4096
+// - decide the best range of lengths
+// - implement snackChance
+// - smoothing the random jumps (or making the maximum randomness less?)
+// - decide on whether randoms should be set on each loop
+// - get rid of the arrays i'm not using
+// - probably other things
+
 //The function: Adafruit_DotStar(NUMPIXELS, DATAPIN, CLOCKPIN, DOTSTAR_BRG);
 //use internal data and clock definitions (INTERNAL_DS_DATA, INTERNAL_DS_CLK)
 
