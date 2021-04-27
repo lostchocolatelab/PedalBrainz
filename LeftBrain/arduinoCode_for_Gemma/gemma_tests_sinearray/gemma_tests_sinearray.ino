@@ -5,15 +5,20 @@
 
 Adafruit_DotStar pixel = Adafruit_DotStar(1, INTERNAL_DS_DATA, INTERNAL_DS_CLK, DOTSTAR_BGR);
 
-unsigned long milli = 0UL;
+unsigned long milli;
 unsigned long lastMillis;
-const int loopLength = 1024;
+const int loopLength = 2056; // size of the arrays that i'm using, i guess higher number is higher resolution?
 int currentLoc;
 int currentStep;
 int currentVal;
+int newCalibrate1;
+int newValue1;
 int color;
-int targetSpeed = 1000; // length of the cycle, so bigger number is slower
+int targetSpeed = 5000; // length of the cycle, so bigger number is slower
 float randomAmount;
+int knob1;
+int knob2;
+int knob3;
 
 
 PROGMEM const int sine256[] = {
@@ -58,28 +63,31 @@ PROGMEM const int sine2056[] = {
 33,33,33,33,32,32,32,31,31,31,31,30,30,30,30,29,29,29,29,28,28,28,28,28,27,27,27,27,26,26,26,26,25,25,25,25,24,24,24,24,24,23,23,23,23,22,22,22,22,22,21,21,21,21,20,20,20,20,20,19,19,19,19,19,18,18,18,18,18,17,17,17,17,17,16,16,16,16,16,15,15,15,15,15,15,14,14,14,14,14,14,13,13,13,13,13,12,12,12,12,
 12,12,11,11,11,11,11,11,11,10,10,10,10,10,10,9,9,9,9,9,9,9,8,8,8,8,8,8,8,8,7,7,7,7,7,7,7,7,6,6,6,6,6,6,6,6,5,5,5,5,5,5,5,5,5,4,4,4,4,4,4,4,4,4,4,4,3,3,3,3,3,3,3,3,3,3,3,3,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-}
+};
 
 const int randomDensity = 8;
 
 int randomCore[randomDensity];
-int random1024[loopLength];
+int randomNumbers[loopLength];
 
-int sum1024[loopLength];
+int sumArray[loopLength];
 
 void setup() {
 pixel.begin();
 setRandoms();
-    color = random(3);
+color = random(3);
+knob1 = analogRead(A0);
+knob2 = analogRead(A1);
+knob3 = analogRead(A2);
 }
 
 void setRandoms() {
   
     for (int j = 0; j < randomDensity; j++) { 
       randomCore[j] = (random(512)-256); // fill a random array of size=randomDensity
-      Serial.println(randomCore[j]);
+   //   Serial.println(randomCore[j]);
       for (int i = 0; i < (loopLength/randomDensity); i++) {
-      random1024[i+((loopLength/randomDensity)*j)] = randomCore[j]; // apply those randomDensity values evenly and sequentially into an array of 1024 values
+      randomNumbers[i+((loopLength/randomDensity)*j)] = randomCore[j]; // apply those randomDensity values evenly and sequentially into an array of 1024 values
       }
     }
 
@@ -87,13 +95,28 @@ void setRandoms() {
 
 void loop() {
 
-randomAmount = .3;
+  newValue1 = analogRead(A0) >> 2;
+
+if (abs(newValue1 - newCalibrate1)>3) {
+  knob1 = newValue1;
+  newCalibrate1 = newValue1;
+}
+
+
+knob2 = analogRead(A1);
+knob3 = analogRead(A2);
+
+
+targetSpeed = 300+knob1*20; // change this multiplier to adjust the range of speeds
+ Serial.println(targetSpeed);
+randomAmount = float(knob2)/1024;
+
 
  for (int i = 0; i < loopLength; i++) {
-  int randomDepth = int(random1024[i] * randomAmount);
+  int randomDepth = int(randomNumbers[i] * randomAmount);
   
   // sum1024[i] = int(sine1024[i]+((random1024[i]-128)*randomMultiplier));
-  sum1024[i] = constrain(sine1024[i]+randomDepth, 0, 255);
+  sumArray[i] = constrain(sine2056[i]+randomDepth, 0, 255);
  }
  
 
@@ -105,15 +128,15 @@ randomAmount = .3;
   {
    lastMillis = millis();  //get ready for the next iteration
       setRandoms();
-      Serial.println("re-random");
+   
   }
 
 
     
     currentStep = int(map(currentLoc,0,targetSpeed,0,loopLength));
-    currentVal = sum1024[currentStep];    
-
+    currentVal = sumArray[currentStep];    
    // Serial.println(currentVal);
+
 
 if (color==0) {
   pixel.setPixelColor(0, currentVal, 0, 0); 
