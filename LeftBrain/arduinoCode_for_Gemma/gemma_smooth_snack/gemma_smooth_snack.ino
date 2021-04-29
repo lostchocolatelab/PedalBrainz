@@ -4,10 +4,14 @@
 // TO-DO:
 // - make it so the length can be something other than 4096
 // - decide the best range of lengths
-// - implement snackChance [done?]
 // - smoothing the random jumps (or making the maximum randomness less?)
+// - perhaps make randomness only make brighter, rather than both directons?!
+// - or only implement randomness calculation if above some threshold
 // - decide on whether randoms should be set on each loop
 // - get rid of the arrays i'm not using [done]
+// - implement snackChance [done?]
+// - decide on best frequency of snack decision
+// - decide on length of snack (relative to targetSpeed?)
 // - probably other things 
 
 Adafruit_DotStar pixel = Adafruit_DotStar(1, INTERNAL_DS_DATA, INTERNAL_DS_CLK, DOTSTAR_BGR);
@@ -33,7 +37,8 @@ bool snackEat = false;
 float snackChance;
 int snackMilli;
 long snackRandom;
-int snackInterval; 
+int snackInterval;
+int snackLength = 500; // also make this relative to targetSpeed? 
 
 PROGMEM const int sine2048[] = {
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -182,10 +187,10 @@ snackInterval = int(targetSpeed/3);
 
 if (snackRandom < snackChance) {
 
-  lastMillis +=500;
+  lastMillis +=snackLength;
 snackRandom = 1024;
 Serial.println("SNACK");
-  delay(500); 
+  delay(snackLength); 
 
 }
 
