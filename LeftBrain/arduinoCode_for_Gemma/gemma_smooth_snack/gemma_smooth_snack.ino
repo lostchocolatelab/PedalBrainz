@@ -184,12 +184,12 @@ snackInterval = int(targetSpeed/3);
   }
 
 
-
+// if you've decided to have your snack
 if (snackRandom < snackChance) {
 
   lastMillis +=snackLength;
-snackRandom = 1024;
-Serial.println("SNACK");
+  snackRandom = 1024;
+  Serial.println("SNACKTIME");
   delay(snackLength); 
 
 }
