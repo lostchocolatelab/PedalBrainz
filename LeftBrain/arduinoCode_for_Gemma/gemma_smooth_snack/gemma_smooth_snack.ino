@@ -2,17 +2,18 @@
 
 
 // TO-DO:
-// - make it so the length can be something other than 4096
-// - decide the best range of lengths
-// - smoothing the random jumps (or making the maximum randomness less?)
-// - perhaps make randomness only make brighter, rather than both directons?!
-// - or only implement randomness calculation if above some threshold
-// - decide on whether randoms should be set on each loop
+// - make it so the length can be something other than 4096 [THIS IS CRUCIAL]
+// - decide the best range of lengths [make the ranges flexible]
+// - smoothing the random jumps (or making the maximum randomness less?) [maybe this doesn't matter]
+// - perhaps make randomness only make brighter, rather than both directons?! [going to 0 is favorable, probably ignore this idea]
+// - or only implement randomness calculation if above some threshold [probably not]
+// - decide on whether randoms should be set on each loop [make this switchable - set variable for this]
 // - get rid of the arrays i'm not using [done]
 // - implement snackChance [done?]
-// - decide on best frequency of snack decision
-// - decide on length of snack (relative to targetSpeed?)
+// - decide on best frequency of snack decision [just try it, probably fine at 3.2]
+// - decide on length of snack (relative to targetSpeed?) [to test]
 // - probably other things 
+// - think about color (fix random color) - maybe just make this all colors?
 
 Adafruit_DotStar pixel = Adafruit_DotStar(1, INTERNAL_DS_DATA, INTERNAL_DS_CLK, DOTSTAR_BGR);
 
@@ -24,7 +25,7 @@ int currentStep;
 int currentVal;
 int newCalibrate1;
 int newValue1;
-int color;
+long color;
 float targetSpeed; // length of the cycle as calculated by knob3
 float maxLength = 3096; // this plus minLength is the longest the loop can be (this currently needs to be 4096)
 float minLength = 1000; // minimum length  (don't change for now)
@@ -38,7 +39,7 @@ float snackChance;
 int snackMilli;
 long snackRandom;
 int snackInterval;
-int snackLength = 500; // also make this relative to targetSpeed? 
+int snackLength = 500; // also make this relative to targetSpeed? FOR TESTING
 
 PROGMEM const int sine2048[] = {
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -107,6 +108,7 @@ color = random(3);
 knob1 = analogRead(A0);
 knob2 = analogRead(A1);
 knob3 = analogRead(A2);
+
 }
 
 void setRandoms() {
@@ -123,7 +125,7 @@ void setRandoms() {
 
 
 void loop() {
-
+Serial.println(currentVal);
   newValue1 = analogRead(A2) >> 2;
 
 if (abs(newValue1 - newCalibrate1)>1) {   // this further smooths the knob, at the expense of some accuracy. probably worth it.
@@ -152,18 +154,13 @@ snackChance = knob2; // chance of snack from 0-1024
 
 // Set pulse rate
 
-// this method works OK but has a blip when the modulo isn't an even multiple
-// targetSpeed = maxLength*speedControl;
-// milli = millis()%maxLength; //set the overall pulse length at the maximum
-// currentLoc = (milli%targetSpeed)*(maxLength/targetSpeed);
-
 targetSpeed = (maxLength*speedControl) + minLength; // set number of milliseconds the loop will last my multiplying the longest possible length by a fraction calculated by the knob
 
 milli = millis()-lastMillis;
   if (milli > targetSpeed) {
   milli = 0;
   lastMillis = millis();
-//  setRandoms(); // the resets the random numbers on each loop. FOR DISCUSSION
+//  setRandoms(); // the resets the random numbers on each loop. 
   }
 
 // use targetSpeed and lengths to read the array of values and determine LED brightness
@@ -173,9 +170,9 @@ currentLoc = (milli*((maxLength+minLength)/targetSpeed))/2; // fix this so that 
 
 
 
-// every so often decide whether to stop for a snack, current 3 times per cycle FOR DISCUSSION
+// every so often decide whether to stop for a snack, current 3 times per cycle 
 
-snackInterval = int(targetSpeed/3);
+snackInterval = int(targetSpeed/3.2);
   if ((millis()-snackMilli)>snackInterval) {
     snackMilli = millis();
     snackRandom = random(1024); // this is where randomness range could be set, currently it is 0-100%, should maybe max out at 50%?
@@ -189,12 +186,10 @@ if (snackRandom < snackChance) {
 
   lastMillis +=snackLength;
   snackRandom = 1024;
-  Serial.println("SNACKTIME");
   delay(snackLength); 
 
 }
 
-Serial.println(milli);
   
 
 if (color==0) {
