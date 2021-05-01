@@ -1,61 +1,51 @@
-#include <AnalogIO.h>
+/**
+
+  Simple Potentiometer Test to change the RGB values of the onboard DotStar LED for the Adafruit Gemma M0
+  This sketch is good for finding cool colors to use in other routines or to verify correct operation.
+
+  -Pedal Brainz
+
+*/
+
 #include <Adafruit_DotStar.h>
 
-/* Set the DtoStar as "pixel". */
+/* Set the on-board DotStar as "pixel". */
 Adafruit_DotStar pixel = Adafruit_DotStar(1, INTERNAL_DS_DATA, INTERNAL_DS_CLK, DOTSTAR_BGR);
 
-/* Creating the object for reading the value from a potentiometer. */
-AnalogIn potentiometerA0(A0, BIT8);
-AnalogIn potentiometerA1(A1, BIT8);
-AnalogIn potentiometerA2(A2, BIT8);
+/* Set a default variable for the red, blue, and green (RGB) value of the on-board Dot Star*/
 
-/* Set a value for each potentiometer (pin). */
-unsigned short valuePotentiometerA0 = 0;
-unsigned short valuePotentiometerA1 = 0;
-unsigned short valuePotentiometerA2 = 0;
-
+int redValue = 0;
+int blueValue = 0;
+int greenValue = 0;
 
 void setup() {
-    Serial.begin(57600);
-    /* Start the DotStar LED */
-    pixel.begin();
-    //pixel.setBrightness(155);
+  //Start the Serial Communication
+  Serial.begin(57600);
+  //Start the on-board DotStar LED
+  pixel.begin();
+  //Start the Brightness of the on-board DotStar LED
+  pixel.setBrightness(255);
 }
 
 void loop() {
+  /* Read the value for each potentiometer (pin) and set as R, G, B continuously while looping*/
 
-    //Potentiometer Top Right Rate Random
-    valuePotentiometerA0 = potentiometerA0.read();
-    //Serial.println("potentiometerA0: ");
-    //Serial.println(valuePotentiometerA0);
+  //Potentiometer Top Right | A0
+  redValue = map(analogRead(A0), 0, 1024, 0, 256);
+  //Serial.println("potentiometerA0: " + String(redValue)); //This will print the value of the A0 Potentiometer
 
-    //Potentiometer Top Left Depth Random
-    valuePotentiometerA1 = potentiometerA1.read();
-    //Serial.println("potentiometerA1: ");
-    //Serial.println(valuePotentiometerA1);
+  //Potentiometer Top Left | A1
+  blueValue = map(analogRead(A1), 0, 1024, 0, 256);
+  //Serial.println("potentiometerA1: " + String(blueValue)); //This will print the value of the A1 Potentiometer
 
-    //Potentiometer Bottom Right Rate 
-    valuePotentiometerA2 = potentiometerA2.read();
-    //Serial.println("potentiometerA2: ");
-    //Serial.println(valuePotentiometerA2);
+  //Potentiometer Bottom Right | A2
+  greenValue = map(analogRead(A2), 0, 1024, 0, 256);
+  //Serial.println("potentiometerA2: " + String(greenValue)); //This will print the value of the A2 Potentiometer
 
-  
-    valuePotentiometerA0 = potentiometerA0.read();
-    pixel.setBrightness(valuePotentiometerA0);
-    pixel.setPixelColor(0, 255, 0, 0); 
-    pixel.show();  
-    delay(2000);
-    valuePotentiometerA1 = potentiometerA1.read();
-    pixel.setBrightness(valuePotentiometerA1);
-    pixel.setPixelColor(0, 0, 255, 0); 
-    pixel.show();  
-    delay(2000);
-    valuePotentiometerA2 = potentiometerA2.read();
-    pixel.setBrightness(valuePotentiometerA2);
-    pixel.setPixelColor(0, 0, 0, 255); 
-    pixel.show();  
-    delay(2000);
- 
-  //pixel.show(); 
-  //Serial.println(pixel.getPixelColor(0));
+  // Declare the LED "number" (0) and set a value for each potentiometer (pin) for colors R,G,B
+  pixel.setPixelColor(0, (redValue), (blueValue), (greenValue));
+  pixel.show();
+
+  //This will print the value of all thee Potentiometers in the Serial Monitor and Serial Plotter
+  Serial.println("Potentiometer A0: " + String(redValue) + " Potentiometer A1: " + String(blueValue) + " Potentiometer A2: " + String(greenValue));
 }
