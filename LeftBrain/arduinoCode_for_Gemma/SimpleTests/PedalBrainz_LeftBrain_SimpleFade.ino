@@ -3,6 +3,10 @@
   Simple Fade In/Out with Delays of the onboard DotStar LED for the Adafruit Gemma M0
   This sketch is good for controlling the speed of fade in/ out and delay times while fully bright and dark.
 
+  A0 = Fade speed of LED
+  A1 = Delay when LED is fully on (It's Lit)
+  A2 = Delay when LED is fully off (It's Dark)
+  
   -Pedal Brainz
 
 */
@@ -59,7 +63,7 @@ void loop() {
     }
 
     //Potentiometer Top Right | A0 - Map the value of the potentiometer from 0-1024 to 0-135 to the variable valueA0
-    valueA0 = map(analogRead(A0), 0, 1024, 2, 135);
+    valueA0 = map(analogRead(A0), 0, 1024, 135, 0);
 
     //Use the value of A0 to control the rate of fade in/out using a delay
     delay(valueA0);
