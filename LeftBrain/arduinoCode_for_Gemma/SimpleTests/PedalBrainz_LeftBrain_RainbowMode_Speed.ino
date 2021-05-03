@@ -8,6 +8,11 @@
   A2 = Maximum Brightness
 
   -Pedal Brainz
+  
+    ***ATTRIBUTION***
+  
+  Rainbow Mode Adapted from here:
+  https://www.instructables.com/How-to-Make-Proper-Rainbow-and-Random-Colors-With-/
 
 */
 
