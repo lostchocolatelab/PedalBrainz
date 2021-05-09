@@ -2,7 +2,7 @@
 
   Simple Fade In/Out with Delays of the onboard DotStar LED for the Adafruit Gemma M0
   This sketch is good for controlling the speed of fade in/ out and delay times while fully bright and dark.
-  
+
   Routine Change
   All potentiometers to zero (fully counter clockwise) for a second then rotate one potentiometer from zero for routine change.
 
@@ -10,32 +10,29 @@
   A0 = Fade speed of LED
   A1 = Delay when LED is fully on (It's Lit)
   A2 = Delay when LED is fully off (It's Dark)
-  
+
   Fadez Mode 2
   A0 = Amount of Random Time Added to A1, A2
   A1 = Delay when LED is fully on (It's Lit)
   A2 = Delay when LED is fully off (It's Dark)
-  
+
   Fadez Mode 3
   A0 = Amount of Random Time Added to Fade Speed, A1, A2
   A1 = Delay when LED is fully on (It's Lit)
   A2 = Delay when LED is fully off (It's Dark)
-  
+
   Rainbow Mode 1
   A0 = Rainbow Cycle Speed
   A1 = Delay when LED is fully off (It's Dark)
   A2 = Maximum Brightness
-  
+
+  Rainbow Mode 2
+  A0 = Rainbow Cycle Speed
+  A1 = Delay when LED is fully off (It's Dark)
+  A2 = Randomized Maximum Brightness
+
+
   -Pedal Brainz
-  
-  ***ATTRIBUTION***
-  
-  Rainbow Mode Adapted from here:
-  https://www.instructables.com/How-to-Make-Proper-Rainbow-and-Random-Colors-With-/
-  
-  Initial Routine code from:
-  Programmer :- Ranga Marasinghe
-  Date       :- 2021-April-22
 
 */
 
@@ -60,7 +57,7 @@ int fadeSpeed = 13;
 int fullDelay = 0;
 int darkDelay = 0;
 
-int delayRandom = random(0, 1000);
+int delayRandom = random(0, 100);
 int randomAmount = 0;
 int delayValue = 0;
 
@@ -74,19 +71,20 @@ uint32_t Sketch2Blue = 0x0000FF;
 uint32_t Sketch2Red = 0xFF0000;
 uint32_t Sketch2Green = 0x00FF00;
 uint32_t Sketch2Yellow = 0xFFFF00;
-uint32_t Sketch2Pink = 0xFF69B4; 
-uint32_t Sketch2Orange = 0xFF8000; 
+uint32_t Sketch2Pink = 0xFF69B4;
+uint32_t Sketch2Orange = 0xFF8000;
 
 int FlashDelay;
 int Brightnesslevel;
-long ValueZeroTime,ValueHighTime;
+int rainbowBright = 255;
+long ValueZeroTime, ValueHighTime;
 long WaitTime = 200;
-int Mode=0;
+int Mode = 0;
 boolean WaitForRoutineChange = true;
 boolean ValueZeroReached = false;
 boolean ValueHighReached = false;
 boolean waitingFlag = false;
-int ValueZeroAdjestment = 20;
+int ValueZeroAdjustment = 20;
 int RoutineFlashDelay = 100;
 boolean initial = true;
 
@@ -196,7 +194,9 @@ void setup() {
 void loop() {
 
   Routines();
-  
+  LEDBrightness = pixel.getBrightness();
+  ////Serial.println(LEDBrightness);
+
 }
 
 
@@ -204,129 +204,132 @@ void loop() {
 void Routines()
 {
 
- //Serial.println("Mode - "+ String(Mode));
+  Serial.println("Mode - " + String(Mode));
 
-     //Fadez_01 ();
-     LEDBrightness = redValue+blueValue+greenValue;
-     Serial.println(LEDBrightness); 
+  //Fadez_01 ();
+  LEDBrightness = pixel.getBrightness();
+  //Serial.println(LEDBrightness);
 
- //This is the initial startup mode (mode = 0)
- 
+  //This is the initial startup mode (mode = 0)
+
   if (Mode == 0)
   {
 
-  //Fade in from the beginning of the Rainbow cycle (Red)
-  for (int x = 0; x < 255; x++)
-  {
-    //Change the rate of the rainbow cycling using potantiometer A0
-    valueA0 = 2;
-    valueA2 = 255;
+    //Fade in from the beginning of the Rainbow cycle (Red)
+    for (int x = 0; x < 255; x++)
+    {
+      //Change the rate of the rainbow cycling using potantiometer A0
+      valueA0 = 2;
+      valueA2 = 255;
 
-    //Increase the value of the R value causing a fade in;
-    pixel.setPixelColor(pixelnumber, x, 0, 0);
+      //Increase the value of the R value causing a fade in;
+      pixel.setPixelColor(pixelnumber, x, 0, 0);
 
-    //A delay amount between each increase in value mapped to A0 and divided
-    delay(valueA0 / 2);
-    pixel.show();
+      //A delay amount between each increase in value mapped to A0 and divided
+      delay(valueA0 / 2);
+      pixel.show();
+    }
+
+    //Run the Rainbow cycle (Red)
+    for (int k = 0; k < 360; k++)
+    {
+
+      // uncomment the mode (or modes) you need below.
+
+      //trueHSV(0, k);
+
+      powerHSV(0, k);
+
+      //sineLED(0, k);
+
+      pixel.show();
+
+      //Change the rate of the rainbow cycling using potantiometer A0
+      //valueA0 = map(analogRead(A0), 0, 1024, 10, 0-1);
+      valueA0 = 2;
+      delay(valueA0);
+
+      //Change the maximum brightness of the LED using potantiometer A2
+      valueA2 = 255;
+      pixel.setBrightness(valueA2);
+
+    }
+
+
+    //Fade out from the end of the Rainbow (lol) cycle (Red)
+    for (int x = 255; x >= 0; x--)
+    {
+      //Change the rate of the rainbow cycling using potantiometer A0
+      valueA0 = 2;
+      valueA2 = 255;
+
+      //Reduces the value of the R value causing a fade out;
+      pixel.setPixelColor(pixelnumber, x, 0, 0);
+
+      //A delay amount between each reduction in value mapped to A0 and divided
+      delay(valueA0 / 2);
+      pixel.show();
+    }
+
+    //Add a delay (ms) at the end of the rainbow cycle using potantiometer A2 while the LED is dark
+    valueA1 = 0;
+    //delay(valueA1);
+
+    //Serial.println("Rate of Rainbow cycling: " + String(valueA0)  + " ||| Delay between Rainbow cycles (ms): " + String(valueA1) + " ||| Maximum Brightness value: " + String(valueA2));
+
+
+    //delay(400);
+    Mode = 1;
+
+
   }
 
-  //Run the Rainbow cycle (Red)
-  for (int k = 0; k < 360; k++)
-  {
-
-    // uncomment the mode (or modes) you need below.
-
-    //trueHSV(0, k);
-
-    powerHSV(0, k);
-
-    //sineLED(0, k);
-
-    pixel.show();
-
-    //Change the rate of the rainbow cycling using potantiometer A0
-    //valueA0 = map(analogRead(A0), 0, 1024, 10, 0-1);
-    valueA0 = 2;
-    delay(valueA0);
-
-    //Change the maximum brightness of the LED using potantiometer A2
-    valueA2 = 255;
-    pixel.setBrightness(valueA2);
-
-  }
-
-
-  //Fade out from the end of the Rainbow (lol) cycle (Red)
-  for (int x = 255; x >= 0; x--)
-  {
-    //Change the rate of the rainbow cycling using potantiometer A0
-    valueA0 = 2;
-    valueA2 = 255;
-
-    //Reduces the value of the R value causing a fade out;
-    pixel.setPixelColor(pixelnumber, x, 0, 0);
-
-    //A delay amount between each reduction in value mapped to A0 and divided
-    delay(valueA0 / 2);
-    pixel.show();
-  }
-
-  //Add a delay (ms) at the end of the rainbow cycle using potantiometer A2 while the LED is dark
-  valueA1 = 0;
-  //delay(valueA1);
-
-  Serial.println("Rate of Rainbow cycling: " + String(valueA0)  + " ||| Delay between Rainbow cycles (ms): " + String(valueA1) + " ||| Maximum Brightness value: " + String(valueA2));
-
-
-  //delay(400);
-  Mode = 1;
- 
-  
-  }
-
- //Fadez 01
+  //Fadez 01
   if (Mode == 1)
   {
-    if(!waitingFlag)
+    if (!waitingFlag)
     {
-    /**for (int i=0;i<3;i++)
-    {
-        pixel.setBrightness(255);
-        pixel.setPixelColor(0, Sketch2Red); // Red
+      for (int i = 0; i < 3; i++)
+      {
+        pixel.setBrightness(100);
+        pixel.setPixelColor(0, Sketch2Pink); // Red
         pixel.show();
         delay(RoutineFlashDelay);
         pixel.setPixelColor(0, 0x000000); // Blank
         pixel.show();
         delay(RoutineFlashDelay);
-    }
-        if (initial)
+      }
+      /**if (initial)
         {
-          pixel.setBrightness(255);
-          pixel.setPixelColor(0, Sketch2Yellow); // Yellow
-          pixel.show();
-          delay(RoutineFlashDelay);
-          pixel.setPixelColor(0, 0x000000); // Blank
-          pixel.show();
-          delay(RoutineFlashDelay);
-          initial = false;
+        pixel.setBrightness(255);
+        pixel.setPixelColor(0, Sketch2Yellow); // Yellow
+        pixel.show();
+        delay(RoutineFlashDelay);
+        pixel.setPixelColor(0, 0x000000); // Blank
+        pixel.show();
+        delay(RoutineFlashDelay);
+        initial = false;
         }
         else
-        {
-          pixel.setBrightness(255);
-          pixel.setPixelColor(0, Sketch2Yellow); // Yellow
-          pixel.show();
-          delay(RoutineFlashDelay);
-          pixel.setPixelColor(0, 0x000000); // Blank
-          pixel.show();
-          delay(RoutineFlashDelay);
-        }
-        */
+        {*/
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, Sketch2Yellow); // Yellow
+      pixel.show();
+      delay(RoutineFlashDelay);
+      pixel.setPixelColor(0, 0x000000); // Blank
+      pixel.show();
+      delay(RoutineFlashDelay);
+      //}
 
-        pixel.setPixelColor(0, redValue, blueValue, greenValue);
-        pixel.show();
-      
-        waitingFlag = true;
-        WaitForRoutineChange = true;
+      //Do the last thing and WaitForRoutineChange
+
+      pixel.setBrightness(255);
+      pixel.setPixelColor(0, redValue, blueValue, greenValue);
+      pixel.show();
+
+      waitingFlag = true;
+      WaitForRoutineChange = true;
+      Serial.println(" WaitForRoutineChange = True");
     }
     else
     {
@@ -335,52 +338,58 @@ void Routines()
 
         //Call the main routine and loop the thing
         Fadez_01 ();
-        
-         if ((analogRead(A0) <= ValueZeroAdjestment) && (analogRead(A1) <= ValueZeroAdjestment) && (analogRead(A2) <= ValueZeroAdjestment))
-         {
-           WaitForRoutineChange = false;
-           delay(400);
-         }        
+
+        if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment))
+        {
+          Serial.println(" WaitForRoutineChange = False");
+          WaitForRoutineChange = false;
+          delay(200);
+        }
       }
-      
-      if (((analogRead(A0) > ValueZeroAdjestment) or (analogRead(A1) > ValueZeroAdjestment) or (analogRead(A2) > ValueZeroAdjestment)) && (!WaitForRoutineChange))
+
+      if (((analogRead(A0) > ValueZeroAdjustment) or (analogRead(A1) > ValueZeroAdjustment) or (analogRead(A2) > ValueZeroAdjustment)) && (!WaitForRoutineChange))
       {
-        Mode = 2; 
+        Mode = 2;
         waitingFlag = false;
         WaitForRoutineChange = false;
-      }      
+        Serial.println(" WaitForRoutineChange = False & WaitingFlag = False");
+      }
     }
   }
 
- //Fadez 02
+  //Fadez 02
   if (Mode == 2)
   {
-    if(!waitingFlag)
+    if (!waitingFlag)
     {
-    for (int i=0;i<2;i++)
-    {
-        pixel.setBrightness(255);
-        pixel.setPixelColor(0, Sketch2Red); // Red
+      for (int i = 0; i < 2; i++)
+      {
+        pixel.setBrightness(100);
+        pixel.setPixelColor(0, Sketch2Blue); // Red
         pixel.show();
         delay(RoutineFlashDelay);
         pixel.setPixelColor(0, 0x000000); // Blank
         pixel.show();
         delay(RoutineFlashDelay);
-    }
+      }
 
-        pixel.setBrightness(255);
-        pixel.setPixelColor(0, Sketch2Pink); // Pink
-        pixel.show();
-        delay(RoutineFlashDelay);
-        pixel.setPixelColor(0, 0x000000); // Blank
-        pixel.show();
-        delay(RoutineFlashDelay);
-    
-        pixel.setPixelColor(0, 36, 0, 255);
-        pixel.show();
-        
-        waitingFlag = true;
-        WaitForRoutineChange = true;
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, Sketch2Pink); // Pink
+      pixel.show();
+      delay(RoutineFlashDelay);
+      pixel.setPixelColor(0, 0x000000); // Blank
+      pixel.show();
+      delay(RoutineFlashDelay);
+
+      //Do the last thing and WaitForRoutineChange
+
+      pixel.setPixelColor(0, 36, 0, 255);
+      pixel.setBrightness(255);
+      pixel.show();
+
+      waitingFlag = true;
+      WaitForRoutineChange = true;
+      Serial.println(" WaitForRoutineChange = True");
     }
     else
     {
@@ -389,52 +398,58 @@ void Routines()
 
         //Call the main routine and loop the thing
         Fadez_01 ();
-        
-         if ((analogRead(A0) <= ValueZeroAdjestment) && (analogRead(A1) <= ValueZeroAdjestment) && (analogRead(A2) <= ValueZeroAdjestment))
-         {
-           WaitForRoutineChange = false;
-           delay(400);
-         }        
+
+        if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment))
+        {
+          WaitForRoutineChange = false;
+          Serial.println(" WaitForRoutineChange = False");
+          delay(200);
+        }
       }
-      
-      if (((analogRead(A0) > ValueZeroAdjestment) or (analogRead(A1) > ValueZeroAdjestment) or (analogRead(A2) > ValueZeroAdjestment)) && (!WaitForRoutineChange))
+
+      if (((analogRead(A0) > ValueZeroAdjustment) or (analogRead(A1) > ValueZeroAdjustment) or (analogRead(A2) > ValueZeroAdjustment)) && (!WaitForRoutineChange))
       {
-        Mode = 3; 
+        Mode = 3;
         waitingFlag = false;
         WaitForRoutineChange = false;
-      }      
+        Serial.println(" WaitForRoutineChange = False & WaitingFlag = False");
+      }
     }
   }
 
- //Fadez 03
+  //Fadez 03
   if (Mode == 3)
   {
-    if(!waitingFlag)
+    if (!waitingFlag)
     {
-    for (int i=0;i<2;i++)
-    {
-        pixel.setBrightness(255);
-        pixel.setPixelColor(0, Sketch2Red); // Red
+      for (int i = 0; i < 2; i++)
+      {
+        pixel.setBrightness(100);
+        pixel.setPixelColor(0, Sketch2Green); // Red
         pixel.show();
         delay(RoutineFlashDelay);
         pixel.setPixelColor(0, 0x000000); // Blank
         pixel.show();
         delay(RoutineFlashDelay);
-    }
+      }
 
-        pixel.setBrightness(255);
-        pixel.setPixelColor(0, Sketch2Orange); // Orange
-        pixel.show();
-        delay(RoutineFlashDelay);
-        pixel.setPixelColor(0, 0x000000); // Blank
-        pixel.show();
-        delay(RoutineFlashDelay);
-    
-        pixel.setBrightness(255);
-        pixel.setPixelColor(0, 36, 200, 10);
-        pixel.show();
-        waitingFlag = true;
-        WaitForRoutineChange = true;
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, Sketch2Orange); // Orange
+      pixel.show();
+      delay(RoutineFlashDelay);
+      pixel.setPixelColor(0, 0x000000); // Blank
+      pixel.show();
+      delay(RoutineFlashDelay);
+
+      //Do the last thing and WaitForRoutineChange
+
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, 36, 200, 10);
+      pixel.setBrightness(255);
+      pixel.show();
+      waitingFlag = true;
+      WaitForRoutineChange = true;
+      Serial.println(" WaitForRoutineChange = True");
     }
     else
     {
@@ -442,52 +457,55 @@ void Routines()
       {
         //Call the main routine and loop the thing
         Fadez_01 ();
-        
-         if ((analogRead(A0) <= ValueZeroAdjestment) && (analogRead(A1) <= ValueZeroAdjestment) && (analogRead(A2) <= ValueZeroAdjestment))
-         {
-           WaitForRoutineChange = false;
-           delay(400);
-         }        
+
+        if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment))
+        {
+          WaitForRoutineChange = false;
+          Serial.println(" WaitForRoutineChange = False");
+          delay(200);
+        }
       }
-      
-      if (((analogRead(A0) > ValueZeroAdjestment) or (analogRead(A1) > ValueZeroAdjestment) or (analogRead(A2) > ValueZeroAdjestment)) && (!WaitForRoutineChange))
+
+      if (((analogRead(A0) > ValueZeroAdjustment) or (analogRead(A1) > ValueZeroAdjustment) or (analogRead(A2) > ValueZeroAdjustment)) && (!WaitForRoutineChange))
       {
-        Mode = 4; 
+        Mode = 4;
         waitingFlag = false;
         WaitForRoutineChange = false;
-      }      
+        Serial.println(" WaitForRoutineChange = False & WaitingFlag = False");
+      }
     }
   }
 
- //Rainbow 01
+  //Rainbow 01
   if (Mode == 4)
   {
-    if(!waitingFlag)
+    if (!waitingFlag)
     {
-    for (int i=0;i<2;i++)
-    {
-        pixel.setBrightness(255);
+      for (int i = 0; i < 2; i++)
+      {
+        pixel.setBrightness(100);
         pixel.setPixelColor(0, Sketch2Red); // Red
         pixel.show();
         delay(RoutineFlashDelay);
         pixel.setPixelColor(0, 0x000000); // Blank
         pixel.show();
         delay(RoutineFlashDelay);
-    }
+      }
 
-        pixel.setBrightness(255);
-        pixel.setPixelColor(0, Sketch2Orange); // Orange
-        pixel.show();
-        delay(RoutineFlashDelay);
-        pixel.setPixelColor(0, 0x000000); // Blank
-        pixel.show();
-        delay(RoutineFlashDelay);
-    
-        pixel.setBrightness(255);
-        pixel.setPixelColor(0, 36, 200, 10);
-        pixel.show();
-        waitingFlag = true;
-        WaitForRoutineChange = true;
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, Sketch2Orange); // Orange
+      pixel.show();
+      delay(RoutineFlashDelay);
+      pixel.setPixelColor(0, 0x000000); // Blank
+      pixel.show();
+      delay(RoutineFlashDelay);
+
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, 36, 200, 10);
+      pixel.show();
+      waitingFlag = true;
+      WaitForRoutineChange = true;
+      Serial.println(" WaitForRoutineChange = True");
     }
     else
     {
@@ -495,157 +513,345 @@ void Routines()
       {
         //Call the main routine and loop the thing
         RainbowMode ();
-        
-         if ((analogRead(A0) <= ValueZeroAdjestment) && (analogRead(A1) <= ValueZeroAdjestment) && (analogRead(A2) <= ValueZeroAdjestment))
-         {
-           WaitForRoutineChange = false;
-           delay(400);
-         }        
+
+        if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment))
+        {
+          WaitForRoutineChange = false;
+          Serial.println(" WaitForRoutineChange = False");
+          delay(200);
+        }
       }
-      
-      if (((analogRead(A0) > ValueZeroAdjestment) or (analogRead(A1) > ValueZeroAdjestment) or (analogRead(A2) > ValueZeroAdjestment)) && (!WaitForRoutineChange))
+
+      if (((analogRead(A0) > ValueZeroAdjustment) or (analogRead(A1) > ValueZeroAdjustment) or (analogRead(A2) > ValueZeroAdjustment)) && (!WaitForRoutineChange))
       {
-        Mode = 1; 
+        Mode = 5;
         waitingFlag = false;
         WaitForRoutineChange = false;
-      }      
+        Serial.println(" WaitForRoutineChange = False & WaitingFlag = False");
+      }
+    }
+  }
+
+  //Rainbow 02
+  if (Mode == 5)
+  {
+    if (!waitingFlag)
+    {
+      for (int i = 0; i < 2; i++)
+      {
+        pixel.setBrightness(100);
+        pixel.setPixelColor(0, Sketch2Pink); // Pink
+        pixel.show();
+        delay(RoutineFlashDelay);
+        pixel.setPixelColor(0, 0x000000); // Blank
+        pixel.show();
+        delay(RoutineFlashDelay);
+      }
+
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, Sketch2Orange); // Orange
+      pixel.show();
+      delay(RoutineFlashDelay);
+      pixel.setPixelColor(0, 0x000000); // Blank
+      pixel.show();
+      delay(RoutineFlashDelay);
+
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, 36, 200, 10);
+      pixel.show();
+      waitingFlag = true;
+      WaitForRoutineChange = true;
+      Serial.println(" WaitForRoutineChange = True");
+    }
+    else
+    {
+      if (WaitForRoutineChange)
+      {
+        //Call the main routine and loop the thing
+        RainbowMode ();
+
+        if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment))
+        {
+          WaitForRoutineChange = false;
+          Serial.println(" WaitForRoutineChange = False");
+          delay(200);
+        }
+      }
+
+      if (((analogRead(A0) > ValueZeroAdjustment) or (analogRead(A1) > ValueZeroAdjustment) or (analogRead(A2) > ValueZeroAdjustment)) && (!WaitForRoutineChange))
+      {
+        Mode = 1;
+        waitingFlag = false;
+        WaitForRoutineChange = false;
+        Serial.println(" WaitForRoutineChange = False & WaitingFlag = False");
+      }
     }
   }
 
 
 }
 
-void Fadez_01 (){
 
-    //LEDBrightness = pixel.getBrightness();
+
+void Fadez_01 () {
+
+  LEDBrightness = pixel.getBrightness();
+  //Serial.println(LEDBrightness);
+
+  int x = 1;
+
+  //This fades the brightness in and out using maths
+  for (int i = 0; i > -1; i = i + x) {
+
+    pixel.setBrightness(i);
+    pixel.show();
+
+    LEDBrightness = pixel.getBrightness();
     //Serial.println(LEDBrightness);
-    
-      int x = 1;
-  
-          //This fades the brightness in and out using maths
-          for (int i = 0; i > -1; i = i + x) {
-            pixel.setBrightness(i);
-            pixel.show();
 
-    //LEDBrightness = pixel.getBrightness();
-    //Serial.println(LEDBrightness);
-        
-            //If the fade has reached it's peak keep the LED lit and then fade out
-        
-            if (i == 50) {
 
-              //Mode changes to the delay time when LED is full color value for potentiometer A1
-              
-              if (Mode == 1){
-                //Potentiometer Top Left | A1 - Map the value of the potentiometer from 0-1024 to 0-5000 to the variable valueA1
-                fullDelay = map(analogRead(A1), 0, 1024, 0, 5000);
-                //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
-              }
-              else if (Mode == 2){
-                //Potentiometer Top Right | A0 - Map the value of the potentiometer from 0-1024 to 0-5000 to the variable valueA0
-                //Potentiometer Top Left | A1 - Map the value of the potentiometer from 0-1024 to 0-5000 to the variable valueA1
-                valueA1 = map(analogRead(A1), 0, 1024, 0, 5000);
-                delayValue = map(analogRead(A0), 0, 1024, 0, 5000);
-                randomAmount = random(0, delayValue);
-                fullDelay = valueA1+randomAmount;
-                //Serial.println("Mode 2 fullDelay: " + String(fullDelay));
-              }
-              else if (Mode == 3){
-                //Potentiometer Top Right | A0 - Map the value of the potentiometer from 0-1024 to 0-5000 to the variable valueA0
-                //Potentiometer Top Left | A1 - Map the value of the potentiometer from 0-1024 to 0-5000 to the variable valueA1
-                valueA1 = map(analogRead(A1), 0, 1024, 0, 5000);
-                delayValue = map(analogRead(A0), 0, 1024, 0, 5000);
-                randomAmount = random(0, delayValue);
-                fullDelay = valueA1+randomAmount;
-                //Serial.println("Mode 2 fullDelay: " + String(fullDelay));
-              }
-              else{
-                fullDelay = 100;
-                Serial.println("Else fullDelay: " + String(fullDelay));
-              }
-        
-              //Use the value of A1 to keep the LED fully lit by the amount of A1 (delay) and then start fading out
-              delay(fullDelay);
-              //Serial.println("Delay when LED fully lit (ms): " + String(valueA1));
-        
-              x = -1;  // switch direction at peak
-            }
+    //If the fade has reached it's peak keep the LED lit and then fade out
 
-            //Mode changes to the delay time of the fade speed for potentiometer A0
-            
-            if (Mode == 1){
-              //Potentiometer Top Right | A0 - Map the value of the potentiometer from 0-1024 to 0-135 to the variable valueA0
-              fadeSpeed = map(analogRead(A0), 0, 1024, 5, 135);
-              //Serial.println("Mode 1 fadeSpeeed: " + String(fadeSpeed));
-            }
-            else if (Mode == 2){
-              //Potentiometer Top Right | A0 - Map the value of the potentiometer from 0-1024 to 0-5000 to the variable valueA1
-              //delayValue = map(analogRead(A0), 0, 1024, 0, 5000);
-              //fadeSpeed = random(0, delayValue);
-              fadeSpeed = 13;
-              //Serial.println("Delay Random (ms): " + String(delayRandom));
-              //Serial.println("Mode 1 fadeSpeeed: " + String(fadeSpeed));
-            }
-            else if (Mode == 3){
-              //Potentiometer Top Right | A0 - Map the value of the potentiometer from 0-1024 to 0-5000 to the variable valueA1
-              valueA0 = map(analogRead(A0), 0, 1024, 5, 135);
-              delayValue = map(analogRead(A0), 0, 1024, 0, 40);
-              randomAmount = random(0, delayValue);
-              fadeSpeed = valueA0+randomAmount;
-              //Serial.println("Delay Random (ms): " + String(delayRandom));
-              //Serial.println("Mode 1 fadeSpeeed: " + String(fadeSpeed));
-            }
-            else{
-              fadeSpeed = 13;
-              Serial.println("Else fadeSpeeed: " + String(fadeSpeed));
-            }    
-        
-            //Use the value of A0 to control the rate of fade in/out using a delay
-            delay(fadeSpeed);
-          }
-          //Serial.println("Rate of Fade in/ Fade out: " + String(valueA0));
+    if (i == 50) {
 
-           //Mode changes to the delay time of the fade speed for potentiometer A2
-           
-          if (Mode == 1){
-              //Potentiometer Bottom Right | A2 - Map the value of the potentiometer from 0-1024 to 0-5000 to the variable valueA2
-              darkDelay = map(analogRead(A2), 0, 1024, 0, 5000);
-              //Serial.println("Mode 1 darkDelay: " + String(darkDelay));
-            }
-            else if (Mode == 2){
-                //Potentiometer Top Right | A0 - Map the value of the potentiometer from 0-1024 to 0-5000 to the variable valueA0
-                //Potentiometer Top Left | A2 - Map the value of the potentiometer from 0-1024 to 0-5000 to the variable valueA1
-                valueA2 = map(analogRead(A2), 0, 1024, 0, 5000);
-                delayValue = map(analogRead(A0), 0, 1024, 0, 5000);
-                randomAmount = random(0, delayValue);
-                darkDelay = valueA2+randomAmount;
-                //Serial.println("Mode 2 darkDelay: " + String(darkDelay));
-            }
-            else if (Mode == 3){
-                //Potentiometer Top Right | A0 - Map the value of the potentiometer from 0-1024 to 0-5000 to the variable valueA0
-                //Potentiometer Top Left | A2 - Map the value of the potentiometer from 0-1024 to 0-5000 to the variable valueA1
-                valueA2 = map(analogRead(A2), 0, 1024, 0, 5000);
-                delayValue = map(analogRead(A0), 0, 1024, 0, 5000);
-                randomAmount = random(0, delayValue);
-                darkDelay = valueA2+randomAmount;
-                //Serial.println("Mode 2 darkDelay: " + String(darkDelay));
-            }
-            else{
-              darkDelay = 100;
-              Serial.println("Else darkDelay: " + String(darkDelay));
-            }    
- 
-          //Use the value of A2 to keep the LED fully dark (delay) between fade in/fade out
-          delay(darkDelay);
-          //Serial.println("Delay when LED fully dark (ms): " + String(valueA2));
-          
-    //LEDBrightness = pixel.getBrightness();
-    //Serial.println(LEDBrightness);
-    
-          Serial.println("Rate of Fade in/ Fade out: " + String(fadeSpeed) + " ||| Delay when LED fully lit (ms): " + String(fullDelay) + " ||| Delay when LED fully dark (ms): " + String(darkDelay));
+      //Mode changes to the delay time when LED is full color value for potentiometer A1
+      //Use the value of A1 to keep the LED fully lit by the amount of A1 (delay) and then start fading out
+
+      delayA1(fullDelay);
+      Serial.println("Delay when LED fully lit (ms): " + String(fullDelay));
+
+      x = -1;  // switch direction at peak
+    }
+
+    //Mode changes to the delay time of the fade speed for potentiometer A0
+    //Use the value of A0 to control the rate of fade in/out using a delay
+
+    delayA0(fadeSpeed);
+    //Serial.println("Rate of Fade in/ Fade out: " + String(fadeSpeed));
   }
+  //Serial.println("Rate of Fade in/ Fade out: " + String(valueA0));
 
-  /**
+  //Mode changes to the delay time of the fade speed for potentiometer A2
+  //Use the value of A2 to keep the LED fully dark (delay) between fade in/fade out
+
+  delayA2(darkDelay);
+  //Serial.println("Delay when LED fully dark (ms): " + String(darkDelay));
+
+  LEDBrightness = pixel.getBrightness();
+  //Serial.println(LEDBrightness);
+
+  randomAmount = random(0, delayValue);
+  //Serial.println("Rate of Fade in/ Fade out: " + String(fadeSpeed) + " ||| Delay when LED fully lit (ms): " + String(fullDelay) + " ||| Delay when LED fully dark (ms): " + String(darkDelay));
+}
+
+
+/**
+
+  A0 Delay - Fade Speed
+
+*/
+
+
+void delayA0(int count)
+{
+
+  int delayCountA0 = fadeSpeed;
+
+  LEDBrightness = pixel.getBrightness();
+  //Serial.println(LEDBrightness);
+
+  for (int count = 0; count <= delayCountA0; count++) {
+
+    delayCountA0 = fadeSpeed;
+    LEDBrightness = pixel.getBrightness();
+    //Serial.println(LEDBrightness);
+
+    if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment)) {
+      count = 0;
+      break;
+      Serial.println("I Broke");
+    }
+
+    if (Mode == 1) {
+      //Potentiometer Top Right | A0 - Map the value of the potentiometer to the variable valueA0
+      fadeSpeed = map(analogRead(A0), 0, 1024, 136, 0);
+      //Serial.println("Mode 1 fadeSpeeed: " + String(fadeSpeed));
+    }
+    else if (Mode == 2) {
+      //Potentiometer Top Right | A0 - Map the value of the potentiometer to the variable valueA1
+      //delayValue = map(analogRead(A0), 0, 1024, 0, 5000);
+      //fadeSpeed = random(0, delayValue);
+      fadeSpeed = 7;
+      Serial.println("Delay Random (ms): " + String(delayRandom));
+      Serial.println("Mode 2 fadeSpeeed: " + String(fadeSpeed));
+    }
+    else if (Mode == 3) {
+      //Potentiometer Top Right | A0 - Map the value of the potentiometer to the variable valueA1
+
+      valueA0 = map(analogRead(A0), 0, 1024, 60, 20);
+      delayValue = map(analogRead(A0), 0, 1024, 0, 40);
+      //randomAmount = random(0, delayValue);
+      fadeSpeed = valueA0 + randomAmount;
+      Serial.println("Mode 3 fadeSpeed Random: " + String(randomAmount));
+      Serial.println("Mode 3 fadeSpeeed: " + String(fadeSpeed));
+    }
+    else if (Mode == 4) {
+      //Potentiometer Top Right | A0 - Map the value of the potentiometer to the variable valueA0
+      fadeSpeed = map(analogRead(A0), 0, 1024, 20, -1);
+      Serial.println("Mode 4 fadeSpeeed: " + String(fadeSpeed));
+    }
+    else if (Mode == 5) {
+      //Potentiometer Top Right | A0 - Map the value of the potentiometer to the variable valueA0
+      fadeSpeed = map(analogRead(A0), 0, 1024, 20, -1);
+      //Serial.println("Mode 4 fadeSpeeed: " + String(fadeSpeed));
+    }
+    else {
+      fadeSpeed = 7;
+      //Serial.println("Else fadeSpeeed: " + String(fadeSpeed));
+    }
+
+    delay(1);
+    //Serial.println("Count if Waiting = False: " + String(count));
+  }
+}
+
+/**
+
+  A1 Delay - Full Delay
+
+*/
+
+
+void delayA1(int count)
+{
+
+  int delayCountA1 = fullDelay;
+
+  for (int count = 0; count <= delayCountA1; count++) {
+
+    delayCountA1 = fullDelay;
+
+    LEDBrightness = pixel.getBrightness();
+    Serial.println(LEDBrightness);
+
+    if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment)) {
+      count = 0;
+      break;
+      Serial.println("I Broke");
+    }
+    if (Mode == 1) {
+      //Potentiometer Top Left | A1 - Map the value of the potentiometer to the variable valueA1
+      fullDelay = map(analogRead(A1), 0, 1024, 0, 100);
+      //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
+    }
+    else if (Mode == 2) {
+      //Potentiometer Top Right | A0 - Map the value of the potentiometer to the variable valueA0
+      //Potentiometer Top Left | A1 - Map the value of the potentiometer to the variable valueA1
+
+      valueA1 = map(analogRead(A1), 0, 1024, 0, 100);
+      delayValue = map(analogRead(A0), 0, 1024, 0, 100);
+      randomAmount = random(0, delayValue);
+      fullDelay = valueA1 + randomAmount;
+      //Serial.println("Mode 2 fullDelay Random: " + String(randomAmount));
+      //Serial.println("Mode 2 fullDelay: " + String(fullDelay));
+    }
+    else if (Mode == 3) {
+      //Potentiometer Top Right | A0 - Map the value of the potentiometer to the variable valueA0
+      //Potentiometer Top Left | A1 - Map the value of the potentiometer to the variable valueA1
+
+      valueA1 = map(analogRead(A1), 0, 1024, 0, 100);
+      delayValue = map(analogRead(A0), 0, 1024, 0, 100);
+      randomAmount = random(0, delayValue);
+      fullDelay = valueA1 + randomAmount;
+      //Serial.println("Mode 3 fullDelay Random: " + String(randomAmount));
+      //Serial.println("Mode 3 fullDelay: " + String(fullDelay));
+    }
+    else if (Mode == 4) {
+      //Potentiometer Top Left | A1 - Map the value of the potentiometer to the variable valueA1
+      valueA1 = map(analogRead(A1), 0, 1024, 0, 100);
+      fullDelay =  valueA1;
+      //Serial.println("Mode 4 darkDelay: " + String(fullDelay));
+    }
+    else if (Mode == 5) {
+      //Potentiometer Top Left | A1 - Map the value of the potentiometer to the variable valueA1
+      valueA1 = map(analogRead(A1), 0, 1024, 0, 100);
+      fullDelay =  valueA1;
+      //Serial.println("Mode 4 darkDelay: " + String(fullDelay));
+    }   else {
+      fullDelay = 100;
+      //Serial.println("Else fullDelay: " + String(fullDelay));
+    }
+
+    delay(50);
+    //Serial.println("Count if Waiting = False: " + String(count));
+  }
+}
+
+/**
+
+  A2 Delay - Dark Delay
+
+*/
+
+
+void delayA2(int count)
+{
+
+  int delayCountA2 = darkDelay;
+
+  for (int count = 0; count <= delayCountA2; count++) {
+
+    delayCountA2 = darkDelay;
+
+    LEDBrightness = pixel.getBrightness();
+    //Serial.println(LEDBrightness);
+    //LEDBrightness = redValue + blueValue + greenValue;
+
+    if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment)) {
+      count = 0;
+      break;
+      Serial.println("I Broke");
+    }
+    if (Mode == 1) {
+      //Potentiometer Bottom Right | A2 - Map the value of the potentiometer to the variable valueA2
+
+      darkDelay = map(analogRead(A2), 0, 1024, 0, 100);
+      //Serial.println("Mode 1 darkDelay: " + String(darkDelay));
+    }
+    else if (Mode == 2) {
+      //Potentiometer Top Right | A0 - Map the value of the potentiometer to the variable valueA0
+      //Potentiometer Top Left | A2 - Map the value of the potentiometer to the variable valueA1
+
+      valueA2 = map(analogRead(A2), 0, 1024, 0, 100);
+      delayValue = map(analogRead(A0), 0, 1024, 0, 100);
+      //randomAmount = random(0, delayValue);
+      darkDelay = valueA2 + randomAmount;
+      Serial.println("Mode 2 darkDelay Random: " + String(randomAmount));
+      Serial.println("Mode 2 darkDelay: " + String(darkDelay));
+    }
+    else if (Mode == 3) {
+      //Potentiometer Top Right | A0 - Map the value of the potentiometer to the variable valueA0
+      //Potentiometer Top Left | A2 - Map the value of the potentiometer to the variable valueA1
+
+      valueA2 = map(analogRead(A2), 0, 1024, 0, 100);
+      delayValue = map(analogRead(A0), 0, 1024, 0, 100);
+      //randomAmount = random(0, delayValue);
+      darkDelay = valueA2 + randomAmount;
+      Serial.println("Mode 3 darkDelay Random: " + String(randomAmount));
+      Serial.println("Mode 3 darkDelay: " + String(darkDelay));
+    }
+    else {
+      darkDelay = 100;
+      //Serial.println("Else darkDelay: " + String(darkDelay));
+    }
+
+    delay(50);
+    //Serial.println("Count if Waiting = False: " + String(count));
+  }
+}
+
+
+/**
 
   Rainbow mode Setups
 
@@ -725,20 +931,42 @@ void sineLED(int pixelnumber, int angle)
 
 }
 
-void RainbowMode (){
+void RainbowMode () {
+
+  if (Mode == 5) {
+    //Change the maximum brightness of the LED using potantiometer A2
+    valueA2 = map(analogRead(A2), 0, 1024, 0, 255);
+    randomAmount = random(0, 255);
+    rainbowBright = valueA2 - randomAmount;
+    pixel.setBrightness(rainbowBright);
+    Serial.println("Mode 5 randomAmount: " + String(randomAmount));
+    Serial.println("Mode 5 rainbowBright: " + String(rainbowBright));
+  }
+  else;
 
   //Fade in from the beginning of the Rainbow cycle (Red)
   for (int x = 0; x < 255; x++)
   {
-    //Change the rate of the rainbow cycling using potantiometer A0
-    valueA0 = map(analogRead(A0), 0, 1024, 0, 50);
-    valueA2 = map(analogRead(A2), 0, 1024, 1, 100);
+    if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment)) {
+      x = 0;
+      break;
+      Serial.println("I Broke");
+    }
 
+    if (Mode == 4) {
+      //Change the maximum brightness of the LED using potantiometer A2
+      rainbowBright = map(analogRead(A2), 0, 1024, 0, 100);
+      pixel.setBrightness(rainbowBright);
+      //Serial.println("Mode 4 rainbowBright: " + String(rainbowBright));
+    }
+    else;
+
+    //Change the rate of the rainbow cycling using potantiometer A0
     //Increase the value of the R value causing a fade in;
     pixel.setPixelColor(pixelnumber, x, 0, 0);
 
     //A delay amount between each increase in value mapped to A0 and divided
-    delay(valueA0 / 2);
+    delayA0(fadeSpeed / 40);
     pixel.show();
   }
 
@@ -756,14 +984,27 @@ void RainbowMode (){
 
     pixel.show();
 
+    if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment)) {
+      k = 0;
+      break;
+      Serial.println("I Broke");
+    }
+
     //Change the rate of the rainbow cycling using potantiometer A0
     //valueA0 = map(analogRead(A0), 0, 1024, 10, 0-1);
-    valueA0 = map(analogRead(A0), 0, 1024, 0, 50);
-    delay(valueA0);
+    //valueA0 = map(analogRead(A0), 0, 1024, 0, 20);
 
-    //Change the maximum brightness of the LED using potantiometer A2
-    valueA2 = map(analogRead(A2), 0, 1024, 1, 100);
-    pixel.setBrightness(valueA2);
+
+    delayA0(fadeSpeed);
+
+
+    if (Mode == 4) {
+      //Change the maximum brightness of the LED using potantiometer A2
+      rainbowBright = map(analogRead(A2), 0, 1024, 0, 100);
+      pixel.setBrightness(rainbowBright);
+      //Serial.println("Mode 4 rainbowBright: " + String(rainbowBright));
+    }
+    else;
 
   }
 
@@ -771,22 +1012,33 @@ void RainbowMode (){
   //Fade out from the end of the Rainbow (lol) cycle (Red)
   for (int x = 255; x >= 0; x--)
   {
-    //Change the rate of the rainbow cycling using potantiometer A0
-    valueA0 = map(analogRead(A0), 0, 1024, 0, 50);
-    valueA2 = map(analogRead(A2), 0, 1024, 1, 100);
+    if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment)) {
+      x = 0;
+      break;
+      Serial.println("I Broke");
+    }
 
+    if (Mode == 4) {
+      //Change the maximum brightness of the LED using potantiometer A2
+      rainbowBright = map(analogRead(A2), 0, 1024, 0, 100);
+      pixel.setBrightness(rainbowBright);
+      //Serial.println("Mode 4 rainbowBright: " + String(rainbowBright));
+    }
+    else;
+
+    //Change the rate of the rainbow cycling using potantiometer A0
     //Reduces the value of the R value causing a fade out;
     pixel.setPixelColor(pixelnumber, x, 0, 0);
 
     //A delay amount between each reduction in value mapped to A0 and divided
-    delay(valueA0 / 2);
+    delayA0(fadeSpeed / 40);
     pixel.show();
   }
 
   //Add a delay (ms) at the end of the rainbow cycle using potantiometer A2 while the LED is dark
-  valueA1 = map(analogRead(A1), 0, 1024, 0, 5000);
-  delay(valueA1);
+  //valueA1 = map(analogRead(A1), 0, 1024, 0, 30);
+  delayA1(darkDelay);
 
-  Serial.println("Rate of Rainbow cycling: " + String(valueA0)  + " ||| Delay between Rainbow cycles (ms): " + String(valueA1) + " ||| Maximum Brightness value: " + String(valueA2));
+  //Serial.println("Rate of Rainbow cycling: " + String(valueA0)  + " ||| Delay between Rainbow cycles (ms): " + String(valueA1) + " ||| Maximum Brightness value: " + String(valueA2));
 
 }
