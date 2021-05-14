@@ -30,6 +30,17 @@
 //  A2 = Randomized Maximum Brightness
 //
 //
+//  Strange Attractors Modes 6-10
+//  A0 = Cycle Speed
+//  A1 = Amount of Randomness
+//  A2 = Maximum Brightness
+//
+//  Mode 6: 1 Wave
+//  Mode 7: 2 Wavez
+//  Mode 8: 3 Wavez
+//  Mode 9: 3 Wavez Alt
+//  Mode 10: 3 Waves Unstable
+//
 //  -Lost Lab
 
 
@@ -100,6 +111,45 @@ int Mode = 0;
 
 //Rainbow Mode Declarations
 unsigned short pixelnumber = 0;
+
+// Strange Attractor Declarations
+
+//Coordinates for the lorenz function
+float x = 0;
+float y = 0;
+float z = 0;
+float scaledX = 0;
+float scaledY = 0;
+float scaledZ = 0;
+float effectiveR = 0;
+float effectiveG = 0;
+float effectiveB = 0;
+
+//Constants for the lorenz function, KEEP UNCHANGED
+float a = 10.0;
+float b = 28.0;
+float c = 8.0 / 3.0;
+
+//Variables for lorenz function
+float dx = 0;
+float dy = 0;
+float dz = 0;
+
+//Variables for timing
+float dt = 0.01;  //Time between interval (seconds) default: 10ms (0.01s) you can change it but the code become unstable
+unsigned long nextLorenzUpdate = 0;
+int printDelay = 10; //Time between each serial print (default: 50ms)
+
+
+float scalings[2][3] {
+                      {0,0,0},  //minX, minY, minZ
+                      {0,0,0}   //maxX, maxY, maxZ 
+                     };
+
+int brightness = 0;
+int fadeAmount = 1;  //Change it to adjust the fading between each step (fading speed)
+int maxBrightness = 255;
+int delayAmount = 0;
 
 /**
 
@@ -191,7 +241,7 @@ const uint8_t HSVpower[121] =
 */
 
 void setup() {
-  Serial.begin(57600);
+  Serial.begin(115200); 
   /* Start the DotStar LED */
   pixel.begin();
   pixel.setBrightness(255);
@@ -215,6 +265,10 @@ void loop() {
     // plotCycle writes values to the Serial Monitor for plotting/
     // This is sprinkled throughout the code in-order to update the values on the Serial Plotter
     plotCycle(); 
+
+    // Some memory Print
+    //Serial.print(F("freeMemory: "));
+    //Serial.println((int)freeMemory);
 
 }
 
@@ -381,8 +435,9 @@ void Routines()
 
       //Do the last thing and WaitForRoutineChange
       
-      //pixel.setBrightness(255);
-      pixel.setPixelColor(0, redValue, blueValue, greenValue);
+      pixel.setBrightness(255);
+      pixel.setPixelColor(0, 115, 0, 130);
+      //52,24,130
       pixel.show();
 
       waitingFlag = true;
@@ -440,8 +495,10 @@ void Routines()
       delay(RoutineFlashDelay);
 
       //Do the last thing and WaitForRoutineChange
-      
+
+      pixel.setBrightness(255);
       pixel.setPixelColor(0, 36, 0, 255);
+      //0,0,255
       pixel.show();
 
       waitingFlag = true;
@@ -501,7 +558,8 @@ void Routines()
       //Do the last thing and WaitForRoutineChange
       
       pixel.setBrightness(255);
-      pixel.setPixelColor(0, 36, 200, 10);
+      pixel.setPixelColor(0, 0, 255, 60);
+      //31,255,60
       pixel.show();
 
       waitingFlag = true;
@@ -557,6 +615,8 @@ void Routines()
       pixel.setPixelColor(0, 0x000000); // Blank
       pixel.show();
       delay(RoutineFlashDelay);
+
+      //Do the last thing and WaitForRoutineChange
 
       pixel.setBrightness(100);
       pixel.setPixelColor(0, 36, 200, 10);
@@ -615,6 +675,8 @@ void Routines()
       pixel.show();
       delay(RoutineFlashDelay);
 
+      //Do the last thing and WaitForRoutineChange
+
       pixel.setBrightness(100);
       pixel.setPixelColor(0, 36, 200, 10);
       pixel.show();
@@ -640,7 +702,7 @@ void Routines()
 
       if (((analogRead(A0) > ValueZeroAdjustment) or (analogRead(A1) > ValueZeroAdjustment) or (analogRead(A2) > ValueZeroAdjustment)) && (!WaitForRoutineChange))
       {
-        Mode = 1;
+        Mode = 6;
         waitingFlag = false;
         WaitForRoutineChange = false;
         Serial.println(" WaitForRoutineChange = False & WaitingFlag = False");
@@ -648,7 +710,319 @@ void Routines()
     }
   }
 
+// Strange Attractor 1
+  if (Mode == 6)
+  {
+    if (!waitingFlag)
+    {
+      for (int i = 0; i < 2; i++)
+      {
+        pixel.setBrightness(100);
+        pixel.setPixelColor(0, Sketch2Pink); // Pink
+        pixel.show();
+        delay(RoutineFlashDelay);
+        pixel.setPixelColor(0, 0x000000); // Blank
+        pixel.show();
+        delay(RoutineFlashDelay);
+      }
 
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, Sketch2Orange); // Orange
+      pixel.show();
+      delay(RoutineFlashDelay);
+      pixel.setPixelColor(0, 0x000000); // Blank
+      pixel.show();
+      delay(RoutineFlashDelay);
+
+      //Do the last thing and WaitForRoutineChange
+
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, 36, 200, 10);
+      pixel.show();
+
+      x = 0.01;
+      y = 0.3;
+      z = 0.7;
+      
+      waitingFlag = true;
+      WaitForRoutineChange = true;
+      Serial.println(" WaitForRoutineChange = True");
+    }
+    else
+    {
+      if (WaitForRoutineChange)
+      {
+        //Call the main routine and loop the thing
+        strangeAttractor();
+
+        if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment))
+        {
+          WaitForRoutineChange = false;
+          Serial.println(" WaitForRoutineChange = False");
+          delay(200);
+        }
+      }
+
+      if (((analogRead(A0) > ValueZeroAdjustment) or (analogRead(A1) > ValueZeroAdjustment) or (analogRead(A2) > ValueZeroAdjustment)) && (!WaitForRoutineChange))
+      {
+        Mode = 7;
+        waitingFlag = false;
+        WaitForRoutineChange = false;
+        Serial.println(" WaitForRoutineChange = False & WaitingFlag = False");
+      }
+    }
+  }
+
+// Strange Attractor 2
+  if (Mode == 7)
+  {
+    if (!waitingFlag)
+    {
+      for (int i = 0; i < 2; i++)
+      {
+        pixel.setBrightness(100);
+        pixel.setPixelColor(0, Sketch2Pink); // Pink
+        pixel.show();
+        delay(RoutineFlashDelay);
+        pixel.setPixelColor(0, 0x000000); // Blank
+        pixel.show();
+        delay(RoutineFlashDelay);
+      }
+
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, Sketch2Orange); // Orange
+      pixel.show();
+      delay(RoutineFlashDelay);
+      pixel.setPixelColor(0, 0x000000); // Blank
+      pixel.show();
+      delay(RoutineFlashDelay);
+
+      //Do the last thing and WaitForRoutineChange
+
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, 36, 200, 10);
+      pixel.show();
+
+      x = 0.01;
+      y = 0.3;
+      z = 0.7;
+      
+      waitingFlag = true;
+      WaitForRoutineChange = true;
+      Serial.println(" WaitForRoutineChange = True");
+    }
+    else
+    {
+      if (WaitForRoutineChange)
+      {
+        //Call the main routine and loop the thing
+        strangeAttractor();
+
+        if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment))
+        {
+          WaitForRoutineChange = false;
+          Serial.println(" WaitForRoutineChange = False");
+          delay(200);
+        }
+      }
+
+      if (((analogRead(A0) > ValueZeroAdjustment) or (analogRead(A1) > ValueZeroAdjustment) or (analogRead(A2) > ValueZeroAdjustment)) && (!WaitForRoutineChange))
+      {
+        Mode = 8;
+        waitingFlag = false;
+        WaitForRoutineChange = false;
+        Serial.println(" WaitForRoutineChange = False & WaitingFlag = False");
+      }
+    }
+  }
+
+ // Strange Attractor 3
+  if (Mode == 8)
+  {
+    if (!waitingFlag)
+    {
+      for (int i = 0; i < 2; i++)
+      {
+        pixel.setBrightness(100);
+        pixel.setPixelColor(0, Sketch2Pink); // Pink
+        pixel.show();
+        delay(RoutineFlashDelay);
+        pixel.setPixelColor(0, 0x000000); // Blank
+        pixel.show();
+        delay(RoutineFlashDelay);
+      }
+
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, Sketch2Orange); // Orange
+      pixel.show();
+      delay(RoutineFlashDelay);
+      pixel.setPixelColor(0, 0x000000); // Blank
+      pixel.show();
+      delay(RoutineFlashDelay);
+
+      //Do the last thing and WaitForRoutineChange
+
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, 36, 200, 10);
+      pixel.show();
+
+      x = 0.01;
+      y = 0.3;
+      z = 0.7;
+      
+      waitingFlag = true;
+      WaitForRoutineChange = true;
+      Serial.println(" WaitForRoutineChange = True");
+    }
+    else
+    {
+      if (WaitForRoutineChange)
+      {
+        //Call the main routine and loop the thing
+        strangeAttractor();
+
+        if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment))
+        {
+          WaitForRoutineChange = false;
+          Serial.println(" WaitForRoutineChange = False");
+          delay(200);
+        }
+      }
+
+      if (((analogRead(A0) > ValueZeroAdjustment) or (analogRead(A1) > ValueZeroAdjustment) or (analogRead(A2) > ValueZeroAdjustment)) && (!WaitForRoutineChange))
+      {
+        Mode = 9;
+        waitingFlag = false;
+        WaitForRoutineChange = false;
+        Serial.println(" WaitForRoutineChange = False & WaitingFlag = False");
+      }
+    }
+  }   
+ // Strange Attractor 4
+  if (Mode == 9)
+  {
+    if (!waitingFlag)
+    {
+      for (int i = 0; i < 2; i++)
+      {
+        pixel.setBrightness(100);
+        pixel.setPixelColor(0, Sketch2Pink); // Pink
+        pixel.show();
+        delay(RoutineFlashDelay);
+        pixel.setPixelColor(0, 0x000000); // Blank
+        pixel.show();
+        delay(RoutineFlashDelay);
+      }
+
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, Sketch2Orange); // Orange
+      pixel.show();
+      delay(RoutineFlashDelay);
+      pixel.setPixelColor(0, 0x000000); // Blank
+      pixel.show();
+      delay(RoutineFlashDelay);
+
+      //Do the last thing and WaitForRoutineChange
+
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, 36, 200, 10);
+      pixel.show();
+
+      x = 0.01;
+      y = 0.3;
+      z = 0.7;
+      
+      waitingFlag = true;
+      WaitForRoutineChange = true;
+      Serial.println(" WaitForRoutineChange = True");
+    }
+    else
+    {
+      if (WaitForRoutineChange)
+      {
+        //Call the main routine and loop the thing
+        strangeAttractor();
+
+        if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment))
+        {
+          WaitForRoutineChange = false;
+          Serial.println(" WaitForRoutineChange = False");
+          delay(200);
+        }
+      }
+
+      if (((analogRead(A0) > ValueZeroAdjustment) or (analogRead(A1) > ValueZeroAdjustment) or (analogRead(A2) > ValueZeroAdjustment)) && (!WaitForRoutineChange))
+      {
+        Mode = 10;
+        waitingFlag = false;
+        WaitForRoutineChange = false;
+        Serial.println(" WaitForRoutineChange = False & WaitingFlag = False");
+      }
+    }
+  }
+  
+ // Strange Attractor 5
+  if (Mode == 10)
+  {
+    if (!waitingFlag)
+    {
+      for (int i = 0; i < 2; i++)
+      {
+        pixel.setBrightness(100);
+        pixel.setPixelColor(0, Sketch2Pink); // Pink
+        pixel.show();
+        delay(RoutineFlashDelay);
+        pixel.setPixelColor(0, 0x000000); // Blank
+        pixel.show();
+        delay(RoutineFlashDelay);
+      }
+
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, Sketch2Orange); // Orange
+      pixel.show();
+      delay(RoutineFlashDelay);
+      pixel.setPixelColor(0, 0x000000); // Blank
+      pixel.show();
+      delay(RoutineFlashDelay);
+
+      //Do the last thing and WaitForRoutineChange
+
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, 36, 200, 10);
+      pixel.show();
+
+      x = 0.01;
+      y = 0.3;
+      z = 0.7;
+      
+      waitingFlag = true;
+      WaitForRoutineChange = true;
+      Serial.println(" WaitForRoutineChange = True");
+    }
+    else
+    {
+      if (WaitForRoutineChange)
+      {
+        //Call the main routine and loop the thing
+        strangeAttractor();
+
+        if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment))
+        {
+          WaitForRoutineChange = false;
+          Serial.println(" WaitForRoutineChange = False");
+          delay(200);
+        }
+      }
+
+      if (((analogRead(A0) > ValueZeroAdjustment) or (analogRead(A1) > ValueZeroAdjustment) or (analogRead(A2) > ValueZeroAdjustment)) && (!WaitForRoutineChange))
+      {
+        Mode = 1;
+        waitingFlag = false;
+        WaitForRoutineChange = false;
+        Serial.println(" WaitForRoutineChange = False & WaitingFlag = False");
+      }
+    }
+  }    
 
 
 }
@@ -659,6 +1033,27 @@ void Fadez_01 () {
 
     plotCycle();  
 
+if (Mode == 1)
+{
+      redValue = 115;
+      greenValue = 0;
+      blueValue = 130;
+}
+if (Mode == 2) // pixel.setPixelColor(0, 36, 0, 255);
+{
+      redValue = 36;
+      greenValue = 0;
+      blueValue = 255;
+}
+if (Mode == 3) //pixel.setPixelColor(0, 0, 255, 60);
+{
+      redValue = 0;
+      greenValue = 255;
+      blueValue = 60;
+}
+else;
+
+      
   int x = 1;
 
   //This fades the brightness in and out using maths
@@ -669,9 +1064,14 @@ void Fadez_01 () {
 
     plotCycle(); 
 
+             
+      //Experiment in-progress
+      //pixel.setPixelColor(0, redValue-i/2, greenValue, blueValue-i);
+      //52,24,130
+
     //If the fade has reached it's peak keep the LED lit and then fade out
 
-    if (i == 50) {
+    if (i == 155) {
 
       //Mode changes to the delay time when LED is full color value for potentiometer A1
       //Use the value of A1 to keep the LED fully lit by the amount of A1 (delay) and then start fading out
@@ -682,6 +1082,9 @@ void Fadez_01 () {
       plotCycle(); 
 
       x = -1;  // switch direction at peak
+      
+      //Experiment in-progress
+      //pixel.setPixelColor(0, redValue+i, greenValue, blueValue-i);
     }
 
     //Mode changes to the delay time of the fade speed for potentiometer A0
@@ -774,7 +1177,8 @@ void delayA0(int count)
       //Serial.println("Else fadeSpeeed: " + String(fadeSpeed));
     }
 
-    delay(1);
+    //Make this number smaller to fade faster
+    delay(.5);
     controlsMax();
     //Serial.println("Count if Waiting = False: " + String(count));
   }
@@ -838,7 +1242,7 @@ void delayA1(int count)
     }
     else if (Mode == 5) {
       //Potentiometer Top Left | A1 - Map the value of the potentiometer to the variable valueA1
-      valueA1 = map(analogRead(A1), 0, 1024, 0, 100);
+      valueA1 = map(analogRead(A1), 0, 1024, 0, 5000);
       fullDelay =  valueA1;
       //Serial.println("Mode 4 darkDelay: " + String(fullDelay));
     }   else {
@@ -1261,11 +1665,252 @@ void controlsMax()
 
 void plotCycle()
 {
-    Serial.println("Min:0,Max:255");
     
-    LEDBrightness = pixel.getBrightness();
-    Serial.println(LEDBrightness); 
-    //LEDBrightness = redValue + blueValue + greenValue;
+
+    // If the Mode is 5 or less, run print for fades
+    if (5 >= Mode)
+    {
+          Serial.println("Min:0,Max:255");
+          LEDBrightness = pixel.getBrightness();
+          Serial.println(LEDBrightness); 
+          //LEDBrightness = redValue + blueValue + greenValue;
+    }
+
+    // If the Mode is 5 or more, run pirnt for strange attractor
+    else;
+    
+    /*
+     * 
+     if (5 <= Mode)
+    {
+          //Print some things
+          //printStrangeScaled();
+          //printStrangeEffective();
+          printStrangeXYZ();
+    }
+   */
+}
+
+
+// STRANGE ATTRACTOR
+
+
+void strangeAttractor()
+{
+
+  controlsMax();
+  
+  //Don't execute the code if not enough time has elapsed
+  if(millis() > nextLorenzUpdate){
+    
+    lorenzFunction();
+    nextLorenzUpdate = millis() + (printDelay);
+
+    brightenColors();
+
+    //A0 potentiometer controls for fade speed
+    delayAmount = map(analogRead(A0), 0, 1024, 300, 0);
+    //Serial.println(" A2:  " + String(analogRead(A2)) + " a:  " + String(a));
+
+    //A1 potentiometer controls for amount of randomless from less to more random
+    b = map(analogRead(A1), 0, 1024, 20, 35);
+
+    //A2 potentiometer controls for maximum brightness
+    maxBrightness = map(analogRead(A2), 0, 1024, 0, 255);
+    pixel.setBrightness(maxBrightness);
+
+
+    //Modes
+    /* Set a value for each potentiometer (pin) for colors R,G,B. */
+
+    if (Mode == 6)
+    {
+      pixel.setPixelColor(0, scaledX, 0, 0); //Single Output Scaled X
+    }
+    if (Mode == 7)
+    {
+      pixel.setPixelColor(0, scaledX, 0, scaledZ); //Double Output Scaled X & Z
+    }
+    if (Mode == 8)
+    {
+      pixel.setPixelColor(0, scaledX, scaledY, scaledZ); //Triple Output Scaled XYZ
+    }
+    if (Mode == 9)
+    {
+      pixel.setPixelColor(0, scaledX+scaledY+scaledZ, 0, 0); //Combined Output
+    }
+    if (Mode == 10)
+    {
+      //pixel.setPixelColor(0, scaledX, scaledY, scaledZ); //Triple Output Scaled XYZ
+      pixel.setPixelColor(0, effectiveR, effectiveG, effectiveB); //Triple Output Less Stable
+    }
+    
+
+    
+
+
+    pixel.show();        
+    delay(delayAmount);
+
+    //plotCycle();
+
+    //Print some things
+    //printStrangeScaled();
+    //printStrangeEffective();
+    printStrangeXYZ();
+    
+  }
+
+}
+
+void printStrangeXYZ()
+{
+  Serial.println("x:  " + String(x) + " y:  " + String(y) + " z:  " + String(z));
+  Serial.print("\n"); //Comment this line to not have a space between cicles
+  //Serial.println("A0:  " + String(analogRead(A0)) + " A1:  " + String(analogRead(A1)) + " A2:  " + String(analogRead(A2)));
+}
+
+
+void printStrangeScaled()
+{
+    Serial.print(F("x:  "));
+    Serial.println(String(scaledX));
+    Serial.print(F("y:  "));
+    Serial.println(String(scaledY));
+    Serial.print(F("z:  "));
+    Serial.println(String(scaledZ));
+    Serial.print("\n"); //Comment this line to not have a space between cicles
+}
+
+void printStrangeEffective()
+{
+    Serial.print(F("  |  "));
+    Serial.println(effectiveR);
+    Serial.print(F("  |  "));
+    Serial.println(effectiveG);
+    Serial.print(F("  |  "));
+    Serial.println(effectiveB);
+    Serial.print("\n"); //Comment this line to not have a space between cicles
+}
+
+void updateScaling(byte rowA, byte cellA, byte rowB, byte cellB, float checkValue) {
+
+  if(checkValue < scalings[rowA][cellA]){ //If the variable is higher than the current max scale value, then update the max scale value
+    scalings[rowA][cellA] = checkValue;
+  }
+
+  if(checkValue > scalings[rowB][cellB]){ //If the variable is lower than the current min scale value, then update the min scale value
+    scalings[rowB][cellB] = checkValue;
+  }
+  
+}
+
+void lorenzFunction() {
+
+  /*
+   * This function performs the calculations for the Lorenz equation
+   * 
+   * I removed the for cicle and I perform a single calculation to extend the code working time
+   * 
+   * I divided each equation in two steps:
+   * Before I calculation and sum to the old value in the same step, now I divided it
+   * 
+   */
+
+  dx = (a * (y - x)) * dt;
+  dy = (x * (b - z) - y) * dt;
+  dz = ((x * y) - (c * z)) * dt;
+
+  x += dx;
+  y += dy;
+  z += dz;
+
+  /*
+   * I don't know exactly what range of values can the lorenz return
+   * 
+   * So I created a function to adjust the scalings if a value is outside the range
+   * 
+   */
+  
+  updateScaling(0,0,1,0,x);
+  updateScaling(0,1,1,1,y);
+  updateScaling(0,2,1,2,z);
+
+  //Values are scaled to 0-255 to adapt to the analogWrite function
+
+  scaledX = map(x, scalings[0][0], scalings[1][0], 0, 255);
+  scaledY = map(y, scalings[0][1], scalings[1][1], 0, 255);
+  scaledZ = map(z, scalings[0][2], scalings[1][2], 0, 255);
+  
+}
+
+#ifdef __arm__
+  // should use uinstd.h to define sbrk but Due causes a conflict
+  extern "C" char* sbrk(int incr);
+#else  // __ARM__
+  extern char *__brkval;
+#endif  // __arm__
+ 
+int freeMemory() {
+    char top;
+  #ifdef __arm__
+    return &top - reinterpret_cast<char*>(sbrk(0));
+  #elif defined(CORE_TEENSY) || (ARDUINO > 103 && ARDUINO != 151)
+    return &top - __brkval;
+  #else  // __arm__
+    return __brkval ? &top - __brkval : &top - __malloc_heap_start;
+  #endif  // __arm__
+}
+
+void brightenColors() {
+
+  /*
+   * Brightness is managed as follows:
+   *    When brightness should be maximum:
+   *      Nothing appens to not affect the colors
+   *     
+   *    When brightness should be minimum:
+   *      Variables are decreased to obtain minimum brightness without affecting the color
+   */
+
+  if(fadeAmount < 0) {
+    //Brightness is decreasing
+    //Results are decreased to match with the wanted brightness
+
+    effectiveR = brightness;                        //Red (x) is the master
+    effectiveG = (scaledX / scaledY) * effectiveR;  //Proportion must remain unchanged
+    effectiveB = (scaledX / scaledZ) * effectiveR;  //Proportion must remain unchanged
+    
+    if (effectiveR < 0) effectiveR = 0; //Results must be greater or equal to 0
+    if (effectiveG < 0) effectiveG = 0; //Results must be greater or equal to 0
+    if (effectiveB < 0) effectiveB = 0; //Results must be greater or equal to 0
+    
+    /*Serial.print("Fading  ");
+    Serial.print(brightness);
+    Serial.print("  ");
+    Serial.print(effectiveR);
+    Serial.print("  ");
+    Serial.print(effectiveG);
+    Serial.print("  ");
+    Serial.println(effectiveB);
+    delay(3000);*/
+    
+  } else {
+    //Brightness is increasing
+    //Results remains unchanged
+
+    effectiveR = scaledX;
+    effectiveG = scaledY;
+    effectiveB = scaledZ;
+    
+  }
+  
+  brightness += fadeAmount;
+
+  if (brightness <= 0 || brightness >= 255) {
+    fadeAmount = -fadeAmount;
+  }
+  
 }
 
 void writeStartupMode()
