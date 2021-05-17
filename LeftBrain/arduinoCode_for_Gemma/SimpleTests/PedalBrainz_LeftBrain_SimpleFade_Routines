@@ -29,10 +29,9 @@
 //  A1 = Delay when LED is fully off (It's Dark)
 //  A2 = Randomized Maximum Brightness
 //
-//
 //  Strange Attractors Modes 6-10
 //  A0 = Cycle Speed
-//  A1 = Amount of Randomness
+//  A1 = Amount of Randomness 
 //  A2 = Maximum Brightness
 //
 //  Mode 6: 1 Wave
@@ -41,25 +40,58 @@
 //  Mode 9: 3 Wavez Alt
 //  Mode 10: 3 Waves Unstable
 //
+//
 //  -Lost Lab
 
 
+/**
+
+  ARDUINO Libraries in-use
+  These must be included in your Arduino Environment using /Sketch/Include Libraries/Manage Libraries... or by importing the Library .zip directly
+
+*/
 
 #include <Adafruit_DotStar.h>
 #include <FlashAsEEPROM_SAMD.h>
 
-/* Set the on-board DotStar as "pixel". */
+/**
+
+ Adafruit_DotStar Library declaration
+ Set the on-board DotStar as "pixel".
+
+*/
+
 Adafruit_DotStar pixel = Adafruit_DotStar(1, INTERNAL_DS_DATA, INTERNAL_DS_CLK, DOTSTAR_BGR);
 
-// Declare the potentiometer variables
+/**
+
+  POTENTIOMETER declarations
+
+*/
+
 int valueA0 = 135;
 int valueA1 = 0;
 int valueA2 = 0;
 
-// Flash Memory EEPROM variables
+/**
+
+  FlashAsEEPROM_SAMD Library declarations
+  FLASH MEMORY/ EEPROM for reading and writing the startup mode
+
+*/
+
 uint16_t address = 0;
 int number;
 int startupMode = 1;
+
+
+
+/**
+
+  General declarations
+  Some colors, some randoms, some brightness
+
+*/
 
 // Set a default variable for the red, blue, and green (RGB) value of the on-board Dot Star
 // Pink! Potentiometer A0: 236 Potentiometer A1: 73 Potentiometer A2: 107
@@ -76,11 +108,17 @@ int delayRandom = random(0, 1000);
 int randomAmount = 0;
 int delayValue = 0;
 
+
 unsigned long myTime;
 int LEDBrightness;
 
 
-// Routines Declarations
+/**
+
+  ROUTINES Declarations
+
+*/
+
 // Some Colors
 uint32_t Sketch2Blue = 0x0000FF;
 uint32_t Sketch2Red = 0xFF0000;
@@ -112,7 +150,11 @@ int Mode = 0;
 //Rainbow Mode Declarations
 unsigned short pixelnumber = 0;
 
-// Strange Attractor Declarations
+/**
+
+  STRANGE ATTRACTORS Declarations
+
+*/
 
 //Coordinates for the lorenz function
 float x = 0;
@@ -267,8 +309,9 @@ void loop() {
     plotCycle(); 
 
     // Some memory Print
-    //Serial.print(F("freeMemory: "));
-    //Serial.println((int)freeMemory);
+    Serial.print(F("freeMemory: "));
+    Serial.println((int)freeMemory);
+
 
 }
 
@@ -1136,41 +1179,40 @@ void delayA0(int count)
       break;
       Serial.println("I Broke");
     }
-    
+
+    // Potentiometer Top Right | A0 - Map the value of the Potentiometer to a Variable
     if (Mode == 1) {
-      //Potentiometer Top Right | A0 - Map the value of the potentiometer to the variable valueA0
-      fadeSpeed = map(analogRead(A0), 0, 1024, 136, 0);
+      
+      fadeSpeed = map(analogRead(A0), 0, 1024, 300, 0);
       //Serial.println("Mode 1 fadeSpeeed: " + String(fadeSpeed));
     }
     else if (Mode == 2) {
-      //Potentiometer Top Right | A0 - Map the value of the potentiometer to the variable valueA1
-      //delayValue = map(analogRead(A0), 0, 1024, 0, 5000);
-      //fadeSpeed = random(0, delayValue);
-      
-      fadeSpeed = 7;
-      //Serial.println("Delay Random (ms): " + String(delayRandom));
-      //Serial.println("Mode 2 fadeSpeeed: " + String(fadeSpeed));
+
+      valueA0 = map(analogRead(A0), 0, 1024, 500, 0);
+      delayValue = map(analogRead(A0), 0, 1024, 500, 0);
+      randomAmount = random(0, delayValue);
+      fadeSpeed = valueA0-delayRandom;
+      Serial.println("Delay Random (ms): " + String(delayRandom));
+      Serial.println("Mode 2 fadeSpeeed: " + String(fadeSpeed));
     }
     else if (Mode == 3) {
-      //Potentiometer Top Right | A0 - Map the value of the potentiometer to the variable valueA1
-      
-      valueA0 = map(analogRead(A0), 0, 1024, 60, 20);
-      delayValue = map(analogRead(A0), 0, 1024, 0, 40);
-      //randomAmount = random(0, delayValue);
-      
-      fadeSpeed = valueA0 + randomAmount;
+           
+      valueA0 = map(analogRead(A0), 0, 1024, 500, 0);
+      delayValue = map(analogRead(A0), 0, 1024, 500, 0);
+      randomAmount = random(0, delayValue);
+      fadeSpeed = valueA0 - randomAmount;
       //Serial.println("Mode 3 fadeSpeed Random: " + String(randomAmount));
       //Serial.println("Mode 3 fadeSpeeed: " + String(fadeSpeed));
     }
      else if (Mode == 4) {
-      //Potentiometer Top Right | A0 - Map the value of the potentiometer to the variable valueA0
-      fadeSpeed = map(analogRead(A0), 0, 1024, 20, -1);
-      //Serial.println("Mode 4 fadeSpeeed: " + String(fadeSpeed));
+     
+      fadeSpeed = map(analogRead(A0), 0, 1024, 80, -1);
+      Serial.println("Mode 4 fadeSpeeed: " + String(fadeSpeed));
     }
      else if (Mode == 5) {
-      //Potentiometer Top Right | A0 - Map the value of the potentiometer to the variable valueA0
-      fadeSpeed = map(analogRead(A0), 0, 1024, 20, -1);
-      //Serial.println("Mode 4 fadeSpeeed: " + String(fadeSpeed));
+     
+      fadeSpeed = map(analogRead(A0), 0, 1024, 80, -1);
+      Serial.println("Mode 5 fadeSpeeed: " + String(fadeSpeed));
     }
     else {
       fadeSpeed = 7;
@@ -1207,26 +1249,24 @@ void delayA1(int count)
       break;
       Serial.println("I Broke");
     }
+
+    // Potentiometer Top Left | A1 - Map the value of the potentiometer to a variable
     if (Mode == 1) {
-      //Potentiometer Top Left | A1 - Map the value of the potentiometer to the variable valueA1
+     
       fullDelay = map(analogRead(A1), 0, 1024, 0, 5000);
       //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
     }
     else if (Mode == 2) {
-      //Potentiometer Top Right | A0 - Map the value of the potentiometer to the variable valueA0
-      //Potentiometer Top Left | A1 - Map the value of the potentiometer to the variable valueA1
-      
+           
       valueA1 = map(analogRead(A1), 0, 1024, 0, 5000);
       delayValue = map(analogRead(A0), 0, 1024, 0, 5000);
       randomAmount = random(0, delayValue);
       fullDelay = valueA1 + randomAmount;
-      //Serial.println("Mode 2 fullDelay Random: " + String(randomAmount));
-      //Serial.println("Mode 2 fullDelay: " + String(fullDelay));
+      Serial.println("Mode 2 fullDelay Random: " + String(randomAmount));
+      Serial.println("Mode 2 fullDelay: " + String(fullDelay));
     }
     else if (Mode == 3) {
-      //Potentiometer Top Right | A0 - Map the value of the potentiometer to the variable valueA0
-      //Potentiometer Top Left | A1 - Map the value of the potentiometer to the variable valueA1
-      
+            
       valueA1 = map(analogRead(A1), 0, 1024, 0, 5000);
       delayValue = map(analogRead(A0), 0, 1024, 0, 5000);
       randomAmount = random(0, delayValue);
@@ -1235,17 +1275,18 @@ void delayA1(int count)
       //Serial.println("Mode 3 fullDelay: " + String(fullDelay));
     }
     else if (Mode == 4) {
-      //Potentiometer Top Left | A1 - Map the value of the potentiometer to the variable valueA1
+     
       valueA1 = map(analogRead(A1), 0, 1024, 0, 5000);
       fullDelay =  valueA1;
       //Serial.println("Mode 4 darkDelay: " + String(fullDelay));
     }
     else if (Mode == 5) {
-      //Potentiometer Top Left | A1 - Map the value of the potentiometer to the variable valueA1
+      
       valueA1 = map(analogRead(A1), 0, 1024, 0, 5000);
       fullDelay =  valueA1;
       //Serial.println("Mode 4 darkDelay: " + String(fullDelay));
-    }   else {
+    }   
+    else {
       fullDelay = 100;
       //Serial.println("Else fullDelay: " + String(fullDelay));
     }
@@ -1279,32 +1320,27 @@ void delayA2(int count)
       break;
       Serial.println("I Broke");
     }
+
+  //Potentiometer Bottom Right | A2 - Map the value of the potentiometer to a variable
   if (Mode == 1) {
-    //Potentiometer Bottom Right | A2 - Map the value of the potentiometer to the variable valueA2
-    
+       
     darkDelay = map(analogRead(A2), 0, 1024, 0, 5000);
     //Serial.println("Mode 1 darkDelay: " + String(darkDelay));
   }
   else if (Mode == 2) {
-    //Potentiometer Top Right | A0 - Map the value of the potentiometer to the variable valueA0
-    //Potentiometer Top Left | A2 - Map the value of the potentiometer to the variable valueA1
-    
+        
     valueA2 = map(analogRead(A2), 0, 1024, 0, 5000);
     delayValue = map(analogRead(A0), 0, 1024, 0, 5000);
-    //randomAmount = random(0, delayValue);
-    
+    randomAmount = random(0, delayValue);
     darkDelay = valueA2 + randomAmount;
-    //Serial.println("Mode 2 darkDelay Random: " + String(randomAmount));
-    //Serial.println("Mode 2 darkDelay: " + String(darkDelay));
+    Serial.println("Mode 2 darkDelay Random: " + String(randomAmount));
+    Serial.println("Mode 2 darkDelay: " + String(darkDelay));
   }
   else if (Mode == 3) {
-    //Potentiometer Top Right | A0 - Map the value of the potentiometer to the variable valueA0
-    //Potentiometer Top Left | A2 - Map the value of the potentiometer to the variable valueA1
-    
+       
     valueA2 = map(analogRead(A2), 0, 1024, 0, 5000);
     delayValue = map(analogRead(A0), 0, 1024, 0, 5000);
-    //randomAmount = random(0, delayValue);
-    
+    randomAmount = random(0, delayValue);
     darkDelay = valueA2 + randomAmount;
     //Serial.println("Mode 3 darkDelay Random: " + String(randomAmount));
     //Serial.println("Mode 3 darkDelay: " + String(darkDelay));
@@ -1402,18 +1438,7 @@ void sineLED(int pixelnumber, int angle)
 }
 
 void RainbowMode () {
-
-        if (Mode == 5) {
-          //Change the maximum brightness of the LED using potantiometer A2  
-          valueA2 = map(analogRead(A2), 0, 1024, 0, 255);   
-          randomAmount = random(0, 255); 
-          rainbowBright = valueA2 - randomAmount;
-          pixel.setBrightness(rainbowBright);
-          Serial.println("Mode 5 randomAmount: " + String(randomAmount));
-          Serial.println("Mode 5 rainbowBright: " + String(rainbowBright));
-        } 
-        else;
-        
+   
   //Fade in from the beginning of the Rainbow cycle (Red)
   for (int x = 0; x < 255; x++)
   {
@@ -1423,13 +1448,25 @@ void RainbowMode () {
       Serial.println("I Broke");
     }
 
-       if (Mode == 4) {
-        //Change the maximum brightness of the LED using potantiometer A2      
-        rainbowBright = map(analogRead(A2), 0, 1024, 0, 100);
+     if (Mode == 4) {
+      
+      //Change the maximum brightness of the LED using potantiometer A2      
+      rainbowBright = map(analogRead(A2), 0, 1024, 0, 100);
+      pixel.setBrightness(rainbowBright);
+      //Serial.println("Mode 4 rainbowBright: " + String(rainbowBright));
+    }  
+    if (Mode == 5) {
+    
+        //Change the maximum brightness of the LED using potantiometer A2  
+        
+        valueA2 = map(analogRead(A2), 0, 1024, 0, 255);   
+        randomAmount = random(0, 255); 
+        rainbowBright = valueA2 - randomAmount;
         pixel.setBrightness(rainbowBright);
-        //Serial.println("Mode 4 rainbowBright: " + String(rainbowBright));
-      }  
-      else;  
+        Serial.println("Mode 5 randomAmount: " + String(randomAmount));
+        Serial.println("Mode 5 rainbowBright: " + String(rainbowBright));
+      } 
+      else; 
 
     plotCycle();
       
@@ -1437,8 +1474,10 @@ void RainbowMode () {
     //Increase the value of the R value causing a fade in;
     pixel.setPixelColor(pixelnumber, x, 0, 0);
 
+    
+
     //A delay amount between each increase in value mapped to A0 and divided
-    delayA0(fadeSpeed / 40);
+    delayA0(fadeSpeed / 100);
     pixel.show();
   }
 
@@ -1463,8 +1502,8 @@ void RainbowMode () {
     }
     
     //Change the rate of the rainbow cycling using potantiometer A0
-    //valueA0 = map(analogRead(A0), 0, 1024, 10, 0-1);
-    //valueA0 = map(analogRead(A0), 0, 1024, 0, 20);
+    fadeSpeed = map(analogRead(A0), 0, 1024, 80, -1);
+    //Serial.println("Mode 5 fadeSpeeed: " + String(fadeSpeed));
     
     
     delayA0(fadeSpeed);
@@ -1505,7 +1544,7 @@ void RainbowMode () {
     pixel.setPixelColor(pixelnumber, x, 0, 0);
 
     //A delay amount between each reduction in value mapped to A0 and divided
-    delayA0(fadeSpeed / 40);
+    delayA0(fadeSpeed / 100);
     pixel.show();
 
     plotCycle();
@@ -1663,37 +1702,16 @@ void controlsMax()
   
 }
 
-void plotCycle()
-{
-    
-
-    // If the Mode is 5 or less, run print for fades
-    if (5 >= Mode)
-    {
-          Serial.println("Min:0,Max:255");
-          LEDBrightness = pixel.getBrightness();
-          Serial.println(LEDBrightness); 
-          //LEDBrightness = redValue + blueValue + greenValue;
-    }
-
-    // If the Mode is 5 or more, run pirnt for strange attractor
-    else;
-    
-    /*
-     * 
-     if (5 <= Mode)
-    {
-          //Print some things
-          //printStrangeScaled();
-          //printStrangeEffective();
-          printStrangeXYZ();
-    }
-   */
-}
 
 
-// STRANGE ATTRACTOR
+/**
 
+  STRANGE ATTRACTORS
+
+*/
+//
+//  This Section is the Strange Attractor loop
+//
 
 void strangeAttractor()
 {
@@ -1713,11 +1731,12 @@ void strangeAttractor()
     //Serial.println(" A2:  " + String(analogRead(A2)) + " a:  " + String(a));
 
     //A1 potentiometer controls for amount of randomless from less to more random
-    b = map(analogRead(A1), 0, 1024, 20, 35);
+    b = map(analogRead(A1), 0, 1024, 20, 50);
 
     //A2 potentiometer controls for maximum brightness
     maxBrightness = map(analogRead(A2), 0, 1024, 0, 255);
     pixel.setBrightness(maxBrightness);
+    //Serial.println(maxBrightness); 
 
 
     //Modes
@@ -1725,24 +1744,26 @@ void strangeAttractor()
 
     if (Mode == 6)
     {
-      pixel.setPixelColor(0, scaledX, 0, 0); //Single Output Scaled X
+      pixel.setPixelColor(0, scaledX, 0, 30); //Single Output Scaled X
+      //pixel.setPixelColor(0, x, 0, 30); //Single Output Scaled X
     }
     if (Mode == 7)
     {
       pixel.setPixelColor(0, scaledX, 0, scaledZ); //Double Output Scaled X & Z
+      //pixel.setPixelColor(0, x, 0, z+100); //Double Output Scaled X & Z
     }
     if (Mode == 8)
     {
-      pixel.setPixelColor(0, scaledX, scaledY, scaledZ); //Triple Output Scaled XYZ
+      pixel.setPixelColor(0, scaledX, scaledY+100, scaledZ+100); //Triple Output Scaled XYZ
     }
     if (Mode == 9)
     {
-      pixel.setPixelColor(0, scaledX+scaledY+scaledZ, 0, 0); //Combined Output
+      pixel.setPixelColor(0, scaledX+(scaledY+100)+(scaledZ+100), 0, scaledX+(scaledY+100)+(scaledZ+100)); //Combined Output
     }
     if (Mode == 10)
     {
       //pixel.setPixelColor(0, scaledX, scaledY, scaledZ); //Triple Output Scaled XYZ
-      pixel.setPixelColor(0, effectiveR, effectiveG, effectiveB); //Triple Output Less Stable
+      pixel.setPixelColor(0, effectiveB+60, effectiveG+60, effectiveR+60); //Triple Output Less Stable
     }
     
 
@@ -1752,22 +1773,65 @@ void strangeAttractor()
     pixel.show();        
     delay(delayAmount);
 
-    //plotCycle();
-
-    //Print some things
-    //printStrangeScaled();
-    //printStrangeEffective();
-    printStrangeXYZ();
+    plotCycle();
     
   }
 
 }
 
+/**
+
+  Serial Printing and Plotting
+
+*/
+//
+//  This Section is waiting includes different ways to print and plot the variable to the Arduino Serial Monitor and Serial Plotter
+//
+
+void plotCycle()
+{
+    
+    /*
+    // If the Mode is 5 or less, run print for fades
+    if (5 >= Mode)
+    {
+          //Serial.println("Min:0,Max:255");
+          //Serial.print("Min:0,Max:255"); //Un-comment this for a smooth line
+          //Serial.print(","); //Un-comment this for a smooth line
+          
+          LEDBrightness = pixel.getBrightness();
+          Serial.println(LEDBrightness); 
+          //LEDBrightness = redValue + blueValue + greenValue;
+    }
+
+    // If the Mode is 5 or more, run pirnt for strange attractor
+    else;
+    
+     if (6 <= Mode)
+    {
+          //Print some things
+          //Serial.println("Min:0,Max:500");
+          Serial.print("Min:0,Max:500"); //Un-comment this for a smooth line
+          Serial.print(","); //Un-comment this for a smooth line
+          
+          //printStrangeScaled();
+          //printStrangeScaled2();
+          printStrangeScaled3();
+          //printStrangeScaledSingle();
+          
+          //printStrangeEffective();
+
+          //Serial.print("Min:0,Max:100");
+          //printStrangeXYZ();
+    }
+*/
+}
+
 void printStrangeXYZ()
 {
-  Serial.println("x:  " + String(x) + " y:  " + String(y) + " z:  " + String(z));
-  Serial.print("\n"); //Comment this line to not have a space between cicles
-  //Serial.println("A0:  " + String(analogRead(A0)) + " A1:  " + String(analogRead(A1)) + " A2:  " + String(analogRead(A2)));
+    Serial.println("x:  " + String(x+100) + " y:  " + String(y+100) + " z:  " + String(z+100));
+    Serial.print("\n"); //Comment this line to not have a space between cicles
+    //Serial.println("A0:  " + String(analogRead(A0)) + " A1:  " + String(analogRead(A1)) + " A2:  " + String(analogRead(A2)));
 }
 
 
@@ -1777,6 +1841,30 @@ void printStrangeScaled()
     Serial.println(String(scaledX));
     Serial.print(F("y:  "));
     Serial.println(String(scaledY));
+    Serial.print(F("z:  "));
+    Serial.println(String(scaledZ));
+    Serial.print("\n"); //Comment this line to not have a space between cicles
+}
+
+void printStrangeScaled2()
+{
+    Serial.println("x:  " + String(scaledX) + " y:  " + String(scaledY) + " z:  " + String(scaledZ));
+    Serial.print("\n"); //Comment this line to not have a space between cicles
+}
+
+void printStrangeScaled3()
+{
+    Serial.println(String(scaledX));
+    Serial.println(String(scaledY));
+    Serial.println(String(scaledZ));
+}
+
+void printStrangeScaledSingle()
+{
+    //Serial.print(F("x:  "));
+    //Serial.println(String(scaledX));
+    //Serial.print(F("y:  "));
+    //Serial.println(String(scaledY));
     Serial.print(F("z:  "));
     Serial.println(String(scaledZ));
     Serial.print("\n"); //Comment this line to not have a space between cicles
@@ -1792,6 +1880,16 @@ void printStrangeEffective()
     Serial.println(effectiveB);
     Serial.print("\n"); //Comment this line to not have a space between cicles
 }
+
+
+/**
+
+  STRANGE ATTRACTORS Functions
+
+*/
+//
+//  This Section is the Strange Attractor maths and stuff called by the strangeAttractor() function
+//
 
 void updateScaling(byte rowA, byte cellA, byte rowB, byte cellB, float checkValue) {
 
@@ -1867,7 +1965,7 @@ void brightenColors() {
   /*
    * Brightness is managed as follows:
    *    When brightness should be maximum:
-   *      Nothing appens to not affect the colors
+   *      Nothing happens to not affect the colors
    *     
    *    When brightness should be minimum:
    *      Variables are decreased to obtain minimum brightness without affecting the color
@@ -1913,6 +2011,18 @@ void brightenColors() {
   
 }
 
+
+/**
+
+  Reading and Writing to FLASH/ EEPROM Memory
+
+*/
+//
+//  This Section is the Strange Attractor maths and stuff called by the strangeAttractor() function
+//
+
+
+
 void writeStartupMode()
 {
     startupMode = Mode;
@@ -1937,3 +2047,24 @@ void readStartupMode()
   // Read the content of emulated-EEPROM
   EEPROM.get(address, startupMode);
 }
+
+
+/**
+
+  ATTRIBUTION
+  
+
+  Modes & ValueHigh/ Low
+
+
+  Rainbow Mode
+
+  
+  Strange Attractors Lorentz
+
+
+  Mountain (Snack Master) 
+
+  
+
+*/
