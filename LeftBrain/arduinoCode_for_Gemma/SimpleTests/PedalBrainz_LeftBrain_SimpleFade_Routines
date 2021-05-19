@@ -40,6 +40,11 @@
 //  Mode 9: 3 Wavez Alt
 //  Mode 10: 3 Waves Unstable
 //
+//  Mountain Snack
+//  A0 = Cycle Speed
+//  A1 = Amount of Randomness 
+//  A2 = Unused
+//
 //
 //  -Lost Lab
 
@@ -2425,7 +2430,7 @@ void readStartupMode()
   Strange Attractors Lorentz
 
 
-  Mountain Snack
+  Mountain (Snack Master) 
 
   
 
