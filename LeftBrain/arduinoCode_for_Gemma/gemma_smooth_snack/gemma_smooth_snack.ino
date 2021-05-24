@@ -204,38 +204,38 @@ void loop() {
 
   }
 
-
-  pixel.setBrightness(currentVal);
-  
-  if ((currentVal >= 0) && (currentVal <= 80)) {
-    pixel.setPixelColor(0, 100, 0, 200);
-  }
-
-  if ((currentVal >= 60) && (currentVal <= 200)) {
-    pixel.setPixelColor(0, 10, 100, 200);
-  }
-
-  if ((currentVal >= 155) && (currentVal <= 255)) {
-    pixel.setPixelColor(0, 100, 255, 100);
-  }
-  pixel.show();
-
-// yann's simple system for setitng single pixel color with variable brightness
-//  if (color == 0) {
-//    pixel.setBrightness(currentVal);
-//    pixel.setPixelColor(0, 255, 0, 255);
+// variable color setting system
+//  pixel.setBrightness(currentVal);
+//  
+//  if ((currentVal >= 0) && (currentVal <= 80)) {
+//    pixel.setPixelColor(0, 100, 0, 200);
 //  }
 //
-//  if (color == 1) {
-//     pixel.setBrightness(currentVal);
-//    pixel.setPixelColor(0, 0, 255, 255);
+//  if ((currentVal >= 60) && (currentVal <= 200)) {
+//    pixel.setPixelColor(0, 10, 100, 200);
 //  }
 //
-//  if (color == 2) {
-//     pixel.setBrightness(currentVal);
-//    pixel.setPixelColor(0, 0, 0, 255);
+//  if ((currentVal >= 155) && (currentVal <= 255)) {
+//    pixel.setPixelColor(0, 100, 255, 100);
 //  }
 //  pixel.show();
+
+// yann's simple system for setitng single pixel color with variable brightness
+  if (color == 0) {
+    pixel.setBrightness(currentVal);
+    pixel.setPixelColor(0, 255, 0, 255);
+  }
+
+  if (color == 1) {
+     pixel.setBrightness(currentVal);
+    pixel.setPixelColor(0, 0, 255, 255);
+  }
+
+  if (color == 2) {
+     pixel.setBrightness(currentVal);
+    pixel.setPixelColor(0, 0, 0, 255);
+  }
+  pixel.show();
 
 
   // pixel.setPixelColor(pixel number, R, G, B);
