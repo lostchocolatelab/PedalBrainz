@@ -22,7 +22,7 @@ int color = 0; // change between 0, 1, 2 to set the color of the pixel (currentl
 float minLength = 1000; // minimum length, shortest cycle time in milliseconds
 float maxLength = 6096; // this plus minLength is the longest the loop can be, in milliseconds
 bool reRandom = false; // whether or not the random numbers are reset on each loop
-
+int maximumScale = 30;
 
 // other variables that probably shouldn't be poked at without some thought
 unsigned long milli;
@@ -46,7 +46,7 @@ long snackRandom;
 int snackInterval; // length of time between each potential snack, currently relative to targetSpeed
 int snackLength; // rough length of the snack, also relative to targetSpeed
 int snackLengthRandom; // a random number between -50 and 50 added to snackLength to give some variation on the length of the snack
-
+int scaledVal;
 
 PROGMEM const int sine2048[] = {
   0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -221,8 +221,11 @@ void loop() {
 //  pixel.show();
 
 // yann's simple system for setitng single pixel color with variable brightness
+
+scaledVal = map(currentVal, 0, 255, 0, maximumScale);
+  Serial.println(scaledVal);
   if (color == 0) {
-    pixel.setBrightness(currentVal);
+    pixel.setBrightness(scaledVal);
     pixel.setPixelColor(0, 255, 0, 255);
   }
 
