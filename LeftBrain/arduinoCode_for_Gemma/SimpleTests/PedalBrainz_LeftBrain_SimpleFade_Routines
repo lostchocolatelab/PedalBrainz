@@ -42,7 +42,7 @@
 //  Mountain Snack 9, 10
 //  A0 = Cycle Speed
 //  A1 = Amount of Randomness
-//  A2 = Unused
+//  A2 = Amount of Snacking/ Random Duration of Snacks
 //
 // Mode 9: Random Repeat
 // Mode 10: Random Random
