@@ -1,51 +1,62 @@
 
 //  Welcome to Pedal Brainz
 //
-//  Routine Change
-//  All potentiometers to zero (fully counter clockwise) for a second then rotate one potentiometer from zero for routine change.
+//  Mode Change
+//  All potentiometers to zero fully counter clockwise (left) for 1 second then rotate potentiometer A2 clockwise (right) from zero for Mode Change.
 //
+//  Mode Save
+//  All potentiometers to 100 fully clockwise (right) for 1 second then rotate potentiometer A2 counter-clockwise (left) to Save the Current Mode as the Startup Mode
 //
-//  Squarez Mode 1
+//  Mode 1 | Squarez 
 //  A0 = Speed between 2 Blinks
 //  A1 = Blink 1 Color Value (Brightness)
 //  A2 = Blink 2 Color Value (Brightness)
 //
-//  Fadez Mode 1
+//  Mode 2 | Trainglez 
 //  A0 = Fade speed of LED
-//  A1 = Delay when LED is fully on (It's Lit)
-//  A2 = Delay when LED is fully off (It's Dark)
+//  A1 = Duration when LED is fully on (It's Lit)
+//  A2 = Duration when LED is fully off (It's Dark)
 //
-//  Fadez Mode 2
+//  Mode 3 | Trainglez Random
 //  A0 = Amount of Random Time Added to A1, A2
-//  A1 = Delay when LED is fully on (It's Lit)
-//  A2 = Delay when LED is fully off (It's Dark)
+//  A1 = Duration when LED is fully on (It's Lit)
+//  A2 = Duration when LED is fully off (It's Dark)
 //
-//  Rainbow Mode 1
+//  Mode 4 | Rainbowz
 //  A0 = Rainbow Cycle Speed
-//  A1 = Delay when LED is fully off (It's Dark)
-//  A2 = Maximum Brightness
+//  A1 = Maximum Brightness
+//  A2 = Duration when LED is fully off (It's Dark)
 //
-//  Rainbow Mode 2
+//  Mode 5 | Rainbowz Random
 //  A0 = Rainbow Cycle Speed
-//  A1 = Delay when LED is fully off (It's Dark)
-//  A2 = Randomized Maximum Brightness
+//  A1 = Randomized Maximum Brightness
+//  A2 = Duration when LED is fully off (It's Dark)
 //
-//  Strange Attractors Modes 6, 7, 8
+//  Mode 6 | Mountainz Random Repeat
 //  A0 = Cycle Speed
 //  A1 = Amount of Randomness
-//  A2 = Maximum Brightness
+//  A2 = Chance of Snack
 //
-//  Mode 6: 1 Wave
-//  Mode 7: 2 Wavez
-//  Mode 8: 3 Wavez
-//
-//  Mountain Snack 9, 10
+//  Mode 7 | Mountainz Random Random
 //  A0 = Cycle Speed
 //  A1 = Amount of Randomness
-//  A2 = Amount of Snacking/ Random Duration of Snacks
+//  A2 = Chance of Snack
 //
-// Mode 9: Random Repeat
-// Mode 10: Random Random
+//  Mode 8 | Strange Attractorz Single
+//  A0 = Cycle Speed
+//  A1 = Maximum Brightness
+//  A2 = Amount of Randomness
+//
+//  Mode 9 | Strange Attractorz Double
+//  A0 = Cycle Speed
+//  A1 = Maximum Brightness
+//  A2 = Amount of Randomness
+//
+//  Mode 10 | Strange Attractorz Triple
+//  A0 = Cycle Speed
+//  A1 = Maximum Brightness
+//  A2 = Amount of Randomness
+//
 //
 //  -Lost Lab
 
@@ -110,15 +121,15 @@ int fadeSpeed = 13;
 int fullDelay = 0;
 int darkDelay = 0;
 
-int delayRandom = random(0, 1000);
 int randomAmountA0 = 0;
 int randomAmountA1 = 0;
 int randomAmountA2 = 0;
+
+int delayRandom = random(0, 1000);
 int delayValue = 0;
 int delayValueA0 = 0;
 int delayValueA1 = 0;
 int delayValueA2 = 0;
-
 
 unsigned long myTime;
 int LEDBrightness;
@@ -145,12 +156,14 @@ int rainbowBright = 255;
 
 boolean waitingFlag = false;
 boolean WaitForModeChange = true;
+
 boolean ValueZeroReached = false;
 boolean ValueHighReached = false;
 int ValueHighlight = 0;
 long ValueHighlightTime;
 long ValueZeroTime, ValueHighTime;
-int ValueZeroAdjustment = 5;
+int ValueZeroAdjustment = 20;
+
 int ModeFlashDelay = 100;
 boolean initial = true;
 
@@ -160,12 +173,17 @@ long WaitTime = 200;
 
 int Mode = 0;
 
-//Rainbow Mode Declarations
+/**
+
+  Rainbowz Declarations
+
+*/
+
 unsigned short pixelnumber = 0;
 
 /**
 
-  STRANGE ATTRACTORS Declarations
+  STRANGE ATTRACTORZ Declarations
 
 */
 
@@ -213,6 +231,7 @@ int delayAmount = 0;
 */
 
 // easily adjustable parameters
+
 int color = 0; // change between 0, 1, 2 to set the color of the pixel (currently not used)
 float minLength = 1000; // minimum length, shortest cycle time in milliseconds
 float maxLength = 6096; // this plus minLength is the longest the loop can be, in milliseconds
@@ -220,6 +239,7 @@ bool reRandom = false; // whether or not the random numbers are reset on each lo
 int maximumScale = 30;
 
 // other variables that probably shouldn't be poked at without some thought
+
 unsigned long milli;
 int lastMillis;
 const int loopLength = 2048; // size of the arrays that i'm using
@@ -307,17 +327,6 @@ const uint8_t HSVlights[61] =
   81, 85, 89, 93, 98, 102, 106, 110, 115, 119, 123, 127, 132, 136, 140, 144,
   149, 153, 157, 161, 166, 170, 174, 178, 183, 187, 191, 195, 200, 204, 208,
   212, 217, 221, 225, 229, 234, 238, 242, 246, 251, 255
-};
-
-const uint8_t HSVlightsFwdRev[120] =
-{ 0, 4, 8, 13, 17, 21, 25, 30, 34, 38, 42, 47, 51, 55, 59, 64, 68, 72, 76,
-  81, 85, 89, 93, 98, 102, 106, 110, 115, 119, 123, 127, 132, 136, 140, 144,
-  149, 153, 157, 161, 166, 170, 174, 178, 183, 187, 191, 195, 200, 204, 208,
-  212, 217, 221, 225, 229, 234, 238, 242, 246, 251, 255, 251, 246, 242, 238,
-  234, 229, 225, 221, 217, 212, 208, 204, 200, 195, 191, 187, 183, 178, 174,
-  170, 166, 161, 157, 153, 149, 144, 140, 136, 132, 127, 123, 119, 115, 110,
-  106, 102, 98, 93, 89, 85, 81, 76, 72, 68, 64, 59, 55, 51, 47, 42, 38, 34,
-  30, 25, 21, 17, 13, 8, 4
 };
 
 const uint8_t HSVpower[121] =
@@ -441,6 +450,14 @@ void loop() {
 }
 
 
+/**
+
+  Routines
+
+  This is where the Mode switching and waiting happens within the loop.
+
+*/
+
 
 void Routines()
 {
@@ -455,8 +472,9 @@ void Routines()
 
   if (Mode == 0)
   {
-
-    // Fade in from the beginning of the Rainbow cycle (starts with the color Red)
+    // On first power cycle, do this thing so that folks know things are getting ready
+    
+    // Fade in from the beginning of the Rainbow cycle (starts with the color Red) using some default values
     // This "for loop" adds to "x" which is set to zero (0) until it reaches 255 (Max Brightness)
     for (int x = 0; x < 255; x++)
     {
@@ -564,7 +582,7 @@ void Routines()
 
   */
 
-  //Fadez 01
+  // Squarez
   if (Mode == 1)
   {
     if (!waitingFlag)
@@ -596,7 +614,7 @@ void Routines()
     }
   }
 
-  //Fadez 02
+  // Trianglez
   if (Mode == 2)
   {
     if (!waitingFlag)
@@ -628,7 +646,7 @@ void Routines()
     }
   }
 
-  //Fadez 03
+  // Trianglez Repeat
   if (Mode == 3)
   {
     if (!waitingFlag)
@@ -1797,6 +1815,8 @@ void strangeAttractor()
 void plotCycle()
 {
 
+Serial.println(" A0 = " + String(analogRead(A0)) + " A1 = " + String(analogRead(A1)) + " A2 = " + String(analogRead(A2)));
+          
   ///*
   if (Mode == 1)
 {
@@ -2255,23 +2275,26 @@ void readStartupMode()
   ATTRIBUTION
 
 
-  Modes & ValueHigh/ Low
+  Routine & ValueHigh/ Low
   * Programmer : Ranga Marasinghe
   * Date       : 2021-April-22
   * https://www.fiverr.com/ranga_niroshan
 
+  Fading
+  * Programmer : Guljanjua
+  * Date       : 2021-April-21
+  * https://www.fiverr.com/guljanjua
 
-  Rainbow Mode
-  https://www.instructables.com/How-to-Make-Proper-Rainbow-and-Random-Colors-With-/
+  * Rainbow Mode
+  * https://www.instructables.com/How-to-Make-Proper-Rainbow-and-Random-Colors-With-/
 
-
-  Strange Attractors Lorentz
+  Strange Attractorz Lorentz
   * Programmer : Timothy Franceschi
   * Date       : 2021-April-21
   * https://www.fiverr.com/timofran
 
 
-  Mountain (Snack Master)
+  Mountainz (Snack Master)
   * Programmer : Yann Seznec
   * Date       : 2021-May
   * https://www.yannseznec.com/
