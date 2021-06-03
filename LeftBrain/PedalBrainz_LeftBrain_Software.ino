@@ -5,7 +5,7 @@
 //  All potentiometers to zero fully counter clockwise (left) for 1 second then rotate potentiometer A2 clockwise (right) from zero for Mode Change.
 //
 //  Mode Save
-//  All potentiometers to 100 fully clockwise (right) for 1 second then rotate potentiometer A2 counter-clockwise (left) to Save the Current Mode as the Startup Mode
+//  The last Mode used will be saved as the Startup Mode.
 //
 //  Mode 1 | Squarez 
 //  A0 = Speed between 2 Blinks
@@ -597,6 +597,8 @@ void Routines()
       //52,24,130
       pixel.show();
 
+      writeStartupMode();
+
       waitingFlag = true;
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
@@ -628,6 +630,8 @@ void Routines()
       pixel.setPixelColor(0, 36, 0, 255);
       //0,0,255
       pixel.show();
+
+      writeStartupMode();
 
       waitingFlag = true;
       WaitForModeChange = true;
@@ -661,6 +665,8 @@ void Routines()
       //31,255,60
       pixel.show();
 
+      writeStartupMode();
+
       waitingFlag = true;
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
@@ -691,6 +697,8 @@ void Routines()
       pixel.setBrightness(100);
       pixel.setPixelColor(0, 36, 200, 10);
       pixel.show();
+
+      writeStartupMode();
 
       waitingFlag = true;
       WaitForModeChange = true;
@@ -723,6 +731,8 @@ void Routines()
       pixel.setPixelColor(0, 36, 200, 10);
       pixel.show();
 
+      writeStartupMode();
+
       waitingFlag = true;
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
@@ -740,113 +750,8 @@ void Routines()
     }
   }
 
-  // Strange Attractor 1
-  if (Mode == 6)
-  {
-    if (!waitingFlag)
-    {
-      // Flash the pixel at the start of a mode chnage
-      modeFlash();
-
-      //Do the last thing and WaitForModeChange
-
-      pixel.setBrightness(100);
-      pixel.setPixelColor(0, 36, 200, 10);
-      pixel.show();
-
-      x = 0.01;
-      y = 0.3;
-      z = 0.7;
-
-      waitingFlag = true;
-      WaitForModeChange = true;
-      Serial.println(" WaitForModeChange = True");
-    }
-    else
-    {
-      if (WaitForModeChange)
-      {
-
-        //Call the main routine and loop the thing
-        strangeAttractor ();
-      }
-        // Wait for the Mode Change
-        modeChangeWait();
-    }
-  }
-
-  // Strange Attractor 2
-  if (Mode == 7)
-  {
-    if (!waitingFlag)
-    {
-      // Flash the pixel at the start of a mode chnage
-      modeFlash();
-
-      //Do the last thing and WaitForModeChange
-
-      pixel.setBrightness(100);
-      pixel.setPixelColor(0, 36, 200, 10);
-      pixel.show();
-
-      x = 0.01;
-      y = 0.3;
-      z = 0.7;
-
-      waitingFlag = true;
-      WaitForModeChange = true;
-      Serial.println(" WaitForModeChange = True");
-    }
-     else
-    {
-      if (WaitForModeChange)
-      {
-
-        //Call the main routine and loop the thing
-        strangeAttractor ();
-      }
-        // Wait for the Mode Change
-        modeChangeWait();
-    }
-  }
-
-  // Strange Attractor 3
-  if (Mode == 8)
-  {
-    if (!waitingFlag)
-    {
-      // Flash the pixel at the start of a mode chnage
-      modeFlash();
-
-      //Do the last thing and WaitForModeChange
-
-      pixel.setBrightness(100);
-      pixel.setPixelColor(0, 36, 200, 10);
-      pixel.show();
-
-      x = 0.01;
-      y = 0.3;
-      z = 0.7;
-
-      waitingFlag = true;
-      WaitForModeChange = true;
-      Serial.println(" WaitForModeChange = True");
-    }
-     else
-    {
-      if (WaitForModeChange)
-      {
-
-        // Call the main routine and loop the thing
-        strangeAttractor ();
-      }
-        // Wait for the Mode Change
-        modeChangeWait();
-    }
-  }
-
   // Mountain Snack Mode
-  if (Mode == 9)
+  if (Mode == 6)
   {
     if (!waitingFlag)
     {
@@ -858,6 +763,8 @@ void Routines()
       pixel.setBrightness(100);
       pixel.setPixelColor(0, 36, 200, 10);
       pixel.show();
+
+      writeStartupMode();
 
       x = 0.01;
       y = 0.3;
@@ -883,7 +790,7 @@ void Routines()
   }
 
  // Mountain Snack Mode
-  if (Mode == 10)
+  if (Mode == 7)
   {
     if (!waitingFlag)
     {
@@ -895,6 +802,8 @@ void Routines()
       pixel.setBrightness(100);
       pixel.setPixelColor(0, 36, 200, 10);
       pixel.show();
+
+      writeStartupMode();
 
       x = 0.01;
       y = 0.3;
@@ -913,6 +822,117 @@ void Routines()
         mountainSnack ();
         reRandom = true;
         
+      }
+        // Wait for the Mode Change
+        modeChangeWait();
+    }
+  }
+
+  // Strange Attractor 1
+  if (Mode == 8)
+  {
+    if (!waitingFlag)
+    {
+      // Flash the pixel at the start of a mode chnage
+      modeFlash();
+
+      //Do the last thing and WaitForModeChange
+
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, 36, 200, 10);
+      pixel.show();
+
+      writeStartupMode();
+
+      x = 0.01;
+      y = 0.3;
+      z = 0.7;
+
+      waitingFlag = true;
+      WaitForModeChange = true;
+      Serial.println(" WaitForModeChange = True");
+    }
+    else
+    {
+      if (WaitForModeChange)
+      {
+
+        //Call the main routine and loop the thing
+        strangeAttractor ();
+      }
+        // Wait for the Mode Change
+        modeChangeWait();
+    }
+  }
+
+  // Strange Attractor 2
+  if (Mode == 9)
+  {
+    if (!waitingFlag)
+    {
+      // Flash the pixel at the start of a mode chnage
+      modeFlash();
+
+      //Do the last thing and WaitForModeChange
+
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, 36, 200, 10);
+      pixel.show();
+
+      writeStartupMode();
+
+      x = 0.01;
+      y = 0.3;
+      z = 0.7;
+
+      waitingFlag = true;
+      WaitForModeChange = true;
+      Serial.println(" WaitForModeChange = True");
+    }
+     else
+    {
+      if (WaitForModeChange)
+      {
+
+        //Call the main routine and loop the thing
+        strangeAttractor ();
+      }
+        // Wait for the Mode Change
+        modeChangeWait();
+    }
+  }
+
+  // Strange Attractor 3
+  if (Mode == 10)
+  {
+    if (!waitingFlag)
+    {
+      // Flash the pixel at the start of a mode chnage
+      modeFlash();
+
+      //Do the last thing and WaitForModeChange
+
+      pixel.setBrightness(100);
+      pixel.setPixelColor(0, 36, 200, 10);
+      pixel.show();
+
+      writeStartupMode();
+
+      x = 0.01;
+      y = 0.3;
+      z = 0.7;
+
+      waitingFlag = true;
+      WaitForModeChange = true;
+      Serial.println(" WaitForModeChange = True");
+    }
+     else
+    {
+      if (WaitForModeChange)
+      {
+
+        // Call the main routine and loop the thing
+        strangeAttractor ();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -1119,7 +1139,7 @@ void delayA0(int count)
       //delay(.5);
     }
     
-    controlsMax();
+    //controlsMax();
     //Serial.println("Count if Waiting = False: " + String(count));
   }
 }
@@ -1176,7 +1196,7 @@ void delayA1(int count)
     }
 
     delay(1);
-    controlsMax();
+    //controlsMax();
     //Serial.println("Count if Waiting = False: " + String(count));
   }
 }
@@ -1248,7 +1268,7 @@ void delayA2(int count)
     }
 
     delay(1);
-    controlsMax();
+    //controlsMax();
     //Serial.println("Count if Waiting = False: " + String(count));
   }
 }
@@ -1754,7 +1774,7 @@ void controlsMax()
 void strangeAttractor()
 {
 
-  controlsMax();
+  //controlsMax();
 
   //Don't execute the code if not enough time has elapsed
   if (millis() > nextLorenzUpdate) {
@@ -1779,17 +1799,17 @@ void strangeAttractor()
     //Modes
     /* Set a value for each potentiometer (pin) for colors R,G,B. */
 
-    if (Mode == 6)
+    if (Mode == 8)
     {
       pixel.setPixelColor(0, scaledX, 0, 30); //Single Output Scaled X
       //pixel.setPixelColor(0, x, 0, 30); //Single Output Scaled X
     }
-    if (Mode == 7)
+    if (Mode == 9)
     {
       pixel.setPixelColor(0, scaledX, 0, scaledZ); //Double Output Scaled X & Z
       //pixel.setPixelColor(0, x, 0, z+100); //Double Output Scaled X & Z
     }
-    if (Mode == 8)
+    if (Mode == 10)
     {
       pixel.setPixelColor(0, scaledX, scaledY + 100, scaledZ + 100); //Triple Output Scaled XYZ
     }
@@ -1838,6 +1858,13 @@ Serial.println(" A0 = " + String(analogRead(A0)) + " A1 = " + String(analogRead(
   if ((Mode >= 6) && (Mode <= 8))
     //if (6 <= Mode)
   {
+    //Serial.print("Min:0,Max:300"); //Un-comment this for a smooth line
+    //Serial.print(","); //Un-comment this for a smooth line
+    Serial.println(currentVal);
+    //Serial.print(","); //Un-comment this for a smooth line
+  }
+  else
+  {
     //Print some things
     //Serial.println("Min:0,Max:500");
     Serial.print("Min:0,Max:300"); //Un-comment this for a smooth line
@@ -1852,13 +1879,6 @@ Serial.println(" A0 = " + String(analogRead(A0)) + " A1 = " + String(analogRead(
 
     //Serial.print("Min:0,Max:100");
     //printStrangeXYZ();
-  }
-  else
-  {
-    //Serial.print("Min:0,Max:300"); //Un-comment this for a smooth line
-    //Serial.print(","); //Un-comment this for a smooth line
-    Serial.println(currentVal);
-    //Serial.print(","); //Un-comment this for a smooth line
   }
   //*/
 }
@@ -2229,7 +2249,7 @@ void delaySnack(int count)
     }
     
     delay(1);
-    controlsMax();
+    //controlsMax();
     //Serial.println("Count if Waiting = False: " + String(count));
   }
 }
