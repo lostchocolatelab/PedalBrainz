@@ -168,6 +168,7 @@ int ModeFlashDelay = 100;
 boolean initial = true;
 
 boolean Blink1 = true;
+boolean plotterPrint = true;
 
 long WaitTime = 200;
 
@@ -221,7 +222,7 @@ float scalings[2][3] {
 
 int brightness = 0;
 int fadeAmount = 1;  //Change it to adjust the fading between each step (fading speed)
-int maxBrightness = 255;
+int maxBrightness = 190;
 int delayAmount = 0;
 
 /**
@@ -236,7 +237,7 @@ int color = 0; // change between 0, 1, 2 to set the color of the pixel (currentl
 float minLength = 1000; // minimum length, shortest cycle time in milliseconds
 float maxLength = 6096; // this plus minLength is the longest the loop can be, in milliseconds
 bool reRandom = false; // whether or not the random numbers are reset on each loop
-int maximumScale = 30;
+int maximumScale = 90;
 
 // other variables that probably shouldn't be poked at without some thought
 
@@ -411,12 +412,12 @@ void setup() {
   Serial.begin(115200);
   /* Start the DotStar LED */
   pixel.begin();
-  pixel.setBrightness(255);
+  pixel.setBrightness(maxBrightness);
   pixel.setPixelColor(0, redValue, blueValue, greenValue);
   pixel.show();
 
   setRandoms();
-  color = random(3);
+  plotterPrint = true; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
 
   
 }
@@ -808,6 +809,7 @@ void Routines()
       x = 0.01;
       y = 0.3;
       z = 0.7;
+    
 
       waitingFlag = true;
       WaitForModeChange = true;
@@ -980,7 +982,7 @@ void Fadez_01 () {
   for (int i = 0; i > -1; i = i + x) {
 
     pixel.setBrightness(i);
-    pixel.setPixelColor(0, (i/5), 0, i); // Blink 2
+    pixel.setPixelColor(0, (i/5), 0, i); 
     pixel.show();
 
     plotCycle();
@@ -992,7 +994,7 @@ void Fadez_01 () {
 
     //If the fade has reached it's peak keep the LED lit and then fade out
 
-    if (i == 255) {
+    if (i == 190) {
 
       //Mode changes to the delay time when LED is full color value for potentiometer A1
       //Use the value of A1 to keep the LED fully lit by the amount of A1 (delay) and then start fading out
@@ -1036,22 +1038,22 @@ void Squarez_01()
 
         // Alternate between two different blink values
         Blink1 = true;
-        valueA1 = map(analogRead(A1), 0, 1024, 0, 255);
-        pixel.setPixelColor(0, valueA1, (valueA1/5), 0); // Blink 1
+        valueA1 = map(analogRead(A1), 0, 1024, 0, 20);
+        pixel.setPixelColor(0, valueA1, (valueA1/10), 0); // Blink 1
+        pixel.setBrightness(valueA1);
         pixel.show();
         delayA0(fadeSpeed);
         currentVal = valueA1;
-        //Serial.println(fadeSpeed);
         plotCycle();
         //pixel.setPixelColor(0, 0x000000); // Blank
 
         Blink1 = false;
         valueA2 = map(analogRead(A2), 0, 1024, 0, 255);
-        pixel.setPixelColor(0, 0, (valueA2/5), valueA2); // Blink 2
+        pixel.setPixelColor(0, (valueA2/6), valueA2, valueA2); // Blink 2
+        pixel.setBrightness(valueA2);
         pixel.show();
         delayA0(fadeSpeed);
         currentVal = valueA2;
-        //Serial.println(valueA2);
         plotCycle();
 }
 
@@ -1087,13 +1089,13 @@ void delayA0(int count)
       fadeSpeed = map(analogRead(A0), 0, 1024, 1000, 20);
       //Serial.println("Mode 1 fadeSpeeed: " + String(fadeSpeed));
 
-      valueA1 = map(analogRead(A1), 0, 1024, 0, 255);
-      valueA2 = map(analogRead(A2), 0, 1024, 0, 255);
+      valueA1 = map(analogRead(A1), 0, 1024, 0, 90);
+      valueA2 = map(analogRead(A2), 0, 1024, 0, 90);
     }
     // Potentiometer Top Right | A0 - Map the value of the Potentiometer to a Variable
     else if (Mode == 2) {
 
-      fadeSpeed = map(analogRead(A0), 0, 1024, 300, 0);
+      fadeSpeed = map(analogRead(A0), 0, 1024, 1000, 0);
       //Serial.println("Mode 1 fadeSpeeed: " + String(fadeSpeed));
     }
     
@@ -1123,20 +1125,22 @@ void delayA0(int count)
       delay(2);
 
       // Update the brightness of each blink color depending on which Blink it is
-      if (Blink1 == true)
+      if (Blink1 == true) 
       {
-        pixel.setPixelColor(0, valueA1, (valueA1/5), 0); // Update the color value for each blink
+        pixel.setPixelColor(0, valueA1, (valueA1/5), 0); // Blink 1 // Update the color value for each blink
+        pixel.setBrightness(valueA1);
       }
-      if (Blink1 == false)
+      if (Blink1 == false) 
       {
-        pixel.setPixelColor(0, 0, (valueA2/5), valueA2); // Update the color value for each blink
+        pixel.setPixelColor(0, (valueA2/6), valueA2, valueA2); // Blink 2 // Update the color value for each blink
+        pixel.setBrightness(valueA2);
       }
       pixel.show();
       
     }
     else
     {
-      //delay(.5);
+      delay(.5);
     }
     
     //controlsMax();
@@ -1544,14 +1548,16 @@ void modeChangeWait() {
         {
           if (Blink1 = true)
           {
-            valueA1 = map(analogRead(A1), 0, 1024, 0, 255);
+            valueA1 = map(analogRead(A1), 0, 1024, 0, 20);
             pixel.setPixelColor(0, valueA1, (valueA1/5), 0); // Blink 1
+            pixel.setBrightness(valueA1);
             pixel.show();
           }
           if (Blink1 = false)
           {
             valueA2 = map(analogRead(A2), 0, 1024, 0, 255);
-            pixel.setPixelColor(0, 0, (valueA2/5), valueA2); // Blink 2
+            pixel.setPixelColor(0, (valueA2/6), valueA2, valueA2); // Blink 2
+            pixel.setBrightness(valueA2);
             pixel.show();
           }       
         }
@@ -1648,14 +1654,16 @@ void controlsMax()
     {
         if (Blink1 = true)
           {
-            valueA1 = map(analogRead(A1), 0, 1024, 0, 255);
+            valueA1 = map(analogRead(A1), 0, 1024, 0, 20);
             pixel.setPixelColor(0, valueA1, (valueA1/5), 0); // Blink 1
+            pixel.setBrightness(valueA1);
             pixel.show();
           }
         if (Blink1 = false)
           {
-            valueA2 = map(analogRead(A2), 0, 1024, 0, 255);
-            pixel.setPixelColor(0, 0, (valueA2/5), valueA2); // Blink 2
+            valueA2 = map(analogRead(A2), 0, 1024, 0, 255); 
+            pixel.setPixelColor(0, (valueA2/6), valueA2, valueA2); // Blink 2
+            pixel.setBrightness(valueA2);
             pixel.show();
           }     
     }
@@ -1791,7 +1799,7 @@ void strangeAttractor()
     b = map(analogRead(A2), 0, 1024, 20, 50);
 
     //A1 potentiometer controls for maximum brightness
-    maxBrightness = map(analogRead(A1), 0, 1024, 0, 255);
+    maxBrightness = map(analogRead(A1), 0, 1024, 0, 190);
     pixel.setBrightness(maxBrightness);
     //Serial.println(maxBrightness);
 
@@ -1835,19 +1843,26 @@ void strangeAttractor()
 void plotCycle()
 {
 
-Serial.println(" A0 = " + String(analogRead(A0)) + " A1 = " + String(analogRead(A1)) + " A2 = " + String(analogRead(A2)));
+//Serial.println(" A0 = " + String(analogRead(A0)) + " A1 = " + String(analogRead(A1)) + " A2 = " + String(analogRead(A2)));
+
+if (plotterPrint == true){
           
   ///*
   if (Mode == 1)
 {
+  Serial.println("Min:0,Max:100"); //Un-comment this for a smooth line
+  //Serial.println(","); //Un-comment this for a smooth line
   Serial.println(currentVal);
+  //Serial.println(valueA1);
+  //Serial.println(valueA2);
+  
 }
 
   // If the Mode is 2-5, run print for fades
    if ((Mode >= 2) && (Mode <= 5))
   {
     //Serial.println("Min:0,Max:255");
-    //Serial.print("Min:0,Max:255"); //Un-comment this for a smooth line
+    Serial.println("Min:0,Max:255"); //Un-comment this for a smooth line
     //Serial.print(","); //Un-comment this for a smooth line
 
     LEDBrightness = pixel.getBrightness();
@@ -1855,7 +1870,7 @@ Serial.println(" A0 = " + String(analogRead(A0)) + " A1 = " + String(analogRead(
     //LEDBrightness = redValue + blueValue + greenValue;
   }
 
-  if ((Mode >= 6) && (Mode <= 8))
+  if ((Mode >= 6) && (Mode <= 7))
     //if (6 <= Mode)
   {
     //Serial.print("Min:0,Max:300"); //Un-comment this for a smooth line
@@ -1863,23 +1878,25 @@ Serial.println(" A0 = " + String(analogRead(A0)) + " A1 = " + String(analogRead(
     Serial.println(currentVal);
     //Serial.print(","); //Un-comment this for a smooth line
   }
-  else
+  if ((Mode >= 8) && (Mode <= 10))
+    //if (6 <= Mode)
   {
     //Print some things
-    //Serial.println("Min:0,Max:500");
-    Serial.print("Min:0,Max:300"); //Un-comment this for a smooth line
+    Serial.print("Min:0,Max:200"); //Un-comment this for a smooth line
     Serial.print(","); //Un-comment this for a smooth line
 
     //printStrangeScaled(); // This one is nice
     //printStrangeScaled2();
-    printStrangeScaled3(); // This one is nice
+    //printStrangeScaled3(); // This one is nice
     //printStrangeScaledSingle();
 
     //printStrangeEffective();
 
     //Serial.print("Min:0,Max:100");
-    //printStrangeXYZ();
+    printStrangeXYZ(); // This one is the coolest
   }
+  else;
+} 
   //*/
 }
 
@@ -1922,7 +1939,7 @@ void printStrangeScaledSingle()
   //Serial.println(String(scaledY));
   Serial.print(F("z:  "));
   Serial.println(String(scaledZ));
-  Serial.print("\n"); //Comment this line to not have a space between cicles
+  //Serial.print("\n"); //Comment this line to not have a space between cicles
 }
 
 void printStrangeEffective()
@@ -1995,9 +2012,9 @@ void lorenzFunction() {
 
   //Values are scaled to 0-255 to adapt to the analogWrite function
 
-  scaledX = map(x, scalings[0][0], scalings[1][0], 0, 255);
-  scaledY = map(y, scalings[0][1], scalings[1][1], 0, 255);
-  scaledZ = map(z, scalings[0][2], scalings[1][2], 0, 255);
+  scaledX = map(x, scalings[0][0], scalings[1][0], 0, 190);
+  scaledY = map(y, scalings[0][1], scalings[1][1], 0, 190);
+  scaledZ = map(z, scalings[0][2], scalings[1][2], 0, 190);
 
 }
 
@@ -2076,7 +2093,7 @@ void brightenColors() {
 
   brightness += fadeAmount;
 
-  if (brightness <= 0 || brightness >= 255) {
+  if (brightness <= 0 || brightness >= 190) {
     fadeAmount = -fadeAmount;
   }
 
@@ -2109,8 +2126,8 @@ void mountainSnack() {
   if (abs(newValue1 - newCalibrate1) > 1) { // this further smooths the knob, at the expense of some accuracy. probably worth it.
     valueA0 = newValue1;
     newCalibrate1 = newValue1;
-    Serial.println("newValue1 :" + String(newValue1));
-    Serial.println("newCalibrate :" + String(newCalibrate1));
+    //Serial.println("newValue1 :" + String(newValue1));
+    //Serial.println("newCalibrate :" + String(newCalibrate1));
   }
 
   valueA2 = analogRead(A2); // Increases Chance for Snack
@@ -2176,7 +2193,7 @@ void mountainSnack() {
     //Serial.println("SNACK TIME");
     //Serial.println(snackLength+snackLengthRandom);
     //delay(snackLength+snackLengthRandom);
-    Serial.println("snackLength :" + String(delaySnackLength));
+    //Serial.println("snackLength :" + String(delaySnackLength));
     
     delaySnack(delaySnackLength);
 
@@ -2185,39 +2202,52 @@ void mountainSnack() {
   }
 
 
-// variable color setting system
-//  pixel.setBrightness(currentVal);
-//  
-//  if ((currentVal >= 0) && (currentVal <= 80)) {
-//    pixel.setPixelColor(0, 100, 0, 200);
-//  }
-//
-//  if ((currentVal >= 60) && (currentVal <= 200)) {
-//    pixel.setPixelColor(0, 10, 100, 200);
-//  }
-//
-//  if ((currentVal >= 155) && (currentVal <= 255)) {
-//    pixel.setPixelColor(0, 100, 255, 100);
-//  }
-//  pixel.show();
+  if (Mode == 6){
+    
+      color = 1;
+  }
+  if (Mode == 7){
+    
+      color = 3;
+  }
 
 // yann's simple system for setitng single pixel color with variable brightness
 
 scaledVal = map(currentVal, 0, 255, 0, maximumScale);
   //Serial.println(scaledVal);
   if (color == 0) {
-    pixel.setBrightness(currentVal);
+    pixel.setBrightness(scaledVal);
     pixel.setPixelColor(0, 255, 0, 255);
   }
 
   if (color == 1) {
-     pixel.setBrightness(currentVal);
+     pixel.setBrightness(scaledVal);
     pixel.setPixelColor(0, 0, 255, 255);
   }
 
   if (color == 2) {
-     pixel.setBrightness(currentVal);
+     pixel.setBrightness(scaledVal);
     pixel.setPixelColor(0, 0, 0, 255);
+  }
+
+  // damian's wacky system for setitng triple pixel color with variable brightness
+
+  
+  if (color == 3) {
+    if ((currentVal >= 0) && (currentVal <= 60)) {
+      pixel.setBrightness(scaledVal);
+      pixel.setPixelColor(0, 100, 0, 200);
+    }
+  
+    if ((currentVal >= 60) && (currentVal <= 200)) {
+      pixel.setBrightness(scaledVal);
+      pixel.setPixelColor(0, 10, 100, 200);
+    }
+  
+    if ((currentVal >= 190) && (currentVal <= 255)) {
+      pixel.setBrightness(scaledVal);
+      pixel.setPixelColor(0, 100, 255, 255);
+    }
   }
   pixel.show();
 
