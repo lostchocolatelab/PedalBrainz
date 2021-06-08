@@ -883,9 +883,9 @@ void Routines()
 
       writeStartupMode();
 
-      x = 0.01;
-      y = 0.3;
-      z = 0.7;
+      x = 0.1;
+      y = 2;
+      z = 1;
 
       waitingFlag = true;
       WaitForModeChange = true;
@@ -920,9 +920,9 @@ void Routines()
 
       writeStartupMode();
 
-      x = 0.01;
-      y = 0.3;
-      z = 0.7;
+      x = 0.5;
+      y = 0.9;
+      z = 0.1;
 
       waitingFlag = true;
       WaitForModeChange = true;
@@ -1799,7 +1799,7 @@ void strangeAttractor()
     b = map(analogRead(A2), 0, 1024, 20, 50);
 
     //A1 potentiometer controls for maximum brightness
-    maxBrightness = map(analogRead(A1), 0, 1024, 0, 190);
+    maxBrightness = map(analogRead(A1), 0, 1024, 0, 255);
     pixel.setBrightness(maxBrightness);
     //Serial.println(maxBrightness);
 
@@ -1809,17 +1809,17 @@ void strangeAttractor()
 
     if (Mode == 8)
     {
-      pixel.setPixelColor(0, scaledX, 0, 30); //Single Output Scaled X
+      pixel.setPixelColor(0, (scaledX/4), 0, (scaledX/8)); //Single Output Scaled X
       //pixel.setPixelColor(0, x, 0, 30); //Single Output Scaled X
     }
     if (Mode == 9)
     {
-      pixel.setPixelColor(0, scaledX, 0, scaledZ); //Double Output Scaled X & Z
+      pixel.setPixelColor(0, (scaledX/4), 0, (scaledZ/4)); //Double Output Scaled X & Z
       //pixel.setPixelColor(0, x, 0, z+100); //Double Output Scaled X & Z
     }
     if (Mode == 10)
     {
-      pixel.setPixelColor(0, scaledX, scaledY + 100, scaledZ + 100); //Triple Output Scaled XYZ
+      pixel.setPixelColor(0, (scaledX/2), (scaledY/6), (scaledZ/2)); //Triple Output Scaled XYZ
     }
 
 
@@ -1832,147 +1832,6 @@ void strangeAttractor()
 
 }
 
-/**
-
-  Serial Printing and Plotting
-
-  This Section includes different ways to print and plot the variable to the Arduino Serial Monitor and Serial Plotter
-
-*/
-
-void plotCycle()
-{
-
-//Serial.println(" A0 = " + String(analogRead(A0)) + " A1 = " + String(analogRead(A1)) + " A2 = " + String(analogRead(A2)));
-
-if (plotterPrint == true){
-          
-  ///*
-  if (Mode == 1)
-{
-  Serial.println("Min:0,Max:100"); //Un-comment this for a smooth line
-  //Serial.println(","); //Un-comment this for a smooth line
-  Serial.println(currentVal);
-  //Serial.println(valueA1);
-  //Serial.println(valueA2);
-  
-}
-
-  // If the Mode is 2-5, run print for fades
-   if ((Mode >= 2) && (Mode <= 5))
-  {
-    //Serial.println("Min:0,Max:255");
-    Serial.println("Min:0,Max:255"); //Un-comment this for a smooth line
-    //Serial.print(","); //Un-comment this for a smooth line
-
-    LEDBrightness = pixel.getBrightness();
-    Serial.println(LEDBrightness);
-    //LEDBrightness = redValue + blueValue + greenValue;
-  }
-
-  if ((Mode >= 6) && (Mode <= 7))
-    //if (6 <= Mode)
-  {
-    //Serial.print("Min:0,Max:300"); //Un-comment this for a smooth line
-    //Serial.print(","); //Un-comment this for a smooth line
-    Serial.println(currentVal);
-    //Serial.print(","); //Un-comment this for a smooth line
-  }
-  if ((Mode >= 8) && (Mode <= 10))
-    //if (6 <= Mode)
-  {
-    //Print some things
-    Serial.print("Min:0,Max:200"); //Un-comment this for a smooth line
-    Serial.print(","); //Un-comment this for a smooth line
-
-    //printStrangeScaled(); // This one is nice
-    //printStrangeScaled2();
-    //printStrangeScaled3(); // This one is nice
-    //printStrangeScaledSingle();
-
-    //printStrangeEffective();
-
-    //Serial.print("Min:0,Max:100");
-    printStrangeXYZ(); // This one is the coolest
-  }
-  else;
-} 
-  //*/
-}
-
-void printStrangeXYZ()
-{
-  Serial.println("x:  " + String(x + 100) + " y:  " + String(y + 100) + " z:  " + String(z + 100));
-  Serial.print("\n"); //Comment this line to not have a space between cicles
-  //Serial.println("A0:  " + String(analogRead(A0)) + " A1:  " + String(analogRead(A1)) + " A2:  " + String(analogRead(A2)));
-}
-
-
-void printStrangeScaled()
-{
-  Serial.println(String(scaledX));
-  Serial.println(String(scaledY));
-  Serial.println(String(scaledZ));
-}
-
-void printStrangeScaled2()
-{
-  Serial.println("x:  " + String(scaledX) + " y:  " + String(scaledY) + " z:  " + String(scaledZ));
-  Serial.print("\n"); //Comment this line to not have a space between cicles
-}
-
-void printStrangeScaled3()
-{
-  Serial.println(String(scaledX));
-  Serial.print("\n"); //Comment this line to not have a space between cicles
-  Serial.println(String(scaledY));
-  Serial.print("\n"); //Comment this line to not have a space between cicles
-  Serial.println(String(scaledZ));
-  Serial.print("\n"); //Comment this line to not have a space between cicles
-}
-
-void printStrangeScaledSingle()
-{
-  //Serial.print(F("x:  "));
-  //Serial.println(String(scaledX));
-  //Serial.print(F("y:  "));
-  //Serial.println(String(scaledY));
-  Serial.print(F("z:  "));
-  Serial.println(String(scaledZ));
-  //Serial.print("\n"); //Comment this line to not have a space between cicles
-}
-
-void printStrangeEffective()
-{
-  Serial.print(F("  |  "));
-  Serial.println(effectiveR);
-  Serial.print(F("  |  "));
-  Serial.println(effectiveG);
-  Serial.print(F("  |  "));
-  Serial.println(effectiveB);
-  Serial.print("\n"); //Comment this line to not have a space between cicles
-}
-
-
-/**
-
-  STRANGE ATTRACTORS Functions
-
-  This Section is the Strange Attractor maths and stuff called by the strangeAttractor() function
-
-*/
-
-void updateScaling(byte rowA, byte cellA, byte rowB, byte cellB, float checkValue) {
-
-  if (checkValue < scalings[rowA][cellA]) { //If the variable is higher than the current max scale value, then update the max scale value
-    scalings[rowA][cellA] = checkValue;
-  }
-
-  if (checkValue > scalings[rowB][cellB]) { //If the variable is lower than the current min scale value, then update the min scale value
-    scalings[rowB][cellB] = checkValue;
-  }
-
-}
 
 /**
 
@@ -2018,31 +1877,7 @@ void lorenzFunction() {
 
 }
 
-/**
 
-  Memory Reporting Tools
-
-  This Section is used for memory reporting
-  
-*/
-
-#ifdef __arm__
-// should use uinstd.h to define sbrk but Due causes a conflict
-extern "C" char* sbrk(int incr);
-#else  // __ARM__
-extern char *__brkval;
-#endif  // __arm__
-
-int freeMemory() {
-  char top;
-#ifdef __arm__
-  return &top - reinterpret_cast<char*>(sbrk(0));
-#elif defined(CORE_TEENSY) || (ARDUINO > 103 && ARDUINO != 151)
-  return &top - __brkval;
-#else  // __arm__
-  return __brkval ? &top - __brkval : &top - __malloc_heap_start;
-#endif  // __arm__
-}
 
 /**
 
@@ -2284,6 +2119,174 @@ void delaySnack(int count)
   }
 }
 
+
+/**
+
+  Serial Printing and Plotting
+
+  This Section includes different ways to print and plot the variable to the Arduino Serial Monitor and Serial Plotter
+
+*/
+
+void plotCycle()
+{
+
+//Serial.println(" A0 = " + String(analogRead(A0)) + " A1 = " + String(analogRead(A1)) + " A2 = " + String(analogRead(A2)));
+
+if (plotterPrint == true){
+          
+  ///*
+  if (Mode == 1)
+{
+  Serial.println("Min:0,Max:100"); //Un-comment this for a smooth line
+  //Serial.println(","); //Un-comment this for a smooth line
+  Serial.println(currentVal);
+  //Serial.println(valueA1);
+  //Serial.println(valueA2);
+  
+}
+
+  // If the Mode is 2-5, run print for fades
+   if ((Mode >= 2) && (Mode <= 5))
+  {
+    //Serial.println("Min:0,Max:255");
+    Serial.println("Min:0,Max:255"); //Un-comment this for a smooth line
+    //Serial.print(","); //Un-comment this for a smooth line
+
+    LEDBrightness = pixel.getBrightness();
+    Serial.println(LEDBrightness);
+    //LEDBrightness = redValue + blueValue + greenValue;
+  }
+
+  if ((Mode >= 6) && (Mode <= 7))
+    //if (6 <= Mode)
+  {
+    //Serial.print("Min:0,Max:300"); //Un-comment this for a smooth line
+    //Serial.print(","); //Un-comment this for a smooth line
+    Serial.println(currentVal);
+    //Serial.print(","); //Un-comment this for a smooth line
+  }
+  if ((Mode >= 8) && (Mode <= 10))
+    //if (6 <= Mode)
+  {
+    //Print some things
+    Serial.print("Min:0,Max:200"); //Un-comment this for a smooth line
+    Serial.print(","); //Un-comment this for a smooth line
+
+    //printStrangeScaled(); // This one is nice
+    //printStrangeScaled2();
+    //printStrangeScaled3(); // This one is nice
+    //printStrangeScaledSingle();
+
+    //printStrangeEffective();
+
+    //Serial.print("Min:0,Max:100");
+    printStrangeXYZ(); // This one is the coolest
+  }
+  else;
+} 
+  //*/
+}
+
+void printStrangeXYZ()
+{
+  Serial.println("x:  " + String(x + 100) + " y:  " + String(y + 100) + " z:  " + String(z + 100));
+  Serial.print("\n"); //Comment this line to not have a space between cicles
+  //Serial.println("A0:  " + String(analogRead(A0)) + " A1:  " + String(analogRead(A1)) + " A2:  " + String(analogRead(A2)));
+}
+
+
+void printStrangeScaled()
+{
+  Serial.println(String(scaledX));
+  Serial.println(String(scaledY));
+  Serial.println(String(scaledZ));
+}
+
+void printStrangeScaled2()
+{
+  Serial.println("x:  " + String(scaledX) + " y:  " + String(scaledY) + " z:  " + String(scaledZ));
+  Serial.print("\n"); //Comment this line to not have a space between cicles
+}
+
+void printStrangeScaled3()
+{
+  Serial.println(String(scaledX));
+  Serial.print("\n"); //Comment this line to not have a space between cicles
+  Serial.println(String(scaledY));
+  Serial.print("\n"); //Comment this line to not have a space between cicles
+  Serial.println(String(scaledZ));
+  Serial.print("\n"); //Comment this line to not have a space between cicles
+}
+
+void printStrangeScaledSingle()
+{
+  //Serial.print(F("x:  "));
+  //Serial.println(String(scaledX));
+  //Serial.print(F("y:  "));
+  //Serial.println(String(scaledY));
+  Serial.print(F("z:  "));
+  Serial.println(String(scaledZ));
+  //Serial.print("\n"); //Comment this line to not have a space between cicles
+}
+
+void printStrangeEffective()
+{
+  Serial.print(F("  |  "));
+  Serial.println(effectiveR);
+  Serial.print(F("  |  "));
+  Serial.println(effectiveG);
+  Serial.print(F("  |  "));
+  Serial.println(effectiveB);
+  Serial.print("\n"); //Comment this line to not have a space between cicles
+}
+
+
+/**
+
+  STRANGE ATTRACTORS Functions
+
+  This Section is the Strange Attractor maths and stuff called by the strangeAttractor() function
+
+*/
+
+void updateScaling(byte rowA, byte cellA, byte rowB, byte cellB, float checkValue) {
+
+  if (checkValue < scalings[rowA][cellA]) { //If the variable is higher than the current max scale value, then update the max scale value
+    scalings[rowA][cellA] = checkValue;
+  }
+
+  if (checkValue > scalings[rowB][cellB]) { //If the variable is lower than the current min scale value, then update the min scale value
+    scalings[rowB][cellB] = checkValue;
+  }
+
+}
+
+/**
+
+  Memory Reporting Tools
+
+  This Section is used for memory reporting
+  
+*/
+
+#ifdef __arm__
+// should use uinstd.h to define sbrk but Due causes a conflict
+extern "C" char* sbrk(int incr);
+#else  // __ARM__
+extern char *__brkval;
+#endif  // __arm__
+
+int freeMemory() {
+  char top;
+#ifdef __arm__
+  return &top - reinterpret_cast<char*>(sbrk(0));
+#elif defined(CORE_TEENSY) || (ARDUINO > 103 && ARDUINO != 151)
+  return &top - __brkval;
+#else  // __arm__
+  return __brkval ? &top - __brkval : &top - __malloc_heap_start;
+#endif  // __arm__
+}
 
 /**
 
