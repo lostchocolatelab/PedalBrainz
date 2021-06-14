@@ -131,6 +131,14 @@ int delayValueA0 = 0;
 int delayValueA1 = 0;
 int delayValueA2 = 0;
 
+// Sets the value in milleseconds of the slowest fadeSpeed for delayA0
+int speedMinimum = 5000;
+
+// Sets the value in milleseconds of the longest duration for delayA1 and delayA2
+int durationMaximum = 10000;
+
+int valueLog;
+
 unsigned long myTime;
 int LEDBrightness;
 
@@ -235,7 +243,7 @@ int delayAmount = 0;
 
 int color = 0; // change between 0, 1, 2 to set the color of the pixel (currently not used)
 float minLength = 1000; // minimum length, shortest cycle time in milliseconds
-float maxLength = 6096; // this plus minLength is the longest the loop can be, in milliseconds
+float maxLength = 100096; // this plus minLength is the longest the loop can be, in milliseconds
 bool reRandom = false; // whether or not the random numbers are reset on each loop
 int maximumScale = 90;
 
@@ -417,7 +425,7 @@ void setup() {
   pixel.show();
 
   setRandoms();
-  plotterPrint = true; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
+  plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
 
   
 }
@@ -1086,7 +1094,10 @@ void delayA0(int count)
     // Potentiometer Top Right | A0 - Map the value of the Potentiometer to a Variable
     if (Mode == 1) {
 
-      fadeSpeed = map(analogRead(A0), 0, 1024, 1000, 20);
+      valueLog = log(analogRead(A0)+1)/log(1024)*255;
+      //Serial.println("Mode 1 valueLog: " + String(valueLog));
+      fadeSpeed = map(valueLog, 0, 255, (speedMinimum/2), (40/2)); // Logarithmic Potentiometer Value
+      //fadeSpeed = map(analogRead(A0), 0, 1024, speedMinimum, 20); // Linear Potentiometer Value
       //Serial.println("Mode 1 fadeSpeeed: " + String(fadeSpeed));
 
       valueA1 = map(analogRead(A1), 0, 1024, 0, 90);
@@ -1094,8 +1105,10 @@ void delayA0(int count)
     }
     // Potentiometer Top Right | A0 - Map the value of the Potentiometer to a Variable
     else if (Mode == 2) {
-
-      fadeSpeed = map(analogRead(A0), 0, 1024, 1000, 0);
+      valueLog = log(analogRead(A0)+1)/log(1024)*255;
+      //Serial.println("Mode 1 valueLog: " + String(valueLog));
+      fadeSpeed = map(valueLog, 0, 255, (speedMinimum/2), (0/2)); // Logarithmic Potentiometer Value
+      //fadeSpeed = map(analogRead(A0), 0, 1024, speedMinimum, 0); // Linear Potentiometer Value
       //Serial.println("Mode 1 fadeSpeeed: " + String(fadeSpeed));
     }
     
@@ -1106,12 +1119,12 @@ void delayA0(int count)
     }
     else if (Mode == 4) {
 
-      fadeSpeed = map(analogRead(A0), 0, 1024, 80, -1);
+      fadeSpeed = map(analogRead(A0), 0, 1024, (speedMinimum/10), -1);
       //Serial.println("Mode 4 fadeSpeeed: " + String(fadeSpeed));
     }
     else if (Mode == 5) {
 
-      fadeSpeed = map(analogRead(A0), 0, 1024, 80, -1);
+      fadeSpeed = map(analogRead(A0), 0, 1024, (speedMinimum/10), -1);
       //Serial.println("Mode 5 fadeSpeeed: " + String(fadeSpeed));
     }
     else {
@@ -1184,12 +1197,12 @@ void delayA1(int count)
     // Potentiometer Top Left | A1 - Map the value of the potentiometer to a variable and Update the Variable(s)
     if (Mode == 2) {
 
-      fullDelay = map(analogRead(A1), 0, 1024, 0, 5000);
+      fullDelay = map(analogRead(A1), 0, 1024, 0, durationMaximum);
       //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
     }
     else if (Mode == 3) {
 
-      valueA1 = map(analogRead(A1), 0, 1024, 0, 5000);
+      valueA1 = map(analogRead(A1), 0, 1024, 0, durationMaximum);
       delayValueA1 = map(analogRead(A0), 0, 1024, 10000, 400);
       //Serial.println("Mode 3 fullDelay Random: " + String(randomAmountA1));
       //Serial.println("Mode 3 fullDelay: " + String(fullDelay));
@@ -1243,12 +1256,12 @@ void delayA2(int count)
     //Potentiometer Bottom Right | A2 - Map the value of the potentiometer to a variable and Update the Variable(s)
     if (Mode == 2) {
 
-      darkDelay = map(analogRead(A2), 0, 1024, 0, 5000);
+      darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
       //Serial.println("Mode 1 darkDelay: " + String(darkDelay));
     }
     else if (Mode == 3) {
 
-      valueA2 = map(analogRead(A2), 0, 1024, 0, 5000);
+      valueA2 = map(analogRead(A2), 0, 1024, 0, durationMaximum);
       delayValueA2 = map(analogRead(A0), 0, 1024, 10000, 400);
       //Serial.println("Mode 3 delayValueA2: " + String(delayValueA2));
       //Serial.println("Mode 3 darkDelay Random: " + String(randomAmountA2));
@@ -1256,13 +1269,13 @@ void delayA2(int count)
     }
     else if (Mode == 4) {
 
-      valueA2 = map(analogRead(A2), 0, 1024, 0, 5000);
+      valueA2 = map(analogRead(A2), 0, 1024, 0, durationMaximum);
       darkDelay =  valueA2;
       //Serial.println("Mode 4 darkDelay: " + String(fullDelay));
     }
     else if (Mode == 5) {
 
-      valueA2 = map(analogRead(A2), 0, 1024, 0, 5000);
+      valueA2 = map(analogRead(A2), 0, 1024, 0, durationMaximum);
       darkDelay =  valueA2;
       //Serial.println("Mode 4 darkDelay: " + String(fullDelay));
     }
@@ -1793,13 +1806,13 @@ void strangeAttractor()
     brightenColors();
 
     //A0 potentiometer controls for fade speed
-    delayAmount = map(analogRead(A0), 0, 1024, 300, 0);
+    delayAmount = map(analogRead(A0), 0, 1024, (speedMinimum/10), 0);
    
     //A2 potentiometer controls for amount of randomless from less to more random
     b = map(analogRead(A2), 0, 1024, 20, 50);
 
     //A1 potentiometer controls for maximum brightness
-    maxBrightness = map(analogRead(A1), 0, 1024, 0, 255);
+    maxBrightness = map(analogRead(A1), 0, 1024, 0, 190);
     pixel.setBrightness(maxBrightness);
     //Serial.println(maxBrightness);
 
@@ -1840,8 +1853,6 @@ void strangeAttractor()
   This Section is the Strange Attractor maths and stuff called by the strangeAttractor() function
 
      This function performs the calculations for the Lorenz equation
-
-     I removed the for cicle and I perform a single calculation to extend the code working time
      
 */
 
@@ -2071,17 +2082,17 @@ scaledVal = map(currentVal, 0, 255, 0, maximumScale);
   if (color == 3) {
     if ((currentVal >= 0) && (currentVal <= 60)) {
       pixel.setBrightness(scaledVal);
-      pixel.setPixelColor(0, 100, 0, 200);
+      pixel.setPixelColor(0, (currentVal/2), 0, currentVal);
     }
   
     if ((currentVal >= 60) && (currentVal <= 200)) {
       pixel.setBrightness(scaledVal);
-      pixel.setPixelColor(0, 10, 100, 200);
+      pixel.setPixelColor(0, 10, (currentVal/2), currentVal);
     }
   
     if ((currentVal >= 190) && (currentVal <= 255)) {
       pixel.setBrightness(scaledVal);
-      pixel.setPixelColor(0, 100, 255, 255);
+      pixel.setPixelColor(0, currentVal, currentVal, 0);
     }
   }
   pixel.show();
@@ -2346,12 +2357,23 @@ void readStartupMode()
   * Date       : 2021-April-21
   * https://www.fiverr.com/timofran
 
-
   Mountainz (Snack Master)
   * Programmer : Yann Seznec
   * Date       : 2021-May
   * https://www.yannseznec.com/
 
+  Alpha and Beta Brainz Testers
+  * Ancient Radiations
+  * Forrest Hopkins
+  * LEEMS Industries
+  * Aotokumo
 
+  Special Thanks
+  * Rarebuzzer
+  * Mask Audio Electronics
+  * El Garatge
+  * Obscura MFG
+  * Lightning Wave
+  * Collector//Emitter Discord Community
 
 */
