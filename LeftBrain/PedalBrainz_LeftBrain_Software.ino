@@ -2363,6 +2363,7 @@ void readStartupMode()
   * https://www.yannseznec.com/
 
   Alpha and Beta Brainz Testers
+  * John Cook
   * Ancient Radiations
   * Forrest Hopkins
   * LEEMS Industries
