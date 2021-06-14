@@ -2366,7 +2366,11 @@ void readStartupMode()
   * Ancient Radiations
   * Forrest Hopkins
   * LEEMS Industries
-  * Aotokumo
+  * Aaron Meagher - Discrete Circuitry
+  * Jordan Namer
+  * Hideaki Noguchi - Aotokumo  
+  * Andy Pitcher
+  
 
   Special Thanks
   * Rarebuzzer
