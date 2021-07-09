@@ -1,7 +1,20 @@
+//
+//  Pedal Brainz - Rainbow Brightness Modulation
+//
+//  Cycles through 6 colors. The Brightness of each color is modulated 4 times. Default brightness set in declarations.
+//  Un-comment 'setRandomBrights' in Setup to randomize Brightness values for the 4 values once at startup
+//  Un-comment 'setRandomBrights' in Loop to randomize Brightness values for the 4 values after each cycle
+//
+//  Set Color -> Set 4 Brightness Values w/ Delay (A1) -> Delay before setting next Color (A0)
+//  
+//  A0 = Cycle Speed
+//  A1 = Delay of each Brightness Value (4) for a Single Color
+//  A2 = Duration of Darkness after full Color Cycle
+//
 
 #include <Adafruit_DotStar.h>
 
-/* Set the DtoStar as "pixel". */
+/* Set the DotStar as "pixel". */
 Adafruit_DotStar pixel = Adafruit_DotStar(1, INTERNAL_DS_DATA, INTERNAL_DS_CLK, DOTSTAR_BGR);
 
 /**
@@ -47,6 +60,11 @@ int durationMaximum = 10000;
 
 int valueLog;
 
+int randomBright01 = 20;
+int randomBright02 = 60;
+int randomBright03 = 110;
+int randomBright04 = 170;
+
 
 
 void setup() {
@@ -54,10 +72,20 @@ void setup() {
     /* Start the DotStar LED */
     pixel.begin();
     //pixel.setBrightness(155);
+    
+    //setRandomBrights();
+
+
 }
 
 void loop() {
 
+    //setRandomBrights();
+    Serial.println(randomBright01);
+    Serial.println(randomBright02);
+    Serial.println(randomBright03);
+    Serial.println(randomBright04);
+    
     // Set the color
     pixel.setPixelColor(0, colorRed); 
     pixel.show(); 
@@ -97,7 +125,7 @@ void loop() {
     
  
   //pixel.show(); 
-  Serial.println(fadeSpeed);
+  
 }
 
 
@@ -191,37 +219,49 @@ void delayA2(int count)
 void quadBrightness()
 {
   // Set the brightness
-  pixel.setBrightness(20);
-  pixel.show(); 
-  // Delay the change to the next brightness by the amount of A1
-  delayA1(fullDelay);
-  Serial.println("Full Delay 1: " + String(fullDelay));
-
-  // Set the brightness
-  pixel.setBrightness(60);
-  pixel.show(); 
-  // Delay the change to the next brightness by the amount of A1
-  delayA1(fullDelay);
-  Serial.println("Full Delay 2: " + String(fullDelay));
-
-  // Set the brightness
-  pixel.setBrightness(100);
+  pixel.setBrightness(randomBright01);
   pixel.show(); 
   // Delay the change to the next brightness by the amount of A1
   delayA1(fullDelay);
   
-  Serial.println("Full Delay 3: " + String(fullDelay));
+  //Serial.println("Full Delay 1: " + String(fullDelay));
 
   // Set the brightness
-  pixel.setBrightness(170);
+  pixel.setBrightness(randomBright02);
   pixel.show(); 
   // Delay the change to the next brightness by the amount of A1
   delayA1(fullDelay);
   
-  Serial.println("Full Delay 4: " + String(fullDelay));
+  //Serial.println("Full Delay 2: " + String(fullDelay));
+
+  // Set the brightness
+  pixel.setBrightness(randomBright03);
+  pixel.show(); 
+  // Delay the change to the next brightness by the amount of A1
+  delayA1(fullDelay);
+  
+  //Serial.println("Full Delay 3: " + String(fullDelay));
+
+  // Set the brightness
+  pixel.setBrightness(randomBright04);
+  pixel.show(); 
+  // Delay the change to the next brightness by the amount of A1
+  delayA1(fullDelay);
+  
+  //Serial.println("Full Delay 4: " + String(fullDelay));
 }
 
+void setRandomBrights() {
+
+randomBright01  = random(10, 255);
+randomBright02  = random(10, 255);
+randomBright03  = random(10, 255);
+randomBright04  = random(10, 255);
+  
+}
+  
 void plotCycle()
 {
-  
+    //Serial.println(fadeSpeed);
+    //Serial.println("Full Delay 4: " + String(fullDelay));
 }
