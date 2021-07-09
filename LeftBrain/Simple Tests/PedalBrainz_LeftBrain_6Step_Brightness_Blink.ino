@@ -72,7 +72,8 @@ void setup() {
     /* Start the DotStar LED */
     pixel.begin();
     //pixel.setBrightness(155);
-    
+
+    // Un-comment 'setRandomBrights' in Setup to randomize Brightness values for the 4 values once at startup
     //setRandomBrights();
 
 
@@ -80,7 +81,9 @@ void setup() {
 
 void loop() {
 
+    // Un-comment 'setRandomBrights' in Loop to randomize Brightness values for the 4 values after each cycle
     //setRandomBrights();
+    
     Serial.println(randomBright01);
     Serial.println(randomBright02);
     Serial.println(randomBright03);
