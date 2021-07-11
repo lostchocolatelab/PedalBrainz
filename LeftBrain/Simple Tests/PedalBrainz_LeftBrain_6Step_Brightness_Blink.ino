@@ -100,23 +100,28 @@ void loop() {
     pixel.setPixelColor(0, colorOrange); 
     pixel.show();
     quadBrightness();  
-    delayA0(fadeSpeed);
+    delayA1(fullDelay);
+    darkDelayBetwixtColors();
     pixel.setPixelColor(0, colorYellow); 
     pixel.show();  
     quadBrightness();  
-    delayA0(fadeSpeed);
+    delayA1(fullDelay);
+    darkDelayBetwixtColors();
     pixel.setPixelColor(0, colorGreen); 
     pixel.show();  
     quadBrightness();  
-    delayA0(fadeSpeed);
+    delayA1(fullDelay);
+    darkDelayBetwixtColors();
     pixel.setPixelColor(0, colorBlue); 
     pixel.show();
     quadBrightness();  
-    delayA0(fadeSpeed);
+    delayA1(fullDelay);
+    darkDelayBetwixtColors();
     pixel.setPixelColor(0, colorPurple); 
     pixel.show();  
     quadBrightness();  
-    delayA0(fadeSpeed);
+    delayA1(fullDelay);
+    
 
     // Make the pixel dark
     pixel.setBrightness(0);
@@ -124,7 +129,8 @@ void loop() {
 
     // Delay by the amount of A2
     delayA2(darkDelay);
-
+    
+    //darkDelayBetwixtColors();
     
  
   //pixel.show(); 
@@ -141,17 +147,17 @@ void delayA0(int count)
 
   for (int count = 0; count <= delayCountA0; count++) 
   {
-    delayCountA0 = fullDelay;
+    delayCountA0 = fadeSpeed;
 
     plotCycle();
 
 
     // Potentiometer Top Right | A0 - Map the value of the Potentiometer to a Variable
 
-      //valueLog = log(analogRead(A0)+1)/log(1024)*255;
+      valueLog = log(analogRead(A0)+1)/log(1024)*255;
       //Serial.println("Mode 1 valueLog: " + String(valueLog));
-      //fadeSpeed = map(valueLog, 0, 255, (speedMinimum/2), (40/2)); // Logarithmic Potentiometer Value
-      fullDelay = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+      fadeSpeed = map(valueLog, 0, 255, (speedMinimum/2), (40/2)); // Logarithmic Potentiometer Value
+      //fadeSpeed = map(analogRead(A0), 0, 1024, durationMaximum, 0);
       
       //Serial.println("Mode 1 fadeSpeeed: " + String(fadeSpeed));
 
@@ -179,10 +185,10 @@ void delayA1(int count)
   for (int count = 0; count <= delayCountA1; count++) 
   {
 
-    delayCountA1 = fadeSpeed;
+    delayCountA1 = fullDelay;
 
     plotCycle();
-      fadeSpeed = map(analogRead(A0), 0, 1024, speedMinimum, 100); // Linear Potentiometer Value
+      fullDelay = map(analogRead(A1), 0, 1024, 100, speedMinimum); // Linear Potentiometer Value
       //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
    
     delay(1);
@@ -226,7 +232,7 @@ void quadBrightness()
   pixel.setBrightness(randomBright01);
   pixel.show(); 
   // Delay the change to the next brightness by the amount of A1
-  delayA1(fullDelay);
+  delayA0(fadeSpeed);
   
   //Serial.println("Full Delay 1: " + String(fullDelay));
 
@@ -234,7 +240,7 @@ void quadBrightness()
   pixel.setBrightness(randomBright02);
   pixel.show(); 
   // Delay the change to the next brightness by the amount of A1
-  delayA1(fullDelay);
+  delayA0(fadeSpeed);
   
   //Serial.println("Full Delay 2: " + String(fullDelay));
 
@@ -242,7 +248,7 @@ void quadBrightness()
   pixel.setBrightness(randomBright03);
   pixel.show(); 
   // Delay the change to the next brightness by the amount of A1
-  delayA1(fullDelay);
+  delayA0(fadeSpeed);
   
   //Serial.println("Full Delay 3: " + String(fullDelay));
 
@@ -250,9 +256,12 @@ void quadBrightness()
   pixel.setBrightness(randomBright04);
   pixel.show(); 
   // Delay the change to the next brightness by the amount of A1
-  delayA1(fullDelay);
+  delayA0(fadeSpeed);
   
   //Serial.println("Full Delay 4: " + String(fullDelay));
+
+
+  
 }
 
 void setRandomBrights() {
@@ -262,6 +271,17 @@ randomBright02  = random(10, 255);
 randomBright03  = random(10, 255);
 randomBright04  = random(10, 255);
   
+}
+
+void darkDelayBetwixtColors(){
+  
+    // Make the pixel dark 
+    pixel.setBrightness(0);
+    pixel.show();    
+
+    // Delay by the amount of A2 - Remove the following comment to turn the led off between each color 
+    delayA2(darkDelay);
+
 }
   
 void plotCycle()
