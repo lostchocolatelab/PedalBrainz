@@ -425,7 +425,7 @@ void setup() {
   pixel.setPixelColor(0, redValue, blueValue, greenValue);
   pixel.show();
 
-  Mode = 8;
+  //Mode = 8;
   setRandoms();
   plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
 
