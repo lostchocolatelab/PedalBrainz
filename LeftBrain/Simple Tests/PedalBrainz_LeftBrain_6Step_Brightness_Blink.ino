@@ -7,8 +7,8 @@
 //
 //  Set Color -> Set 4 Brightness Values w/ Delay (A1) -> Delay before setting next Color (A0)
 //  
-//  A0 = Cycle Speed
-//  A1 = Delay of each Brightness Value (4) for a Single Color
+//  A0 = Delay of each Brightness Value (4) for a Single Color
+//  A1 = Duration of 4th brightness after brightness changes for a single color
 //  A2 = Duration of Darkness after full Color Cycle
 //
 
@@ -141,7 +141,7 @@ void delayA0(int count)
 
   for (int count = 0; count <= delayCountA0; count++) 
   {
-    delayCountA0 = fadeSpeed;
+    delayCountA0 = fullDelay;
 
     plotCycle();
 
@@ -151,7 +151,8 @@ void delayA0(int count)
       //valueLog = log(analogRead(A0)+1)/log(1024)*255;
       //Serial.println("Mode 1 valueLog: " + String(valueLog));
       //fadeSpeed = map(valueLog, 0, 255, (speedMinimum/2), (40/2)); // Logarithmic Potentiometer Value
-      fadeSpeed = map(analogRead(A0), 0, 1024, speedMinimum, 100); // Linear Potentiometer Value
+      fullDelay = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+      
       //Serial.println("Mode 1 fadeSpeeed: " + String(fadeSpeed));
 
       //valueA1 = map(analogRead(A1), 0, 1024, 0, 90);
@@ -178,10 +179,10 @@ void delayA1(int count)
   for (int count = 0; count <= delayCountA1; count++) 
   {
 
-    delayCountA1 = fullDelay;
+    delayCountA1 = fadeSpeed;
 
     plotCycle();
-      fullDelay = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+      fadeSpeed = map(analogRead(A0), 0, 1024, speedMinimum, 100); // Linear Potentiometer Value
       //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
    
     delay(1);
