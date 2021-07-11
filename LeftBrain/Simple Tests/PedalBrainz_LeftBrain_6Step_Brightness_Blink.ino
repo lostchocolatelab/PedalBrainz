@@ -82,7 +82,7 @@ void setup() {
 void loop() {
 
     // Un-comment 'setRandomBrights' in Loop to randomize Brightness values for the 4 values after each cycle
-    //setRandomBrights();
+    setRandomBrights();
     
     Serial.println(randomBright01);
     Serial.println(randomBright02);
@@ -95,13 +95,16 @@ void loop() {
     // Do the brightness changes 4 times
     quadBrightness();  
     // Delay the change to the next color by the amount of A0
-    delayA0(fadeSpeed);
+    delayA1(fullDelay);
+    // Add an amount of darness by the amount of A2
+    darkDelayBetwixtColors();
     
     pixel.setPixelColor(0, colorOrange); 
     pixel.show();
     quadBrightness();  
     delayA1(fullDelay);
     darkDelayBetwixtColors();
+    
     pixel.setPixelColor(0, colorYellow); 
     pixel.show();  
     quadBrightness();  
