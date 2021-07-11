@@ -9,7 +9,7 @@
 //  
 //  A0 = Delay of each Brightness Value (4) for a Single Color
 //  A1 = Duration of 4th brightness after brightness changes for a single color
-//  A2 = Duration of Darkness after full Color Cycle
+//  A2 = Duration of Darkness after full Color Cycle (or betwixt each color if darkDelayBetwixtColors is enabled)
 //
 
 #include <Adafruit_DotStar.h>
