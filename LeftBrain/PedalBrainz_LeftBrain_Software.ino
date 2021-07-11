@@ -232,6 +232,7 @@ int brightness = 0;
 int fadeAmount = 1;  //Change it to adjust the fading between each step (fading speed)
 int maxBrightness = 190;
 int delayAmount = 0;
+int strangeRandom;
 
 /**
 
@@ -424,6 +425,7 @@ void setup() {
   pixel.setPixelColor(0, redValue, blueValue, greenValue);
   pixel.show();
 
+  Mode = 8;
   setRandoms();
   plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
 
@@ -1811,11 +1813,16 @@ void strangeAttractor()
     //A2 potentiometer controls for amount of randomless from less to more random
     b = map(analogRead(A2), 0, 1024, 20, 50);
 
+  if ((scaledY >= 0) && (scaledY <= 50)) {
+      pixel.setBrightness(maxBrightness-255);  
+      pixel.setPixelColor(0, 0, 0, 0); 
+  }
+  else if ((scaledY >= 51) && (scaledY <= 255))
+  {
     //A1 potentiometer controls for maximum brightness
     maxBrightness = map(analogRead(A1), 0, 1024, 0, 190);
     pixel.setBrightness(maxBrightness);
     //Serial.println(maxBrightness);
-
 
     //Modes
     /* Set a value for each potentiometer (pin) for colors R,G,B. */
@@ -1834,10 +1841,17 @@ void strangeAttractor()
     {
       pixel.setPixelColor(0, (scaledX/2), (scaledY/6), (scaledZ/2)); //Triple Output Scaled XYZ
     }
-
+  }
 
     pixel.show();
     delay(delayAmount);
+
+    // Slow down the simulation when the value is low
+    if ((scaledY >= 0) && (scaledY <= 50)) {
+      strangeRandom = random(20, 100);
+      delay(strangeRandom+(delayAmount*2)); 
+      //pixel.setBrightness(61);   
+  }
 
     plotCycle();
 
@@ -1941,7 +1955,7 @@ void brightenColors() {
 
   if (brightness <= 0 || brightness >= 190) {
     fadeAmount = -fadeAmount;
-  }
+  } 
 
 }
 
@@ -2363,15 +2377,10 @@ void readStartupMode()
   * https://www.yannseznec.com/
 
   Alpha and Beta Brainz Testers
-  * John Cook
   * Ancient Radiations
   * Forrest Hopkins
   * LEEMS Industries
-  * Aaron Meagher - Discrete Circuitry
-  * Jordan Namer
-  * Hideaki Noguchi - Aotokumo  
-  * Andy Pitcher
-  
+  * Aotokumo
 
   Special Thanks
   * Rarebuzzer
@@ -2380,5 +2389,10 @@ void readStartupMode()
   * Obscura MFG
   * Lightning Wave
   * Collector//Emitter Discord Community
+  * 
+
+
+
+
 
 */
