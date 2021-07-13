@@ -233,6 +233,7 @@ int fadeAmount = 1;  //Change it to adjust the fading between each step (fading 
 int maxBrightness = 190;
 int delayAmount = 0;
 int strangeRandom;
+int strangeSlowAmount;
 
 /**
 
@@ -425,7 +426,9 @@ void setup() {
   pixel.setPixelColor(0, redValue, blueValue, greenValue);
   pixel.show();
 
+  // Set a Startup Mode
   //Mode = 8;
+  
   setRandoms();
   plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
 
@@ -1813,7 +1816,55 @@ void strangeAttractor()
     //A2 potentiometer controls for amount of randomless from less to more random
     b = map(analogRead(A2), 0, 1024, 20, 50);
 
-  if ((scaledY >= 0) && (scaledY <= 50)) {
+    strangeBright();
+    //strangeBrightMinDark(); 
+
+    pixel.show();
+    delay(delayAmount);
+
+    // Slow down the simulation when the value is low
+    //strangeSlow2(strangeSlowAmount);
+    strangeSlow();
+      
+  
+
+    plotCycle();
+
+  }
+
+}
+
+void strangeBright() {
+
+    //A1 potentiometer controls for maximum brightness
+    maxBrightness = map(analogRead(A1), 0, 1024, 0, 190);
+    pixel.setBrightness(maxBrightness);
+    //Serial.println(maxBrightness);
+
+    //Modes
+    /* Set a value for each potentiometer (pin) for colors R,G,B. */
+
+    if (Mode == 8)
+    {
+      pixel.setPixelColor(0, (scaledX/4), 0, (scaledX/8)); //Single Output Scaled X
+      //pixel.setPixelColor(0, x, 0, 30); //Single Output Scaled X
+    }
+    if (Mode == 9)
+    {
+      pixel.setPixelColor(0, (scaledX/4), 0, (scaledZ/4)); //Double Output Scaled X & Z
+      //pixel.setPixelColor(0, x, 0, z+100); //Double Output Scaled X & Z
+    }
+    if (Mode == 10)
+    {
+      pixel.setPixelColor(0, (scaledX/2), (scaledY/6), (scaledZ/2)); //Triple Output Scaled XYZ
+    }
+    
+  }
+
+
+void strangeBrightMinDark() {
+
+if ((scaledY >= 0) && (scaledY <= 50)) {
       pixel.setBrightness(maxBrightness-255);  
       pixel.setPixelColor(0, 0, 0, 0); 
   }
@@ -1842,21 +1893,51 @@ void strangeAttractor()
       pixel.setPixelColor(0, (scaledX/2), (scaledY/6), (scaledZ/2)); //Triple Output Scaled XYZ
     }
   }
+  
+  }  
 
-    pixel.show();
-    delay(delayAmount);
+void strangeSlow() {
+
+    // Slow down the simulation when the value is low
+    if ((scaledY >= 0) && (scaledY <= 50)) {
+      strangeRandom = random(20, 200);
+      strangeSlowAmount = (strangeRandom+(delayAmount*2));
+      delay(strangeSlowAmount);
+  }
+
+    
+    //Serial.println("Count if Waiting = False: " + String(count));
+  }
+
+
+void strangeSlow2(int count) {
+
+ int slowCount = strangeSlowAmount;
+
+   
+  for (int count = 0; count <= slowCount; count++) {
+
+    slowCount = strangeSlowAmount;
+
+    plotCycle();
+
+    if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment)) {
+      count = 0;
+      Serial.println("I Broke");
+      break;
+    }
 
     // Slow down the simulation when the value is low
     if ((scaledY >= 0) && (scaledY <= 50)) {
       strangeRandom = random(20, 100);
-      delay(strangeRandom+(delayAmount*2)); 
-      //pixel.setBrightness(61);   
+      strangeSlowAmount = (strangeRandom+(delayAmount*2));
   }
 
-    plotCycle();
-
+    delay(1);
+    //Serial.println("Count if Waiting = False: " + String(count));
   }
 
+  
 }
 
 
@@ -2381,6 +2462,9 @@ void readStartupMode()
   * Forrest Hopkins
   * LEEMS Industries
   * Aotokumo
+  * Andy Pitcher
+  * Mask Audio Electronics
+  * Aaron Meagher - Discrete Circuitry
 
   Special Thanks
   * Rarebuzzer
