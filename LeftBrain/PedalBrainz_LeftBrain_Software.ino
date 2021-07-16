@@ -427,7 +427,7 @@ void setup() {
   pixel.show();
 
   // Set a Startup Mode
-  //Mode = 8;
+  //Mode = 6;
   
   setRandoms();
   plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
@@ -780,10 +780,6 @@ void Routines()
 
       writeStartupMode();
 
-      x = 0.01;
-      y = 0.3;
-      z = 0.7;
-
       waitingFlag = true;
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
@@ -817,12 +813,7 @@ void Routines()
       pixel.setPixelColor(0, 36, 200, 10);
       pixel.show();
 
-      writeStartupMode();
-
-      x = 0.01;
-      y = 0.3;
-      z = 0.7;
-    
+      writeStartupMode();    
 
       waitingFlag = true;
       WaitForModeChange = true;
@@ -2062,6 +2053,7 @@ void setRandoms() {
 
 void mountainSnack() {
 
+  
   newValue1 = map(analogRead(A0), 0, 1024, 255, 0); // Control the Speed
   
   if (abs(newValue1 - newCalibrate1) > 1) { // this further smooths the knob, at the expense of some accuracy. probably worth it.
@@ -2090,9 +2082,9 @@ void mountainSnack() {
 
 
   // Set pulse rate
-
+  valueA0 = newValue1;
   targetSpeed = (maxLength * speedControl) + minLength; // set number of milliseconds the loop will last by multiplying the longest possible length by a fraction calculated by the knob
-
+  //Serial.println("targetspeed :" + String(targetSpeed));
   milli = millis() - lastMillis;
   if (milli > targetSpeed) {
     milli = 0;
@@ -2191,6 +2183,19 @@ scaledVal = map(currentVal, 0, 255, 0, maximumScale);
     }
   }
   pixel.show();
+
+
+    // Slow down the simulation when the value is low
+    if ((scaledVal >= 0) && (scaledVal <= 10)) {
+      strangeRandom = random(20, 200);
+      strangeSlowAmount = (strangeRandom+(delayAmount*3));
+      delay(strangeSlowAmount);
+      //Serial.println("StrangeSlow: " + String(strangeSlowAmount));
+      //Serial.println("ScaledVal: " + String(scaledVal));
+      //Serial.println("CurrentVal: " + String(currentVal));
+  }
+
+ 
 
   plotCycle();
 
