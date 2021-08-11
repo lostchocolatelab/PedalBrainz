@@ -2082,6 +2082,10 @@ void readStartupMode()
   * Rainbow Mode
   * https://www.instructables.com/How-to-Make-Proper-Rainbow-and-Random-Colors-With-/
 
+  Mountainz (Snack Master)
+  * Programmer : Yann Seznec
+  * Date       : 2021-May
+  * https://www.yannseznec.com/
 
   Alpha and Beta Brainz Testers
   * Ancient Radiations
