@@ -392,7 +392,7 @@ void setup() {
   setRandoms();
   
   // Set a Startup Mode
-  Mode = 6;
+  Mode = 1;
   
   plotterPrint = true; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
 
