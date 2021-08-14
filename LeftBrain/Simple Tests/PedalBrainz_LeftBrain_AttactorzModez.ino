@@ -7,55 +7,35 @@
 //  Mode Save
 //  The last Mode used will be saved as the Startup Mode.
 //
-//  Mode 1 | Squarez
-//  A0 = Speed between 2 Blinks
-//  A1 = Blink 1 Color Value (Brightness)
-//  A2 = Blink 2 Color Value (Brightness)
-//
-//  Mode 2 | Trainglez
-//  A0 = Fade speed of LED
-//  A1 = Duration when LED is fully on (It's Lit)
-//  A2 = Duration when LED is fully off (It's Dark)
-//
-//  Mode 3 | Trainglez Random
-//  A0 = Amount of Random Time Added to A1, A2
-//  A1 = Duration when LED is fully on (It's Lit)
-//  A2 = Duration when LED is fully off (It's Dark)
-//
-//  Mode 4 | Rainbowz
-//  A0 = Rainbow Cycle Speed
-//  A1 = Maximum Brightness
-//  A2 = Duration when LED is fully off (It's Dark)
-//
-//  Mode 5 | Rainbowz Random
-//  A0 = Rainbow Cycle Speed
-//  A1 = Randomized Maximum Brightness
-//  A2 = Duration when LED is fully off (It's Dark)
-//
-//  Mode 6 | Mountainz Random Repeat
-//  A0 = Cycle Speed
-//  A1 = Amount of Randomness
-//  A2 = Chance of Snack
-//
-//  Mode 7 | Mountainz Random Random
-//  A0 = Cycle Speed
-//  A1 = Amount of Randomness
-//  A2 = Chance of Snack
-//
-//  Mode 8 | Strange Attractorz Single
+//  Mode 1 | Strange Attractorz Single
 //  A0 = Cycle Speed
 //  A1 = Maximum Brightness
 //  A2 = Amount of Randomness
 //
-//  Mode 9 | Strange Attractorz Double
+//  Mode 2 | Strange Attractorz Double
 //  A0 = Cycle Speed
 //  A1 = Maximum Brightness
 //  A2 = Amount of Randomness
 //
-//  Mode 10 | Strange Attractorz Triple
+//  Mode 3 | Strange Attractorz Triple
 //  A0 = Cycle Speed
 //  A1 = Maximum Brightness
 //  A2 = Amount of Randomness
+//
+//  Mode 4 | Speedy Attractorz Single
+//  A0 = Cycle Speed
+//  A1 = Maximum Brightness
+//  A2 = Duration of Slowdown at Minimum
+//
+//  Mode 5 | Speedy Attractorz Double
+//  A0 = Cycle Speed
+//  A1 = Maximum Brightness
+//  A2 = Duration of Slowdown at Minimum
+//
+//  Mode 6 | Speedy Attractorz Triple
+//  A0 = Cycle Speed
+//  A1 = Maximum Brightness
+//  A2 = Duration of Slowdown at Minimum
 //
 //
 //  -Lost Lab
@@ -347,7 +327,7 @@ void setup() {
   pixel.show();
 
   // Set a Startup Mode
-  Mode = 1;
+  Mode = 7;
 
   plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
 
@@ -758,7 +738,7 @@ void Routines()
       {
 
         //Call the main routine and loop the thing
-
+        
 
       }
       // Wait for the Mode Change
