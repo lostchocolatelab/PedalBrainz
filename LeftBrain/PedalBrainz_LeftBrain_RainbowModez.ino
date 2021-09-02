@@ -40,7 +40,15 @@
 //  A1 = Amount of Randomness
 //  A2 = Chance of Snack
 //
-//  
+//  Mode 8 | Rainbow Squarez
+//  A0 = Cycle Speed
+//  A1 = Amount of Randomness
+//  A2 = Chance of Snack 
+//
+//  Mode 9 | Rainbow Squarez Random
+//  A0 = Cycle Speed
+//  A1 = Amount of Randomness
+//  A2 = Chance of Snack
 //
 //
 //  -Lost Lab
@@ -55,6 +63,7 @@
 
 #include <Adafruit_DotStar.h>
 #include <FlashAsEEPROM_SAMD.h>
+#include "MultiMap.h"
 
 /**
 
@@ -183,6 +192,8 @@ int Mode = 0;
 
 int currentVal;
 float randomAmount;
+int controlAmount;
+int x;
 
 /**
 
@@ -240,6 +251,9 @@ int delayAmount = 0;
 
 unsigned short pixelnumber = 0;
 int maxBrightness = 190;
+boolean increaseValue = true;
+int modulateSpeed = 0;
+int modulateConstrain;
 
 
 /**
@@ -388,13 +402,15 @@ void setup() {
   pixel.setBrightness(maxBrightness);
   pixel.setPixelColor(0, redValue, blueValue, greenValue);
   pixel.show();
-
+  
   setRandoms();
   
   // Set a Startup Mode
-  Mode = 1;
+  Mode = 8;
+
+  fadeSpeed = 0;
   
-  plotterPrint = true; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
+  plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
 
   
 }
@@ -825,7 +841,7 @@ void Routines()
       {
 
         //Call the main routine and loop the thing
-       
+       RainbowSquarez();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -848,6 +864,9 @@ void Routines()
 
       writeStartupMode();
 
+      increaseValue = true;
+      //fadeSpeed = 10;
+      
       waitingFlag = true;
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
@@ -858,7 +877,8 @@ void Routines()
       {
 
         //Call the main routine and loop the thing
-        
+        //Serial.println("INIT fadeSpeed: " + String(fadeSpeed));
+        RainbowSquarez();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -931,36 +951,134 @@ void delayA0(int count)
 
     // Potentiometer Top Right | A0 - Map the value of the Potentiometer to a Variable
     if (Mode == 1) {
-      fadeSpeed = map(analogRead(A0), 0, 1024, (speedMinimum/10), -1);
+      //fadeSpeed = map(analogRead(A0), 0, 1024, (speedMinimum/10), -1);
       //Serial.println("Mode 4 fadeSpeeed: " + String(fadeSpeed));
+
+      // This makes the potentiometer slower to change when reducting from full and gives better control fidelity at higher speeds
+      // This is a map of values for the potentiometer. note: the in array should have increasing values
+      int in[]  = {0, 25.5,51,76.5,102,127.5,153,178.5,204,229.5,255};
+      // This is a map of values for potentiometer curve type.
+      int out[] = { 2300,2298,2296,2295,2292,2200,2100,2000,1800,1300,0 };  // 11
+      // This maps the potentiometer scale.
+      controlAmount  = map(analogRead(A0), 0, 1024, 255, 0);
+      // This is a multimap that assigns values from the [in] array (potentiometer) to values from the [out] array (curve)
+      x = multiMap(controlAmount, in, out, 11);
+      // This maps the values for the Modez.
+      fadeSpeed = map(x, 0, 2300, speedMinimum/10, -1);
+
+      //Serial.println("Mode 1 controlAmount: " + String(controlAmount));
+      //Serial.println("Mode 1 fadeSpeeed: " + String(fadeSpeed));
 
     }
     // Potentiometer Top Right | A0 - Map the value of the Potentiometer to a Variable
     else if (Mode == 2) {
-      fadeSpeed = map(analogRead(A0), 0, 1024, (speedMinimum/10), -1);
+      //fadeSpeed = map(analogRead(A0), 0, 1024, (speedMinimum/10), -1);
       //Serial.println("Mode 5 fadeSpeeed: " + String(fadeSpeed));
+
+      // This makes the potentiometer slower to change when reducting from full and gives better control fidelity at higher speeds
+      // This is a map of values for the potentiometer. note: the in array should have increasing values
+      int in[]  = {0, 25.5,51,76.5,102,127.5,153,178.5,204,229.5,255};
+      // This is a map of values for potentiometer curve type.
+      int out[] = { 2300,2298,2296,2295,2292,2200,2100,2000,1800,1300,0 };  // 11
+      // This maps the potentiometer scale.
+      controlAmount  = map(analogRead(A0), 0, 1024, 255, 0);
+      // This is a multimap that assigns values from the [in] array (potentiometer) to values from the [out] array (curve)
+      x = multiMap(controlAmount, in, out, 11);
+      // This maps the values for the Modez.
+      fadeSpeed = map(x, 0, 2300, speedMinimum/10, -1);
+
+      //Serial.println("Mode 2 controlAmount: " + String(controlAmount));
+      //Serial.println("Mode 2 fadeSpeeed: " + String(fadeSpeed));      
     }
     
     else if (Mode == 3) {
-      valueLog = log(analogRead(A0)+1)/log(1024)*255;
+      //valueLog = log(analogRead(A0)+1)/log(1024)*255;
       //Serial.println("Mode 1 valueLog: " + String(valueLog));
-      fadeSpeed = map(valueLog, 0, 255, (speedMinimum/2), (40/2)); // Logarithmic Potentiometer Value
+      //fadeSpeed = map(valueLog, 0, 255, (speedMinimum/2), (40/2)); // Logarithmic Potentiometer Value
       //fadeSpeed = map(analogRead(A0), 0, 1024, durationMaximum, 0);
+
+      // This makes the potentiometer slower to change when reducting from full and gives better control fidelity at higher speeds
+      // This is a map of values for the potentiometer. note: the in array should have increasing values
+      int in[]  = {0, 25.5,51,76.5,102,127.5,153,178.5,204,229.5,255};
+      // This is a map of values for potentiometer curve type.
+      int out[] = { 2300,2298,2296,2295,2292,2200,2100,2000,1800,1300,0 };  // 11
+      // This maps the potentiometer scale.
+      controlAmount  = map(analogRead(A0), 0, 1024, 255, 0);
+      // This is a multimap that assigns values from the [in] array (potentiometer) to values from the [out] array (curve)
+      x = multiMap(controlAmount, in, out, 11);
+      // This maps the values for the Modez.
+      fadeSpeed = map(x, 0, 2300, speedMinimum, 10);
+      
+
+      //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
+      Serial.println("Mode 3 fadeSpeeed: " + String(fadeSpeed));    
     }
     else if (Mode == 4) {
-      valueLog = log(analogRead(A0)+1)/log(1024)*255;
+      //valueLog = log(analogRead(A0)+1)/log(1024)*255;
       //Serial.println("Mode 1 valueLog: " + String(valueLog));
-      fadeSpeed = map(valueLog, 0, 255, (speedMinimum/2), (40/2)); // Logarithmic Potentiometer Value
+      //fadeSpeed = map(valueLog, 0, 255, (speedMinimum/2), (40/2)); // Logarithmic Potentiometer Value
       //fadeSpeed = map(analogRead(A0), 0, 1024, durationMaximum, 0);
+
+      // This makes the potentiometer slower to change when reducting from full and gives better control fidelity at higher speeds
+      // This is a map of values for the potentiometer. note: the in array should have increasing values
+      int in[]  = {0, 25.5,51,76.5,102,127.5,153,178.5,204,229.5,255};
+      // This is a map of values for potentiometer curve type.
+      int out[] = { 2300,2298,2296,2295,2292,2200,2100,2000,1800,1300,0 };  // 11
+      // This maps the potentiometer scale.
+      controlAmount  = map(analogRead(A0), 0, 1024, 255, 0);
+      // This is a multimap that assigns values from the [in] array (potentiometer) to values from the [out] array (curve)
+      x = multiMap(controlAmount, in, out, 11);
+      // This maps the values for the Modez.
+      fadeSpeed = map(x, 0, 2300, speedMinimum, 10);
+      
+
+      //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
+      Serial.println("Mode 3 fadeSpeeed: " + String(fadeSpeed)); 
 
     }
     else if (Mode == 5) {
-      valueLog = log(analogRead(A0)+1)/log(1024)*255;
+      //valueLog = log(analogRead(A0)+1)/log(1024)*255;
       //Serial.println("Mode 1 valueLog: " + String(valueLog));
-      fadeSpeed = map(valueLog, 0, 255, (speedMinimum/2), (40/2)); // Logarithmic Potentiometer Value
+      //fadeSpeed = map(valueLog, 0, 255, (speedMinimum/2), (40/2)); // Logarithmic Potentiometer Value
       //fadeSpeed = map(analogRead(A0), 0, 1024, durationMaximum, 0);
 
+      // This makes the potentiometer slower to change when reducting from full and gives better control fidelity at higher speeds
+      // This is a map of values for the potentiometer. note: the in array should have increasing values
+      int in[]  = {0, 25.5,51,76.5,102,127.5,153,178.5,204,229.5,255};
+      // This is a map of values for potentiometer curve type.
+      int out[] = { 2300,2298,2296,2295,2292,2200,2100,2000,1800,1300,0 };  // 11
+      // This maps the potentiometer scale.
+      controlAmount  = map(analogRead(A0), 0, 1024, 255, 0);
+      // This is a multimap that assigns values from the [in] array (potentiometer) to values from the [out] array (curve)
+      x = multiMap(controlAmount, in, out, 11);
+      // This maps the values for the Modez.
+      fadeSpeed = map(x, 0, 2300, speedMinimum, 10);
+      
+
+      //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
+      Serial.println("Mode 3 fadeSpeeed: " + String(fadeSpeed)); 
+
     }
+    else if (Mode == 8) {
+      valueLog = log(analogRead(A0)+1)/log(1024)*255;
+      //Serial.println("Mode 1 valueLog: " + String(valueLog));
+      fadeSpeed = map(valueLog, 0, 255, (speedMinimum/2), 30); // Logarithmic Potentiometer Value
+      //fadeSpeed = map(analogRead(A0), 0, 1024, durationMaximum, 0);
+
+      Serial.println("delayA0 Mode 8 - fadeSpeeed: " + String(fadeSpeed));
+
+    }    
+    else if (Mode == 9) {
+      //valueA0 = map(analogRead(A0), 0, 1024, 2000, 0);
+      valueA0 = log(analogRead(A0)+1)/log(1024)*255;
+      modulateConstrain = modulateSpeed + (valueA0-200);
+      fadeSpeed = constrain(modulateConstrain, 0, 3000);
+      //fadeSpeed = map(analogRead(A0), 0, 1024, durationMaximum, 0);
+      //ModulateControl();
+      //fadeSpeed = fadeSpeed;
+      
+      //Serial.println("delayA0 fadeSpeeed: " + String(fadeSpeed));
+    }   
     else {
       fadeSpeed = 7;
       //Serial.println("Else fadeSpeeed: " + String(fadeSpeed));
@@ -1016,16 +1134,58 @@ void delayA1(int count)
       fullDelay = 100;
     }
     else if (Mode == 3) {
-      fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100); // Linear Potentiometer Value
+      //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100); // Linear Potentiometer Value
       //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
+
+      // This makes the potentiometer slower to change when reducting from full and gives better control fidelity at higher speeds
+      // This is a map of values for the potentiometer. note: the in array should have increasing values
+      int in[]  = {0, 25.5,51,76.5,102,127.5,153,178.5,204,229.5,255};
+      // This is a map of values for potentiometer curve type.
+      int out[] = { 2300,2298,2296,2295,2292,2200,2100,2000,1800,1300,0 };  // 11
+      // This maps the potentiometer scale.
+      controlAmount  = map(analogRead(A1), 0, 1024, 255, 0);
+      // This is a multimap that assigns values from the [in] array (potentiometer) to values from the [out] array (curve)
+      x = multiMap(controlAmount, in, out, 11);
+      // This maps the values for the Modez.
+      fullDelay = map(x, 0, 2300, speedMinimum, 10);
+      
+
+      //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
+      //Serial.println("Mode 3 fadeSpeeed: " + String(fadeSpeed));
+      
     }
     else if (Mode == 4) {
       fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100); // Linear Potentiometer Value
       //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
+      
+      // This makes the potentiometer slower to change when reducting from full and gives better control fidelity at higher speeds
+      // This is a map of values for the potentiometer. note: the in array should have increasing values
+      int in[]  = {0, 25.5,51,76.5,102,127.5,153,178.5,204,229.5,255};
+      // This is a map of values for potentiometer curve type.
+      int out[] = { 2300,2298,2296,2295,2292,2200,2100,2000,1800,1300,0 };  // 11
+      // This maps the potentiometer scale.
+      controlAmount  = map(analogRead(A1), 0, 1024, 255, 0);
+      // This is a multimap that assigns values from the [in] array (potentiometer) to values from the [out] array (curve)
+      x = multiMap(controlAmount, in, out, 11);
+      // This maps the values for the Modez.
+      fullDelay = map(x, 0, 2300, speedMinimum, 10);
+      
     }
     else if (Mode == 5) {
-      fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100); // Linear Potentiometer Value
+      //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100); // Linear Potentiometer Value
       //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
+      
+      // This makes the potentiometer slower to change when reducting from full and gives better control fidelity at higher speeds
+      // This is a map of values for the potentiometer. note: the in array should have increasing values
+      int in[]  = {0, 25.5,51,76.5,102,127.5,153,178.5,204,229.5,255};
+      // This is a map of values for potentiometer curve type.
+      int out[] = { 2300,2298,2296,2295,2292,2200,2100,2000,1800,1300,0 };  // 11
+      // This maps the potentiometer scale.
+      controlAmount  = map(analogRead(A1), 0, 1024, 255, 0);
+      // This is a multimap that assigns values from the [in] array (potentiometer) to values from the [out] array (curve)
+      x = multiMap(controlAmount, in, out, 11);
+      // This maps the values for the Modez.
+      fullDelay = map(x, 0, 2300, speedMinimum, 10);
     }
     else {
       fullDelay = 100;
@@ -1090,7 +1250,17 @@ void delayA2(int count)
 
       darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
       //Serial.println("Mode 1 darkDelay: " + String(darkDelay));
-    }     
+    }  
+    else if (Mode == 8) {
+
+      darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
+      //Serial.println("Mode 1 darkDelay: " + String(darkDelay));
+    } 
+    else if (Mode == 9) {
+
+      darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
+      //Serial.println("Mode 1 darkDelay: " + String(darkDelay));
+    }                  
     else {
       darkDelay = 100;
       //Serial.println("Else darkDelay: " + String(darkDelay));
@@ -1470,6 +1640,234 @@ void darkDelayBetwixtColors(){
 
 }
 
+void brightnessA1(){
+    valueA1 = map(analogRead(A1), 0, 1024, 0, 20);
+    pixel.setBrightness(valueA1);  
+}
+
+void RainbowSquarez(){
+
+    //Serial.println("RainbowSquarez " + String(fadeSpeed));
+    
+    ModulateControl();
+    // Set the color
+    pixel.setPixelColor(0, colorRed); 
+    pixel.show(); 
+    brightnessA1();
+ 
+    // Delay the change to the next color by the amount of A0
+    delayA0(fadeSpeed);
+    // Add an amount of darness by the amount of A2
+    //darkDelayBetwixtColors();
+
+    ModulateControl();
+    pixel.setPixelColor(0, colorOrange); 
+    pixel.show();
+    brightnessA1();
+    delayA0(fadeSpeed);
+    //darkDelayBetwixtColors();
+
+    ModulateControl();
+    pixel.setPixelColor(0, colorYellow); 
+    pixel.show();  
+    brightnessA1();
+    delayA0(fadeSpeed);
+    //darkDelayBetwixtColors();
+
+    ModulateControl();
+    pixel.setPixelColor(0, colorGreen); 
+    pixel.show();  
+    delayA0(fadeSpeed);
+    //darkDelayBetwixtColors();
+
+    ModulateControl();
+    pixel.setPixelColor(0, colorBlue); 
+    pixel.show();
+    brightnessA1();
+    delayA0(fadeSpeed);
+    //darkDelayBetwixtColors();
+    
+    ModulateControl();
+    pixel.setPixelColor(0, colorPurple); 
+    pixel.show();
+    brightnessA1();
+    delayA0(fadeSpeed);
+    //darkDelayBetwixtColors();
+
+    ModulateControl();
+    pixel.setPixelColor(0, colorBlue); 
+    pixel.show();
+    brightnessA1();
+    delayA0(fadeSpeed);
+    //darkDelayBetwixtColors();
+    
+    ModulateControl();
+    pixel.setPixelColor(0, colorGreen); 
+    pixel.show();  
+    delayA0(fadeSpeed);
+
+    ModulateControl();
+    pixel.setPixelColor(0, colorYellow); 
+    pixel.show();  
+    brightnessA1();
+    delayA0(fadeSpeed);
+    //darkDelayBetwixtColors();
+
+    ModulateControl();
+    pixel.setPixelColor(0, colorOrange); 
+    pixel.show();
+    brightnessA1();
+    delayA0(fadeSpeed);
+    //darkDelayBetwixtColors();
+
+    darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
+    Serial.println("darkDelay " + String(darkDelay));
+
+    if (darkDelay > 20) {
+      // Make the pixel dark
+
+    pixel.setBrightness(0);
+    pixel.show();    
+
+    // Delay by the amount of A2
+    delayA2(darkDelay);
+    //Serial.println("darkDelay " + String(darkDelay));
+
+    }
+    
+    //darkDelayBetwixtColors();
+    
+ 
+  //pixel.show(); 
+  
+
+}
+
+
+
+void changeValue() {
+     
+      if (increaseValue == true) {
+        if ((modulateSpeed >= 1) && (modulateSpeed <= 100)){
+           modulateSpeed = modulateSpeed+1;
+           Serial.println("Increasing Modulation Least ");
+        }
+        else if ((modulateSpeed >= 101) && (modulateSpeed <= 200)){
+           modulateSpeed = modulateSpeed+5;
+           Serial.println("Increasing Modulation Leser ");
+        }
+        else if ((modulateSpeed >= 201) && (modulateSpeed <= 600)){
+           modulateSpeed = modulateSpeed+10;
+           Serial.println("Increasing Modulation Less ");
+        }
+        else {
+          modulateSpeed = modulateSpeed+40;
+        }
+        
+      }
+
+      if (increaseValue == false) {
+        if ((modulateSpeed >= 1) && (modulateSpeed <= 100)){
+           modulateSpeed = modulateSpeed-1;
+           Serial.println("Decreasing Modulation Least ");
+        }
+        else if ((modulateSpeed >= 101) && (modulateSpeed <= 200)){
+           modulateSpeed = modulateSpeed-5;
+           Serial.println("Decreasing Modulation Lesser ");
+        }
+        else if ((modulateSpeed >= 201) && (modulateSpeed <= 600)){
+           modulateSpeed = modulateSpeed-10;
+           Serial.println("Decreasing Modulation Less ");
+        }
+        else {
+          modulateSpeed = modulateSpeed-40;
+        }
+      }
+}
+
+void valueRangeLimits() {
+
+      if (modulateSpeed < 1){
+        increaseValue = true;
+        
+      }
+      if (modulateSpeed > 2000){
+        increaseValue = false;
+
+     }
+  
+}
+
+void ModulateControl() {
+
+      Serial.println("Increase " + String(increaseValue));
+      Serial.println("Increase false - fadeSpeed: " + String(fadeSpeed));
+      Serial.println("Increase false - modulateSpeed: " + String(modulateSpeed));
+        
+       //Serial.println("Mode 1 valueLog: " + String(valueLog));
+      //fadeSpeed = map(valueLog, 0, 255, (speedMinimum/2), (40/2)); // Logarithmic Potentiometer Value
+      //fadeSpeed = map(analogRead(A0), 0, 1024, durationMaximum, 0);
+      //fadeSpeed = fadeSpeed;
+      
+      valueRangeLimits();
+      changeValue();
+      
+      
+ /** fadeSpeed = 1;
+  
+  // Fade In
+  for (int x = 0; x < 255; x++)
+  {
+    if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment)) {
+      x = 0;
+      Serial.println("I Broke");
+      break;
+    }
+
+    plotCycle();
+
+    fadeSpeed = fadeSpeed+1;
+    Serial.println("Modulate|| fadeSpeeed: " + String(fadeSpeed));
+
+
+    //A delay amount between each increase in value mapped to A0 and divided
+    delayA0(fadeSpeed);
+    pixel.show();
+  }
+
+  //Fade out 
+  for (int x = 255; x >= 0; x--)
+  {
+    if ((analogRead(A0) <= ValueZeroAdjustment) && (analogRead(A1) <= ValueZeroAdjustment) && (analogRead(A2) <= ValueZeroAdjustment)) {
+      x = 0;
+      Serial.println("I Broke");
+      break;
+    }
+
+    fadeSpeed = fadeSpeed-1;
+    Serial.println("Modulate||| fadeSpeeed: " + String(fadeSpeed));
+
+    //A delay amount between each reduction in value mapped to A0 and divided
+    delayA0(fadeSpeed);
+    pixel.show();
+
+    plotCycle();
+  }
+
+  //Add a delay (ms) at the end of the rainbow cycle using potantiometer A2 while the LED is dark
+  //valueA1 = map(analogRead(A1), 0, 1024, 0, 30);
+  //delayA2(darkDelay);
+
+  plotCycle();
+
+  //Serial.println("Rate of Rainbow cycling: " + String(valueA0)  + " ||| Delay between Rainbow cycles (ms): " + String(valueA1) + " ||| Maximum Brightness value: " + String(valueA2));
+
+*/
+
+
+
+}
+
 
 /**
 
@@ -1686,6 +2084,7 @@ void delaySnack(int count)
 
 
 
+
 /**
 
   Mode Change
@@ -1773,12 +2172,12 @@ void modeChangeWait() {
       // If pin A2 moves from fully counter-clockwise (zero) then advance the Mode
       if ((analogRead(A2) > ValueZeroAdjustment) && (!WaitForModeChange))
       {
-        if (6 >= Mode)
+        if (9 >= Mode)
         {
           Mode = Mode+1;
           //Serial.println("Mode Change = " + String(Mode));
         }
-        else if (Mode == 7)
+        else if (Mode == 10)
         {
           Mode = 1;
           //Serial.println("Mode Change = " + String(Mode));
@@ -2082,10 +2481,6 @@ void readStartupMode()
   * Rainbow Mode
   * https://www.instructables.com/How-to-Make-Proper-Rainbow-and-Random-Colors-With-/
 
-  Mountainz (Snack Master)
-  * Programmer : Yann Seznec
-  * Date       : 2021-May
-  * https://www.yannseznec.com/
 
   Alpha and Beta Brainz Testers
   * Ancient Radiations
