@@ -430,7 +430,7 @@ void setup() {
   pixel.show();
 
   // Set a Startup Mode
-  Mode = 1;
+  Mode = 0;
   
   setRandoms();
   plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
