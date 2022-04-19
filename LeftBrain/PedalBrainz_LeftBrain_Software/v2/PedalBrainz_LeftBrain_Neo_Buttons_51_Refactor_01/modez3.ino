@@ -58,12 +58,7 @@ void modeStartupBank3(){
     if (Mode == 1)
       {
 
-      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-         strip.setPixelColor(p, 36, 200, 10);
-      }
-      pixel.setPixelColor(0, 36, 200, 10);
-      inner.setPixelColor(0, 36, 200, 10);
- 
+
       }
     else if (Mode == 2)
       {
@@ -131,8 +126,8 @@ void Bank3()
     Fadez
 
   */
-
-  // RainbowQuad
+  
+  // Rainbow Shift
   if (Mode == 1)
   {
     //Serial.println("Mode 1 Started fadespeed " + String(fadeSpeed));
@@ -158,8 +153,9 @@ void Bank3()
       if (WaitForModeChange)
       {
 
-        //Call the main routine and loop the thing
-        RainbowQuad();
+        // Call the main routine and loop the thing
+        valueA0  = 7;
+        rainbowNew();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -169,6 +165,9 @@ void Bank3()
   // RainbowQuad
   if (Mode == 2)
   {
+    //Serial.println("Mode 1 Started fadespeed " + String(fadeSpeed));
+    
+   
     if (!waitingFlag)
     {
       // Flash the pixel at the start of a mode chnage
@@ -189,7 +188,7 @@ void Bank3()
       if (WaitForModeChange)
       {
 
-        // Call the main routine and loop the thing
+        //Call the main routine and loop the thing
         RainbowQuad();
       }
         // Wait for the Mode Change
@@ -228,7 +227,7 @@ void Bank3()
     }
   }
 
-  // RainbowMountainRepeat
+  // RainbowQuad
   if (Mode == 4)
   {
     if (!waitingFlag)
@@ -251,16 +250,15 @@ void Bank3()
       if (WaitForModeChange)
       {
 
-        //Call the main routine and loop the thing
-        mountainSnack ();
-        reRandom = false;
+        // Call the main routine and loop the thing
+        RainbowQuad();
       }
         // Wait for the Mode Change
         modeChangeWait();
     }
   }
 
-  // RainbowMountainRandom
+  // RainbowMountainRepeat
   if (Mode == 5)
   {
     if (!waitingFlag)
@@ -284,15 +282,14 @@ void Bank3()
       {
 
         //Call the main routine and loop the thing
-        mountainSnack ();
-        reRandom = true;
+        RainbowQuad();
       }
         // Wait for the Mode Change
         modeChangeWait();
     }
   }
 
-  // RainbowMountainPulse
+  // RainbowMountainRandom
   if (Mode == 6)
   {
     if (!waitingFlag)
@@ -316,14 +313,14 @@ void Bank3()
       {
 
         //Call the main routine and loop the thing
-        mountainSnack ();
-        reRandom = true;
+        RainbowQuad();
       }
         // Wait for the Mode Change
         modeChangeWait();
     }
   }
-  // RainbowSquarez
+
+  // RainbowMountainPulse
   if (Mode == 7)
   {
     if (!waitingFlag)
@@ -341,21 +338,19 @@ void Bank3()
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
     }
-     else
+    else
     {
       if (WaitForModeChange)
       {
 
         //Call the main routine and loop the thing
-        RainbowSquarez();
-        
+        RainbowQuad();
       }
         // Wait for the Mode Change
         modeChangeWait();
     }
   }
-
- // RainbowSquarez
+  // RainbowSquarez
   if (Mode == 8)
   {
     if (!waitingFlag)
@@ -387,8 +382,40 @@ void Bank3()
     }
   }
 
-  // RainbowSquarezRamping
+ // RainbowSquarez
   if (Mode == 9)
+  {
+    if (!waitingFlag)
+    {
+      // Flash the pixel at the start of a mode chnage
+      //modeFlash();
+
+      // Do some startup stuff for this Bank/ Mode if anything needs to be done
+      modeStartupBank3();
+      
+      //writeStartupDataz();
+      
+      //Do the last thing and WaitForModeChange
+      waitingFlag = true;
+      WaitForModeChange = true;
+      Serial.println(" WaitForModeChange = True");
+    }
+     else
+    {
+      if (WaitForModeChange)
+      {
+
+        //Call the main routine and loop the thing
+        RainbowSquarez();
+        
+      }
+        // Wait for the Mode Change
+        modeChangeWait();
+    }
+  }
+
+  // RainbowSquarezRamping
+  if (Mode == 10)
   {
     if (!waitingFlag)
     {
@@ -411,79 +438,14 @@ void Bank3()
       {
 
         //Call the main routine and loop the thing
-        RainbowSquarez();
+        twinkelz();
       }
         // Wait for the Mode Change
         modeChangeWait();
     }
   }
 
-  // Strange Attractor 2
-  if (Mode == 9)
-  {
-    if (!waitingFlag)
-    {
-      // Flash the pixel at the start of a mode chnage
-      //modeFlash();
 
-      // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
-      
-      //writeStartupDataz();
-      
-      //Do the last thing and WaitForModeChange
-      
-
-      waitingFlag = true;
-      WaitForModeChange = true;
-      Serial.println(" WaitForModeChange = True");
-    }
-     else
-    {
-      if (WaitForModeChange)
-      {
-
-        //Call the main routine and loop the thing
-        increaseValue = true;
-        //fadeSpeed = 10;
-        RainbowSquarez();
-      }
-        // Wait for the Mode Change
-        modeChangeWait();
-    }
-  }
-
-  // Strange Attractor 3
-  if (Mode == 10)
-  {
-    if (!waitingFlag)
-    {
-      // Flash the pixel at the start of a mode chnage
-      //modeFlash();
-
-      // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
-      
-      //writeStartupDataz();
-      
-      //Do the last thing and WaitForModeChange
-      waitingFlag = true;
-      WaitForModeChange = true;
-      Serial.println(" WaitForModeChange = True");
-    }
-     else
-    {
-      if (WaitForModeChange)
-      {
-
-        // Call the main routine and loop the thing
-        valueA0  = 7;
-        rainbowNew();
-      }
-        // Wait for the Mode Change
-        modeChangeWait();
-    }
-  }
 
 /*
  * 

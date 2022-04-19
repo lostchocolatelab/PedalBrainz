@@ -1,7 +1,7 @@
 /**
 
-  FlashAsEEPROM_SAMD Library declarations
-  FLASH MEMORY/ EEPROM for reading and writing the startup mode
+FlashAsEEPROM_SAMD Library declarations
+FLASH MEMORY/ EEPROM for reading and writing the startup mode
 
 */
 
@@ -9,112 +9,107 @@
 
 /**
 
-  Write Startup Mode to Memory
+Write Startup Mode to Memory
 
 */
 
 
-void writeStartupMode()
+void writeStartupMode()       // Currently Unused
 {
-  
+
 }
 
-void readStartupMode()
+void readStartupMode()        // Reads the Startup Bank, Mode, MaxBright when Mode is zero
 {
-    EEPROM.get(storedAddress + sizeof(startup), dataz);
+  EEPROM.get(storedAddress + sizeof(startup), dataz);
 
-    // Say hello to the returning user!
-    Serial.print("Hi "); Serial.print(dataz.savedBank); Serial.print(" "); Serial.print(dataz.savedMode); Serial.print(" "); Serial.print(dataz.savedMaxBright); 
-    Serial.println(", nice to see you again :-)");
+  // Say hello to the returning user!
+  Serial.print("Hi "); Serial.print(dataz.savedBank); Serial.print(" "); Serial.print(dataz.savedMode); Serial.print(" "); Serial.print(dataz.savedMaxBright);
+  Serial.println(", nice to see you again :-)");
 
-    
-    startupBank = dataz.savedBank;
-    startupMode = dataz.savedMode;
-    startupMaxBright = dataz.savedMaxBright;
-    
-    Serial.println(startupBank);
-    Serial.println(startupMode);
-    Serial.println(startupMaxBright);
-  
+
+  startupBank = dataz.savedBank;
+  startupMode = dataz.savedMode;
+  startupMaxBright = dataz.savedMaxBright;
+
+  Serial.println(startupBank);
+  Serial.println(startupMode);
+  Serial.println(startupMaxBright);
 }
 
-
-
-void writeStartupDataz()
+void writeStartupDataz()      // Writes the Startup Bank, Mode, MaxBright to the flash memory
 {
   Serial.println("Writing STARTUP_DATAZ");
 
-    //startupBank = Bank;
-    //startupMode = Mode;
-    //savedMaxBright = MaxBright;
+  //startupBank = Bank;
+  //startupMode = Mode;
+  //savedMaxBright = MaxBright;
 
-    EEPROM.put(storedAddress, STARTUP_DATA);
+  EEPROM.put(storedAddress, STARTUP_DATA);
 
-    Serial.println("Filling in DATAZ Bank - " + String(Bank));
-    Serial.println("Filling in DATAZ Mode - " + String(Mode));
-    Serial.println("Filling in DATAZ MaxBright - " + String(MaxBright));
-    
+  Serial.println("Filling in DATAZ Bank - " + String(Bank));
+  Serial.println("Filling in DATAZ Mode - " + String(Mode));
+  Serial.println("Filling in DATAZ MaxBright - " + String(MaxBright));
 
-    // Fill the "dataz" structure with the data entered by the user...
-    dataz.savedBank = Bank;
-    dataz.savedMode = Mode;
-    dataz.savedMaxBright = MaxBright;
 
-    // ...and finally save everything into emulated-EEPROM
-    EEPROM.put(storedAddress + sizeof(startup), dataz);
+  // Fill the "dataz" structure with the data entered by the user...
+  dataz.savedBank = Bank;
+  dataz.savedMode = Mode;
+  dataz.savedMaxBright = MaxBright;
 
-    if (!EEPROM.getCommitASAP())
-    {
-      Serial.println("CommitASAP not set. Need commit()");
-      EEPROM.commit();
-    }
+  // ...and finally save everything into emulated-EEPROM
+  EEPROM.put(storedAddress + sizeof(startup), dataz);
 
-    // Print a confirmation of the data inserted.
-    Serial.print("<< Your Bank "); Serial.print(dataz.savedBank);  
-    Serial.print(". Your Mode: "); Serial.print(dataz.savedMode);    
-    Serial.print(". Your MaxBright: "); Serial.print(dataz.savedMaxBright);
-    Serial.println(" >> have been saved. Thank you!");
-    
+  if (!EEPROM.getCommitASAP())
+  {
+    Serial.println("CommitASAP not set. Need commit()");
+    EEPROM.commit();
+  }
+
+  // Print a confirmation of the data inserted.
+  Serial.print("<< Your Bank "); Serial.print(dataz.savedBank);
+  Serial.print(". Your Mode: "); Serial.print(dataz.savedMode);
+  Serial.print(". Your MaxBright: "); Serial.print(dataz.savedMaxBright);
+  Serial.println(" >> have been saved. Thank you!");
 }
 
-void writeMaxBrightDataz()
+void writeMaxBrightDataz()    // Writes the MaxBright to the flash memory
 {
   Serial.println("Writing MazBright STARTUP_DATAZ");
 
-    //startupBank = Bank;
-    //startupMode = Mode;
-    //savedMaxBright = MaxBright;
+  //startupBank = Bank;
+  //startupMode = Mode;
+  //savedMaxBright = MaxBright;
 
-    EEPROM.put(storedAddress, STARTUP_DATA);
+  EEPROM.put(storedAddress, STARTUP_DATA);
 
-    //Serial.println("Filling in DATAZ Bank - " + String(Bank));
-    //Serial.println("Filling in DATAZ Mode - " + String(Mode));
-    Serial.println("Filling in DATAZ MaxBright - " + String(MaxBright));
-    
+  //Serial.println("Filling in DATAZ Bank - " + String(Bank));
+  //Serial.println("Filling in DATAZ Mode - " + String(Mode));
+  Serial.println("Filling in DATAZ MaxBright - " + String(MaxBright));
 
-    // Fill the "dataz" structure with the data entered by the user...
-    //dataz.savedBank = Bank;
-    //dataz.savedMode = Mode;
-    dataz.savedMaxBright = MaxBright;
 
-    // ...and finally save everything into emulated-EEPROM
-    EEPROM.put(storedAddress + sizeof(startup), dataz);
+  // Fill the "dataz" structure with the data entered by the user...
+  //dataz.savedBank = Bank;
+  //dataz.savedMode = Mode;
+  dataz.savedMaxBright = MaxBright;
 
-    if (!EEPROM.getCommitASAP())
-    {
-      Serial.println("CommitASAP not set. Need commit()");
-      EEPROM.commit();
-    }
+  // ...and finally save everything into emulated-EEPROM
+  EEPROM.put(storedAddress + sizeof(startup), dataz);
 
-    // Print a confirmation of the data inserted.
-    //Serial.print("<< Your Bank "); Serial.print(dataz.savedBank);  
-    //Serial.print(". Your Mode: "); Serial.print(dataz.savedMode);    
-    Serial.print(". Your MaxBright: "); Serial.print(dataz.savedMaxBright);
-    Serial.println(" >> have been saved. Thank you!");
-    
+  if (!EEPROM.getCommitASAP())
+  {
+    Serial.println("CommitASAP not set. Need commit()");
+    EEPROM.commit();
+  }
+
+  // Print a confirmation of the data inserted.
+  //Serial.print("<< Your Bank "); Serial.print(dataz.savedBank);
+  //Serial.print(". Your Mode: "); Serial.print(dataz.savedMode);
+  Serial.print(". Your MaxBright: "); Serial.print(dataz.savedMaxBright);
+  Serial.println(" >> have been saved. Thank you!");
 }
 
-void readStartupBank()
+void readStartupBank()        // Currently Unused
 {
 
 }
@@ -122,18 +117,18 @@ void readStartupBank()
 
 /**
 
-  Memory Reporting Tools
+Memory Reporting Tools
 
-  This Section is used for memory reporting
-  
+This Section is used for memory reporting
+
 */
 
 #ifdef __arm__
-// should use uinstd.h to define sbrk but Due causes a conflict
+  // should use uinstd.h to define sbrk but Due causes a conflict
 extern "C" char* sbrk(int incr);
-#else  // __ARM__
+#else    // __ARM__
 extern char *__brkval;
-#endif  // __arm__
+#endif    // __arm__
 
 int freeMemory() {
   char top;
@@ -141,22 +136,21 @@ int freeMemory() {
   return &top - reinterpret_cast<char*>(sbrk(0));
 #elif defined(CORE_TEENSY) || (ARDUINO > 103 && ARDUINO != 151)
   return &top - __brkval;
-#else  // __arm__
+#else    // __arm__
   return __brkval ? &top - __brkval : &top - __malloc_heap_start;
-#endif  // __arm__
+#endif    // __arm__
 }
 
 
 \
 
-//
-//  This Section is waiting for all potentiometers to be fully clockwise for a duration defined as "ValueHighlightTime"
-//  and then will start flashing a pattern of light in preparation for wiritng the startup mode to the Flash/ EEPROM Memory
-//  If A2 is beloww zero (turned counter-clockwise) then the current Mode will be written as the Startup Mode to Memory
-//  If A0 or A1 is rotated below fully clockwise (turned counter-clockwise) current Mode will resume with Mode Color
-//
-//
-
+  //
+  //  This Section is waiting for all potentiometers to be fully clockwise for a duration defined as "ValueHighlightTime"
+  //  and then will start flashing a pattern of light in preparation for wiritng the startup mode to the Flash/ EEPROM Memory
+  //  If A2 is beloww zero (turned counter-clockwise) then the current Mode will be written as the Startup Mode to Memory
+  //  If A0 or A1 is rotated below fully clockwise (turned counter-clockwise) current Mode will resume with Mode Color
+  //
+  //  This code is historic for now and was part of the navigation for Pedal Brain Left Brain v1
 
 void controlsMax()
 {
@@ -172,7 +166,7 @@ void controlsMax()
 
   }
 
-//
+  //
   // When A0 or A1 becomes less than fully Clockwise, resume the current Mode without writing the Startup Mode
   // then set the pixel color to the right color depending on the current Mode
   //
@@ -183,28 +177,28 @@ void controlsMax()
 
     if (Mode == 1)
     {
-        if (Blink1 = true)
-          {
-            valueA1 = map(analogRead(A1), 0, 1024, 0, 20);
-            pixel.setPixelColor(0, valueA1, (valueA1/5), 0); // Blink 1
-            pixel.setBrightness(valueA1);
-            pixel.show();
-          }
-        if (Blink1 = false)
-          {
-            valueA2 = map(analogRead(A2), 0, 1024, 0, 255); 
-            pixel.setPixelColor(0, (valueA2/6), valueA2, valueA2); // Blink 2
-            pixel.setBrightness(valueA2);
-            pixel.show();
-          }     
+      if (Blink1 = true)
+      {
+        valueA1 = map(analogRead(A1), 0, 1024, 0, 20);
+        pixel.setPixelColor(0, valueA1, (valueA1 / 5), 0);   // Blink 1
+        pixel.setBrightness(valueA1);
+        pixel.show();
+      }
+      if (Blink1 = false)
+      {
+        valueA2 = map(analogRead(A2), 0, 1024, 0, 255);
+        pixel.setPixelColor(0, (valueA2 / 6), valueA2, valueA2);   // Blink 2
+        pixel.setBrightness(valueA2);
+        pixel.show();
+      }
     }
     if (Mode == 2)
     {
-      pixel.setPixelColor(0, 36, 0, 255); 
+      pixel.setPixelColor(0, 36, 0, 255);
     }
     if (Mode == 3)
     {
-      pixel.setPixelColor(0, 0, 200, 30);    
+      pixel.setPixelColor(0, 0, 200, 30);
     }
     if (Mode == 4)
     {
@@ -221,7 +215,7 @@ void controlsMax()
   }
 
 
-  
+
   //
   // When A2 potentiometer becomes less than fully Clockwise, write the startup mode to the Flash/ EEPROM Memory
   // then set the pixel color to the right color depending on the Mode
@@ -231,26 +225,26 @@ void controlsMax()
     ValueHighTime = 0;
     ValueHighReached = false;
 
-    // Write the startupMode to EEPROM Flash Memory
+  // Write the startupMode to EEPROM Flash Memory
     writeStartupDataz();
 
     modeFlash();
     pixel.setPixelColor(0, Sketch2Red);
     pixel.show();
-   delay(1000);
+    delay(1000);
     modeFlash();
 
     if (Mode == 1)
     {
-      
+
     }
     if (Mode == 2)
     {
-      pixel.setPixelColor(0, 36, 0, 255); 
+      pixel.setPixelColor(0, 36, 0, 255);
     }
     if (Mode == 3)
     {
-      pixel.setPixelColor(0, 0, 200, 30);    
+      pixel.setPixelColor(0, 0, 200, 30);
     }
     if (Mode == 4)
     {
@@ -270,7 +264,7 @@ void controlsMax()
   if (((ValueHighTime + WaitTime) < millis()) && (ValueHighReached))
   {
 
-    //If all the potentiometer are fully clockwise and a variable duration of time has elapsed, start blinking.
+  //If all the potentiometer are fully clockwise and a variable duration of time has elapsed, start blinking.
     if ((ValueHighlightTime + 300) < millis())
     {
 
@@ -279,13 +273,13 @@ void controlsMax()
         ValueHighlightTime = millis();
         ValueHighlight = 1;
         pixel.setBrightness(155);
-        //pixel.setPixelColor(0, 255,64,98);
+  //pixel.setPixelColor(0, 255,64,98);
         pixel.setPixelColor(0, Sketch2Yellow);
         pixel.show();
-       delay(100);
-        pixel.setPixelColor(0, 0x000000); // Blank
+        delay(100);
+        pixel.setPixelColor(0, 0x000000);   // Blank
         pixel.show();
-       delay(300);
+        delay(300);
         Serial.println("Blinking and getting ready to Save Startup Mode");
       }
       else

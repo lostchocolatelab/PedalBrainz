@@ -109,7 +109,7 @@ void mountainSnack() {
   
   speedControl = float(valueA0) / 256; // speed control bit shifted and then goes from 0-1
   randomAmount = float(valueA1) / 2048; // random depth from 0-0.5
-  if (Bank == 2 && Mode == 6){
+  if (Bank == 2 && Mode == 4){
     
   }
   else{
@@ -213,7 +213,7 @@ void mountainSnack() {
 
               //Serial.println(scaledVal);
 
-       if (Bank == 2 && Mode == 6){
+       if (Bank == 2 && Mode == 4){
     
           }
        else if ((scaledVal >= 0) && (scaledVal <= 10)) {
@@ -246,7 +246,7 @@ void mountainSnack() {
 void snackDecision(){
     // if you've decided to have your snack
 
-  if (Bank == 2 && Mode == 6){
+  if (Bank == 2 && Mode == 4){
 
 
     if ((scaledVal >= 0) && (scaledVal <= .1)) {
@@ -369,6 +369,22 @@ else  if (Bank == 3)
       if (Mode == 5){
         
           color = 4;
+      }
+  }
+else  if (Bank == 4)
+  {
+    
+      if (Mode == 2){
+        
+          color = 6;
+      }
+      if (Mode == 3){
+        
+          color = 5;
+      }
+      if (Mode == 4){
+        
+          color = 5;
       }
   }
 else;

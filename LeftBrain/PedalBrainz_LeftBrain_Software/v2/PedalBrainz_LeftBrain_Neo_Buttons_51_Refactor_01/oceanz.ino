@@ -5,9 +5,9 @@
 //  For Dan.
 //
 
-#define FASTLED_ALLOW_INTERRUPTS 0
+//#define FASTLED_ALLOW_INTERRUPTS 0
 //#include <FastLED.h>
-FASTLED_USING_NAMESPACE
+//FASTLED_USING_NAMESPACE
 
 uint8_t hue1 = map(analogRead(A2), 0, 1024, 0, 190);
 uint8_t hue2 = map(analogRead(A2), 0, 1024, 0, 30);  
@@ -15,18 +15,18 @@ uint8_t hue2 = map(analogRead(A2), 0, 1024, 0, 30);
 
 void testFast() {
    // Move a single white led 
-   for(int whiteLed = 0; whiteLed < NUM_LEDS_STRIP; whiteLed = whiteLed + 1) {
-      // Turn our current led on to white, then show the ledsStrip
-      ledsStrip[whiteLed] = CRGB::White;
+   for(int whiteLed = 0; whiteLed < NUM_LEDS; whiteLed = whiteLed + 1) {
+      // Turn our current led on to white, then show the leds
+      leds[whiteLed] = CRGB::White;
 
-      // Show the ledsStrip (only one of which is set to white, from above)
+      // Show the leds (only one of which is set to white, from above)
       FastLED.show();
 
       // Wait a little bit
      delay(100);
 
       // Turn our current led back to black for the next loop around
-      ledsStrip[whiteLed] = CRGB::Black;
+      leds[whiteLed] = CRGB::Black;
    }
 }
 
@@ -36,12 +36,12 @@ void oceanz()
   EVERY_N_MILLISECONDS( 20) {
     pacifica_loop();
     FastLED.show();
-            pixel.show();
-            inner.show();
+    pixel.show();
+    inner.show();
 
-      checkSpeed();
-      plotCycle();
-      checkButtons();
+    checkSpeed();
+    plotCycle();
+    checkButtons();
   }
 }
 
@@ -113,16 +113,10 @@ CRGBPalette16 pacifica_palette_3 =
 void checkSpeed(){
 
   controlAmount  = map(analogRead(A0), 0, 1024, 90, 0);
-  uint8_t avgLight = ledsStrip[1].getAverageLight();
-  //Serial.println("Average : " + String(avgLight*3));
-
-           pixel.setPixelColor(0, 0,avgLight*3,avgLight); 
-           inner.setPixelColor(0, 0,avgLight*3,avgLight);  
-
+  averageLEDS();
+  
            hue1 = map(analogRead(A2), 0, 1024, 0, 150);
            hue2 = map(analogRead(A2), 0, 1024, 0, 20);  
-
-           //fill_gradient_RGB( ledsStrip, 0, CRGB(gsRGB.r+hue1, gsRGB.g+hue3, hue1), NUM_LEDS-1, CRGB(hue1, geRGB.g+hue3, hue3) );
 }
 
 void setOtherLEDs(){
@@ -173,8 +167,8 @@ void pacifica_loop()
   Serial.println("Control Amount : " + String(controlAmount));
 
   // Clear out the LED array to a dim background blue-green
-  //fill_solid( ledsStrip, NUM_LEDS, CRGB( 2, 6, 10));
-  fill_solid( ledsStrip, NUM_LEDS_STRIP, CRGB( 2+hue2, 6, 10));  //Pinkaliscous
+  //fill_solid( leds, NUM_LEDS, CRGB( 2, 6, 10));
+  fill_solid( leds, NUM_LEDS, CRGB( 2+hue2, 6, 10));  //Pinkaliscous
   //Serial.println("Oceanz | Fill Solid");
   
 
@@ -198,7 +192,7 @@ void pacifica_one_layer( CRGBPalette16& p, uint16_t cistart, uint16_t wavescale,
       uint16_t ci = cistart;
   uint16_t waveangle = ioff;
   uint16_t wavescale_half = (wavescale / 2) + 20;
-  for( uint16_t i = 0; i < NUM_LEDS_STRIP; i++) {
+  for( uint16_t i = 0; i < NUM_LEDS; i++) {
     waveangle += 250;
     uint16_t s16 = sin16( waveangle ) + 32768;
     uint16_t cs = scale16( s16 , wavescale_half ) + wavescale_half;
@@ -206,7 +200,7 @@ void pacifica_one_layer( CRGBPalette16& p, uint16_t cistart, uint16_t wavescale,
     uint16_t sindex16 = sin16( ci) + 32768;
     uint8_t sindex8 = scale16( sindex16, 240);
     CRGB c = ColorFromPalette( p, sindex8, bri, LINEARBLEND);
-    ledsStrip[i] += c;
+    leds[i] += c;
     
     //A1 potentiometer controls for maximum brightness
     maxBrightness = map(analogRead(A1), 0, 1024, 0, maxBrightnessTemp);
@@ -234,14 +228,14 @@ void pacifica_add_whitecaps()
 
   //Serial.println("Oceanz | basethreshold " + String(basethreshold));
   
-  for( uint16_t i = 0; i < NUM_LEDS_STRIP; i++) {
+  for( uint16_t i = 0; i < NUM_LEDS; i++) {
     uint8_t threshold = scale8( sin8( wave), 20) + basethreshold;
     wave += 7;
-    uint8_t l = ledsStrip[i].getAverageLight();
+    uint8_t l = leds[i].getAverageLight();
     if( l > threshold) {
       uint8_t overage = l - threshold;
       uint8_t overage2 = qadd8( overage, overage);
-      ledsStrip[i] += CRGB( overage, overage2, qadd8( overage2, overage2));
+      leds[i] += CRGB( overage, overage2, qadd8( overage2, overage2));
       //Serial.println("Oceanz | ColorFromPalette " + String(overage));
       
     //A1 potentiometer controls for maximum brightness
@@ -266,15 +260,15 @@ void pacifica_deepen_colors()
 {
                  
   //Serial.println("Oceanz | Deepen");
-  for( uint16_t i = 0; i < NUM_LEDS_STRIP; i++) {
+  for( uint16_t i = 0; i < NUM_LEDS; i++) {
 
     hue1 = map(analogRead(A2), 0, 1024, 0, 190);
     
-    //leds[i].blue = scale8( ledsStrip[i].blue,  145); 
-    //leds[i].green= scale8( ledsStrip[i].green, 200); 
-    ledsStrip[i].blue = scale8( ledsStrip[i].blue,  145-hue1); 
-    ledsStrip[i].green= scale8( ledsStrip[i].green, 200-hue1); 
-    ledsStrip[i] |= CRGB( 2, 5, 7);
+    //leds[i].blue = scale8( leds[i].blue,  145); 
+    //leds[i].green= scale8( leds[i].green, 200); 
+    leds[i].blue = scale8( leds[i].blue,  145-hue1); 
+    leds[i].green= scale8( leds[i].green, 200-hue1); 
+    leds[i] |= CRGB( 2, 5, 7);
     
 
     //A1 potentiometer controls for maximum brightness

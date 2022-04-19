@@ -58,12 +58,7 @@ void modeStartupBank4(){
     if (Mode == 1)
       {
 
-      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-         strip.setPixelColor(p, 36, 200, 10);
-      }
-      pixel.setPixelColor(0, 36, 200, 10);
-      inner.setPixelColor(0, 36, 200, 10);
- 
+
       }
     else if (Mode == 2)
       {
@@ -144,7 +139,7 @@ void Bank4()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank4();
       
       //writeStartupDataz();
       
@@ -159,7 +154,7 @@ void Bank4()
       {
 
         //Call the main routine and loop the thing
-        RainbowQuad();
+        fire1();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -175,7 +170,7 @@ void Bank4()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank4();
       
       //writeStartupDataz();
       
@@ -190,7 +185,8 @@ void Bank4()
       {
 
         // Call the main routine and loop the thing
-        RainbowQuad();
+        mountainSnack ();
+        reRandom = false;
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -206,7 +202,7 @@ void Bank4()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank4();
       
       //writeStartupDataz();
       
@@ -221,7 +217,8 @@ void Bank4()
       {
 
         // Call the main routine and loop the thing
-        RainbowQuad();
+        mountainSnack ();
+        reRandom = true;
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -237,7 +234,7 @@ void Bank4()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank4();
       
       //writeStartupDataz();
       
@@ -253,7 +250,7 @@ void Bank4()
 
         //Call the main routine and loop the thing
         mountainSnack ();
-        reRandom = false;
+        reRandom = true;
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -269,7 +266,7 @@ void Bank4()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank4();
       
       //writeStartupDataz();
       
@@ -284,8 +281,7 @@ void Bank4()
       {
 
         //Call the main routine and loop the thing
-        mountainSnack ();
-        reRandom = true;
+        
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -301,7 +297,7 @@ void Bank4()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank4();
       
       //writeStartupDataz();
       
@@ -316,8 +312,7 @@ void Bank4()
       {
 
         //Call the main routine and loop the thing
-        mountainSnack ();
-        reRandom = true;
+        
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -332,7 +327,7 @@ void Bank4()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank4();
       
       //writeStartupDataz();
       
@@ -364,7 +359,7 @@ void Bank4()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank4();
       
       //writeStartupDataz();
       
@@ -396,7 +391,7 @@ void Bank4()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank4();
       
       //writeStartupDataz();
       
@@ -427,7 +422,7 @@ void Bank4()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank4();
       
       //writeStartupDataz();
       
@@ -462,7 +457,7 @@ void Bank4()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank4();
       
       //writeStartupDataz();
       

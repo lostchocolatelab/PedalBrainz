@@ -11,23 +11,18 @@
 
 */
 
-//#include <Adafruit_DotStar.h>
-#include <FlashAsEEPROM_SAMD.h>
-#include "MultiMap.h"
-
-#include <Adafruit_NeoPixel.h>
-#include <FastLED_NeoPixel.h>
-//#include "FastLED.h"
-
-#ifdef __AVR__
- #include <avr/power.h> // Required for 16 MHz Adafruit Trinket
-#endif
-
 #define NUMPIXELS 3 // Number of LEDs in strip
 #define PINSTRIP 4 // Pin used for the strip (knobs)
 #define MAX_POWER 100
 #define VOLTS 5
 
+//#include <Adafruit_DotStar.h>
+#include <FlashAsEEPROM_SAMD.h>
+#include <MultiMap.h>
+
+#include <Adafruit_NeoPixel.h>
+#include <FastLED_NeoPixel.h>
+//#include <FastLED.h>
 // Declare our NeoPixel strip object:
 //Adafruit_NeoPixel strip(NUMPIXELS, 4, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel inner(1, 3, NEO_GRB + NEO_KHZ800);
@@ -43,11 +38,12 @@ Adafruit_NeoPixel pixel(1, PIN_NEOPIXEL);
 //CRGBArray<NUM_LEDS_INNER> ledsInner;
 //FastLED_NeoPixel_Variant inner(ledsInner, NUM_LEDS_INNER);
 
-#define NUM_LEDS_STRIP 3
+#define NUM_LEDS 3
 
-//CRGB ledsStrip[NUM_LEDS];
-CRGBArray<NUM_LEDS_STRIP> ledsStrip;
-FastLED_NeoPixel_Variant strip(ledsStrip, NUM_LEDS_STRIP);
+//CRGB leds[NUM_LEDS];
+CRGBArray <NUM_LEDS> leds;
+//FastLED_NeoPixel_Variant strip(leds, NUM_LEDS);
+FastLED_NeoPixel_Variant strip(leds, NUM_LEDS);
 
 
 
@@ -328,9 +324,14 @@ int randomNumbers[loopLength];
 
 // Rainbowz2
 
+int randomOnce = 0;
 boolean increaseValue = true;
 int modulateSpeed = 0;
 int modulateConstrain;
+
+static uint16_t xx;
+static uint16_t yy;
+static uint16_t zz;
 
 // Game Stuff
 
@@ -361,6 +362,15 @@ bool pressedTapzDown = false;
 boolean empty = false;
 unsigned long startMillis;
 
+// Average LEDS for getting the values of the Knob LEDs and using them
+
+int avgLight;
+int avgLight0;
+int avgLight1;
+int avgLight2;
+int avgLightInner;
+
+
 
 /**
 
@@ -379,8 +389,8 @@ void setup() {
   
   /* Start the DotStar LED */
   pixel.begin();
-  //strip.begin();
-  strip.begin(FastLED.addLeds<WS2812B, PINSTRIP, GRB>(ledsStrip, NUM_LEDS_STRIP).setCorrection(TypicalLEDStrip));
+  //strip.begin(); LEDS.addLeds<LED_TYPE,LED_PIN,COLOR_ORDER>(leds,NUM_LEDS);
+  strip.begin(FastLED.addLeds<WS2812B, PINSTRIP, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip));
   //inner.begin(FastLED.addLeds<WS2812B, 3, GRB>(ledsInner, NUM_LEDS_INNER).setCorrection(TypicalLEDStrip));
   inner.begin();
 
@@ -423,8 +433,6 @@ void setup() {
   //empty=true;
   initial = true;
 
-  
-  
   setRandoms();
   plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
   startMillis = millis();  //initial start time
@@ -480,12 +488,44 @@ void showLEDS(){
 
 void maxBrightnessSet(){
 
-        MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
-        pixel.setBrightness(maxBrightness);
-        strip.setBrightness(MaxBrightReduction);
-        inner.setBrightness(maxBrightness);
-        FastLED.setBrightness(MaxBrightReduction);
+  MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
+  pixel.setBrightness(maxBrightness);
+  strip.setBrightness(MaxBrightReduction);
+  inner.setBrightness(maxBrightness);
+  FastLED.setBrightness(MaxBrightReduction);
         showLEDS();
+}
+
+void maxBrightnessAdjust()
+{
+  //A1 potentiometer controls for maximum brightness
+  maxBrightness = map(analogRead(A1), 0, 1024, 0, maxBrightnessTemp);
+  MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
+  pixel.setBrightness(maxBrightness);
+  strip.setBrightness(MaxBrightReduction);
+  inner.setBrightness(maxBrightness);
+  FastLED.setBrightness(MaxBrightReduction);
+
+  //Serial.println("maxBrightness : " + String(maxBrightness));
+  //Serial.println("MaxBright : " + String(MaxBright));
+  //Serial.println("MaxBrightReduction : " + String(MaxBrightReduction));
+}
+
+void averageLEDS(){
+
+  avgLight0 = leds[0].getAverageLight();
+  avgLight1 = leds[1].getAverageLight();
+  avgLight2 = leds[2].getAverageLight();
+  avgLight = avgLight0+avgLight1+avgLight2;
+  avgLightInner = map(avgLight, 0, 255, 0, 190);
+  //avgLight = avgLight1;
+
+  //Serial.println("Average : " + String(avgLight));
+
+  pixel.setPixelColor(0, avgLightInner,avgLightInner,avgLightInner); 
+  inner.setPixelColor(0, avgLightInner,avgLightInner,avgLightInner);  
+
+    showLEDS();
 }
 
 /**

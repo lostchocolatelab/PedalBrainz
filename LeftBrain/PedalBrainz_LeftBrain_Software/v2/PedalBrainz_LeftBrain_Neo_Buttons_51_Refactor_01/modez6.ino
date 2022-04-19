@@ -1,6 +1,6 @@
 /**
 
-  Bank 6 - Modez
+  Bank 2 - Modez
   
   This is where the Mode switching and waiting happens within the loop.
 
@@ -9,13 +9,108 @@
   -Loop the Mode
   -Wait for the Mode Change
 
-  Mode 1 | 
+  Mode 1 | Quad Rainbowz Fixed - Uses randomBright01-04 Declared in General Declarations
+  A0 = Rainbow Cycle Speed
+  A1 = Maximum Brightness
+  A2 = Duration when LED is fully off (It's Dark)
+
+  Mode 2 | Quad Rainbowz Random Once - Randomize Brightness values for the 4 values once at startup
+  A0 = Rainbow Cycle Speed
+  A1 = Randomized Maximum Brightness
+  A2 = Duration when LED is fully off (It's Dark)
+
+  Modez 3 | Quad Rainbowz Random Random - Randomize Brightness values for the 4 values after each cycle
+  A0 = Duration of 4th brightness after brightness changes for a single color
+  A1 = Delay of each Brightness Value (4) for a Single Color
+  A2 = Duration of Darkness after full Color Cycle (or betwixt each color if darkDelayBetwixtColors is enabled)
+
+  Mode 4 | Mountainz Rainbow Random Repeat
+  A0 = Cycle Speed
+  A1 = Amount of Randomness
+  A2 = Chance of Snack
+
+  Mode 5 | Mountainz Rainbow Random Random
+  A0 = Cycle Speed
+  A1 = Amount of Randomness
+  A2 = Chance of Snack
+
+  Mode 6 | Mountainz Rainbow Random Random Slow
+  A0 = Cycle Speed
+  A1 = Amount of Randomness
+  A2 = Chance of Snack 
+
+  Mode 7 | Rainbow Squarez 
+  A0 = Rainbow Cycle Speed
+  A1 = Maximum Brightness
+  A2 = Duration when LED is fully off (It's Dark)
+
+  Mode 8 | Rainbow Squarez Modulate
+  A0 = Rainbow Cycle Speed
+  A1 = Maximum Brightness
+  A2 = Duration when LED is fully off (It's Dark)  
 
 */
 
+void modeStartupBank6(){
+
+    maxBrightnessSet();
+    
+    if (Mode == 1)
+      {
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+         strip.setPixelColor(p, 36, 200, 10);
+      }
+      pixel.setPixelColor(0, 36, 200, 10);
+      inner.setPixelColor(0, 36, 200, 10);
+ 
+      }
+    else if (Mode == 2)
+      {
+
+
+      }
+    else if (Mode == 3)
+      {
+
+      
+      }
+    else if (Mode == 4)
+      {
+      
+      }
+    else if (Mode == 5)
+      {
+      
+      }
+    else if (Mode == 6)
+      {
+        
+      }
+    else if (Mode == 7)
+      {
+        
+      }
+    else if (Mode == 8)
+      {
+        
+      }
+    else if (Mode == 9)
+      {
+        
+      }
+    else if (Mode == 10)
+      {
+        
+      }  
+      else;
+                              
+  showLEDS();
+}
+
 void Bank6()
 {
- //Serial.println("I am Bank Number : 1");
+  //Serial.println("I am Bank Number : 1");
   //readStartupMode();
   // Pring the Mode value currently initialized
   //Serial.println("Mode : "+ String(Mode));
@@ -46,28 +141,14 @@ void Bank6()
     if (!waitingFlag)
     {
       // Flash the pixel at the start of a mode chnage
-      modeFlash();
+      //modeFlash();
 
-      //Do the last thing and WaitForModeChange
-
-      pixel.setBrightness(100);
-      pixel.setPixelColor(0, 36, 200, 10);
-      pixel.show();
-
-      inner.setBrightness(100);
-      inner.setPixelColor(0, 36, 200, 10);
-      inner.show();
-
-      strip.setBrightness(MaxBright);
-      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-         strip.setPixelColor(p, 36, 200, 10);
-      }
-      strip.show(); 
-
-      //writeStartupDataz();
-
+      // Do some startup stuff for this Bank/ Mode if anything needs to be done
+      modeStartupBank6();
       
-
+      //writeStartupDataz();
+      
+      //Do the last thing and WaitForModeChange
       waitingFlag = true;
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
@@ -91,29 +172,14 @@ void Bank6()
     if (!waitingFlag)
     {
       // Flash the pixel at the start of a mode chnage
-      modeFlash();
+      //modeFlash();
 
-      //Do the last thing and WaitForModeChange
-
-      pixel.setBrightness(255);
-      pixel.setPixelColor(0, 36, 0, 255);
-      //0,0,255
-      pixel.show();
-
-      inner.setBrightness(255);
-      inner.setPixelColor(0, 36, 0, 255);
-      //0,0,255
-      inner.show();
-
-      strip.setBrightness(MaxBright);
-      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-         strip.setPixelColor(p, 36, 0, 255);
-      }
-      strip.show();
-
+      // Do some startup stuff for this Bank/ Mode if anything needs to be done
+      modeStartupBank6();
+      
       //writeStartupDataz();
-     
-
+      
+      //Do the last thing and WaitForModeChange
       waitingFlag = true;
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
@@ -137,27 +203,14 @@ void Bank6()
     if (!waitingFlag)
     {
       // Flash the pixel at the start of a mode chnage
-      modeFlash();
+      //modeFlash();
 
-      //Do the last thing and WaitForModeChange
-
-      pixel.setBrightness(255);
-      pixel.setPixelColor(0, 0, 255, 60);
-      //31,255,60
-      pixel.show();
-
-      inner.setBrightness(255);
-      inner.setPixelColor(0, 0, 255, 60);
-      //31,255,60
-      inner.show();
-
+      // Do some startup stuff for this Bank/ Mode if anything needs to be done
+      modeStartupBank6();
+      
       //writeStartupDataz();
-      strip.setBrightness(MaxBright);
-      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-         strip.setPixelColor(p, 36, 0, 255);
-      }
-      strip.show();     
-
+      
+      //Do the last thing and WaitForModeChange
       waitingFlag = true;
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
@@ -181,26 +234,14 @@ void Bank6()
     if (!waitingFlag)
     {
       // Flash the pixel at the start of a mode chnage
-      modeFlash();
+      //modeFlash();
 
-      //Do the last thing and WaitForModeChange
-
-      pixel.setBrightness(100);
-      pixel.setPixelColor(0, 36, 200, 10);
-      pixel.show();
-
-      inner.setBrightness(100);
-      inner.setPixelColor(0, 36, 200, 10);
-      inner.show();
-
-      strip.setBrightness(MaxBright);
-      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-         strip.setPixelColor(p, 36, 200, 10);
-      }
-      strip.show();      
-
+      // Do some startup stuff for this Bank/ Mode if anything needs to be done
+      modeStartupBank6();
+      
       //writeStartupDataz();
-
+      
+      //Do the last thing and WaitForModeChange
       waitingFlag = true;
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
@@ -225,26 +266,14 @@ void Bank6()
     if (!waitingFlag)
     {
       // Flash the pixel at the start of a mode chnage
-      modeFlash();
+      //modeFlash();
 
-      //Do the last thing and WaitForModeChange
-
-      pixel.setBrightness(100);
-      pixel.setPixelColor(0, 36, 200, 10);
-      pixel.show();
-
-      inner.setBrightness(100);
-      inner.setPixelColor(0, 36, 200, 10);
-      inner.show();
-
-      strip.setBrightness(MaxBright);
-      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-         strip.setPixelColor(p, 36, 200, 10);
-      }
-      strip.show();      
-
+      // Do some startup stuff for this Bank/ Mode if anything needs to be done
+      modeStartupBank6();
+      
       //writeStartupDataz();
-
+      
+      //Do the last thing and WaitForModeChange
       waitingFlag = true;
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
@@ -269,26 +298,14 @@ void Bank6()
     if (!waitingFlag)
     {
       // Flash the pixel at the start of a mode chnage
-      modeFlash();
+      //modeFlash();
 
-      //Do the last thing and WaitForModeChange
-
-      pixel.setBrightness(100);
-      pixel.setPixelColor(0, 36, 200, 10);
-      pixel.show();
-
-      inner.setBrightness(100);
-      inner.setPixelColor(0, 36, 200, 10);
-      inner.show();
-
-      strip.setBrightness(MaxBright);
-      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-         strip.setPixelColor(p, 36, 200, 10);
-      }
-      strip.show();      
-
+      // Do some startup stuff for this Bank/ Mode if anything needs to be done
+      modeStartupBank6();
+      
       //writeStartupDataz();
-
+      
+      //Do the last thing and WaitForModeChange
       waitingFlag = true;
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
@@ -312,26 +329,14 @@ void Bank6()
     if (!waitingFlag)
     {
       // Flash the pixel at the start of a mode chnage
-      modeFlash();
+      //modeFlash();
 
-      // Do the last thing and WaitForModeChange
-
-      pixel.setBrightness(100);
-      pixel.setPixelColor(0, 36, 200, 10);
-      pixel.show();
-
-      inner.setBrightness(100);
-      inner.setPixelColor(0, 36, 200, 10);
-      inner.show();
-
-      strip.setBrightness(MaxBright);
-      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-         strip.setPixelColor(p, 36, 200, 10);
-      }
-      strip.show(); 
+      // Do some startup stuff for this Bank/ Mode if anything needs to be done
+      modeStartupBank6();
       
       //writeStartupDataz();
-
+      
+      //Do the last thing and WaitForModeChange
       waitingFlag = true;
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
@@ -356,26 +361,14 @@ void Bank6()
     if (!waitingFlag)
     {
       // Flash the pixel at the start of a mode chnage
-      modeFlash();
+      //modeFlash();
 
-      //Do the last thing and WaitForModeChange
-
-      pixel.setBrightness(100);
-      pixel.setPixelColor(0, 36, 200, 10);
-      pixel.show();
-
-      inner.setBrightness(100);
-      inner.setPixelColor(0, 36, 200, 10);
-      inner.show();
-
-      strip.setBrightness(MaxBright);
-      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-         strip.setPixelColor(p, 36, 200, 10);
-      }
-      strip.show(); 
+      // Do some startup stuff for this Bank/ Mode if anything needs to be done
+      modeStartupBank6();
       
-      //writeStartupDataz();  
-
+      //writeStartupDataz();
+      
+      //Do the last thing and WaitForModeChange
       waitingFlag = true;
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
@@ -400,26 +393,14 @@ void Bank6()
     if (!waitingFlag)
     {
       // Flash the pixel at the start of a mode chnage
-      modeFlash();
+      //modeFlash();
 
-      //Do the last thing and WaitForModeChange
-
-      pixel.setBrightness(100);
-      pixel.setPixelColor(0, 36, 200, 10);
-      pixel.show();
-
-      inner.setBrightness(100);
-      inner.setPixelColor(0, 36, 200, 10);
-      inner.show();
-
-      strip.setBrightness(MaxBright);
-      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-         strip.setPixelColor(p, 36, 200, 10);
-      }
-      strip.show(); 
+      // Do some startup stuff for this Bank/ Mode if anything needs to be done
+      modeStartupBank6();
       
       //writeStartupDataz();
-
+      
+      //Do the last thing and WaitForModeChange
       waitingFlag = true;
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
@@ -443,28 +424,15 @@ void Bank6()
     if (!waitingFlag)
     {
       // Flash the pixel at the start of a mode chnage
-      modeFlash();
+      //modeFlash();
 
-      //Do the last thing and WaitForModeChange
-
-      pixel.setBrightness(100);
-      pixel.setPixelColor(0, 36, 200, 10);
-      pixel.show();
-
-      inner.setBrightness(100);
-      inner.setPixelColor(0, 36, 200, 10);
-      inner.show();
-
-      strip.setBrightness(MaxBright);
-      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-         strip.setPixelColor(p, 36, 200, 10);
-      }
-      strip.show(); 
+      // Do some startup stuff for this Bank/ Mode if anything needs to be done
+      modeStartupBank6();
       
       //writeStartupDataz();
-
-      increaseValue = true;
-      //fadeSpeed = 10;
+      
+      //Do the last thing and WaitForModeChange
+      
 
       waitingFlag = true;
       WaitForModeChange = true;
@@ -476,6 +444,8 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
+        increaseValue = true;
+        //fadeSpeed = 10;
         RainbowSquarez();
       }
         // Wait for the Mode Change
@@ -489,26 +459,14 @@ void Bank6()
     if (!waitingFlag)
     {
       // Flash the pixel at the start of a mode chnage
-      modeFlash();
+      //modeFlash();
 
-      //Do the last thing and WaitForModeChange
-
-      pixel.setBrightness(100);
-      pixel.setPixelColor(0, 36, 200, 10);
-      pixel.show();
-
-      inner.setBrightness(100);
-      inner.setPixelColor(0, 36, 200, 10);
-      inner.show();
-
-      strip.setBrightness(MaxBright);
-      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-         strip.setPixelColor(p, 36, 200, 10);
-      }
-      strip.show(); 
+      // Do some startup stuff for this Bank/ Mode if anything needs to be done
+      modeStartupBank6();
       
       //writeStartupDataz();
       
+      //Do the last thing and WaitForModeChange
       waitingFlag = true;
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
@@ -519,6 +477,7 @@ void Bank6()
       {
 
         // Call the main routine and loop the thing
+        valueA0  = 7;
         rainbowNew();
       }
         // Wait for the Mode Change

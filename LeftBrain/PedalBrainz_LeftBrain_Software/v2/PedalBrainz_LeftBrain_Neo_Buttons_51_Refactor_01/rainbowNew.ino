@@ -7,7 +7,7 @@ const int _SBASE_ = __COUNTER__ + 1; // Index of 1st __COUNTER__ ref below
 #define _S1_ (sin((__COUNTER__ - _SBASE_) / 128.0 * M_PI) + 1.0) * 127.5 + 0.5,
 #define _S2_ _S1_ _S1_ _S1_ _S1_ _S1_ _S1_ _S1_ _S1_ // Expands to 8 items
 #define _S3_ _S2_ _S2_ _S2_ _S2_ _S2_ _S2_ _S2_ _S2_ // Expands to 64 items
-const uint8_t PROGMEM sineTable[] = { _S3_ _S3_ _S3_ _S3_ }; // 256 items
+//const uint8_t PROGMEM sineTable[] = { _S3_ _S3_ _S3_ _S3_ }; // 256 items
 
 // Similar to above, but for an 8-bit gamma-correction table.
 #define _GAMMA_ 2.6
@@ -15,7 +15,7 @@ const int _GBASE_ = __COUNTER__ + 1; // Index of 1st __COUNTER__ ref below
 #define _G1_ pow((__COUNTER__ - _GBASE_) / 255.0, _GAMMA_) * 255.0 + 0.5,
 #define _G2_ _G1_ _G1_ _G1_ _G1_ _G1_ _G1_ _G1_ _G1_ // Expands to 8 items
 #define _G3_ _G2_ _G2_ _G2_ _G2_ _G2_ _G2_ _G2_ _G2_ // Expands to 64 items
-const uint8_t PROGMEM gammaTable[] = { _G3_ _G3_ _G3_ _G3_ }; // 256 items
+//const uint8_t PROGMEM gammaTable[] = { _G3_ _G3_ _G3_ _G3_ }; // 256 items
 
 // These are used in estimating (very approximately) the current draw of
 // the board and NeoPixels.  BASECURRENT is the MINIMUM current (in mA)
@@ -53,7 +53,7 @@ uint32_t hsv2rgb(int32_t h, uint8_t s, uint8_t v, boolean gc=false) {
   uint16_t s1 =   1 + s; // 1 to 256; same reason - BRIGHTNESS
   uint8_t  s2 = 255 - s; // 255 to 0 - COLOR SHIFT
 
-     if (Bank == 2){
+     if (Bank == 3){
           if (Mode == 1){
     
                 
@@ -73,9 +73,9 @@ uint32_t hsv2rgb(int32_t h, uint8_t s, uint8_t v, boolean gc=false) {
   g = ((((g * s1) >> 8) + s2) * v1) >> 8;
   b = ((((b * s1) >> 8) + s2) * v1) >> 8;
   if(gc) { // Gamma correct?
-    r = pgm_read_byte(&gammaTable[r]);
-    g = pgm_read_byte(&gammaTable[g]);
-    b = pgm_read_byte(&gammaTable[b]);
+//    r = pgm_read_byte(&gammaTable[r]);
+//    g = pgm_read_byte(&gammaTable[g]);
+//    b = pgm_read_byte(&gammaTable[b]);
   }
   return ((uint32_t)r << 16) | ((uint16_t)g << 8) | b;
   

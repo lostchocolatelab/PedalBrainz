@@ -58,12 +58,7 @@ void modeStartupBank5(){
     if (Mode == 1)
       {
 
-      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-         strip.setPixelColor(p, 36, 200, 10);
-      }
-      pixel.setPixelColor(0, 36, 200, 10);
-      inner.setPixelColor(0, 36, 200, 10);
- 
+
       }
     else if (Mode == 2)
       {
@@ -144,7 +139,7 @@ void Bank5()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank5();
       
       //writeStartupDataz();
       
@@ -159,7 +154,10 @@ void Bank5()
       {
 
         //Call the main routine and loop the thing
-        RainbowQuad();
+        popFade();
+        //breather1();
+        //dripz();
+        //meteorz();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -175,7 +173,7 @@ void Bank5()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank5();
       
       //writeStartupDataz();
       
@@ -190,7 +188,10 @@ void Bank5()
       {
 
         // Call the main routine and loop the thing
-        RainbowQuad();
+        //popFade();
+        breather1();
+        //dripz();
+        //meteorz();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -206,7 +207,7 @@ void Bank5()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank5();
       
       //writeStartupDataz();
       
@@ -221,7 +222,10 @@ void Bank5()
       {
 
         // Call the main routine and loop the thing
-        RainbowQuad();
+        //popFade();
+        //breather1();
+        dripz();
+        //meteorz();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -237,7 +241,7 @@ void Bank5()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank5();
       
       //writeStartupDataz();
       
@@ -252,8 +256,10 @@ void Bank5()
       {
 
         //Call the main routine and loop the thing
-        mountainSnack ();
-        reRandom = false;
+        //popFade();
+        //breather1();
+        //dripz();
+        meteorz();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -269,7 +275,7 @@ void Bank5()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank5();
       
       //writeStartupDataz();
       
@@ -301,7 +307,7 @@ void Bank5()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank5();
       
       //writeStartupDataz();
       
@@ -332,7 +338,7 @@ void Bank5()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank5();
       
       //writeStartupDataz();
       
@@ -364,7 +370,7 @@ void Bank5()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank5();
       
       //writeStartupDataz();
       
@@ -396,7 +402,7 @@ void Bank5()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank5();
       
       //writeStartupDataz();
       
@@ -427,7 +433,7 @@ void Bank5()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank5();
       
       //writeStartupDataz();
       
@@ -462,7 +468,7 @@ void Bank5()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank3();
+      modeStartupBank5();
       
       //writeStartupDataz();
       

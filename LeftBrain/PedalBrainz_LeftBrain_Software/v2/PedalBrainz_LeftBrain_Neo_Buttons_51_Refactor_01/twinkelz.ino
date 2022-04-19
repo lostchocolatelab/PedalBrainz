@@ -62,15 +62,22 @@
 // Overall twinkle speed.
 // 0 (VERY slow) to 8 (VERY fast).  
 // 4, 5, and 6 are recommended, default is 4.
-#define TWINKLE_SPEED 8
+//#define TWINKLE_SPEED 8
+
+int TWINKLE_SPEED = 8;
 
 // Overall twinkle density.
 // 0 (NONE lit) to 8 (ALL lit at once).  
 // Default is 5.
-#define TWINKLE_DENSITY 5
+//#define TWINKLE_DENSITY 5
+
+int TWINKLE_DENSITY = 5;
 
 // How often to change color palettes.
-#define SECONDS_PER_PALETTE  10
+//#define SECONDS_PER_PALETTE  10
+
+int SECONDS_PER_PALETTE = 10;
+
 // Also: toward the bottom of the file is an array 
 // called "ActivePaletteList" which controls which color
 // palettes are used; you can add or remove color palettes
@@ -110,7 +117,8 @@ void twinkelz()
     setupTwinkelz();
     }
     else;
-    
+  
+  SECONDS_PER_PALETTE = map(analogRead(A1), 0, 1024, 20, 0);
   EVERY_N_SECONDS( SECONDS_PER_PALETTE ) { 
     chooseNextColorPalette( gTargetPalette ); 
   }
@@ -119,8 +127,17 @@ void twinkelz()
     nblendPaletteTowardPalette( gCurrentPalette, gTargetPalette, 12);
   }
 
-  drawTwinkles( ledsStrip);
+  drawTwinkles( leds);
+
+  uint8_t avgLight0 = leds[0].getAverageLight();
+  uint8_t avgLight1 = leds[1].getAverageLight();
+  uint8_t avgLight2 = leds[2].getAverageLight();
+  //Serial.println("Average : " + String(avgLight*3));
+
+  pixel.setPixelColor(0, avgLight0,avgLight1,avgLight2); 
+  inner.setPixelColor(0, avgLight0,avgLight1,avgLight2); 
   
+  showLEDS();
   FastLED.show();
 }
 
@@ -205,8 +222,12 @@ void drawTwinkles( CRGBSet& L)
 //  of one cycle of the brightness wave function.
 //  The 'high digits' are also used to determine whether this pixelTwink
 //  should light at all during this cycle, based on the TWINKLE_DENSITY.
+
 CRGB computeOneTwinkle( uint32_t ms, uint8_t salt)
 {
+  TWINKLE_SPEED = map(analogRead(A0), 0, 1024, 0, 9);
+  TWINKLE_DENSITY = map(analogRead(A2), 0, 1024, 1, 10);
+
   uint16_t ticks = ms >> (8-TWINKLE_SPEED);
   uint8_t fastcycle8 = ticks;
   uint16_t slowcycle16 = (ticks >> 8) + salt;
