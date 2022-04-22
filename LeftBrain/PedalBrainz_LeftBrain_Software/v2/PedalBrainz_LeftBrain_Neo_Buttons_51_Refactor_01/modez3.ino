@@ -132,6 +132,8 @@ void Bank3()
   {
     //Serial.println("Mode 1 Started fadespeed " + String(fadeSpeed));
     
+    bankFlash();
+    initialBank = false;
    
     if (!waitingFlag)
     {

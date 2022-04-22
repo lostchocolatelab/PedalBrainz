@@ -157,6 +157,9 @@ void Bank1()
   {
       //Serial.println("Mode 1 Started fadespeed " + String(fadeSpeed));
 
+    bankFlash();
+    initialBank = false;
+    
     Blink1 = true;
 
     if (!waitingFlag)

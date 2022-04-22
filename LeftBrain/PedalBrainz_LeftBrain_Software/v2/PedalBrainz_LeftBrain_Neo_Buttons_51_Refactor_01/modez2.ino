@@ -121,6 +121,7 @@ void Bank2()
 
   plotCycle();
 
+
   /**
 
   Fadez
@@ -132,6 +133,8 @@ void Bank2()
   {
       //Serial.println("Mode 1 Started fadespeed " + String(fadeSpeed));
 
+    bankFlash();
+    initialBank = false;
 
     if (!waitingFlag)
     {
@@ -160,10 +163,10 @@ void Bank2()
         //breather1();
         //dripz();
         //meteorz();
-        //meteorz2();
+        meteorz2();
         //alienGardenz();
         //palette1();
-        bankFlash();
+        //bankFlash();
       }
       // Wait for the Mode Change
       modeChangeWait();

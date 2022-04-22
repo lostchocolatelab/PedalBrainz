@@ -153,7 +153,175 @@ DEFINE_GRADIENT_PALETTE( Ocean_Bottom_gp ) {
   204,  15,118,132,
   255,  15,118,132};
 
+// Gradient palette "Never_Give_up_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/colo/katiekat013/tn/Never_Give_up.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 40 bytes of program space. NOPE
 
+DEFINE_GRADIENT_PALETTE( Never_Give_up_gp ) {
+    0, 112, 91, 51,
+   51, 112, 91, 51,
+   51,  73, 84, 38,
+  102,  73, 84, 38,
+  102,  39, 68, 31,
+  153,  39, 68, 31,
+  153,  21, 48, 24,
+  204,  21, 48, 24,
+  204,  17, 36, 25,
+  255,  17, 36, 25};
+
+// Gradient palette "iCreate_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/colo/electroluv/tn/iCreate.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 40 bytes of program space. YIP
+
+DEFINE_GRADIENT_PALETTE( iCreate_gp ) {
+    0, 210, 80, 22,
+   20, 210, 80, 22,
+   20, 255, 23, 17,
+   58, 255, 23, 17,
+   58, 167,  1, 21,
+  107, 167,  1, 21,
+  107,  46,  1,  8,
+  163,  46,  1,  8,
+  163,  12,  1,  4,
+  255,  12,  1,  4};
+
+// Gradient palette "63undercom_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/colo/evad/tn/63undercom.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 40 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( undercom_gp ) {
+    0, 197, 69,  0,
+   51, 197, 69,  0,
+   51, 255, 86,  1,
+  102, 255, 86,  1,
+  102, 255,117,  1,
+  153, 255,117,  1,
+  153, 252,193,  1,
+  204, 252,193,  1,
+  204, 255,233, 64,
+  255, 255,233, 64};
+
+// Gradient palette "fava_bean_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/colo/evad/tn/fava_bean.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 40 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( fava_bean_gp ) {
+    0,  11, 39,  1,
+   51,  11, 39,  1,
+   51,  18, 47,  3,
+  102,  18, 47,  3,
+  102,  37, 80,  6,
+  153,  37, 80,  6,
+  153,  59,111, 14,
+  204,  59,111, 14,
+  204, 103,146,109,
+  255, 103,146,109};
+
+// Gradient palette "just_a_tad_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/colo/evad/tn/just_a_tad.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 40 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( just_a_tad_gp ) {
+    0,  63,133,132,
+   51,  63,133,132,
+   51,  46, 95, 80,
+  102,  46, 95, 80,
+  102,  27, 70, 57,
+  153,  27, 70, 57,
+  153,  19, 50, 57,
+  204,  19, 50, 57,
+  204,  10, 19, 36,
+  255,  10, 19, 36};
+
+// Gradient palette "M_a_i_k_o_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/colo/hana/tn/M_a_i_k_o.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 40 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( M_a_i_k_o_gp ) {
+    0, 182, 31, 37,
+   51, 182, 31, 37,
+   51, 128, 12, 36,
+  102, 128, 12, 36,
+  102,  73,  9, 22,
+  153,  73,  9, 22,
+  153,  25,  3,  7,
+  204,  25,  3,  7,
+  204,   1,  1,  1,
+  255,   1,  1,  1};
+
+// Gradient palette "Doggy_in_the_window_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/colo/katiekat013/tn/Doggy_in_the_window.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 40 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( Doggy_in_the_window_gp ) {
+    0, 171, 17, 29,
+   51, 171, 17, 29,
+   51, 125, 25, 34,
+  102, 125, 25, 34,
+  102,  42, 38, 33,
+  153,  42, 38, 33,
+  153,  18, 39, 32,
+  204,  18, 39, 32,
+  204,  15, 44, 38,
+  255,  15, 44, 38};
+
+// Gradient palette "Copycat_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/colo/katiekat013/tn/Copycat.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 40 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( Copycat_gp ) {
+    0,  22, 15, 29,
+   51,  22, 15, 29,
+   51,  37, 39, 89,
+  102,  37, 39, 89,
+  102,  43,101,145,
+  153,  43,101,145,
+  153,  79,178,158,
+  204,  79,178,158,
+  204, 128,255,188,
+  255, 128,255,188};
+
+// Gradient palette "Life_is_beautiful_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/colo/katiekat013/tn/Life_is_beautiful.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 40 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( Life_is_beautiful_gp ) {
+    0,   2, 37, 16,
+   51,   2, 37, 16,
+   51,   3, 62, 11,
+  102,   3, 62, 11,
+  102,  42, 68,  6,
+  153,  42, 68,  6,
+  153, 109,112,  2,
+  204, 109,112,  2,
+  204, 242,100,  0,
+  255, 242,100,  0};
+
+  // Gradient palette "Raspberries_Creme_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/colo/katiekat013/tn/Raspberries_Creme.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 40 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( Raspberries_Creme_gp ) {
+    0,  86,  1,  3,
+   51,  86,  1,  3,
+   51, 109, 25, 30,
+  102, 109, 25, 30,
+  102, 161,135,130,
+  153, 161,135,130,
+  153, 206,201,149,
+  204, 206,201,149,
+  204, 255,235,160,
+  255, 255,235,160};
 
 
 void palette1()
@@ -172,6 +340,73 @@ void palette1()
     fadeSpeed = 300;
     delayA0(fadeSpeed);
     Serial.println("palette : ");
+}
+
+void paletteStart()
+{
+
+    
+    for( int i = 0; i < 255; ++i) 
+    {
+
+    paletteBanks();
+    currentBlending = LINEARBLEND;
+    
+    static uint8_t startIndex = 0;
+    startIndex = startIndex + 1; /* motion speed */
+
+    FillLEDsFromPaletteColors( startIndex);
+    //FastLED.show();
+    //FastLED.delay(1);
+    //fadeSpeed = 300;
+    //delayA0(300);
+    //Serial.println("paletteStart : ");
+
+    }
+    
+}
+
+void paletteBanks()
+{
+    if (Bank == 1) {
+    
+    currentPalette = Copycat_gp;
+    Serial.println("Bank 1 Start Palette: ");
+
+    }
+    if (Bank == 2) {
+
+    currentPalette = Raspberries_Creme_gp;
+    Serial.println("Bank 2 Start Palette: ");
+
+    }
+    if (Bank == 3) {
+
+    currentPalette = iCreate_gp;
+    Serial.println("Bank 3 Start Palette: ");
+
+    }
+    if (Bank == 4) {
+
+    currentPalette = fava_bean_gp;
+    Serial.println("Bank 4 Start Palette: ");
+
+    }
+    if (Bank == 5) {
+
+    currentPalette = undercom_gp;
+    Serial.println("Bank 5 Start Palette: ");
+
+    }
+    if (Bank == 6) {
+
+    currentPalette = cyan_to_dark_gp;
+    Serial.println("Bank 6 Start Palette: ");
+
+    }
+    else {
+      //Bank1();
+    }
 }
 
 void FillLEDsFromPaletteColors( uint8_t colorIndex)
