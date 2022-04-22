@@ -27,11 +27,11 @@ void breather1() {
 
     maxBrightnessAdjust();
 
-    //thisdelay = map(analogRead(A0), 0, 1024, 0, 200);
-    //ranamount = map(analogRead(A2), 0, 1024, 0, 1000); 
+    fadeSpeed = map(analogRead(A0), 0, 1024, 0, 5000);
+    darkDelay = map(analogRead(A2), 0, 1024, 0, 100); 
   
  //float breath = (exp(sin(millis()/2000.0*PI)) - 0.36787944)*108.0;
-  float breath = (exp(sin(millis()/5000.0*PI)) - 0.36787944)*108.0;
+ float breath = (exp(sin(millis()/fadeSpeed*PI)) - 0.36787944)*darkDelay;
  breath = map(breath, 0, 255, 0, maxBrightness);
  FastLED.setBrightness(breath);
 

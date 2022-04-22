@@ -45,6 +45,13 @@ void modeFlash() {
       
  }
 
+ void bankFlash()
+ {
+
+  palette1();
+  
+ }
+
 
 void modeButtons (){
   

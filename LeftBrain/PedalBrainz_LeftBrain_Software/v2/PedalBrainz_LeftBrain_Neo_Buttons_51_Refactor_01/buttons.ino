@@ -305,6 +305,7 @@ void doubleClickEventUp()
       Mode = 1;
       Serial.println("Bank Change = " + String(Bank));
       writeStartupDataz();
+      bankFlash();
     }
 
 

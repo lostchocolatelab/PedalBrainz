@@ -55,8 +55,8 @@ void Fire2012()
 
     maxBrightnessAdjust();
 
-    SPARKING = map(analogRead(A0), 0, 1024, 50, 200);
-    COOLING = map(analogRead(A2), 0, 1024, 20, 100);    
+    SPARKING = map(analogRead(A0), 0, 1024, 10, 200);
+    COOLING = map(analogRead(A2), 0, 1024, 10, 100);    
 
     // Step 1.  Cool down every cell a little
     for( int i = 0; i < NUM_LEDS; i++) {

@@ -160,8 +160,10 @@ void Bank2()
         //breather1();
         //dripz();
         //meteorz();
-        meteorz2();
+        //meteorz2();
         //alienGardenz();
+        //palette1();
+        bankFlash();
       }
       // Wait for the Mode Change
       modeChangeWait();

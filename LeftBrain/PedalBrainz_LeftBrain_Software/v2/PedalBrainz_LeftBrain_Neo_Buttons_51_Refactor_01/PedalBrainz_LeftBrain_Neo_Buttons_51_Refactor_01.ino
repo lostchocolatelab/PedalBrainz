@@ -370,6 +370,8 @@ int avgLight1;
 int avgLight2;
 int avgLightInner;
 
+bool initialBank;
+
 
 
 /**
@@ -394,9 +396,9 @@ void setup() {
   //inner.begin(FastLED.addLeds<WS2812B, 3, GRB>(ledsInner, NUM_LEDS_INNER).setCorrection(TypicalLEDStrip));
   inner.begin();
 
-  FastLED.setMaxPowerInVoltsAndMilliamps( VOLTS, MAX_POWER);
-  FastLED.setMaxRefreshRate(10000);
-  FastLED.setDither(BINARY_DITHER);
+  //FastLED.setMaxPowerInVoltsAndMilliamps( VOLTS, MAX_POWER);
+  //FastLED.setMaxRefreshRate(10000);
+  //FastLED.setDither(BINARY_DITHER);
   
   pixel.setBrightness(maxBrightness);
   strip.setBrightness(maxBrightness);
@@ -414,7 +416,7 @@ void setup() {
   inner.show();
 
   clicked = false;
-
+  initialBank = false;
   
   // Set a Startup Mode
   Bank = 1;
@@ -493,7 +495,7 @@ void maxBrightnessSet(){
   strip.setBrightness(MaxBrightReduction);
   inner.setBrightness(maxBrightness);
   FastLED.setBrightness(MaxBrightReduction);
-        showLEDS();
+  showLEDS();
 }
 
 void maxBrightnessAdjust()

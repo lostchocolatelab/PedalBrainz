@@ -189,8 +189,8 @@ void Bank5()
 
         // Call the main routine and loop the thing
         //popFade();
-        breather1();
-        //dripz();
+        //breather1();
+        dripz();
         //meteorz();
       }
         // Wait for the Mode Change
@@ -224,8 +224,8 @@ void Bank5()
         // Call the main routine and loop the thing
         //popFade();
         //breather1();
-        dripz();
-        //meteorz();
+        //dripz();
+        meteorz();
       }
         // Wait for the Mode Change
         modeChangeWait();

@@ -33,16 +33,21 @@ void testFast() {
 
 void oceanz()
 {
-  EVERY_N_MILLISECONDS( 20) {
-    pacifica_loop();
-    FastLED.show();
-    pixel.show();
-    inner.show();
+    EVERY_N_MILLISECONDS( 5) 
+    {
+        pacifica_loop();
+        //FastLED.show();
+        //pixel.show();
+        //inner.show();
+        showLEDS();
 
+
+    }
+
+    
     checkSpeed();
     plotCycle();
     checkButtons();
-  }
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -112,31 +117,18 @@ CRGBPalette16 pacifica_palette_3 =
 */
 void checkSpeed(){
 
-  controlAmount  = map(analogRead(A0), 0, 1024, 90, 0);
-  averageLEDS();
-  
-           hue1 = map(analogRead(A2), 0, 1024, 0, 150);
-           hue2 = map(analogRead(A2), 0, 1024, 0, 20);  
+    controlAmount  = map(analogRead(A0), 0, 1024, 90, 0);
+    averageLEDS();
+      
+    hue1 = map(analogRead(A2), 0, 1024, 0, 150);
+    hue2 = map(analogRead(A2), 0, 1024, 0, 20); 
+
+    //showLEDS(); 
 }
 
-void setOtherLEDs(){
-  
-
-            pixel.show();
-            inner.show();
-}
 void pacifica_loop()
 {
-    //A1 potentiometer controls for maximum brightness
-    maxBrightness = map(analogRead(A1), 0, 1024, 0, maxBrightnessTemp);
-    MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
-    pixel.setBrightness(maxBrightness);
-    FastLED.setBrightness(MaxBrightReduction);
-    inner.setBrightness(maxBrightness);
-    //Serial.println("maxBrightness : " + String(maxBrightness));
-    //Serial.println("MaxBright : " + String(MaxBright));
-    //Serial.println("MaxBrightReduction : " + String(MaxBrightReduction));
-      
+    maxBrightnessAdjust();      
       
   // Increment the four "color index start" counters, one for each wave layer.
   // Each is incremented at a different speed, and the speeds vary over time.
@@ -189,33 +181,28 @@ void pacifica_loop()
 void pacifica_one_layer( CRGBPalette16& p, uint16_t cistart, uint16_t wavescale, uint8_t bri, uint16_t ioff)
 {
             
-      uint16_t ci = cistart;
-  uint16_t waveangle = ioff;
-  uint16_t wavescale_half = (wavescale / 2) + 20;
-  for( uint16_t i = 0; i < NUM_LEDS; i++) {
-    waveangle += 250;
-    uint16_t s16 = sin16( waveangle ) + 32768;
-    uint16_t cs = scale16( s16 , wavescale_half ) + wavescale_half;
-    ci += cs;
-    uint16_t sindex16 = sin16( ci) + 32768;
-    uint8_t sindex8 = scale16( sindex16, 240);
-    CRGB c = ColorFromPalette( p, sindex8, bri, LINEARBLEND);
-    leds[i] += c;
+    uint16_t ci = cistart;
+    uint16_t waveangle = ioff;
+    uint16_t wavescale_half = (wavescale / 2) + 20;
     
-    //A1 potentiometer controls for maximum brightness
-    maxBrightness = map(analogRead(A1), 0, 1024, 0, maxBrightnessTemp);
-    MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
-    pixel.setBrightness(maxBrightness);
-    FastLED.setBrightness(MaxBrightReduction);
-    inner.setBrightness(maxBrightness);
-    //Serial.println("maxBrightness : " + String(maxBrightness));
-    //Serial.println("MaxBright : " + String(MaxBright));
-    //Serial.println("MaxBrightReduction : " + String(MaxBrightReduction));
-    
+    for( uint16_t i = 0; i < NUM_LEDS; i++) {
+        waveangle += 250;
+        uint16_t s16 = sin16( waveangle ) + 32768;
+        uint16_t cs = scale16( s16 , wavescale_half ) + wavescale_half;
+        ci += cs;
+        uint16_t sindex16 = sin16( ci) + 32768;
+        uint8_t sindex8 = scale16( sindex16, 240);
+        CRGB c = ColorFromPalette( p, sindex8, bri, LINEARBLEND);
+        leds[i] += c;
+
+        maxBrightnessAdjust(); 
+
         checkSpeed();
         plotCycle();
         checkButtons();
-  }
+
+    }
+    //showLEDS();
 }
 
 // Add extra 'white' to areas where the four layers of light have lined up brightly
