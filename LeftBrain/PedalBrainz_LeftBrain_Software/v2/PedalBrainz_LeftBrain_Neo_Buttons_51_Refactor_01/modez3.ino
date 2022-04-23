@@ -408,6 +408,8 @@ void Bank3()
       {
 
         //Call the main routine and loop the thing
+        increaseValue = true;
+        //fadeSpeed = 10;
         RainbowSquarez();
         
       }

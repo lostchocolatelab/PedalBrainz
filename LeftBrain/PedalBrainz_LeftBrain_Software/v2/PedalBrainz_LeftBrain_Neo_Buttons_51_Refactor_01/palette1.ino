@@ -17,7 +17,7 @@
 // Some notes on the more abstract 'theory and practice' of
 // FastLED compact palettes are at the bottom of this file.
 
-
+uint16_t STEPS = 30;// STEPS set dynamically once we've started up
 
 CRGBPalette16 currentPalette;
 TBlendType    currentBlending;
@@ -326,20 +326,31 @@ DEFINE_GRADIENT_PALETTE( Raspberries_Creme_gp ) {
 
 void palette1()
 {
-    //ChangePalettePeriodically();
-    currentPalette = cyan_to_dark_gp;
+
+    for( int i = 0; i < 255; ++i) 
+    {
+
+    paletteBanks();
+    //currentPalette = PartyColors_p;  
     currentBlending = LINEARBLEND;
     
     static uint8_t startIndex = 0;
     startIndex = startIndex + 1; /* motion speed */
-    
+
     FillLEDsFromPaletteColors( startIndex);
-    
+
     //FastLED.show();
-    //FastLED.delay(300 / UPDATES_PER_SECOND);
-    fadeSpeed = 300;
-    delayA0(fadeSpeed);
-    Serial.println("palette : ");
+    //FastLED.delay(1);
+    //fadeSpeed = 300;
+    //delayA0(300);
+    //Serial.println("paletteStart : ");
+
+    plotCycle();
+    checkButtons();
+
+    }
+
+    //Serial.println("palette1 : ");
 }
 
 void paletteStart()
@@ -356,6 +367,7 @@ void paletteStart()
     startIndex = startIndex + 1; /* motion speed */
 
     FillLEDsFromPaletteColors( startIndex);
+
     //FastLED.show();
     //FastLED.delay(1);
     //fadeSpeed = 300;
@@ -364,49 +376,6 @@ void paletteStart()
 
     }
     
-}
-
-void paletteBanks()
-{
-    if (Bank == 1) {
-    
-    currentPalette = Copycat_gp;
-    Serial.println("Bank 1 Start Palette: ");
-
-    }
-    if (Bank == 2) {
-
-    currentPalette = Raspberries_Creme_gp;
-    Serial.println("Bank 2 Start Palette: ");
-
-    }
-    if (Bank == 3) {
-
-    currentPalette = iCreate_gp;
-    Serial.println("Bank 3 Start Palette: ");
-
-    }
-    if (Bank == 4) {
-
-    currentPalette = fava_bean_gp;
-    Serial.println("Bank 4 Start Palette: ");
-
-    }
-    if (Bank == 5) {
-
-    currentPalette = undercom_gp;
-    Serial.println("Bank 5 Start Palette: ");
-
-    }
-    if (Bank == 6) {
-
-    currentPalette = cyan_to_dark_gp;
-    Serial.println("Bank 6 Start Palette: ");
-
-    }
-    else {
-      //Bank1();
-    }
 }
 
 void FillLEDsFromPaletteColors( uint8_t colorIndex)
@@ -418,7 +387,7 @@ void FillLEDsFromPaletteColors( uint8_t colorIndex)
         leds[0] = ColorFromPalette( currentPalette, colorIndex, brightness, currentBlending);
         leds[1] = ColorFromPalette( currentPalette, colorIndex+10, brightness, currentBlending);
         leds[2] = ColorFromPalette( currentPalette, colorIndex+20, brightness, currentBlending);
-        //colorIndex = colorIndex + 3;
+        colorIndex = STEPS;
     	//FastLED.delay(100 / UPDATES_PER_SECOND);
     	FastLED.show();
     	//showLEDS();
@@ -458,7 +427,130 @@ void ChangePalettePeriodically()
     }
 }
 
+void paletteBanks()
+{
+    plotCycle();
+    checkButtons();
 
+    if (Bank == 1) {
+    
+    currentPalette = undercom_gp;
+    STEPS = 16;
+    //Serial.println("Bank 1 Start Palette: ");
+
+    }
+    else if (Bank == 2) {
+
+    Raspberries_Creme_gp;   
+    STEPS = 16;
+    //Serial.println("Bank 2 Start Palette: ");
+
+    }
+    else if (Bank == 3) {
+
+    currentPalette = iCreate_gp;
+    STEPS = 16;
+    //Serial.println("Bank 3 Start Palette: ");
+
+    }
+    else if (Bank == 4) {
+
+    currentPalette = cyan_to_dark_gp;
+    STEPS = 16;
+    //Serial.println("Bank 4 Start Palette: ");
+
+    }
+    else if (Bank == 5) {
+
+    currentPalette = undercom_gp;
+    STEPS = 16;
+    //Serial.println("Bank 5 Start Palette: ");
+
+    }
+    else if (Bank == 6) {
+
+        //Serial.println("Bank 6 Start Palette: ");
+
+        if (Mode == 1) {
+        
+        currentPalette = Copycat_gp;
+        STEPS = 16;
+        //Serial.println("Mode 1 Palette: ");
+
+        }
+        else if (Mode == 2) {
+
+        currentPalette = Raspberries_Creme_gp;
+        STEPS = 16;
+        //Serial.println("Mode 2 Palette: ");
+
+        }
+        else if (Mode == 3) {
+
+        currentPalette = iCreate_gp;
+        STEPS = 16;
+        //Serial.println("Mode 3 Palette: ");
+
+        }
+        else if (Mode == 4) {
+
+        currentPalette = fava_bean_gp;
+        STEPS = 16;
+        //Serial.println("Mode 4 Palette: ");
+
+        }
+        else if (Mode == 5) {
+
+        currentPalette = undercom_gp;
+        STEPS = 16;
+        //Serial.println("Mode 5 Palette: ");
+
+        }
+        else if (Mode == 6) {
+
+        currentPalette = cyan_to_dark_gp;
+        STEPS = 16;
+        //Serial.println("Mode 6 Palette: ");
+
+        }
+        else if (Mode == 7) {
+
+        currentPalette = cw5_032_gp;
+        STEPS = 16;
+        //Serial.println("Mode 7 Palette: ");
+
+        }
+        else if (Mode == 8) {
+
+        currentPalette = cw5_020_gp;
+        STEPS = 16;
+        //Serial.println("Mode 8 Palette: ");
+
+        }
+        else if (Mode == 9) {
+
+        currentPalette = cw2_087_gp;
+        STEPS = 16;
+        //Serial.println("Mode 9 Palette: ");
+
+        }
+        else if (Mode == 10) {
+
+        currentPalette = cw2_041_gp;
+        STEPS = 16;
+        //Serial.println("Mode 10 Palette: ");
+
+        }
+        else{
+
+        }
+
+    }
+
+    else {
+   
+    }
+}
 
 // This function fills the palette with totally random colors.
 void SetupTotallyRandomPalette()

@@ -228,7 +228,7 @@ void clickEventUp()
   }
   else;
 
-  if (5 >= Bank) {
+  if (6 >= Bank) {
     clicked = true;
     WaitForModeChange = false;
 
@@ -382,7 +382,7 @@ void clickEventDown()
   }
   else;
 
-  if (5 >= Bank) {
+  if (6 >= Bank) {
 
 
     clicked = true;

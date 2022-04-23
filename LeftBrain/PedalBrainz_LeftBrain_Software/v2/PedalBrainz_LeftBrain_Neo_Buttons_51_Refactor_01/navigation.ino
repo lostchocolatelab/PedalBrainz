@@ -51,7 +51,7 @@ void modeFlash() {
     if (initialBank == true)
     {
       
-      Serial.println(" BankFlash True ");
+      //Serial.println(" BankFlash True ");
       paletteStart();
 
     }

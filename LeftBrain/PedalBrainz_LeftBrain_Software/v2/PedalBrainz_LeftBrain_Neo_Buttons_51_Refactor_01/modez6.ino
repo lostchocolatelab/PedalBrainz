@@ -58,11 +58,6 @@ void modeStartupBank6(){
     if (Mode == 1)
       {
 
-      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-         strip.setPixelColor(p, 36, 200, 10);
-      }
-      pixel.setPixelColor(0, 36, 200, 10);
-      inner.setPixelColor(0, 36, 200, 10);
  
       }
     else if (Mode == 2)
@@ -161,7 +156,7 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        RainbowQuad();
+        palette1();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -192,7 +187,7 @@ void Bank6()
       {
 
         // Call the main routine and loop the thing
-        RainbowQuad();
+        palette1();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -223,7 +218,7 @@ void Bank6()
       {
 
         // Call the main routine and loop the thing
-        RainbowQuad();
+        palette1();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -254,8 +249,7 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        mountainSnack ();
-        reRandom = false;
+        palette1();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -286,8 +280,7 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        mountainSnack ();
-        reRandom = true;
+        palette1();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -318,8 +311,7 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        mountainSnack ();
-        reRandom = true;
+        palette1();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -349,8 +341,7 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        RainbowSquarez();
-        
+        palette1();        
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -381,8 +372,7 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        RainbowSquarez();
-        
+        palette1();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -413,7 +403,7 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        RainbowSquarez();
+        palette1();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -446,9 +436,7 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        increaseValue = true;
-        //fadeSpeed = 10;
-        RainbowSquarez();
+        palette1();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -479,8 +467,7 @@ void Bank6()
       {
 
         // Call the main routine and loop the thing
-        valueA0  = 7;
-        rainbowNew();
+        palette1();
       }
         // Wait for the Mode Change
         modeChangeWait();

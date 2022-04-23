@@ -127,7 +127,7 @@ void Bank4()
 
   */
 
-  // RainbowQuad
+  // Mountainz Snack
   if (Mode == 1)
   {
     //Serial.println("Mode 1 Started fadespeed " + String(fadeSpeed));
@@ -156,14 +156,15 @@ void Bank4()
       {
 
         //Call the main routine and loop the thing
-        fire1();
+        mountainSnack ();
+        reRandom = false;
       }
         // Wait for the Mode Change
         modeChangeWait();
     }
   }
 
-  // RainbowQuad
+  // Mountainz
   if (Mode == 2)
   {
     if (!waitingFlag)
@@ -188,7 +189,7 @@ void Bank4()
 
         // Call the main routine and loop the thing
         mountainSnack ();
-        reRandom = false;
+        reRandom = true;
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -283,7 +284,8 @@ void Bank4()
       {
 
         //Call the main routine and loop the thing
-        
+        mountainSnack ();
+        reRandom = true;
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -314,7 +316,8 @@ void Bank4()
       {
 
         //Call the main routine and loop the thing
-        
+        mountainSnack ();
+        reRandom = true;
       }
         // Wait for the Mode Change
         modeChangeWait();
