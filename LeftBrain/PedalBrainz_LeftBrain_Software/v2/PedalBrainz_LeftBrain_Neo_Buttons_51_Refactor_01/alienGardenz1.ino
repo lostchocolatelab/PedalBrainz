@@ -26,11 +26,6 @@ void alienGardenz() {
         leds[0].setHSV( 192, 255 , flower1 );
         leds[1].setHSV( 96, 255 , flower1 );
         leds[2].setHSV( 192, 255 , flower1 );
-        leds[3].setHSV( 96, 255 , flower1 );
-        leds[4].setHSV( 192, 255 , flower2 );
-        leds[5].setHSV( 96, 255 , flower2 );
-        leds[6].setHSV( 192, 255 , flower2 );
-        leds[7].setHSV( 96, 255 , flower2 );
         FastLED.show();
         averageLEDS();
         delayA0(fadeSpeed);
@@ -46,11 +41,6 @@ void alienGardenz() {
         leds[0].setHSV( 192, 255 , flower1 );
         leds[1].setHSV( 96, 255 , flower1 );
         leds[2].setHSV( 192, 255 , flower1 );
-        leds[3].setHSV( 96, 255 , flower1 );
-        leds[4].setHSV( 192, 255 , flower2 );
-        leds[5].setHSV( 96, 255 , flower2 );
-        leds[6].setHSV( 192, 255 , flower2 );
-        leds[7].setHSV( 96, 255 , flower2 );
         FastLED.show();
         averageLEDS();
         delayA0(fadeSpeed);
@@ -59,6 +49,70 @@ void alienGardenz() {
 
   FastLED.show();
   averageLEDS();
-  delayA0(fadeSpeed);
+  //delayA0(fadeSpeed);
+
+}
+
+
+void alienz1() { 
+
+
+  int x = 1;
+
+  for (int i = 0; i > -1; i = i + x)  //This fades the brightness in and out using maths
+  {
+
+
+    MaxBrightReduction = constrain(i, 0, MaxBright);
+
+    //scalePixelBrightness(i);
+    scalePixelRed(i);
+
+    //A1 potentiometer controls for maximum brightness
+    //maxBrightness = map(analogRead(A1), 0, 1024, 0, maxBrightnessTemp);
+    MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
+    pixel.setBrightness(maxBrightness);
+    strip.setBrightness(MaxBrightReduction);
+    FastLED.setBrightness(MaxBrightReduction);
+    inner.setBrightness(maxBrightness);
+
+    //for (int p = 0; p < strip.numPixels(); p++) {     // For each pixel in strip...
+    for (int i = 0; i < NUM_LEDS; i++) {     // For each pixel in strip...
+      //strip.setPixelColor(p, (i/5), 0, i);
+      //strip.setPixelColor(p, (redValue), 0, redValue);
+      leds[i] = CRGB(redValue, 0, redValue);
+    }
+
+    pixel.setPixelColor(0, redValue, 0, redValue);
+    inner.setPixelColor(0, redValue, 0, redValue);
+
+    showLEDS();
+    FastLED.show();
+
+    if (i == 255)                       //If the fade has reached it's peak keep the LED lit and then fade out
+  {
+    x = -1;
+  }
+}
+
+}
+
+void alienz2() { 
+
+fadeAmount = 255;
+
+ for(int i = 0; i < NUM_LEDS; i++ )
+   {
+   leds[i].setRGB(0,255,250);  // Set Color HERE!!!
+   leds[i].fadeLightBy(brightness);
+  }
+  FastLED.show();
+  brightness = brightness + fadeAmount;
+  // reverse the direction of the fading at the ends of the fade: 
+  if(brightness == 0 || brightness == 255)
+  {
+    fadeAmount = -fadeAmount ; 
+  }    
+  delay(0);  // This delay sets speed of the f
 
 }

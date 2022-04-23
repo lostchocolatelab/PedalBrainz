@@ -8,7 +8,7 @@ void Fadez_01 () {
     greenValue = 0;
     blueValue = 130;
   }
-  if (Mode == 3)     // pixel.setPixelColor(0, 36, 0, 255);
+  else if (Mode == 3)     // pixel.setPixelColor(0, 36, 0, 255);
   {
     redValue = 36;
     greenValue = 0;
@@ -18,6 +18,7 @@ void Fadez_01 () {
     delayValueA0 = map(analogRead(A0), 0, 1024, -200, 40);
     randomAmountA0 = random(0, delayValueA0);
     fadeSpeed = valueA0 + randomAmountA0;
+    //Serial.println("randomAmountA0: " + String(fadeSpeed));
     //Serial.println("Fade Speed: " + String(fadeSpeed));
   }
   else
@@ -47,16 +48,19 @@ void Fadez_01 () {
     strip.setBrightness(MaxBrightReduction);
     FastLED.setBrightness(MaxBrightReduction);
     inner.setBrightness(maxBrightness);
-    showLEDS();
 
-    for (int p = 0; p < strip.numPixels(); p++) {     // For each pixel in strip...
+    //for (int p = 0; p < strip.numPixels(); p++) {     // For each pixel in strip...
+    for (int i = 0; i < NUM_LEDS; i++) {     // For each pixel in strip...
       //strip.setPixelColor(p, (i/5), 0, i);
-      strip.setPixelColor(p, (redValue), 0, redValue);
+      //strip.setPixelColor(p, (redValue), 0, redValue);
+      leds[i] = CRGB(redValue, 0, redValue);
     }
 
-    pixel.setPixelColor(0, (redValue), 0, redValue);
-    inner.setPixelColor(0, (redValue), 0, redValue);
+    pixel.setPixelColor(0, redValue, 0, redValue);
+    inner.setPixelColor(0, redValue, 0, redValue);
+
     showLEDS();
+    FastLED.show();
 
     plotCycle();
     checkButtons();
@@ -124,6 +128,7 @@ void Fadez_01 () {
   //Use the value of A0 to control the rate of fade in/out using a delay
 
   delayA0(fadeSpeed);
+  //FastLED.delay(fadeSpeed);
   //Serial.println("Rate of Fade in/ Fade out: " + String(fadeSpeed));
 
   plotCycle();
@@ -142,7 +147,7 @@ void Fadez_01 () {
   plotCycle();
   checkButtons();
 
-  randomAmount = random(0, delayValue);
+  randomAmount = random(0, delayValueA0);
   
   //Serial.println("Rate of Fade in/ Fade out: " + String(fadeSpeed) + " ||| Delay when LED fully lit (ms): " + String(fullDelay) + " ||| Delay when LED fully dark (ms): " + String(darkDelay));
   plotCycle();

@@ -1,14 +1,3 @@
-//#define BRIGHTNESS  200
-#define FRAMES_PER_SECOND 60
-
-//CRGB leds[NUM_LEDS];
-
-/*void setup() {
-  delay(3000); // sanity delay
-  FastLED.addLeds<CHIPSET, PINSTRIP, COLOR_ORDER>(leds, NUM_LEDS).setCorrection( TypicalLEDStrip );
-  FastLED.setBrightness( BRIGHTNESS );
-}*/
-
 // Fire2012 by Mark Kriegsman, July 2012
 // as part of "Five Elements" shown here: http://youtu.be/knWiGsmgycY
 //// https://codebender.cc/example/FastLED/Fire2012#Fire2012.ino
@@ -56,7 +45,7 @@ void Fire2012()
     maxBrightnessAdjust();
 
     SPARKING = map(analogRead(A0), 0, 1024, 10, 200);
-    COOLING = map(analogRead(A2), 0, 1024, 10, 100);    
+    COOLING = map(analogRead(A2), 0, 1024, 100, 10);    
 
     // Step 1.  Cool down every cell a little
     for( int i = 0; i < NUM_LEDS; i++) {

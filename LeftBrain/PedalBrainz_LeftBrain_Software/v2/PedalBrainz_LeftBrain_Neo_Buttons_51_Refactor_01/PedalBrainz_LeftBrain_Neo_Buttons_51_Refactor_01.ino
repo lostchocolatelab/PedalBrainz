@@ -372,7 +372,7 @@ int avgLightInner;
 
 bool initialBank;
 
-
+#define FRAMES_PER_SECOND 60
 
 /**
 

@@ -214,8 +214,9 @@ void Bank1()
       {
 
       // Call the main routine and loop the thing
-        fadeSpeed = 10;
-        Fadez_01 ();
+        fadeSpeed = 0;
+        Fadez_01();
+        
       }
       // Wait for the Mode Change
       modeChangeWait();
@@ -245,8 +246,9 @@ void Bank1()
       {
 
       // Call the main routine and loop the thing
-        fadeSpeed = 10;
+        fadeSpeed = 0;
         Fadez_01 ();
+      
       }
       // Wait for the Mode Change
       modeChangeWait();

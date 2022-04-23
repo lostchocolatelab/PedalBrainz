@@ -1,9 +1,6 @@
 // This is an example how to create a dripping effect using the FastLED library
 // https://codebender.cc/sketch:213839#Dripping%20Icicle.ino
 
-//#define BRIGHTNESS         127
-#define FRAMES_PER_SECOND 30
-//#define NUM_LEDS         16
 #define TRAIL_LENGTH       20
 #define TRAIL_DIM_BY       60
 #define DRIP_HUE           233
@@ -25,7 +22,7 @@ void dripz() {
 
   maxBrightnessAdjust();
   fadeSpeed = map(analogRead(A0), 0, 1024, 10, 60);
-  darkDelay = map(analogRead(A2), 0, 1024, 100, 5000); 
+  darkDelay = map(analogRead(A2), 0, 1024, 100, speedMinimum/2); 
 
   // send the 'leds' array out to the actual LED strip
   averageLEDS(); 

@@ -63,7 +63,7 @@ void pop_fade() {
     averageLEDS();
 
     thisdelay = map(analogRead(A0), 0, 1024, 0, 200);
-    ranamount = map(analogRead(A2), 0, 1024, 0, 1000);   
+    ranamount = map(analogRead(A2), 0, 1024, 1000, 20);   
 
   unsigned long thiscolour;
   if (ranamount >NUM_LEDS) ranamount = NUM_LEDS;               // Make sure we're at least utilizing ALL the LED's.

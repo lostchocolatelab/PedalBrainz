@@ -11,7 +11,7 @@ byte meteorLength = 29;
 
 void meteorz(){
  meteorShower(); 
- darkDelay = map(analogRead(A2), 0, 1024, 0, 300); 
+ darkDelay = map(analogRead(A2), 0, 1024, 300, 0); 
  Serial.println("darkDelay : " + String(darkDelay));
  delayA2(darkDelay);
 }
