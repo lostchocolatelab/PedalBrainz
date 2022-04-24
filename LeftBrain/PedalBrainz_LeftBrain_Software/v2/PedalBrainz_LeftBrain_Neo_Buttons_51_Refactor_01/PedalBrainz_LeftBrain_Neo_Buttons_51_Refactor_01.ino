@@ -22,7 +22,7 @@
 
 #include <Adafruit_NeoPixel.h>
 #include <FastLED_NeoPixel.h>
-//#include <FastLED.h>
+#include <FastLED.h>
 // Declare our NeoPixel strip object:
 //Adafruit_NeoPixel strip(NUMPIXELS, 4, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel inner(1, 3, NEO_GRB + NEO_KHZ800);

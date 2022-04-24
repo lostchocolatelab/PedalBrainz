@@ -380,13 +380,13 @@ void paletteStart()
 
 void FillLEDsFromPaletteColors( uint8_t colorIndex)
 {
-    uint8_t brightness = 255;
+
     //for(int i = 0; i < NUM_LEDS; i++) { 
     //for(int i = NUM_LEDS-1; i >= 0; i--) {
     for( int i = 0; i < NUM_LEDS; ++i) {
-        leds[0] = ColorFromPalette( currentPalette, colorIndex, brightness, currentBlending);
-        leds[1] = ColorFromPalette( currentPalette, colorIndex+10, brightness, currentBlending);
-        leds[2] = ColorFromPalette( currentPalette, colorIndex+20, brightness, currentBlending);
+        leds[0] = ColorFromPalette( currentPalette, colorIndex, MaxBrightReduction, currentBlending);
+        leds[1] = ColorFromPalette( currentPalette, colorIndex+10, MaxBrightReduction, currentBlending);
+        leds[2] = ColorFromPalette( currentPalette, colorIndex+20, MaxBrightReduction, currentBlending);
         colorIndex = STEPS;
     	//FastLED.delay(100 / UPDATES_PER_SECOND);
     	FastLED.show();
@@ -397,7 +397,6 @@ void FillLEDsFromPaletteColors( uint8_t colorIndex)
     //FastLED.delay(1000 / UPDATES_PER_SECOND);
 }
 
-
 // There are several different palettes of colors demonstrated here.
 //
 // FastLED provides several 'preset' palettes: RainbowColors_p, RainbowStripeColors_p,
@@ -406,26 +405,6 @@ void FillLEDsFromPaletteColors( uint8_t colorIndex)
 // Additionally, you can manually define your own color palettes, or you can write
 // code that creates color palettes on the fly.  All are shown here.
 
-void ChangePalettePeriodically()
-{
-    uint8_t secondHand = (millis() / 1000) % 60;
-    static uint8_t lastSecond = 99;
-    
-    if( lastSecond != secondHand) {
-        lastSecond = secondHand;
-        if( secondHand ==  0)  { currentPalette = RainbowColors_p;         currentBlending = LINEARBLEND; }
-        if( secondHand == 10)  { currentPalette = RainbowStripeColors_p;   currentBlending = NOBLEND;  }
-        if( secondHand == 15)  { currentPalette = RainbowStripeColors_p;   currentBlending = LINEARBLEND; }
-        if( secondHand == 20)  { SetupPurpleAndGreenPalette();             currentBlending = LINEARBLEND; }
-        if( secondHand == 25)  { SetupTotallyRandomPalette();              currentBlending = LINEARBLEND; }
-        if( secondHand == 30)  { SetupBlackAndWhiteStripedPalette();       currentBlending = NOBLEND; }
-        if( secondHand == 35)  { SetupBlackAndWhiteStripedPalette();       currentBlending = LINEARBLEND; }
-        if( secondHand == 40)  { currentPalette = CloudColors_p;           currentBlending = LINEARBLEND; }
-        if( secondHand == 45)  { currentPalette = PartyColors_p;           currentBlending = LINEARBLEND; }
-        if( secondHand == 50)  { currentPalette = myRedWhiteBluePalette_p; currentBlending = NOBLEND;  }
-        if( secondHand == 55)  { currentPalette = myRedWhiteBluePalette_p; currentBlending = LINEARBLEND; }
-    }
-}
 
 void paletteBanks()
 {
@@ -441,7 +420,7 @@ void paletteBanks()
     }
     else if (Bank == 2) {
 
-    Raspberries_Creme_gp;   
+    currentPalette = Copycat_gp;   
     STEPS = 16;
     //Serial.println("Bank 2 Start Palette: ");
 
