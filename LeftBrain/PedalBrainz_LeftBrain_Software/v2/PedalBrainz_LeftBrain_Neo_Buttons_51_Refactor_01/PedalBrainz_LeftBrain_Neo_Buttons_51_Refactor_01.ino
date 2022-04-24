@@ -274,6 +274,8 @@ int strangeRandom;
 int strangeSlowAmount;
 int strangeSlowCount;
 
+bool fadeUp;
+
 /**
 
   Mountain Snack Mode declarations

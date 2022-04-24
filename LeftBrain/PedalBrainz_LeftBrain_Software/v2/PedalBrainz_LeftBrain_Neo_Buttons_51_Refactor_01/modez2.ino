@@ -157,13 +157,14 @@ void Bank2()
       {
 
       //Call the main routine and loop the thing
+        fadez2();
         //RainbowQuad();
         //fire1();
         //popFade();
         //breather1();
         //dripz();
         //meteorz();
-        meteorz2();
+        //meteorz2();
         //alienGardenz();
         //palette1();
         //bankFlash();

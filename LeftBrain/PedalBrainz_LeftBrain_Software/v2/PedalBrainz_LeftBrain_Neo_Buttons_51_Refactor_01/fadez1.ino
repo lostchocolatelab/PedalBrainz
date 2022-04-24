@@ -154,3 +154,75 @@ void Fadez_01 () {
   checkButtons();
 
 }
+
+
+void fadez2()
+{
+
+  MaxBrightReduction = constrain(fadeAmount, 0, MaxBright);
+
+  //A1 potentiometer controls for maximum brightness
+  //maxBrightness = map(analogRead(A1), 0, 1024, 0, maxBrightnessTemp);
+  MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
+  pixel.setBrightness(maxBrightness);
+  strip.setBrightness(MaxBrightReduction);
+  FastLED.setBrightness(MaxBrightReduction);
+  inner.setBrightness(maxBrightness);
+
+  if (fadeAmount >= 255)      
+  {
+
+    
+    fadeUp = false;
+    fadeAmount = 255;
+
+  }
+  else if (fadeAmount <= 0)
+  {
+
+    //delay(1000);
+    fadeUp = true;
+    fadeAmount = 0;
+
+  }
+  else;
+
+
+  if (fadeUp == true)
+  {
+        fadeAmount = fadeAmount + 0.5;
+        fadeAmount = fadeAmount+valueA0;
+
+        Serial.println("FADE UP || fadeAmount = " + String(fadeAmount) + " A0 = " + String(valueA0) + " fadeUp = " + String(fadeUp));
+
+  }
+  else if (fadeUp == false)
+  {
+        fadeAmount = fadeAmount - 0.5;
+        fadeAmount = fadeAmount-valueA0;
+
+        Serial.println("FADE DOWN || fadeAmount = " + String(fadeAmount) + " A0 = " + String(valueA0) + " fadeDown = " + String(fadeUp));
+
+  }
+  else;
+
+    //scalePixelBrightness(i);
+    scalePixelRed(fadeAmount);
+
+    valueA0 = map(analogRead(A0), 0, 1024, 1, 30);
+    fadeAmount = constrain(fadeAmount, 0, 255);
+    //FastLED.setBrightness(fadeAmount);
+
+    for (int i = 0; i < NUM_LEDS; i++) {     // For each pixel in strip...
+      //strip.setPixelColor(p, (i/5), 0, i);
+      //strip.setPixelColor(p, (redValue), 0, redValue);
+      leds[i] = CRGB(redValue, 0, redValue);
+    }
+
+    pixel.setPixelColor(0, redValue, 0, redValue);
+    inner.setPixelColor(0, redValue, 0, redValue);
+
+    showLEDS();
+    FastLED.show();
+       
+}
