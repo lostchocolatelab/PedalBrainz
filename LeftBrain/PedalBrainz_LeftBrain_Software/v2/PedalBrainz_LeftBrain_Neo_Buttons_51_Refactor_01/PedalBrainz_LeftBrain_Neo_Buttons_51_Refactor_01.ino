@@ -266,7 +266,7 @@ float scalings[2][3] {
 
 int brightness = 0;
 int brightnessScaled;
-int fadeAmount = 1;  //Change it to adjust the fading between each step (fading speed)
+float fadeAmount = 1;  //Change it to adjust the fading between each step (fading speed)
 int maxBrightness = 190; //Pixel Max Bright
 int maxBrightnessTemp = 190; //Pixel Max Bright
 int delayAmount = 0;
