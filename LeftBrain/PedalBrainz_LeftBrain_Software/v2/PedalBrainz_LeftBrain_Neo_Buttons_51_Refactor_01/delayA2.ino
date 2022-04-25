@@ -201,7 +201,6 @@ void delayA2(int count)
       }
       else if (Mode == 2) {
 
-      
       darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
       //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }

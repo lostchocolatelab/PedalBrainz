@@ -178,8 +178,18 @@ void fadez2()
     plotCycle();
     checkButtons();
 
-    fadeUp = false;
-    fadeAmount = 255;
+    if (Mode == 1)
+    {
+      fadeAmount = 0;
+      setDark();
+    }
+    else
+    {
+      fadeUp = false;
+      fadeAmount = 255;
+    }
+
+    
 
   }
   else if (fadeAmount <= 0)
@@ -242,4 +252,37 @@ void fadez2()
     showLEDS();
     FastLED.show();
        
+}
+
+void setDark()
+{
+    //scalePixelBrightness(i);
+    scalePixelRed(fadeAmount);
+
+    valueA0 = map(analogRead(A0), 0, 1024, 0.5, 17.5);
+    fadeAmount = constrain(fadeAmount, 0.0, 255.0);
+    //FastLED.setBrightness(fadeAmount);
+
+    for (int i = 0; i < NUM_LEDS; i++) {     // For each pixel in strip...
+    //strip.setPixelColor(p, (i/5), 0, i);
+    //strip.setPixelColor(p, (redValue), 0, redValue);
+    leds[i] = CRGB(redValue, 0, redValue);
+    }
+
+    pixel.setPixelColor(0, redValue, 0, redValue);
+    inner.setPixelColor(0, redValue, 0, redValue);
+
+    delayA0(fadeSpeed);
+    //FastLED.delay(fadeSpeed);
+    //Serial.println("Rate of Fade in/ Fade out: " + String(fadeSpeed));
+
+    plotCycle();
+    checkButtons();
+
+    showLEDS();
+    FastLED.show();
+
+    delayA2(darkDelay);
+    Serial.println("Delay when LED fully dark (ms): " + String(darkDelay));
+
 }

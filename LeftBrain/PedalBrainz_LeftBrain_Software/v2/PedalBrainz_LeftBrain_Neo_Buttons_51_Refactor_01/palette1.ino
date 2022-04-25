@@ -331,11 +331,14 @@ void palette1()
     {
 
     paletteBanks();
-    //currentPalette = PartyColors_p;  
+    maxBrightnessAdjust();
+
     currentBlending = LINEARBLEND;
+
+    valueA0 = map(analogRead(A0), 0, 1024, 1, 10);
     
     static uint8_t startIndex = 0;
-    startIndex = startIndex + 1; /* motion speed */
+    startIndex = startIndex + valueA0; /* motion speed */
 
     FillLEDsFromPaletteColors( startIndex);
 
@@ -357,14 +360,14 @@ void paletteStart()
 {
 
     
-    for( int i = 0; i < 255; ++i) 
+    for( int i = 0; i < 127; ++i) 
     {
 
     paletteBanks();
     currentBlending = LINEARBLEND;
     
     static uint8_t startIndex = 0;
-    startIndex = startIndex + 1; /* motion speed */
+    startIndex = startIndex + 2; /* motion speed */
 
     FillLEDsFromPaletteColors( startIndex);
 
@@ -413,7 +416,7 @@ void paletteBanks()
 
     if (Bank == 1) {
     
-    currentPalette = undercom_gp;
+    currentPalette = October_Sky_gp;
     STEPS = 16;
     //Serial.println("Bank 1 Start Palette: ");
 
@@ -427,21 +430,21 @@ void paletteBanks()
     }
     else if (Bank == 3) {
 
-    currentPalette = iCreate_gp;
+    currentPalette = PartyColors_p;
     STEPS = 16;
     //Serial.println("Bank 3 Start Palette: ");
 
     }
     else if (Bank == 4) {
 
-    currentPalette = cyan_to_dark_gp;
+    currentPalette = cw2_041_gp;
     STEPS = 16;
     //Serial.println("Bank 4 Start Palette: ");
 
     }
     else if (Bank == 5) {
 
-    currentPalette = undercom_gp;
+    currentPalette = fava_bean_gp;
     STEPS = 16;
     //Serial.println("Bank 5 Start Palette: ");
 
