@@ -384,6 +384,8 @@ void paletteStart()
 void FillLEDsFromPaletteColors( uint8_t colorIndex)
 {
 
+    maxBrightnessSet();
+
     //for(int i = 0; i < NUM_LEDS; i++) { 
     //for(int i = NUM_LEDS-1; i >= 0; i--) {
     for( int i = 0; i < NUM_LEDS; ++i) {
