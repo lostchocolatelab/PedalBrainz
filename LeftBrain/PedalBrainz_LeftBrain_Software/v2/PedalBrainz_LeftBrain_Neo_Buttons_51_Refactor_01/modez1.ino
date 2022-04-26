@@ -479,9 +479,9 @@ void Bank1()
       if (WaitForModeChange)
       {
 
-      // Call the main routine and loop the thing
-      //strangeAttractor ();
-        oceanz();
+        // Call the main routine and loop the thing
+        strangeAttractor ();
+        //oceanz();
       }
       // Wait for the Mode Change
       modeChangeWait();
@@ -489,7 +489,7 @@ void Bank1()
   }
 
 
-  if (Mode == 98)
+  if (Mode == 98)  // Light Loopz 
   {
     if (!waitingFlag)
     {

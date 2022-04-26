@@ -173,7 +173,7 @@ void fadez2()
   {
 
     delayA1(fullDelay);
-    Serial.println("Delay when LED fully lit (ms): " + String(fullDelay));
+    //Serial.println("Delay when LED fully lit (ms): " + String(fullDelay));
 
     plotCycle();
     checkButtons();
@@ -196,7 +196,7 @@ void fadez2()
   {
 
     delayA2(darkDelay);
-    Serial.println("Delay when LED fully dark (ms): " + String(darkDelay));
+    //Serial.println("Delay when LED fully dark (ms): " + String(darkDelay));
 
     plotCycle();
     checkButtons();
@@ -213,7 +213,7 @@ void fadez2()
         fadeAmount = fadeAmount + 0.5;
         fadeAmount = fadeAmount+valueA0;
 
-        Serial.println("FADE UP || fadeAmount = " + String(fadeAmount) + " A0 = " + String(valueA0) + " fadeUp = " + String(fadeUp));
+        //Serial.println("FADE UP || fadeAmount = " + String(fadeAmount) + " A0 = " + String(valueA0) + " fadeUp = " + String(fadeUp));
 
   }
   else if (fadeUp == false)
@@ -221,7 +221,7 @@ void fadez2()
         fadeAmount = fadeAmount - 0.5;
         fadeAmount = fadeAmount-valueA0;
 
-        Serial.println("FADE DOWN || fadeAmount = " + String(fadeAmount) + " A0 = " + String(valueA0) + " fadeDown = " + String(fadeUp));
+        //Serial.println("FADE DOWN || fadeAmount = " + String(fadeAmount) + " A0 = " + String(valueA0) + " fadeDown = " + String(fadeUp));
 
   }
   else;

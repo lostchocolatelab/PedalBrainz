@@ -520,8 +520,9 @@ void Bank2()
       {
 
       // Call the main routine and loop the thing
-        valueA0  = 7;
-        rainbowNew();
+        //valueA0  = 7;
+        //rainbowNew();
+        twinkelz();
       }
       // Wait for the Mode Change
       modeChangeWait();

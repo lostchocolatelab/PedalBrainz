@@ -15,7 +15,7 @@ BUTTON declarations
       // MULTI-CLICK: One Button, Multiple Events
 
       // Button timing variables
-int debounce = 20;       // ms debounce period to prevent flickering when pressing or releasing the button
+int debounce = 50;       // ms debounce period to prevent flickering when pressing or releasing the button
 int DCgap = 250;       // max ms between clicks for a double click event
 int holdTime = 1000;       // ms hold period: how long to wait for press+hold event
 int longHoldTime = 3000;       // ms long hold period: how long to wait for press+hold event
@@ -512,26 +512,31 @@ void longHoldEventDown()
 
 
 
-  if (Mode == 102) {
-      //readStartupMode();
+
+  if (Mode == 98) // If it's Mode 98 = Light Loopz then go to Mode 102 = Max Bright Settings
+  {
+    Mode = 102;       // Mode 102 = Max Bright Settings
+    Serial.println("Changing from Light Loopz to Max Bright");
+  }
+  else if (Mode == 102) // If it's Mode 102 = Max Bright Settings then go to Mode 99 = Color Mix
+  {
+    //readStartupMode();
     Serial.println("StartupMaxBright = " + String(startupMaxBright));
     MaxBright = MaxBrightTemp;
     writeMaxBrightDataz();
 
-    Mode = 99;        // Color Mix
+    Mode = 99;        // Mode 99 = Color Mix
     Serial.println("Max Bright = " + String(startupMaxBright));
     Serial.println("Changing from Max Bright to Color Mix");
 
   }
-  else if (Mode == 98) {
-    Mode = 102;       // Max Bright
-    Serial.println("Changing from Light Loopz to Max Bright");
-  }
-  else if (Mode == 99) {
-    Mode = 999;       // Memory Game
+  else if (Mode == 99) // If it's Mode 99 = Color Mix then go to Mode 999 = Memory Game
+  {
+    Mode = 999;       // Mode 999 = Memory Game
     Serial.println("Changing from Color Mix to Memory Game");
   }
-  else if (Mode == 999) {
+  else if (Mode == 999) 
+  {
     Mode = 1;
     Serial.println("Changing from Memory Game to Startup Mode");
   }
@@ -540,11 +545,11 @@ void longHoldEventDown()
     if (10 >= Mode) {
       writeStartupDataz();
       clicked = true;
-      Mode = 102;       // Max Bright Settings
+      Mode = 102;       // Mode 102 = Max Bright Settings
       Serial.println("Writing Startup Dataz and Changing from Modez to MaxBright");
     }
     clicked = true;
-    Mode = 102;
+    Mode = 102; // Mode 102 = Max Bright Settings
     Serial.println("Changing from Modez to MaxBright");
   }
 

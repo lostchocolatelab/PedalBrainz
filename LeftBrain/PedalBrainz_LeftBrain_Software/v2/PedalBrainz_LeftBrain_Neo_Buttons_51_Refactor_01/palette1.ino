@@ -323,6 +323,132 @@ DEFINE_GRADIENT_PALETTE( Raspberries_Creme_gp ) {
   204, 255,235,160,
   255, 255,235,160};
 
+// Gradient palette "ib33_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/ing/general/tn/ib33.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 32 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( ib33_gp ) {
+    0, 112,  0,  7,
+   12, 123,  0, 10,
+   25, 133,  0, 14,
+   35,  51,  0,  1,
+  124, 215,  0, 23,
+  201,  68,  0, 10,
+  209, 232,  0, 48,
+  255,  35,  0,  1};
+
+// Gradient palette "ib36_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/ing/general/tn/ib36.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 28 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( ib36_gp ) {
+    0,  16, 30, 44,
+   61,  25,105,201,
+   73,  18, 21, 52,
+  178,  64,115,255,
+  196,  19, 10, 93,
+  201,  27, 23,127,
+  255,  39, 45,166};
+
+// Gradient palette "bhw1_04_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/bhw/bhw1/tn/bhw1_04.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 20 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( bhw1_04_gp ) {
+    0, 229,227,  1,
+   15, 227,101,  3,
+  142,  40,  1, 80,
+  198,  17,  1, 79,
+  255,   0,  0, 45};
+
+
+// Gradient palette "Lemon_Yellow_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/lb/misc/tn/Lemon_Yellow.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 20 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( Lemon_Yellow_gp ) {
+    0, 255,173,  3,
+   73, 239,139,  4,
+  135, 252,180,  6,
+  206, 247,152,  4,
+  255, 244,124,  5};
+
+
+// Gradient palette "bhw4_009_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/bhw/bhw4/tn/bhw4_009.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 32 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( bhw4_009_gp ) {
+    0,  66,186,192,
+   43,   1, 22, 71,
+   79,   2,104,142,
+  117,  66,186,192,
+  147,   2,104,142,
+  186,   1, 22, 71,
+  224,   2,104,142,
+  255,   4, 27, 28};
+
+
+// Gradient palette "bhw2_xc_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/bhw/bhw2/tn/bhw2_xc.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 28 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( bhw2_xc_gp ) {
+    0,   4,  2,  9,
+   58,  16,  0, 47,
+  122,  24,  0, 16,
+  158, 144,  9,  1,
+  183, 179, 45,  1,
+  219, 220,114,  2,
+  255, 234,237,  1};
+
+
+// Gradient palette "bhw2_31a_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/bhw/bhw2/tn/bhw2_31a.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 20 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( bhw2_31a_gp ) {
+    0,   5,  1,  3,
+   33,  18,  1, 10,
+  127,  55,  3,223,
+  221,  18,  1, 10,
+  255,   5,  1,  3};
+
+// Gradient palette "bhw2_10_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/bhw/bhw2/tn/bhw2_10.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 28 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( bhw2_10_gp ) {
+    0,   0, 12,  0,
+   61, 153,239,112,
+  127,   0, 12,  0,
+  165, 106,239,  2,
+  196, 167,229, 71,
+  229, 106,239,  2,
+  255,   0, 12,  0};
+
+
+// Gradient palette "bhw1_greeny_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/bhw/bhw1/tn/bhw1_greeny.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 20 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( bhw1_greeny_gp ) {
+    0,   0,  0,  0,
+   39,   7, 55,  8,
+   99,  42,255, 45,
+  153,   7, 55,  8,
+  255,   0,  0,  0};
+
+
 
 void palette1()
 {
@@ -360,14 +486,14 @@ void paletteStart()
 {
 
     
-    for( int i = 0; i < 127; ++i) 
+    for( int i = 0; i < 255; ++i) 
     {
 
     paletteBanks();
     currentBlending = LINEARBLEND;
     
     static uint8_t startIndex = 0;
-    startIndex = startIndex + 2; /* motion speed */
+    startIndex = startIndex + 1; /* motion speed */
 
     FillLEDsFromPaletteColors( startIndex);
 
@@ -377,8 +503,7 @@ void paletteStart()
     //delayA0(300);
     //Serial.println("paletteStart : ");
 
-    }
-    
+    }   
 }
 
 void FillLEDsFromPaletteColors( uint8_t colorIndex)
@@ -410,7 +535,6 @@ void FillLEDsFromPaletteColors( uint8_t colorIndex)
 // Additionally, you can manually define your own color palettes, or you can write
 // code that creates color palettes on the fly.  All are shown here.
 
-
 void paletteBanks()
 {
     plotCycle();
@@ -418,35 +542,35 @@ void paletteBanks()
 
     if (Bank == 1) {
     
-    currentPalette = October_Sky_gp;
+    currentPalette = cw5_032_gp;
     STEPS = 16;
     //Serial.println("Bank 1 Start Palette: ");
 
     }
     else if (Bank == 2) {
 
-    currentPalette = Copycat_gp;   
+    currentPalette = cw5_020_gp;   
     STEPS = 16;
     //Serial.println("Bank 2 Start Palette: ");
 
     }
     else if (Bank == 3) {
 
-    currentPalette = PartyColors_p;
+    currentPalette = Lemon_Yellow_gp;
     STEPS = 16;
     //Serial.println("Bank 3 Start Palette: ");
 
     }
     else if (Bank == 4) {
 
-    currentPalette = cw2_041_gp;
+    currentPalette = bhw1_greeny_gp;
     STEPS = 16;
     //Serial.println("Bank 4 Start Palette: ");
 
     }
     else if (Bank == 5) {
 
-    currentPalette = fava_bean_gp;
+    currentPalette = cw2_041_gp;
     STEPS = 16;
     //Serial.println("Bank 5 Start Palette: ");
 
@@ -457,71 +581,71 @@ void paletteBanks()
 
         if (Mode == 1) {
         
-        currentPalette = Copycat_gp;
-        STEPS = 16;
+        currentPalette = bhw1_04_gp;
+        STEPS = 32;
         //Serial.println("Mode 1 Palette: ");
 
         }
         else if (Mode == 2) {
 
-        currentPalette = Raspberries_Creme_gp;
-        STEPS = 16;
+        currentPalette = Lemon_Yellow_gp;
+        STEPS = 32;
         //Serial.println("Mode 2 Palette: ");
 
         }
         else if (Mode == 3) {
 
-        currentPalette = iCreate_gp;
-        STEPS = 16;
+        currentPalette = bhw4_009_gp;
+        STEPS = 32;
         //Serial.println("Mode 3 Palette: ");
 
         }
         else if (Mode == 4) {
 
-        currentPalette = fava_bean_gp;
-        STEPS = 16;
+        currentPalette = bhw2_xc_gp;
+        STEPS = 32;
         //Serial.println("Mode 4 Palette: ");
 
         }
         else if (Mode == 5) {
 
-        currentPalette = undercom_gp;
-        STEPS = 16;
+        currentPalette = bhw2_31a_gp;
+        STEPS = 32;
         //Serial.println("Mode 5 Palette: ");
 
         }
         else if (Mode == 6) {
 
-        currentPalette = cyan_to_dark_gp;
-        STEPS = 16;
+        currentPalette = bhw2_10_gp;
+        STEPS = 32;
         //Serial.println("Mode 6 Palette: ");
 
         }
         else if (Mode == 7) {
 
-        currentPalette = cw5_032_gp;
-        STEPS = 16;
+        currentPalette = bhw1_greeny_gp;
+        STEPS = 32;
         //Serial.println("Mode 7 Palette: ");
 
         }
         else if (Mode == 8) {
 
         currentPalette = cw5_020_gp;
-        STEPS = 16;
+        STEPS = 32;
         //Serial.println("Mode 8 Palette: ");
 
         }
         else if (Mode == 9) {
 
         currentPalette = cw2_087_gp;
-        STEPS = 16;
+        STEPS = 32;
         //Serial.println("Mode 9 Palette: ");
 
         }
         else if (Mode == 10) {
 
         currentPalette = cw2_041_gp;
-        STEPS = 16;
+        STEPS = 32;
         //Serial.println("Mode 10 Palette: ");
 
         }

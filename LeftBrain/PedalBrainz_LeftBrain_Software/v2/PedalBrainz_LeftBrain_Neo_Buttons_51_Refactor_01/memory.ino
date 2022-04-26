@@ -45,32 +45,44 @@ void writeStartupDataz()      // Writes the Startup Bank, Mode, MaxBright to the
   //startupMode = Mode;
   //savedMaxBright = MaxBright;
 
-  EEPROM.put(storedAddress, STARTUP_DATA);
-
-  Serial.println("Filling in DATAZ Bank - " + String(Bank));
-  Serial.println("Filling in DATAZ Mode - " + String(Mode));
-  Serial.println("Filling in DATAZ MaxBright - " + String(MaxBright));
-
-
-  // Fill the "dataz" structure with the data entered by the user...
-  dataz.savedBank = Bank;
-  dataz.savedMode = Mode;
-  dataz.savedMaxBright = MaxBright;
-
-  // ...and finally save everything into emulated-EEPROM
-  EEPROM.put(storedAddress + sizeof(startup), dataz);
-
-  if (!EEPROM.getCommitASAP())
+  if ((Mode >= 1) && (Mode <= 10))
   {
-    Serial.println("CommitASAP not set. Need commit()");
-    EEPROM.commit();
+
+    EEPROM.put(storedAddress, STARTUP_DATA);
+
+    Serial.println("Filling in DATAZ Bank - " + String(Bank));
+    Serial.println("Filling in DATAZ Mode - " + String(Mode));
+    Serial.println("Filling in DATAZ MaxBright - " + String(MaxBright));
+
+    // Fill the "dataz" structure with the data entered by the user...
+    dataz.savedBank = Bank;
+    dataz.savedMode = Mode;
+    dataz.savedMaxBright = MaxBright;
+
+    // ...and finally save everything into emulated-EEPROM
+    EEPROM.put(storedAddress + sizeof(startup), dataz);
+  }
+  else
+  {
+      
   }
 
-  // Print a confirmation of the data inserted.
-  Serial.print("<< Your Bank "); Serial.print(dataz.savedBank);
-  Serial.print(". Your Mode: "); Serial.print(dataz.savedMode);
-  Serial.print(". Your MaxBright: "); Serial.print(dataz.savedMaxBright);
-  Serial.println(" >> have been saved. Thank you!");
+  if (!EEPROM.getCommitASAP())
+      {
+        Serial.println("CommitASAP not set. Need commit()");
+        EEPROM.commit();
+
+        // Print a confirmation of the data inserted.
+        Serial.print("<< Your Bank "); Serial.print(dataz.savedBank);
+        Serial.print(". Your Mode: "); Serial.print(dataz.savedMode);
+        Serial.print(". Your MaxBright: "); Serial.print(dataz.savedMaxBright);
+        Serial.println(" >> have been saved. Thank you!");
+      }
+  else
+  {
+    
+  }
+  
 }
 
 void writeMaxBrightDataz()    // Writes the MaxBright to the flash memory
@@ -225,8 +237,8 @@ void controlsMax()
     ValueHighTime = 0;
     ValueHighReached = false;
 
-  // Write the startupMode to EEPROM Flash Memory
-    writeStartupDataz();
+      // Write the startupMode to EEPROM Flash Memory
+     //writeStartupDataz();
 
     modeFlash();
     pixel.setPixelColor(0, Sketch2Red);
