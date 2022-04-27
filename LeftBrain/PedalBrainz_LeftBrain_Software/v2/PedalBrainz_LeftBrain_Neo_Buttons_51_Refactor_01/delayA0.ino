@@ -284,7 +284,7 @@ void delayA0(int count)
       else if (Mode == 3) {
 
         mapScaledA0();
-        fadeSpeed = map(scaledA, 0, 2300, speedMinimum, 10);
+        fadeSpeed = map(scaledA, 0, 2300, speedMinimum/10, 10);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));

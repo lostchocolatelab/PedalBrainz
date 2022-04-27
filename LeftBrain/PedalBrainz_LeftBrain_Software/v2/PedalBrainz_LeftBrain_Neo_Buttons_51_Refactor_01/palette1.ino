@@ -17,10 +17,7 @@
 // Some notes on the more abstract 'theory and practice' of
 // FastLED compact palettes are at the bottom of this file.
 
-uint16_t STEPS = 30;// STEPS set dynamically once we've started up
 
-CRGBPalette16 currentPalette;
-TBlendType    currentBlending;
 
 //extern CRGBPalette16 myRedWhiteBluePalette;
 extern const TProgmemPalette16 myRedWhiteBluePalette_p PROGMEM;
@@ -463,7 +460,7 @@ void palette1()
 
     valueA0 = map(analogRead(A0), 0, 1024, 1, 10);
     
-    static uint8_t startIndex = 0;
+    //static uint8_t startIndex = 0;
     startIndex = startIndex + valueA0; /* motion speed */
 
     FillLEDsFromPaletteColors( startIndex);
@@ -492,10 +489,11 @@ void paletteStart()
     paletteBanks();
     currentBlending = LINEARBLEND;
     
-    static uint8_t startIndex = 0;
+    //static uint8_t startIndex = 0;
     startIndex = startIndex + 1; /* motion speed */
 
     FillLEDsFromPaletteColors( startIndex);
+    //Serial.println("colorIndex : " + String(colorIndex));
 
     //FastLED.show();
     //FastLED.delay(1);
@@ -522,6 +520,28 @@ void FillLEDsFromPaletteColors( uint8_t colorIndex)
     	FastLED.show();
     	//showLEDS();
     	//Serial.println("colorIndex : " + String(colorIndex));
+    }
+    //colorIndex += 3;
+    //FastLED.delay(1000 / UPDATES_PER_SECOND);
+}
+
+void FillLEDsFromPaletteColors2( uint8_t colorIndex)
+{
+
+    //maxBrightnessSet();
+    //delayA0(fadeSpeed);
+
+    //for(int i = 0; i < NUM_LEDS; i++) { 
+    //for(int i = NUM_LEDS-1; i >= 0; i--) {
+    for( int i = 0; i < NUM_LEDS; ++i) {
+        leds[0] = ColorFromPalette( currentPalette, colorIndex, colorIndex, currentBlending);
+        leds[1] = ColorFromPalette( currentPalette, colorIndex+10, colorIndex, currentBlending);
+        leds[2] = ColorFromPalette( currentPalette, colorIndex+20, colorIndex, currentBlending);
+        colorIndex = STEPS;
+        //FastLED.delay(100 / UPDATES_PER_SECOND);
+        FastLED.show();
+        //showLEDS();
+        //Serial.println("colorIndex : " + String(colorIndex));
     }
     //colorIndex += 3;
     //FastLED.delay(1000 / UPDATES_PER_SECOND);

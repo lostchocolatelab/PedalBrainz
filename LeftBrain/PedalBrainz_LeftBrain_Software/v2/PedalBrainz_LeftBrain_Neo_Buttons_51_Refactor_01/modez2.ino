@@ -236,11 +236,12 @@ void Bank2()
       {
 
       // Call the main routine and loop the thing
+        fadez3();
         //RainbowQuad();
         //fire1();
         //popFade();
         //breather1();
-        dripz();
+        //dripz();
         //meteorz();
         //meteorz2();
       }

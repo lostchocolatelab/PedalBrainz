@@ -204,8 +204,8 @@ void delayA1(int count)
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
-        mapScaledA1();
-        fadeSpeed = map(scaledA, 0, 2300, speedMinimum, 10);
+        valueA1 = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+        fullDelay = valueA1;
       }
       else if (Mode == 4) {
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value

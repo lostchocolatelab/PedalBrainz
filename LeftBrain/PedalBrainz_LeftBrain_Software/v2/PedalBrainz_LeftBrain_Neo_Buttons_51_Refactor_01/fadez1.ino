@@ -226,12 +226,12 @@ void fadez2()
   }
   else;
 
-    //scalePixelBrightness(i);
-    scalePixelRed(fadeAmount);
-
     valueA0 = map(analogRead(A0), 0, 1024, 0.5, 17.5);
     fadeAmount = constrain(fadeAmount, 0.0, 255.0);
     //FastLED.setBrightness(fadeAmount);
+
+    //scalePixelBrightness(i);
+    scalePixelRed(fadeAmount);
 
     for (int i = 0; i < NUM_LEDS; i++) {     // For each pixel in strip...
     //strip.setPixelColor(p, (i/5), 0, i);
@@ -256,23 +256,212 @@ void fadez2()
 
 void setDark()
 {
-    //scalePixelBrightness(i);
-    scalePixelRed(fadeAmount);
-
     valueA0 = map(analogRead(A0), 0, 1024, 0.5, 17.5);
     fadeAmount = constrain(fadeAmount, 0.0, 255.0);
     //FastLED.setBrightness(fadeAmount);
 
+    //scalePixelBrightness(i);
+    scalePixelRed(fadeAmount);
+
     for (int i = 0; i < NUM_LEDS; i++) {     // For each pixel in strip...
     //strip.setPixelColor(p, (i/5), 0, i);
     //strip.setPixelColor(p, (redValue), 0, redValue);
-    leds[i] = CRGB(redValue, 0, redValue);
+    leds[i] = CRGB(0, 0, 0);
     }
 
-    pixel.setPixelColor(0, redValue, 0, redValue);
-    inner.setPixelColor(0, redValue, 0, redValue);
+    pixel.setPixelColor(0, 0, 0, 0);
+    inner.setPixelColor(0, 0, 0, 0);
 
     delayA0(fadeSpeed);
+    //FastLED.delay(fadeSpeed);
+    //Serial.println("Rate of Fade in/ Fade out: " + String(fadeSpeed));
+
+    plotCycle();
+    checkButtons();
+
+    showLEDS();
+    FastLED.show();
+
+    delayA2(darkDelay);
+    Serial.println("Delay when LED fully dark (ms): " + String(darkDelay));
+
+}
+
+
+  // Gradient palette "cw2_041_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/cw/2/tn/cw2-041.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 12 bytes of program space. GreenBlue to Purple
+
+DEFINE_GRADIENT_PALETTE( cw2_041 ) {
+    0,   1, 16,  1,
+  127,   2,  6, 41,
+  255,  28, 22, 59};
+
+  // Gradient palette "Ocean_Bottom_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/colo/katiekat013/tn/Ocean_Bottom.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 40 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( Ocean_Bottom ) {
+    0,  13, 14,  8,
+   51,  13, 14,  8,
+   51,  42, 38, 25,
+  102,  42, 38, 25,
+  102,  23, 52, 45,
+  153,  23, 52, 45,
+  153,  22, 81, 80,
+  204,  22, 81, 80,
+  204,  15,118,132,
+  255,  15,118,132};  
+
+void fadez3()
+{
+
+  //Serial.println("Made it to: fadez3");
+  MaxBrightReduction = constrain(fadeAmount, 0, MaxBright);
+
+  //A1 potentiometer controls for maximum brightness
+  //maxBrightness = map(analogRead(A1), 0, 1024, 0, maxBrightnessTemp);
+  MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
+  pixel.setBrightness(maxBrightness);
+  strip.setBrightness(MaxBrightReduction);
+  FastLED.setBrightness(MaxBrightReduction);
+  inner.setBrightness(maxBrightness);
+
+  if (startIndex >= 255)      
+  {
+
+      //Serial.println("Made it to: if (startIndex >= 255)   ");
+      delayA1(fullDelay);
+      //Serial.println("Delay when LED fully lit (ms): " + String(fullDelay));
+
+      plotCycle();
+      checkButtons();
+
+/*      if (Mode == 3)
+      {
+        startIndex = 1;
+        setDark();
+      }
+      else
+      {
+        fadeUp = false;
+        startIndex = 255;
+      }*/
+
+      fadeUp = false;
+      startIndex = 255;
+      //setDark();
+
+  }
+  else if (startIndex <= 0)
+  {
+
+    //Serial.println("Made it to: if (startIndex <= 0)   ");
+    setDark2();
+    //delayA2(darkDelay);
+    //Serial.println("Delay when LED fully dark (ms): " + String(darkDelay));
+
+    plotCycle();
+    checkButtons();
+
+    fadeUp = true;
+    startIndex = 0;
+
+  }
+  else;
+
+
+  if (fadeUp == true)
+  {
+        //Serial.println("Made it to: fadeUp == true   ");
+
+
+        //paletteBanks();
+        currentPalette = cw2_041;
+        STEPS = 32;
+        currentBlending = LINEARBLEND;
+        
+        //static uint8_t startIndex = 0;
+        //startIndex = startIndex + 1; /* motion speed */
+
+        valueA0 = map(analogRead(A0), 0, 1024, 0.5, 20);
+        
+
+        startIndex = startIndex + 0.5;
+        startIndex = startIndex+valueA0;
+        startIndex = constrain(startIndex, 0, 255);
+        
+        //delayA0(fadeSpeed);
+
+        //FastLED.setBrightness(startIndex);
+        FillLEDsFromPaletteColors2(startIndex);
+        
+        Serial.println("colorIndex : " + String(startIndex));
+
+
+
+
+
+
+  }
+  else if (fadeUp == false)
+  {
+
+
+        //paletteBanks();
+        currentPalette = cw2_041;
+        STEPS = 32;
+        currentBlending = LINEARBLEND;
+        
+        //static uint8_t startIndex = 0;
+        //startIndex = startIndex - 1; /* motion speed */
+
+        valueA0 = map(analogRead(A0), 0, 1024, 0.5, 20);
+
+        startIndex = startIndex - 0.5;
+        startIndex = startIndex-valueA0;
+        startIndex = constrain(startIndex, 0, 255);
+
+        //delayA0(fadeSpeed);
+
+        //FastLED.setBrightness(startIndex);
+        FillLEDsFromPaletteColors2(startIndex);
+
+        Serial.println("colorIndex : " + String(startIndex));
+   
+  }
+  else;
+
+
+    //delayA0(fadeSpeed);
+    //FastLED.delay(fadeSpeed);
+    //Serial.println("Rate of Fade in/ Fade out: " + String(fadeSpeed));
+
+    plotCycle();
+    checkButtons();
+
+    //showLEDS();
+    //FastLED.show();
+       
+}
+
+void setDark2()
+{
+    for (int i = 0; i < NUM_LEDS; i++) {     // For each pixel in strip...
+    //strip.setPixelColor(p, (i/5), 0, i);
+    //strip.setPixelColor(p, (redValue), 0, redValue);
+    leds[i] = CRGB(0, 0, 0);
+    }
+
+    pixel.setPixelColor(0, 0, 0, 0);
+    inner.setPixelColor(0, 0, 0, 0);
+
+    FastLED.setBrightness(0);
+    strip.setBrightness(0);
+
+    //delayA0(fadeSpeed);
     //FastLED.delay(fadeSpeed);
     //Serial.println("Rate of Fade in/ Fade out: " + String(fadeSpeed));
 

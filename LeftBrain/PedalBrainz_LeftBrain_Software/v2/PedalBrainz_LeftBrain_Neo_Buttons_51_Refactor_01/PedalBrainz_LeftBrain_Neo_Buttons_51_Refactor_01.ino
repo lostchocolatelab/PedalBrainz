@@ -373,6 +373,11 @@ int avgLight2;
 int avgLightInner;
 
 bool initialBank;
+float startIndex = 0;
+int STEPS = 30;// STEPS set dynamically once we've started up
+
+CRGBPalette16 currentPalette;
+TBlendType    currentBlending;
 
 #define FRAMES_PER_SECOND 60
 
