@@ -1,3 +1,29 @@
+void scalePixelFade (int val){
+
+      //controlAmount = map(analogRead(A0), 0, 1024, 0, 100);
+      //valueLog = log(analogRead(A0)+1)/log(1024)*255;
+      //Serial.println("Mode 1 valueLog: " + String(valueLog));
+      //fadeSpeed = map(valueLog, 0, 255, (speedMinimum), (40/2)); // Logarithmic Potentiometer Value
+      //fadeSpeed = map(valueLog, 0, 255, (speedMinimum/2), (40/2)); // Logarithmic Potentiometer Value
+
+      // This makes the potentiometer slower to change when reducting from full and gives better control fidelity at higher speeds
+      // This is a map of values for the potentiometer. note: the in array should have increasing values
+      int in[]  = {0, 25,51,76,102,127,153,178,204,229,255};
+      // This is a map of values for potentiometer curve type.
+      int out[] = {0, 5, 10,  15,  20,  25,  30,  35,  50,  80,  190 };  // 11
+      // This maps the potentiometer scale.
+      controlAmount  = val;
+      // This is a multimap that assigns values from the [in] array (potentiometer) to values from the [out] array (curve)
+      x = multiMap(controlAmount, in, out, 11);
+      // This maps the values for the Modez.
+      fadeValueScaled = map(x, 0, 255, 0, 255);
+
+      //int redValue = 236;
+      //int blueValue = 73;
+      //int greenValue = 107;
+      
+}
+
 void Fadez_01 () {
 
   plotCycle();
@@ -288,32 +314,60 @@ void setDark()
 }
 
 
-  // Gradient palette "cw2_041_gp", originally from
-// http://soliton.vm.bytemark.co.uk/pub/cpt-city/cw/2/tn/cw2-041.png.index.html
-// converted for FastLED with gammas (2.6, 2.2, 2.5)
-// Size: 12 bytes of program space. GreenBlue to Purple
-
-DEFINE_GRADIENT_PALETTE( cw2_041 ) {
-    0,   1, 16,  1,
-  127,   2,  6, 41,
-  255,  28, 22, 59};
-
-  // Gradient palette "Ocean_Bottom_gp", originally from
-// http://soliton.vm.bytemark.co.uk/pub/cpt-city/colo/katiekat013/tn/Ocean_Bottom.png.index.html
+  // Gradient palette "October_Sky_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/colo/sugar/tn/October_Sky.png.index.html
 // converted for FastLED with gammas (2.6, 2.2, 2.5)
 // Size: 40 bytes of program space.
 
-DEFINE_GRADIENT_PALETTE( Ocean_Bottom ) {
-    0,  13, 14,  8,
-   51,  13, 14,  8,
-   51,  42, 38, 25,
-  102,  42, 38, 25,
-  102,  23, 52, 45,
-  153,  23, 52, 45,
-  153,  22, 81, 80,
-  204,  22, 81, 80,
-  204,  15,118,132,
-  255,  15,118,132};  
+DEFINE_GRADIENT_PALETTE( October_Sky ) {
+    0,  42,  7, 11,
+  142,  42,  7, 11,
+  142, 121, 11, 14,
+  170, 121, 11, 14,
+  170, 192, 25, 11,
+  198, 192, 25, 11,
+  198, 232, 66,  5,
+  226, 232, 66,  5,
+  226, 227,122,  9,
+  255, 227,122,  9};
+
+// Gradient palette "bhw1_07_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/bhw/bhw1/tn/bhw1_07.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 8 bytes of program space.
+
+DEFINE_GRADIENT_PALETTE( bhw1_07 ) {
+    0, 232, 65,  1,
+  255, 229,227,  1};
+
+// Gradient palette "cw2_042_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/cw/2/tn/cw2-042.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 12 bytes of program space. Dark to Light Purple
+
+DEFINE_GRADIENT_PALETTE( cw2_042 ) {
+    0,   4,  8,  6,
+  127,  20, 23, 59,
+  255,  61, 69,109};  
+
+  // Gradient palette "cw2_033_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/cw/2/tn/cw2-033.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 12 bytes of program space. Blue to Yellow
+
+DEFINE_GRADIENT_PALETTE( cw2_033 ) {
+    0,  20, 54, 45,
+  127,  74,178, 23,
+  255, 224,244, 17};  
+
+// Gradient palette "cw5_020_gp", originally from
+// http://soliton.vm.bytemark.co.uk/pub/cpt-city/cw/5/tn/cw5-020.png.index.html
+// converted for FastLED with gammas (2.6, 2.2, 2.5)
+// Size: 8 bytes of program space. Pink to Purple
+
+DEFINE_GRADIENT_PALETTE( cw5_020 ) {
+    0,  61, 13, 24,
+  255,   5,  1, 40};
 
 void fadez3()
 {
@@ -329,7 +383,7 @@ void fadez3()
   FastLED.setBrightness(MaxBrightReduction);
   inner.setBrightness(maxBrightness);
 
-  if (startIndex >= 255)      
+  if (startIndex >= 200)      
   {
 
       //Serial.println("Made it to: if (startIndex >= 255)   ");
@@ -351,7 +405,7 @@ void fadez3()
       }*/
 
       fadeUp = false;
-      startIndex = 255;
+      startIndex = 200;
       //setDark();
 
   }
@@ -379,26 +433,33 @@ void fadez3()
 
 
         //paletteBanks();
-        currentPalette = cw2_041;
-        STEPS = 32;
+        currentPalette = cw2_033;
+        STEPS = 256;
         currentBlending = LINEARBLEND;
         
         //static uint8_t startIndex = 0;
         //startIndex = startIndex + 1; /* motion speed */
 
-        valueA0 = map(analogRead(A0), 0, 1024, 0.5, 20);
+        valueA0 = map(analogRead(A0), 0, 1024, 0.5, 30);
         
 
         startIndex = startIndex + 0.5;
         startIndex = startIndex+valueA0;
-        startIndex = constrain(startIndex, 0, 255);
+        startIndex = constrain(startIndex, 0, 200);
+        //scalePixelFade(startIndex);
+        //startIndex = fadeValueScaled;
         
         //delayA0(fadeSpeed);
+        
 
         //FastLED.setBrightness(startIndex);
         FillLEDsFromPaletteColors2(startIndex);
+        //FastLED.setBrightness(startIndex);
+
+        averageLEDS();
+
         
-        Serial.println("colorIndex : " + String(startIndex));
+        Serial.println("startIndex : " + String(startIndex));
 
 
 
@@ -411,25 +472,32 @@ void fadez3()
 
 
         //paletteBanks();
-        currentPalette = cw2_041;
-        STEPS = 32;
+        currentPalette = cw2_033;
+        STEPS = 256;
         currentBlending = LINEARBLEND;
         
         //static uint8_t startIndex = 0;
         //startIndex = startIndex - 1; /* motion speed */
 
-        valueA0 = map(analogRead(A0), 0, 1024, 0.5, 20);
+        valueA0 = map(analogRead(A0), 0, 1024, 0.5, 30);
 
         startIndex = startIndex - 0.5;
         startIndex = startIndex-valueA0;
-        startIndex = constrain(startIndex, 0, 255);
+        startIndex = constrain(startIndex, 0, 200);
+        //scalePixelFade(startIndex);
+        //startIndex = fadeValueScaled;
 
         //delayA0(fadeSpeed);
-
+        
         //FastLED.setBrightness(startIndex);
         FillLEDsFromPaletteColors2(startIndex);
+        //FastLED.setBrightness(startIndex);
 
-        Serial.println("colorIndex : " + String(startIndex));
+        averageLEDS();
+
+
+
+        Serial.println("startIndex : " + String(startIndex));
    
   }
   else;

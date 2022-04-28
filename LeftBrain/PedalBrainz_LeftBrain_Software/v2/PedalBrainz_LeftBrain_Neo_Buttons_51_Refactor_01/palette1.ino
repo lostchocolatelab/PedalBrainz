@@ -525,7 +525,7 @@ void FillLEDsFromPaletteColors( uint8_t colorIndex)
     //FastLED.delay(1000 / UPDATES_PER_SECOND);
 }
 
-void FillLEDsFromPaletteColors2( uint8_t colorIndex)
+void FillLEDsFromPaletteColors2( uint8_t startIndex)
 {
 
     //maxBrightnessSet();
@@ -534,17 +534,19 @@ void FillLEDsFromPaletteColors2( uint8_t colorIndex)
     //for(int i = 0; i < NUM_LEDS; i++) { 
     //for(int i = NUM_LEDS-1; i >= 0; i--) {
     for( int i = 0; i < NUM_LEDS; ++i) {
-        leds[0] = ColorFromPalette( currentPalette, colorIndex, colorIndex, currentBlending);
-        leds[1] = ColorFromPalette( currentPalette, colorIndex+10, colorIndex, currentBlending);
-        leds[2] = ColorFromPalette( currentPalette, colorIndex+20, colorIndex, currentBlending);
-        colorIndex = STEPS;
+        leds[0] = ColorFromPalette( currentPalette, startIndex, startIndex, currentBlending);
+        leds[1] = ColorFromPalette( currentPalette, startIndex+10, startIndex, currentBlending);
+        leds[2] = ColorFromPalette( currentPalette, startIndex+20, startIndex, currentBlending);
+        //startIndex = STEPS;
         //FastLED.delay(100 / UPDATES_PER_SECOND);
+        //FastLED.setBrightness(colorIndex);
+
         FastLED.show();
         //showLEDS();
         //Serial.println("colorIndex : " + String(colorIndex));
     }
     //colorIndex += 3;
-    //FastLED.delay(1000 / UPDATES_PER_SECOND);
+    //FastLED.delay(fadeSpeed);
 }
 
 // There are several different palettes of colors demonstrated here.

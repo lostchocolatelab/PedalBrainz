@@ -91,6 +91,7 @@ int      head  = 0, tail = -10; // Index of first 'on' and 'off' pixels
 int redValue = 236;
 int blueValue = 73;
 int greenValue = 107;
+int fadeValueScaled;
 
 int fadeSpeed = 13;
 int fullDelay = 0;
