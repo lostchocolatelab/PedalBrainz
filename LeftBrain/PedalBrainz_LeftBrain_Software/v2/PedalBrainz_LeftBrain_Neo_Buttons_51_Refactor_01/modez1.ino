@@ -79,21 +79,21 @@ void modeStartupBank1() {
   else if (Mode == 2)
   {
 
-    for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
+/*    for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
       strip.setPixelColor(p, 36, 0, 255);
     }
     pixel.setPixelColor(0, 36, 0, 255);
-    inner.setPixelColor(0, 36, 0, 255);
+    inner.setPixelColor(0, 36, 0, 255);*/
 
   }
   else if (Mode == 3)
   {
 
-    for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
+/*    for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
       strip.setPixelColor(p, 36, 0, 255);
     }
     pixel.setPixelColor(0, 36, 0, 255);
-    inner.setPixelColor(0, 36, 0, 255);
+    inner.setPixelColor(0, 36, 0, 255);*/
 
   }
   else if (Mode == 4)
@@ -215,7 +215,7 @@ void Bank1()
 
       // Call the main routine and loop the thing
         fadeSpeed = 0;
-        Fadez_01();
+        fadez3();
         
       }
       // Wait for the Mode Change
@@ -247,7 +247,7 @@ void Bank1()
 
       // Call the main routine and loop the thing
         fadeSpeed = 0;
-        Fadez_01 ();
+        fadez3 ();
       
       }
       // Wait for the Mode Change

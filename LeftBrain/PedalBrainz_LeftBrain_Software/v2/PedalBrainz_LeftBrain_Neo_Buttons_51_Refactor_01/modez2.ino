@@ -224,6 +224,7 @@ void Bank2()
       modeStartupBank2();
 
       //writeStartupDataz();
+      startIndex = 0;
 
       //Do the last thing and WaitForModeChange
       waitingFlag = true;
@@ -262,6 +263,7 @@ void Bank2()
       modeStartupBank2();
 
       //writeStartupDataz();
+      startIndex = 0;
 
       //Do the last thing and WaitForModeChange
       waitingFlag = true;
@@ -274,9 +276,10 @@ void Bank2()
       {
 
       //Call the main routine and loop the thing
+        fadez3();
         //RainbowQuad();
         //fire1();
-        popFade();
+        //popFade();
         //breather1();
         //dripz();
         //meteorz();
@@ -299,6 +302,7 @@ void Bank2()
       modeStartupBank2();
 
       //writeStartupDataz();
+      startIndex = 0;
 
       //Do the last thing and WaitForModeChange
       waitingFlag = true;
@@ -311,8 +315,9 @@ void Bank2()
       {
 
       //Call the main routine and loop the thing
+        fadez3();
         //RainbowQuad();
-        fire1();
+        //fire1();
         //popFade();
         //breather1();
         //dripz();
@@ -336,6 +341,7 @@ void Bank2()
       modeStartupBank2();
 
       //writeStartupDataz();
+      startIndex = 0;
 
       //Do the last thing and WaitForModeChange
       waitingFlag = true;
@@ -349,13 +355,14 @@ void Bank2()
 
       //Call the main routine and loop the thing
                 //RainbowQuad();
+        fadez3();
         //fire1();
         //popFade();
         //breather1();
         //dripz();
         //meteorz();
         //meteorz2();
-        alienGardenz();
+        //alienGardenz();
       }
       // Wait for the Mode Change
       modeChangeWait();
@@ -373,6 +380,7 @@ void Bank2()
       modeStartupBank2();
 
       //writeStartupDataz();
+      startIndex = 0;
 
       //Do the last thing and WaitForModeChange
       waitingFlag = true;
@@ -385,13 +393,14 @@ void Bank2()
       {
 
       //Call the main routine and loop the thing
+        fadez3();
         //RainbowQuad();
         //fire1();
         //popFade();
         //breather1();
         //dripz();
         //meteorz();
-        meteorz2();
+        //meteorz2();
 
       }
       // Wait for the Mode Change
@@ -411,6 +420,7 @@ void Bank2()
       modeStartupBank2();
 
       //writeStartupDataz();
+      startIndex = 0;
 
       //Do the last thing and WaitForModeChange
       waitingFlag = true;
@@ -423,7 +433,7 @@ void Bank2()
       {
 
       //Call the main routine and loop the thing
-        RainbowSquarez();
+      fadez3();
 
       }
       // Wait for the Mode Change
@@ -455,7 +465,7 @@ void Bank2()
       {
 
       //Call the main routine and loop the thing
-        RainbowSquarez();
+      fadez3();
       }
       // Wait for the Mode Change
       modeChangeWait();
@@ -488,9 +498,9 @@ void Bank2()
       {
 
       //Call the main routine and loop the thing
-        increaseValue = true;
+      //increaseValue = true;
       //fadeSpeed = 10;
-        RainbowSquarez();
+      fadez3();
       }
       // Wait for the Mode Change
       modeChangeWait();
