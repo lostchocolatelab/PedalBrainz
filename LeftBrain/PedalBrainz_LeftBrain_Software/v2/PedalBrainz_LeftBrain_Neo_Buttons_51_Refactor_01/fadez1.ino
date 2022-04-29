@@ -387,9 +387,14 @@ void fadez3()
         //static uint8_t startIndex = 0;
         //startIndex = startIndex + 1; /* motion speed */
 
+        if (Bank ==1 && Mode == 3)
+      {
+        valueA0 = map(analogRead(A0), 0, 1024, .5, 10);
+      }
+      else
+      {
         valueA0 = map(analogRead(A0), 0, 1024, 0.1, 30);
-        
-
+      }
         startIndex = startIndex + 0.1;
         startIndex = startIndex+valueA0;
         startIndex = constrain(startIndex, 0, 200);
@@ -420,7 +425,14 @@ void fadez3()
         //static uint8_t startIndex = 0;
         //startIndex = startIndex - 1; /* motion speed */
 
+      if (Bank ==1 && Mode == 3)
+      {
+        valueA0 = map(analogRead(A0), 0, 1024, .5, 10);
+      }
+      else
+      {
         valueA0 = map(analogRead(A0), 0, 1024, 0.1, 30);
+      }
 
         startIndex = startIndex - 0.1;
         startIndex = startIndex-valueA0;

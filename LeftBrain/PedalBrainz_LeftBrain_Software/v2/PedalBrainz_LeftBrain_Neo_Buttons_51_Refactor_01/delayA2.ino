@@ -126,7 +126,7 @@ void delayA2(int count)
       }
       else {
         darkDelay = 100;
-      //Serial.println("Else darkDelay: " + String(darkDelay));
+        //Serial.println("Else darkDelay: " + String(darkDelay));
       }
 
       checkButtons();
