@@ -98,7 +98,7 @@ void strangeBright() {
   //Modes
   /* Set a value for each potentiometer (pin) for colors R,G,B. */
 
-  if (Mode == 8)
+  if (Mode == 1)
   {
     for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
       strip.setPixelColor(p, (scaledX / 2), 0, (scaledX / 4));
@@ -109,7 +109,7 @@ void strangeBright() {
     //pixel.setPixelColor(0, x, 0, 30);   //Single Output Scaled X
     showLEDS();
   }
-  if (Mode == 9)
+  if (Mode == 2)
   {
     for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
       strip.setPixelColor(p, (scaledX / 2), 0, (scaledZ / 2));
@@ -120,7 +120,7 @@ void strangeBright() {
     //pixel.setPixelColor(0, x, 0, z+100);   //Double Output Scaled X & Z
     showLEDS();
   }
-  if (Mode == 10)
+  if (Mode == 3)
   {
     for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
       strip.setPixelColor(p, (scaledX), (scaledY / 3), (scaledZ));
@@ -294,7 +294,7 @@ void strangeBrightMinDark() {
     //Modes
     /* Set a value for each potentiometer (pin) for colors R,G,B. */
 
-    if (Mode == 8)
+    if (Mode == 1)
     {
       for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
         strip.setPixelColor(p, (scaledX / 2), 0, (scaledX / 4));
@@ -304,7 +304,7 @@ void strangeBrightMinDark() {
       //pixel.setPixelColor(0, x, 0, 30);   //Single Output Scaled X
       showLEDS();
     }
-    if (Mode == 9)
+    if (Mode == 2)
     {
       for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
         strip.setPixelColor(p, (scaledX / 2), 0, (scaledZ / 2));
@@ -315,7 +315,7 @@ void strangeBrightMinDark() {
       //pixel.setPixelColor(0, x, 0, z+100);   //Double Output Scaled X & Z
       showLEDS();
     }
-    if (Mode == 10)
+    if (Mode == 3)
     {
       for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
         strip.setPixelColor(p, (scaledX), (scaledY / 3), (scaledZ));

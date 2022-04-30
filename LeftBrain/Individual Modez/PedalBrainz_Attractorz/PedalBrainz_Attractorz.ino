@@ -1,4 +1,4 @@
-//  Welcome to Pedal Brainz
+//  Abstracted Strange Attractorz Modez
 //
 //
 //  -Lost Lab
@@ -11,18 +11,18 @@
 
 */
 
+//#include <Adafruit_DotStar.h>
+#include <FlashAsEEPROM_SAMD.h>
+#include <MultiMap.h>
+#include <Adafruit_NeoPixel.h>
+#include <FastLED_NeoPixel.h>
+#include <FastLED.h>
+
 #define NUMPIXELS 3 // Number of LEDs in strip
 #define PINSTRIP 4 // Pin used for the strip (knobs)
 #define MAX_POWER 100
 #define VOLTS 5
 
-//#include <Adafruit_DotStar.h>
-#include <FlashAsEEPROM_SAMD.h>
-#include <MultiMap.h>
-
-#include <Adafruit_NeoPixel.h>
-#include <FastLED_NeoPixel.h>
-#include <FastLED.h>
 // Declare our NeoPixel strip object:
 //Adafruit_NeoPixel strip(NUMPIXELS, 4, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel inner(1, 3, NEO_GRB + NEO_KHZ800);
@@ -33,16 +33,9 @@ Adafruit_NeoPixel pixel(1, PIN_NEOPIXEL);
 //FastLED_NeoPixel <1, PIN_NEOPIXEL> pixel;
 
 #define NUM_LEDS_INNER 1
-
-//CRGB leds[NUM_LEDS_INNER];
-//CRGBArray<NUM_LEDS_INNER> ledsInner;
-//FastLED_NeoPixel_Variant inner(ledsInner, NUM_LEDS_INNER);
-
 #define NUM_LEDS 3
 
-//CRGB leds[NUM_LEDS];
 CRGBArray <NUM_LEDS> leds;
-//FastLED_NeoPixel_Variant strip(leds, NUM_LEDS);
 FastLED_NeoPixel_Variant strip(leds, NUM_LEDS);
 
 
@@ -68,7 +61,7 @@ int valueA2 = 0;
 
 /**
 
-  POTENTIOMETER declarations
+  BUTTON declarations
 
 */
 
@@ -86,7 +79,7 @@ const int buttonPinDown =  A10;      // Button Down
 // Set a default variable for the red, blue, and green (RGB) value of the on-board Dot Star
 // Pink! Potentiometer A0: 236 Potentiometer A1: 73 Potentiometer A2: 107
 
-int      head  = 0, tail = -10; // Index of first 'on' and 'off' pixels
+int head  = 0, tail = -10; // Index of first 'on' and 'off' pixels
 
 int redValue = 236;
 int blueValue = 73;
@@ -132,58 +125,9 @@ boolean Blink1 = true;
 
 /**
 
-  ROUTINES Declarations
-
-*/
-
-// Some Colors
-uint32_t Sketch2Blue = 0x0000FF;
-uint32_t Sketch2Red = 0xFF0000;
-uint32_t Sketch2Green = 0x00FF00;
-uint32_t Sketch2Yellow = 0xFFFF00;
-uint32_t Sketch2Pink = 0xFF69B4;
-uint32_t Sketch2Orange = 0xFF8000;
-
-/* rainbow1 */
-uint32_t colorRed = 0xFF0000;
-uint32_t colorOrange = 0xFF6600;
-uint32_t colorYellow = 0xFFFF00;
-uint32_t colorGreen = 0x00FF00;
-uint32_t colorBlue = 0x0000FF;
-uint32_t colorPurple = 0x660CCF;
-uint32_t colorPink = 0xFF69B4;
-
-
-
-
-uint32_t CurrentColor = Sketch2Pink;
-
-
-
-
-int rainbowBright = 255;
-int rainbowBrightReducation;
-
-/**
-
   NAVIGATION Declarations
 
 */
-
-boolean ValueZeroReached = false;
-boolean ValueHighReached = false;
-int ValueHighlight = 0;
-long ValueHighlightTime;
-long ValueZeroTime, ValueHighTime;
-int ValueZeroAdjustment = 20;
-
-boolean waitingFlag = false;
-boolean WaitForModeChange = true;
-boolean routinesStartup = true;
-
-int FlashDelay;
-int ModeFlashDelay = 100;
-boolean initial = true;
 
 bool clicked = false;
 
@@ -193,31 +137,6 @@ bool breakdelayA1 = false;
 bool breakdelayA2 = false;
 
 long WaitTime = 200;
-
-
-const int STARTUP_DATA = 0xBEEFDEED;
-uint16_t storedAddress = 0;
-    
-// Create a structure that is big enough to contain a Bank
-// and a Mode. The "valid" variable is set to "true" once
-// the structure is filled with actual data for the first time.
-typedef struct
-{
-  int savedBank;
-  int savedMode;
-  int savedMaxBright;
-} savedData;
-
-
-
-// Create a "savedData" variable and call it "dataz"
-  savedData dataz;
-
-// Check signature at address 0
-int startup;
-int startupBank;
-int startupMode;
-int startupMaxBright;
 
 int Mode = 1;
 int Bank = 1;
@@ -277,55 +196,7 @@ int strangeRandom;
 int strangeSlowAmount;
 int strangeSlowCount;
 
-bool fadeUp;
-
-/**
-
-  Mountain Snack Mode declarations
-
-*/
-
-// easily adjustable parameters
-
-int color = 0; // change between 0, 1, 2 to set the color of the pixel (currently not used)
-float minLength = 1000; // minimum length, shortest cycle time in milliseconds
-float maxLength = 100096; // this plus minLength is the longest the loop can be, in milliseconds
-bool reRandom = false; // whether or not the random numbers are reset on each loop
-int maximumScale = 90;
-
-// other variables that probably shouldn't be poked at without some thought
-
-unsigned long milli;
-int lastMillis;
-const int loopLength = 2048; // size of the arrays that i'm using
-float currentLoc;
-int currentStep;
-int currentVal;
-int newCalibrate1;
-int newValue1;
-float targetSpeed; // length of the cycle as calculated by valueA0
-float speedControl;
-
-// Snack
-
-bool snackEat = false;
-float snackChance;
-int snackMilli;
-long snackRandom;
-int snackInterval; // length of time between each potential snack, currently relative to targetSpeed
-int snackLength; // rough length of the snack, also relative to targetSpeed
-int snackLengthRandom; // a random number between -50 and 50 added to snackLength to give some variation on the length of the snack
-int delaySnackLength; // the addition of snackLength & snackLengthRandom
-
-int sumArray[loopLength];
-int scaledVal;
-boolean waitDelay = true;
-
 float randomAmount;
-const int randomDensity = 8;
-int randomCore[randomDensity];
-int randomNumbers[loopLength];
-
 
 // Rainbowz2
 
@@ -334,37 +205,6 @@ boolean increaseValue = true;
 int modulateSpeed = 0;
 int modulateConstrain;
 
-static uint16_t xx;
-static uint16_t yy;
-static uint16_t zz;
-
-// Game Stuff
-
-// A counter to record the number of button presses made by the player
-int numButtonPresses;
-
-const int STATE_START_GAME        = 0;  // Initial state
-const int STATE_PICK_RND_SEQUENCE = 1;  // Pick a random sequence of LEDs
-const int STATE_SHOW_RND_SEQUENCE = 2;  // Show the randomly selected sequence of LED flashes
-const int STATE_READ_PLAYER_GUESS = 3;  // Read the player's guess
-const int STATE_VERIFY_GUESS      = 4;  // Check the guess against the random sequence
-const int STATE_GUESS_CORRECT     = 5;  // Player guessed correctly
-const int STATE_GUESS_INCORRECT   = 6;  // Player guessed incorrectly
-
-// The current state the game is in
-int currentState;
-int nextState;
-
-// The difficulty level (1..MAX_DIFFICULTY_LEVEL)
-// (Do not set to zero!)
-int difficultyLevel;
-
-
-// Redorderz Stuff
-
-bool pressedTapzUp = false;
-bool pressedTapzDown = false;
-boolean empty = false;
 unsigned long startMillis;
 
 // Average LEDS for getting the values of the Knob LEDs and using them
@@ -375,14 +215,8 @@ int avgLight1;
 int avgLight2;
 int avgLightInner;
 
-bool initialBank;
-float startIndex = 0;
-int STEPS = 30;// STEPS set dynamically once we've started up
 
-CRGBPalette16 currentPalette;
-TBlendType    currentBlending;
 
-#define FRAMES_PER_SECOND 60
 
 /**
 
@@ -399,9 +233,7 @@ void setup() {
   
   /* Start the DotStar LED */
   pixel.begin();
-  //strip.begin(); LEDS.addLeds<LED_TYPE,LED_PIN,COLOR_ORDER>(leds,NUM_LEDS);
   strip.begin(FastLED.addLeds<WS2812B, PINSTRIP, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip));
-  //inner.begin(FastLED.addLeds<WS2812B, 3, GRB>(ledsInner, NUM_LEDS_INNER).setCorrection(TypicalLEDStrip));
   inner.begin();
 
   //FastLED.setMaxPowerInVoltsAndMilliamps( VOLTS, MAX_POWER);
@@ -435,26 +267,10 @@ void setup() {
   //y = 0.9;
   //z = 0.1;
 
-  clicked = false;
-  initialBank = false;
-  
   // Set a Startup Mode
   Bank = 1;
-  Mode = 10;
+  Mode = 2;
   MaxBright = 255;
-
-  routinesStartup = true;
-  //readStartupBank();
-
-  // Game Setups
-  difficultyLevel = 1;
-  currentState = STATE_START_GAME;
-  nextState = currentState;
-  numButtonPresses = 0;
-
-  // Recorderz Setup
-  //empty=true;
-  initial = true;
 
   //setRandoms();
   plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
@@ -473,11 +289,9 @@ void loop() {
   // This is the function that handles startup and Mode switching
   
   //Routines();
-  strangeAttractor();
   
-
   //Explicit Functions and Modes can be set here, instead of the Routines
-  //mountainSnack();
+  strangeAttractor();
 
   // plotCycle writes values to the Serial Monitor for plotting/
   // This is sprinkled throughout the code in-order to update the values on the Serial Plotter
@@ -489,14 +303,12 @@ void loop() {
   //Serial.print(F("freeMemory: "));
   //Serial.println((int)freeMemory);
 
-
 }
 
 /**
 
-  Reading and Writing to FLASH/ EEPROM Memory
+  Some Global Functions
 
-  This Section reads the startupMode value and uses it for the Mode after startup and writes the startupMode value for the current Mode
 
 */
 
@@ -609,7 +421,7 @@ void mapScaledBright (int val){
   * Date       : 2021-April-22
   * https://www.fiverr.com/ranga_niroshan
 
-  Fading
+  Initial Fading
   * Programmer : Guljanjua
   * Date       : 2021-April-21
   * https://www.fiverr.com/guljanjua
@@ -644,9 +456,5 @@ void mapScaledBright (int val){
   * Lightning Wave
   * Collector//Emitter Discord Community
   * 
-
-
-
-
 
 */
