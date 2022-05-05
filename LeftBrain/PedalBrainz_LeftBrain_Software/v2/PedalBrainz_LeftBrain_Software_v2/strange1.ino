@@ -20,11 +20,11 @@ void strangeAttractor()
   checkButtons();
 
   //Don't execute the code if not enough time has elapsed
-  if (millis() > nextLorenzUpdate) {
+  if (millis() > nextAttractorzUpdate) {
 
 
     lorenzFunction();
-    nextLorenzUpdate = millis() + (printDelay);
+    nextAttractorzUpdate = millis() + (printDelay);
 
     brightenColors();
     checkButtons();

@@ -258,7 +258,7 @@ float dz = 0;
 
 //Variables for timing
 float dt = 0.01;  //Time between interval (seconds) default: 10ms (0.01s) you can change it but the code become unstable
-unsigned long nextLorenzUpdate = 0;
+unsigned long nextAttractorzUpdate = 0;
 int printDelay = 10; //Time between each serial print (default: 50ms)
 
 

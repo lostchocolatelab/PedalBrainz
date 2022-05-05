@@ -483,6 +483,10 @@ void Bank2()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank2();
 
+      x = 0.5;
+      y = 0.9;
+      z = 0.1;
+
       //writeStartupDataz();
 
       //Do the last thing and WaitForModeChange
@@ -500,7 +504,7 @@ void Bank2()
       //Call the main routine and loop the thing
       //increaseValue = true;
       //fadeSpeed = 10;
-      fadez3();
+      fadez4();
       }
       // Wait for the Mode Change
       modeChangeWait();

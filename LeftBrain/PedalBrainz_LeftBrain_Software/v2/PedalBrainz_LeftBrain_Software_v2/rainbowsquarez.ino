@@ -44,6 +44,8 @@ void RainbowSquarez(){
     
     
     ModulateControl();
+
+
     // Set the color
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorRed);
@@ -61,6 +63,8 @@ void RainbowSquarez(){
     //darkDelayBetwixtColors();
 
     ModulateControl();
+
+
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorOrange);
     }
@@ -75,6 +79,8 @@ void RainbowSquarez(){
     //darkDelayBetwixtColors();
 
     ModulateControl();
+
+
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorYellow);
     }
@@ -89,6 +95,8 @@ void RainbowSquarez(){
     //darkDelayBetwixtColors();
 
     ModulateControl();
+
+
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorGreen);
     }
@@ -101,6 +109,8 @@ void RainbowSquarez(){
     //darkDelayBetwixtColors();
 
     ModulateControl();
+
+
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorBlue);
     }
@@ -115,6 +125,8 @@ void RainbowSquarez(){
     //darkDelayBetwixtColors();
     
     ModulateControl();
+
+
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorPurple);
     }
@@ -127,6 +139,8 @@ void RainbowSquarez(){
     //darkDelayBetwixtColors();
 
     ModulateControl();
+
+
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorBlue);
     }
@@ -139,6 +153,8 @@ void RainbowSquarez(){
     //darkDelayBetwixtColors();
     
     ModulateControl();
+
+
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorGreen);
     }
@@ -150,6 +166,8 @@ void RainbowSquarez(){
     delayA0(fadeSpeed);
 
     ModulateControl();
+
+
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorYellow);
     }
@@ -162,6 +180,8 @@ void RainbowSquarez(){
     //darkDelayBetwixtColors();
 
     ModulateControl();
+
+    
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorOrange);
     }
