@@ -399,7 +399,7 @@ void fadez3()
 
         if (Bank == 1 && Mode == 3)
       {
-        valueA0 = map(analogRead(A0), 0, 1024, .5, 30);
+        valueA0 = map(analogRead(A0), 0, 1024, 0.01, 30);
       }
       else
       {
@@ -435,9 +435,9 @@ void fadez3()
         //static uint8_t startIndex = 0;
         //startIndex = startIndex - 1; /* motion speed */
 
-      if (Bank ==1 && Mode == 3)
+      if (Bank == 1 && Mode == 3)
       {
-        valueA0 = map(analogRead(A0), 0, 1024, .5, 10);
+        valueA0 = map(analogRead(A0), 0, 1024, 0.01, 10);
       }
       else
       {

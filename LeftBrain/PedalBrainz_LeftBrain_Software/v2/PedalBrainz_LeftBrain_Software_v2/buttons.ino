@@ -327,6 +327,7 @@ void doubleClickEventUp()
       Mode = 1;
       Serial.println("Bank Change = " + String(Bank));
       writeStartupDataz();
+      initialBank = true;
     }
 
   }
@@ -488,6 +489,7 @@ void doubleClickEventDown()
       Mode = 1;
       Serial.println("Bank Change = " + String(Bank));
       writeStartupDataz();
+      initialBank = true;
     }
 
   }

@@ -422,6 +422,36 @@
       153,   7, 55,  8,
       255,   0,  0,  0};
 
+     DEFINE_GRADIENT_PALETTE( rrr ) {
+        0,   255,  0,  0,
+       120,  255, 12,  0,
+      255,   255,  0,  0}; 
+
+      DEFINE_GRADIENT_PALETTE( ooo ) {
+        0,   255,  73,  0,
+       120,  255, 50,  0,
+      255,   255,  73,  0};  
+
+    DEFINE_GRADIENT_PALETTE( yyy ) {
+        0,   255,  255,  0,
+       120,  176, 255,  0,
+      255,   255,  255,  0}; 
+
+    DEFINE_GRADIENT_PALETTE( ggg ) {
+        0,   0,  255,  0,
+       120,  43, 255,  0,
+      255,   0,  255,  0};   
+
+    DEFINE_GRADIENT_PALETTE( bbb ) {
+        0,   0,  0,  255,
+       120,  0, 37,  142,
+      255,   0,  0,  255};  
+
+     DEFINE_GRADIENT_PALETTE( vvv ) {
+        0,   42,  0,  117,
+       120,  75, 0,  200,
+      255,   32,  0,  117};           
+
 
 #define UPDATES_PER_SECOND 100
 
@@ -484,14 +514,14 @@ void paletteStart()
 {
 
     
-    for( int i = 0; i < 125; ++i) 
+    for( int i = 0; i < 100; ++i) 
     {
 
     paletteBanks();
     currentBlending = LINEARBLEND;
     STEPS = 256;
     //static uint8_t startIndex = 0;
-    startIndex = startIndex + 2; /* motion speed */
+    startIndex = startIndex + 5; /* motion speed */
 
     FillLEDsFromPaletteColors(startIndex);
     //Serial.println("colorIndex : " + String(colorIndex));
@@ -586,8 +616,8 @@ void paletteBanks()
     
         if (Mode == 1) {
             
-            currentPalette = bhw2_xc_gp;
-            //STEPS = 32;
+            currentPalette = rrr;
+            STEPS = 16;
             //Serial.println("Mode 1 Palette: ");
 
             }
@@ -617,8 +647,8 @@ void paletteBanks()
 
         if (Mode == 1) {
         
-        currentPalette = bhw1_04_gp;
-        //STEPS = 32;
+        currentPalette = ooo;
+        STEPS = 16;
         //Serial.println("Mode 1 Palette: ");
 
         }
@@ -693,21 +723,21 @@ void paletteBanks()
     }
     else if (Bank == 3) {
 
-    currentPalette = Lemon_Yellow_gp;
+    currentPalette = yyy;
     STEPS = 16;
     //Serial.println("Bank 3 Start Palette: ");
 
     }
     else if (Bank == 4) {
 
-    currentPalette = bhw1_greeny_gp;
+    currentPalette = ggg;
     STEPS = 16;
     //Serial.println("Bank 4 Start Palette: ");
 
     }
     else if (Bank == 5) {
 
-    currentPalette = cw2_041_gp;
+    currentPalette = bbb;
     STEPS = 16;
     //Serial.println("Bank 5 Start Palette: ");
 
@@ -718,7 +748,7 @@ void paletteBanks()
 
         if (Mode == 1) {
         
-        currentPalette = bhw1_04_gp;
+        currentPalette = vvv;
         STEPS = 32;
         //Serial.println("Mode 1 Palette: ");
 

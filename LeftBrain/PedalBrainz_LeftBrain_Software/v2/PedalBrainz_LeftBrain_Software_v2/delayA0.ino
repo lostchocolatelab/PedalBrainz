@@ -80,7 +80,7 @@ void delayA0(int count)
       if (Mode == 1) {
 
         mapScaledA0();
-        fadeSpeed = map(scaledA, 0, 2300, speedMinimum, 50);
+        fadeSpeed = map(scaledA, 0, 2300, speedMinimum, 30);
 
         valueA1 = map(analogRead(A1), 0, 1024, 0, 90);
         valueA2 = map(analogRead(A2), 0, 1024, 0, 90);

@@ -146,13 +146,7 @@ void Bank1()
 
   plotCycle();
 
-  /**
-
-  Fadez
-
-  */
-
-      // Squarez
+  // Squarez
   if (Mode == 1)
   {
       //Serial.println("Mode 1 Started fadespeed " + String(fadeSpeed));
