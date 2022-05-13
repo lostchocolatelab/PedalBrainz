@@ -16,7 +16,8 @@ void scalePixelRed (int val){
       // This is a multimap that assigns values from the [in] array (potentiometer) to values from the [out] array (curve)
       x = multiMap(controlAmount, in, out, 11);
       // This maps the values for the Modez.
-      redValue = map(x, 0, 255, 0, 255);
+      //redValue = map(x, 0, 255, 0, 255);
+      redValue = constrain(x, 0.0, 255.0);
 
       //int redValue = 236;
       //int blueValue = 73;
