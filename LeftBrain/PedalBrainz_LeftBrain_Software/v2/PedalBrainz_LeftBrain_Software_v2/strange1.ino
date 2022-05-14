@@ -56,6 +56,49 @@ void strangeAttractor()
 
 }
 
+void strangeAttractor2()
+{
+
+  //controlsMax();
+  checkButtons();
+
+  //Don't execute the code if not enough time has elapsed
+  if (millis() > nextAttractorzUpdate) {
+
+
+    lorenzFunction();
+    nextAttractorzUpdate = millis() + (printDelay);
+
+    brightenColors();
+    checkButtons();
+
+    //A2 potentiometer controls for amount of randomless from less to more random
+    b = map(analogRead(A2), 0, 1024, 20, 50);
+
+    strangeBright();
+    //strangeBrightMinDark();
+    checkButtons();
+
+    showLEDS();
+
+    //A0 potentiometer controls for fade speed
+    delayA0(fadeSpeed);
+
+    checkButtons();
+
+    // Slow down the simulation when the value is low
+
+    //strangeSlow();
+    strangeSlow2();
+    checkButtons();
+
+    plotCycle();
+    checkButtons();
+
+  }
+
+}
+
 void strangeBright() {
 
   //A1 potentiometer controls for maximum brightness
@@ -110,7 +153,9 @@ void strangeBright() {
   }
   
   // Print some stuff
-  Serial.println("scaledx: " + String(scaledX) + " scaledY : " + String(scaledY) + " scaledz : " + String(scaledZ));
+  //Serial.println("scaledx: " + String(scaledX) + " scaledY : " + String(scaledY) + " scaledz : " + String(scaledZ));
+  Serial.println("," + String(scaledX) + "," + String(scaledY) + "," + String(scaledZ));
+
 }
 
 
@@ -229,7 +274,8 @@ void strangeSlow2() {
       showLEDS();
       
       //Serial.println("strangeSlow: " + String(darkDelay) + " strangeSlowAmount : " + String(strangeSlowAmount));
-      Serial.println("scaledY: " + String(scaledY) + " darkDelay : " + String(darkDelay) + " strangeSlowCount : " + String(strangeSlowCount));
+      //Serial.println("scaledY: " + String(scaledY) + " darkDelay : " + String(darkDelay) + " strangeSlowCount : " + String(strangeSlowCount));
+    
     }
   }
 }

@@ -207,7 +207,7 @@ void delayA0(int count)
       }
       else
       {
-        delay(.5);
+        delay(.1);
       };
 
       checkButtons();
