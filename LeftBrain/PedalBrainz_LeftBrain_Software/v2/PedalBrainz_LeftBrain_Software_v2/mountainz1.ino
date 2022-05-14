@@ -92,7 +92,7 @@ void mountainSnack() {
       // This is a multimap that assigns values from the [in] array (potentiometer) to values from the [out] array (curve)
       x = multiMap(controlAmount, in, out, 11);
       // This maps the values for the Modez.
-      newValue1 = map(x, 0, 2300, 255, 0);
+      newValue1 = mapfloat(x, 0, 2300, 255, 0);
   
   //newValue1 = map(analogRead(A0), 0, 1024, 255, 0); // Control the Speed
   
@@ -391,7 +391,7 @@ else;
 
     // yann's simple system for setitng single pixel color with variable brightness
     
-    scaledVal = map(currentVal, 0, 255, 0, maximumScale);
+    scaledVal = mapfloat(currentVal, 0, 255, 0, maximumScale);
     MaxBrightReduction = constrain(currentVal, 0, MaxBright);
     
       //Serial.println(scaledVal);

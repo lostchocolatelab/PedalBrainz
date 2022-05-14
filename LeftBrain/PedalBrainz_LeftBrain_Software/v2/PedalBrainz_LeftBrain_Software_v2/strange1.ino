@@ -8,9 +8,6 @@ STRANGE ATTRACTORS
   //
 
 
-int scaledXInner;
-int scaledYInner;
-int scaledZInner;
 
 
 void strangeAttractor()
@@ -56,48 +53,6 @@ void strangeAttractor()
 
 }
 
-void strangeAttractor2()
-{
-
-  //controlsMax();
-  checkButtons();
-
-  //Don't execute the code if not enough time has elapsed
-  if (millis() > nextAttractorzUpdate) {
-
-
-    lorenzFunction();
-    nextAttractorzUpdate = millis() + (printDelay);
-
-    brightenColors();
-    checkButtons();
-
-    //A2 potentiometer controls for amount of randomless from less to more random
-    b = map(analogRead(A2), 0, 1024, 20, 50);
-
-    strangeBright();
-    //strangeBrightMinDark();
-    checkButtons();
-
-    showLEDS();
-
-    //A0 potentiometer controls for fade speed
-    delayA0(fadeSpeed);
-
-    checkButtons();
-
-    // Slow down the simulation when the value is low
-
-    //strangeSlow();
-    strangeSlow2();
-    checkButtons();
-
-    plotCycle();
-    checkButtons();
-
-  }
-
-}
 
 void strangeBright() {
 
@@ -280,6 +235,39 @@ void strangeSlow2() {
   }
 }
 
+void strangeSlow3() {
+
+
+  if ((strangeSlowCount >= 0) && (strangeSlowCount <= 20)) {
+    strangeSlowCount = strangeSlowCount + 1;
+  }
+  else {
+    // Slow down the simulation when the value is low
+    if ((scaledX >= 0) && (scaledX <= 50) || (scaledY >= 0) && (scaledY <= 50) || (scaledZ >= 0) && (scaledZ <= 50)) {
+      valueA0 = map(analogRead(A0), 0, 1024, 1000, 0);
+      strangeRandom = random(20, 200);
+      strangeSlowAmount = (strangeRandom + valueA0);
+      darkDelay = strangeSlowAmount;
+    //darkDelay = strangeSlowAmount;
+      checkButtons();
+      delayA2(darkDelay);
+
+      maxBrightness = map(analogRead(A1), 0, 1024, 0, maxBrightnessTemp);
+      MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
+      pixel.setBrightness(maxBrightness);
+      strip.setBrightness(MaxBrightReduction);
+      FastLED.setBrightness(MaxBrightReduction);
+      inner.setBrightness(maxBrightness);
+      showLEDS();
+      
+      //Serial.println("strangeSlow: " + String(darkDelay) + " strangeSlowAmount : " + String(strangeSlowAmount));
+      //Serial.println(", " + String(darkDelay) + " , " + String(strangeSlowAmount));
+      //Serial.println("scaledY: " + String(scaledY) + " darkDelay : " + String(darkDelay) + " strangeSlowCount : " + String(strangeSlowCount));
+    
+    }
+  }
+}
+
 /**
 
 STRANGE ATTRACTORS Lorentz
@@ -316,13 +304,13 @@ void lorenzFunction() {
 
   //Values are scaled to 0-255 to adapt to the analogWrite function
 
-  scaledX = map(x, scalings[0][0], scalings[1][0], 0, 255);
-  scaledY = map(y, scalings[0][1], scalings[1][1], 0, 255);
-  scaledZ = map(z, scalings[0][2], scalings[1][2], 0, 255);
+  scaledX = mapfloat(x, scalings[0][0], scalings[1][0], 0, 255);
+  scaledY = mapfloat(y, scalings[0][1], scalings[1][1], 0, 255);
+  scaledZ = mapfloat(z, scalings[0][2], scalings[1][2], 0, 255);
 
-  scaledXInner = map(scaledX, 0, 255, 0, 190);
-  scaledYInner = map(scaledY, 0, 255, 0, 190);
-  scaledZInner = map(scaledZ, 0, 255, 0, 190);
+  scaledXInner = mapfloat(scaledX, 0, 255, 0, 190);
+  scaledYInner = mapfloat(scaledY, 0, 255, 0, 190);
+  scaledZInner = mapfloat(scaledZ, 0, 255, 0, 190);
 }
 
 /**

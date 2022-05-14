@@ -473,7 +473,7 @@ void delayA1(int count)
   }
 
   ////////////////////
-  ////////////////////        BANK 5
+  ////////////////////        BANK 5 - Attractorz
   ////////////////////  
   else if (Bank == 5)
   {
@@ -523,39 +523,8 @@ void delayA1(int count)
       }
 
 
-      if (Mode == 1) {
-        //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
-        //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
-
-        mapScaledA1();
-        fadeSpeed = map(scaledA, 0, 2300, speedMinimum, 10);
-
-
-        //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
-        //Serial.println("Mode 3 fadeSpeeed: " + String(fadeSpeed));
-
-      }
-      else if (Mode == 2) {
-        fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
-        //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
-
-        mapScaledA1();
-        fadeSpeed = map(scaledA, 0, 2300, speedMinimum, 10);
-
-      }
-      else if (Mode == 3) {
-        //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
-        //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
-
-        mapScaledA1();
-        fadeSpeed = map(scaledA, 0, 2300, speedMinimum, 10);
-      }
-      else {
-        fullDelay = 100;
-              //Serial.println("Else fullDelay: " + String(fullDelay));
-      }
-
-      FastLED.delay(1);
+   
+      //FastLED.delay(1);
 
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fullDelay));
 

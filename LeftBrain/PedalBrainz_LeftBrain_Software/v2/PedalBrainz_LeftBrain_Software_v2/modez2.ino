@@ -422,46 +422,7 @@ void Bank2()
     }
   }
 
-      // Strange Attractor 2
-  if (Mode == 9)
-  {
-    if (!waitingFlag)
-    {
-      // Flash the pixel at the start of a mode chnage
-      //modeFlash();
-
-      // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank2();
-
-      x = 0.5;
-      y = 0.9;
-      z = 0.1;
-
-      //writeStartupDataz();
-
-      //Do the last thing and WaitForModeChange
-
-
-      waitingFlag = true;
-      WaitForModeChange = true;
-      Serial.println(" WaitForModeChange = True");
-    }
-    else
-    {
-      if (WaitForModeChange)
-      {
-
-      //Call the main routine and loop the thing
-      //increaseValue = true;
-      //fadeSpeed = 10;
-      fadez4();
-      }
-      // Wait for the Mode Change
-      modeChangeWait();
-    }
-  }
-
-      // Strange Attractor 3
+  // Strange Attractor 3
   if (Mode == 10)
   {
     if (!waitingFlag)

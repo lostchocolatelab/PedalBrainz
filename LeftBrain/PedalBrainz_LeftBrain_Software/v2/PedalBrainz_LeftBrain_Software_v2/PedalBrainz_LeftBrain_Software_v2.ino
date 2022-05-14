@@ -245,11 +245,21 @@ float scaledZ = 0;
 float effectiveR = 0;
 float effectiveG = 0;
 float effectiveB = 0;
+float scaledXInner;
+float scaledYInner;
+float scaledZInner;
+
 
 //Constants for the lorenz function, KEEP UNCHANGED
 float a = 10.0;
 float b = 28.0;
 float c = 8.0 / 3.0;
+float d;
+float e;
+float f;
+float g;
+
+float timestep;
 
 //Variables for lorenz function
 float dx = 0;
@@ -267,7 +277,17 @@ float scalings[2][3] {
   {0, 0, 0} //maxX, maxY, maxZ
 };
 
-int brightness = 0;
+bool already = false; // the variable is used to restart only after two consecutive max values
+
+float maxValue, minValue;
+
+  float mapfloat(float b, float in_min, float in_max, float out_min, float out_max)
+  {
+    return (b - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+  }
+
+
+float brightness = 0;
 int brightnessScaled;
 float fadeAmount = 1;  //Change it to adjust the fading between each step (fading speed)
 int maxBrightness = 190; //Pixel Max Bright
@@ -557,6 +577,25 @@ void averageLEDSBrightness(){
   inner.setPixelColor(0, avgLightInner,avgLightInner,avgLightInner);  
 
   showLEDS();
+}
+
+void pixelScaling()
+{
+  
+  updateScaling(0, 0, 1, 0, x);
+  updateScaling(0, 1, 1, 1, y);
+  updateScaling(0, 2, 1, 2, z);
+
+  //Values are scaled to 0-255 to adapt to the analogWrite function
+
+  scaledX = mapfloat(x, scalings[0][0], scalings[1][0], 0, 255);
+  scaledY = mapfloat(y, scalings[0][1], scalings[1][1], 0, 255);
+  scaledZ = mapfloat(z, scalings[0][2], scalings[1][2], 0, 255);
+
+  scaledXInner = mapfloat(scaledX, 0, 255, 0, 190);
+  scaledYInner = mapfloat(scaledY, 0, 255, 0, 190);
+  scaledZInner = mapfloat(scaledZ, 0, 255, 0, 190);  
+
 }
 
 

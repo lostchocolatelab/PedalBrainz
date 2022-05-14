@@ -471,7 +471,7 @@ void delayA2(int count)
     }
   }
   ////////////////////
-  ////////////////////        BANK 5
+  ////////////////////        BANK 5 - Attractorz
   ////////////////////  
   else if (Bank == 5)
   {
@@ -522,54 +522,10 @@ void delayA2(int count)
 
       }
 
-      if (Mode == 1) {
-
-        darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
-      //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
-      }
-      else if (Mode == 2) {
-
-        darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
-      //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
-      }
-      else if (Mode == 3) {
-
-        darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
-      //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
-      }
-      else if (Mode == 6) {
-
-        valueA2 = map(analogRead(A2), 0, 1024, 0, durationMaximum);
-        darkDelay =  valueA2 / 5;
-      //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
-      }
-      else if (Mode == 7) {
-
-        darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
-      //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
-      }
-      else if (Mode == 8) {
-
-        darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
-      //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
-      }
-      else if (Mode == 9) {
-
-        darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
-      //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
-      }
-      else if (Mode == 10) {
-
-        darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
-      //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
-      }
-      else {
-        darkDelay = 100;
-      //Serial.println("Else darkDelay: " + String(darkDelay));
-      }
+  
 
       checkButtons();
-      FastLED.delay(1);
+      //FastLED.delay(1);
       //controlsMax();
       //Serial.println("Count if Waiting = False: " + String(count));
       //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));

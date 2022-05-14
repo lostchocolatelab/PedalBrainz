@@ -203,7 +203,11 @@ void Bank6()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank6();
+      modeStartupBank5();
+
+      x = 0.5;
+      y = 0.9;
+      z = 0.1;
       
       //writeStartupDataz();
       
@@ -218,7 +222,10 @@ void Bank6()
       {
 
         // Call the main routine and loop the thing
-        palette1();
+        //popFade();
+        //breather1();
+        //dripz();
+        meteorz();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -234,7 +241,7 @@ void Bank6()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank6();
+      modeStartupBank5();
       
       //writeStartupDataz();
       
@@ -249,7 +256,10 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        palette1();
+        //popFade();
+        //breather1();
+        //dripz();
+        meteorz();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -265,7 +275,7 @@ void Bank6()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank6();
+      modeStartupBank5();
       
       //writeStartupDataz();
       
@@ -280,7 +290,8 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        palette1();
+        mountainSnack ();
+        reRandom = true;
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -296,7 +307,7 @@ void Bank6()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank6();
+      modeStartupBank5();
       
       //writeStartupDataz();
       
@@ -311,7 +322,8 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        palette1();
+        mountainSnack ();
+        reRandom = true;
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -326,7 +338,7 @@ void Bank6()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank6();
+      modeStartupBank5();
       
       //writeStartupDataz();
       
@@ -341,7 +353,8 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        palette1();        
+        RainbowSquarez();
+        
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -357,7 +370,7 @@ void Bank6()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank6();
+      modeStartupBank5();
       
       //writeStartupDataz();
       
@@ -372,38 +385,8 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        palette1();
-      }
-        // Wait for the Mode Change
-        modeChangeWait();
-    }
-  }
-
-  // RainbowSquarezRamping
-  if (Mode == 9)
-  {
-    if (!waitingFlag)
-    {
-      // Flash the pixel at the start of a mode chnage
-      //modeFlash();
-
-      // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank6();
-      
-      //writeStartupDataz();
-      
-      //Do the last thing and WaitForModeChange
-      waitingFlag = true;
-      WaitForModeChange = true;
-      Serial.println(" WaitForModeChange = True");
-    }
-    else
-    {
-      if (WaitForModeChange)
-      {
-
-        //Call the main routine and loop the thing
-        palette1();
+        RainbowSquarez();
+        
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -419,7 +402,7 @@ void Bank6()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank6();
+      modeStartupBank5();
       
       //writeStartupDataz();
       
@@ -436,7 +419,9 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        palette1();
+        increaseValue = true;
+        //fadeSpeed = 10;
+        RainbowSquarez();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -452,7 +437,7 @@ void Bank6()
       //modeFlash();
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank6();
+      modeStartupBank5();
       
       //writeStartupDataz();
       
@@ -467,7 +452,8 @@ void Bank6()
       {
 
         // Call the main routine and loop the thing
-        palette1();
+        valueA0  = 7;
+        rainbowNew();
       }
         // Wait for the Mode Change
         modeChangeWait();

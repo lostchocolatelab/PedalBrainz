@@ -387,37 +387,6 @@ void Bank4()
     }
   }
 
-  // RainbowSquarezRamping
-  if (Mode == 9)
-  {
-    if (!waitingFlag)
-    {
-      // Flash the pixel at the start of a mode chnage
-      //modeFlash();
-
-      // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank4();
-      
-      //writeStartupDataz();
-      
-      //Do the last thing and WaitForModeChange
-      waitingFlag = true;
-      WaitForModeChange = true;
-      Serial.println(" WaitForModeChange = True");
-    }
-    else
-    {
-      if (WaitForModeChange)
-      {
-
-        //Call the main routine and loop the thing
-        RainbowSquarez();
-      }
-        // Wait for the Mode Change
-        modeChangeWait();
-    }
-  }
-
   // Strange Attractor 2
   if (Mode == 9)
   {

@@ -1,55 +1,84 @@
-/**
 
-  Bank 2 - Modez
+/*
+///  Bank 5 - Modez
   
-  This is where the Mode switching and waiting happens within the loop.
+//thomas
 
-  If Bank and Mode are True:
-  -Initialize some things
-  -Loop the Mode
-  -Wait for the Mode Change
+b = 0.19;
 
-  Mode 1 | Quad Rainbowz Fixed - Uses randomBright01-04 Declared in General Declarations
-  A0 = Rainbow Cycle Speed
-  A1 = Maximum Brightness
-  A2 = Duration when LED is fully off (It's Dark)
+x = 1;
+y = 2;
+z = 1;
 
-  Mode 2 | Quad Rainbowz Random Once - Randomize Brightness values for the 4 values once at startup
-  A0 = Rainbow Cycle Speed
-  A1 = Randomized Maximum Brightness
-  A2 = Duration when LED is fully off (It's Dark)
+timestep = .1;
 
-  Modez 3 | Quad Rainbowz Random Random - Randomize Brightness values for the 4 values after each cycle
-  A0 = Duration of 4th brightness after brightness changes for a single color
-  A1 = Delay of each Brightness Value (4) for a Single Color
-  A2 = Duration of Darkness after full Color Cycle (or betwixt each color if darkDelayBetwixtColors is enabled)
+//arneodo
 
-  Mode 4 | Mountainz Rainbow Random Repeat
-  A0 = Cycle Speed
-  A1 = Amount of Randomness
-  A2 = Chance of Snack
+a = -5.5;
+b = 3.5;
+c = -1;
 
-  Mode 5 | Mountainz Rainbow Random Random
-  A0 = Cycle Speed
-  A1 = Amount of Randomness
-  A2 = Chance of Snack
+x = 0.5;
+y = 0.1;
+z = 0.3;
 
-  Mode 6 | Mountainz Rainbow Random Random Slow
-  A0 = Cycle Speed
-  A1 = Amount of Randomness
-  A2 = Chance of Snack 
+//timestep = 0.01;
+timestep = 0.008;
 
-  Mode 7 | Rainbow Squarez 
-  A0 = Rainbow Cycle Speed
-  A1 = Maximum Brightness
-  A2 = Duration when LED is fully off (It's Dark)
+//chen
 
-  Mode 8 | Rainbow Squarez Modulate
-  A0 = Rainbow Cycle Speed
-  A1 = Maximum Brightness
-  A2 = Duration when LED is fully off (It's Dark)  
+a = 5.0;
+b = -10.0;
+c = -0.38;
 
+x = 5;
+y = 10;
+z = 10;
+
+timestep = 0.005;
+
+//scroll 3 
+
+a = 40.0;
+b = 0.833;
+c = 20.0;
+d = 0.5;
+e = 0.65;
+
+x = 2.1;
+y = 0.9;
+z = 1.2;
+
+timestep = 0.01;
+
+//lorentz83
+
+ a = 0.95;
+ b = 7.91;
+ f = 4.83;
+ g = 4.66;
+
+ x = -0.2;
+ y = -2.82;
+ z = 2.71;
+
+timestep = 0.005;
+
+//dadras
+
+a = 3;
+b = 2.7;
+c = 1.7;
+d = 2;
+e = 9;
+
+x = 0.5;
+y = 0.1;
+z = 0.3;
+
+timestep = 0.01;
 */
+
 
 void modeStartupBank5(){
 
@@ -127,7 +156,7 @@ void Bank5()
 
   */
 
-  // RainbowQuad
+  // Thomas
   if (Mode == 1)
   {
     //Serial.println("Mode 1 Started fadespeed " + String(fadeSpeed));
@@ -143,9 +172,15 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
       
-      x = 0.5;
-      y = 0.9;
-      z = 0.1;
+      //thomas
+
+      b = 0.19;
+
+      x = 1;
+      y = 2;
+      z = 1;
+
+      timestep = .1;
 
       //writeStartupDataz();
       
@@ -160,17 +195,14 @@ void Bank5()
       {
 
         //Call the main routine and loop the thing
-        popFade();
-        //breather1();
-        //dripz();
-        //meteorz();
+        strangeAttractor2();
       }
         // Wait for the Mode Change
         modeChangeWait();
     }
   }
 
-  // RainbowQuad
+  // 
   if (Mode == 2)
   {
     if (!waitingFlag)
@@ -181,9 +213,15 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
       
-      x = 0.5;
-      y = 0.9;
-      z = 0.1;
+      //thomas
+
+      b = 0.19;
+
+      x = 1;
+      y = 2;
+      z = 1;
+
+      timestep = .1;
 
       //writeStartupDataz();
       
@@ -198,10 +236,7 @@ void Bank5()
       {
 
         // Call the main routine and loop the thing
-        //popFade();
-        //breather1();
-        dripz();
-        //meteorz();
+        strangeAttractor2();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -219,10 +254,20 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
 
+      //arneodo
+
+      a = -5.5;
+      b = 3.5;
+      c = -1;
+
       x = 0.5;
-      y = 0.9;
-      z = 0.1;
-      
+      y = 0.1;
+      z = 0.3;
+
+      //timestep = 0.01;
+      timestep = 0.008;
+
+  
       //writeStartupDataz();
       
       //Do the last thing and WaitForModeChange
@@ -236,10 +281,7 @@ void Bank5()
       {
 
         // Call the main routine and loop the thing
-        //popFade();
-        //breather1();
-        //dripz();
-        meteorz();
+        strangeAttractor2();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -256,6 +298,19 @@ void Bank5()
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
+
+      //arneodo
+
+      a = -5.5;
+      b = 3.5;
+      c = -1;
+
+      x = 0.5;
+      y = 0.1;
+      z = 0.3;
+
+      //timestep = 0.01;
+      timestep = 0.008;
       
       //writeStartupDataz();
       
@@ -270,10 +325,7 @@ void Bank5()
       {
 
         //Call the main routine and loop the thing
-        //popFade();
-        //breather1();
-        //dripz();
-        meteorz();
+        strangeAttractor2();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -290,7 +342,19 @@ void Bank5()
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
-      
+
+      //chen
+
+      a = 5.0;
+      b = -10.0;
+      c = -0.38;
+
+      x = 5;
+      y = 10;
+      z = 10;
+
+      timestep = 0.005;
+
       //writeStartupDataz();
       
       //Do the last thing and WaitForModeChange
@@ -304,8 +368,7 @@ void Bank5()
       {
 
         //Call the main routine and loop the thing
-        mountainSnack ();
-        reRandom = true;
+        strangeAttractor2();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -322,6 +385,18 @@ void Bank5()
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
+
+      //chen
+
+      a = 5.0;
+      b = -10.0;
+      c = -0.38;
+
+      x = 5;
+      y = 10;
+      z = 10;
+
+      timestep = 0.005;
       
       //writeStartupDataz();
       
@@ -336,8 +411,7 @@ void Bank5()
       {
 
         //Call the main routine and loop the thing
-        mountainSnack ();
-        reRandom = true;
+        strangeAttractor2();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -353,7 +427,21 @@ void Bank5()
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
-      
+
+      //scroll 3 
+
+      a = 40.0;
+      b = 0.833;
+      c = 20.0;
+      d = 0.5;
+      e = 0.65;
+
+      x = 2.1;
+      y = 0.9;
+      z = 1.2;
+
+      timestep = 0.01;
+    
       //writeStartupDataz();
       
       //Do the last thing and WaitForModeChange
@@ -367,8 +455,7 @@ void Bank5()
       {
 
         //Call the main routine and loop the thing
-        RainbowSquarez();
-        
+        strangeAttractor2();        
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -385,7 +472,21 @@ void Bank5()
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
-      
+
+      //scroll 3 
+
+      a = 40.0;
+      b = 0.833;
+      c = 20.0;
+      d = 0.5;
+      e = 0.65;
+
+      x = 2.1;
+      y = 0.9;
+      z = 1.2;
+
+      timestep = 0.01;
+    
       //writeStartupDataz();
       
       //Do the last thing and WaitForModeChange
@@ -399,39 +500,7 @@ void Bank5()
       {
 
         //Call the main routine and loop the thing
-        RainbowSquarez();
-        
-      }
-        // Wait for the Mode Change
-        modeChangeWait();
-    }
-  }
-
-  // RainbowSquarezRamping
-  if (Mode == 9)
-  {
-    if (!waitingFlag)
-    {
-      // Flash the pixel at the start of a mode chnage
-      //modeFlash();
-
-      // Do some startup stuff for this Bank/ Mode if anything needs to be done
-      modeStartupBank5();
-      
-      //writeStartupDataz();
-      
-      //Do the last thing and WaitForModeChange
-      waitingFlag = true;
-      WaitForModeChange = true;
-      Serial.println(" WaitForModeChange = True");
-    }
-    else
-    {
-      if (WaitForModeChange)
-      {
-
-        //Call the main routine and loop the thing
-        RainbowSquarez();
+        strangeAttractor2();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -448,6 +517,19 @@ void Bank5()
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
+
+      //lorentz83
+
+       a = 0.95;
+       b = 7.91;
+       f = 4.83;
+       g = 4.66;
+
+       x = -0.2;
+       y = -2.82;
+       z = 2.71;
+
+      timestep = 0.005;
       
       //writeStartupDataz();
       
@@ -464,9 +546,7 @@ void Bank5()
       {
 
         //Call the main routine and loop the thing
-        increaseValue = true;
-        //fadeSpeed = 10;
-        RainbowSquarez();
+        strangeAttractor2();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -483,6 +563,19 @@ void Bank5()
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
+
+      //lorentz83
+
+       a = 0.95;
+       b = 7.91;
+       f = 4.83;
+       g = 4.66;
+
+       x = -0.2;
+       y = -2.82;
+       z = 2.71;
+
+      timestep = 0.005;
       
       //writeStartupDataz();
       
@@ -497,8 +590,7 @@ void Bank5()
       {
 
         // Call the main routine and loop the thing
-        valueA0  = 7;
-        rainbowNew();
+        strangeAttractor2();
       }
         // Wait for the Mode Change
         modeChangeWait();
