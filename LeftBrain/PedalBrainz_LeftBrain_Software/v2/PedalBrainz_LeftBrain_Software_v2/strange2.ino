@@ -42,7 +42,9 @@ void strangeAttractor2()
   Serial.print(",");
   Serial.print(scaledY);
   Serial.print(",");
-  Serial.println(scaledZ);  
+  Serial.print(scaledZ);  
+  //Serial.print(",");
+  //Serial.println((scaledXInner+scaledYInner+scaledZInner)/3);  
 
   // Serial.print(",");
   // Serial.print(scaledXInner);
@@ -57,76 +59,111 @@ void attractorzPixel()
 {
   if (Mode == 1)
   {
-      for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
-        strip.setPixelColor(p, (scaledXInner/5), (0), (scaledZ));
+      // for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
+      //   strip.setPixelColor(p, (scaledXInner/5), (0), (scaledZ));
 
-      }
-      pixel.setPixelColor(0, (scaledXInner/5), (0), (scaledZInner));   //Single Output Scaled XYZ
-      inner.setPixelColor(0, (scaledXInner/5), (0), (scaledZInner));   //Single Output Scaled XYZ
+      // }
+      // pixel.setPixelColor(0, (scaledXInner/5), (0), (scaledZInner));   //Single Output Scaled XYZ
+      // inner.setPixelColor(0, (scaledXInner/5), (0), (scaledZInner));   //Single Output Scaled XYZ
+
+      strip.setPixelColor(0, (scaledX), (0), (scaledX/5));
+      strip.setPixelColor(1, (scaledY), (0), (scaledY/3));
+      strip.setPixelColor(2, (scaledZ), (0), (scaledZ/1));
+      pixel.setPixelColor(0, (scaledXInner), (0), (0));   //Single Output Scaled XYZ
+      inner.setPixelColor(0, (scaledXInner), (0), (0));   //Single Output Scaled XYZ
+
   }
   else if (Mode == 2)
   {
-      for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
-        strip.setPixelColor(p, (scaledXInner/5), (scaledY/3), (scaledZ));
+      // for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
+      //   strip.setPixelColor(p, (scaledXInner/5), (scaledY/3), (scaledZ));
 
-      }
-      pixel.setPixelColor(0, (scaledXInner/5), (scaledYInner/3), (scaledZInner));   //Double Output Scaled XYZ
-      inner.setPixelColor(0, (scaledXInner/5), (scaledYInner/3), (scaledZInner));   //Double Output Scaled XYZ
+      // }
+
+      strip.setPixelColor(0, (scaledX)/5, (0), (scaledX));
+      strip.setPixelColor(1, (scaledY)/3, (0), (scaledY));
+      strip.setPixelColor(2, (scaledZ)/1, (0), (scaledZ));      
+      pixel.setPixelColor(0, (scaledXInner)/2, (0), (scaledYInner)/2);   //Single Output Scaled XYZ
+      inner.setPixelColor(0, (scaledXInner)/2, (0), (scaledYInner)/2);   //Single Output Scaled XYZ
   }
   else if (Mode == 3)
   {
-    for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
-        strip.setPixelColor(p, (0), (scaledZ), (0));
+    // for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
+    //     strip.setPixelColor(p, (0), (scaledZ), (0));
 
-      }
+    //   }
+
+      strip.setPixelColor(0, (0), (scaledX), (scaledX)/5);
+      strip.setPixelColor(1, (0), (scaledY), (scaledY)/3);
+      strip.setPixelColor(2, (0), (scaledZ), (scaledZ)/1);
       pixel.setPixelColor(0, (0), (scaledZInner), (0));   //Single Output Scaled XYZ
-      inner.setPixelColor(0, (0), (scaledZInner), (0));   //Single Output Scaled XYZ
+      inner.setPixelColor(0, (0), (scaledZInner), (0));   //Single Output Scaled XYZ    
   }
   else if (Mode == 4)
   {
-      for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
-        strip.setPixelColor(p, (0), (scaledZ), (scaledYInner/5));
+      // for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
+      //   strip.setPixelColor(p, (0), (scaledZ), (scaledYInner/5));
 
-      }
-      pixel.setPixelColor(0, (0), (scaledZInner), (scaledYInner/5));   //Double Output Scaled XYZ
-      inner.setPixelColor(0, (0), (scaledZInner), (scaledYInner/5));   //Double Output Scaled XYZ
+      // }
+
+      strip.setPixelColor(0, (0), (scaledX)/5, (scaledX));
+      strip.setPixelColor(1, (0), (scaledY)/3, (scaledY));
+      strip.setPixelColor(2, (0), (scaledZ)/1, (scaledZ));
+      pixel.setPixelColor(0, (0), (scaledZInner)/2, (scaledYInner/2));   //Double Output Scaled XYZ
+      inner.setPixelColor(0, (0), (scaledZInner)/2, (scaledYInner/2));   //Double Output Scaled XYZ
   }
   else if (Mode == 5)
   {
-      for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
-        strip.setPixelColor(p, (scaledZ), (0), (0));
+      // for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
+      //   strip.setPixelColor(p, (scaledZ), (0), (0));
 
-      }
-      pixel.setPixelColor(0, (scaledZInner), (0), (0));   //Single Output Scaled XYZ
-      inner.setPixelColor(0, (scaledZInner), (0), (0));   //Single Output Scaled XYZ
+      // }
+
+      strip.setPixelColor(0, (scaledX), (scaledX)/5, (0));
+      strip.setPixelColor(1, (scaledY), (scaledY)/3, (0));
+      strip.setPixelColor(2, (scaledZ), (scaledZ)/1, (0));
+      pixel.setPixelColor(0, (scaledXInner), (0), (0));   //Single Output Scaled XYZ
+      inner.setPixelColor(0, (scaledXInner), (0), (0));   //Single Output Scaled XYZ    
   }
   else if (Mode == 6)
   {
-      for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
-        strip.setPixelColor(p, (scaledZ), (scaledXInner/2), (0));
+      // for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
+      //   strip.setPixelColor(p, (scaledZ), (scaledXInner/2), (0));
 
-      }
-      pixel.setPixelColor(0, (scaledZInner), (scaledXInner/2), (0));   //Single Output Scaled XYZ
-      inner.setPixelColor(0, (scaledZInner), (scaledXInner/2), (0));   //Single Output Scaled XYZ
+      // }
+
+      strip.setPixelColor(0, (scaledX)/5, (scaledX), (0));
+      strip.setPixelColor(1, (scaledY)/3, (scaledY), (0));
+      strip.setPixelColor(2, (scaledZ)/1, (scaledZ), (0));
+      pixel.setPixelColor(0, (scaledZInner)/2, (scaledXInner)/2, (0));   //Single Output Scaled XYZ
+      inner.setPixelColor(0, (scaledZInner)/2, (scaledXInner)/2, (0));   //Single Output Scaled XYZ
   }
   else if (Mode == 7)
   {
-      for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
-        strip.setPixelColor(p, (scaledZInner), (scaledXInner/4), (scaledZInner/4));
+      // for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
+      //   strip.setPixelColor(p, (scaledZInner), (scaledXInner/4), (scaledZInner/4));
 
-      }
-      pixel.setPixelColor(0, (scaledZInner), (scaledXInner/4), (scaledZInner/4));   //Single Output Scaled XYZ
-      inner.setPixelColor(0, (scaledZInner), (scaledXInner/4), (scaledZInner/4));   //Single Output Scaled XYZ
-  }
+      // }
+
+      strip.setPixelColor(0, (scaledX)/5, (0), (scaledX));
+      strip.setPixelColor(1, (scaledY)/3, (0), (scaledY));
+      strip.setPixelColor(2, (scaledZ)/1, (0), (scaledZ));
+      pixel.setPixelColor(0, (0), (0), (scaledXInner));   //Single Output Scaled XYZ
+      inner.setPixelColor(0, (0), (0), (scaledXInner));   //Single Output Scaled XYZ       
+}
   else if (Mode == 8)
   {
-      for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
-        strip.setPixelColor(p, (scaledZInner), (scaledZ), (scaledXInner/4));
+      // for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
+      //   strip.setPixelColor(p, (scaledZInner), (scaledZ), (scaledXInner/4));
 
-      }
-      pixel.setPixelColor(0, (scaledZInner), (scaledZInner), (scaledXInner/4));   //Single Output Scaled XYZ
-      inner.setPixelColor(0, (scaledZInner), (scaledZInner), (scaledXInner/4));   //Single Output Scaled XYZ
-  }
+      // }
+
+      strip.setPixelColor(0, (scaledX)/5, (0), (scaledX));
+      strip.setPixelColor(1, (scaledY)/3, (0), (scaledY));
+      strip.setPixelColor(2, (scaledZ)/1, (0), (scaledZ));
+      pixel.setPixelColor(0, (scaledYInner)/2, (0), (scaledXInner)/2);   //Single Output Scaled XYZ
+      inner.setPixelColor(0, (scaledYInner)/2, (0), (scaledXInner)/2);   //Single Output Scaled XYZ       
+ }
   else if (Mode == 9)
   {
       for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
@@ -392,6 +429,15 @@ void chenFunction() {
 
   b = mapfloat(analogRead(A2), 0, 1024, -10, -14);
   
+  if(map(x,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(y,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(z,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } {
+    already = false;
+  }  
 }
 
 void scroll3Function() {
@@ -409,6 +455,15 @@ void scroll3Function() {
 
   c = mapfloat(analogRead(A2), 0, 1024, 21.3, 20.3);  
 
+  if(map(x,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(y,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(z,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } {
+    already = false;
+  }
 }
 
 void lorentz83() {
@@ -426,6 +481,15 @@ void lorentz83() {
 
   //updateRange();
 
+  if(map(x,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(y,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(z,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } {
+    already = false;
+  }
 }
 
 void updateRange() {
@@ -449,7 +513,7 @@ void updateRange() {
   }
 }
 
-void (* resetFunc)(void)=0; // declare reset function @ address 0
+
 
 void checkRestart() {
   if(already == false) {

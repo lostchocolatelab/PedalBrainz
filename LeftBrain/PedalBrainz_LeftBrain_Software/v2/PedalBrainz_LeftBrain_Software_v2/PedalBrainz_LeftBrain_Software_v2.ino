@@ -286,6 +286,8 @@ float maxValue, minValue;
     return (b - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   }
 
+ void (* resetFunc)(void)=0; // declare reset function @ address 0 
+
 
 float brightness = 0;
 int brightnessScaled;
@@ -447,8 +449,8 @@ void setup() {
   initialBank = false;
   
   // Set a Startup Mode
-  Bank = 1;
-  Mode = 0;
+  Bank = 5;
+  Mode = 1;
 
   routinesStartup = true;
   readStartupBank();
