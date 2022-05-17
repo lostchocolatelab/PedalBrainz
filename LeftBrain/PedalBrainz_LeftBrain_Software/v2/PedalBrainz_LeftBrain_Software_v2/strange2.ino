@@ -1,4 +1,10 @@
+/**
 
+  STRANGE ATTRACTORS 2
+
+  Attractorz Maths implemented in code by Timothy Franceschi
+
+*/
 
 void strangeAttractor2()
 {
@@ -6,20 +12,26 @@ void strangeAttractor2()
 
   //fadeSpeed = 0;
 
+  //  This handles the maximum brightness adjustment using the A1 control
   maxBrightnessAdjust();
 
+  //  Specifies a different attractorz type depending on Mode
+  //  x,y,z and a,b,c,d,e,f,g starting values for each attractorz type in the Bank/ Modez startup
   attractorzType();
   checkButtons();
   
+  //  Scale the values of the attractorz to 0-255 for the A0, A1, A2 LEDs and 0-190 for the inner LEDs
   pixelScaling();
   attractorzPixel();
   showLEDS();
   checkButtons();
 
+  //  Use the value of A0 to control the fadeSpeed delay
   delayA0(fadeSpeed);
   checkButtons();
 
-  strangeSlow3();
+  //  Slow things down when the values are low
+  //strangeSlow3();
   checkButtons();
 
   // Serial.print(", X:");
@@ -37,12 +49,12 @@ void strangeAttractor2()
   // Serial.print(",");
   // Serial.println(z);
 
-  Serial.print(",");
+  //Serial.print(",");
   Serial.print(scaledX);
   Serial.print(",");
   Serial.print(scaledY);
   Serial.print(",");
-  Serial.print(scaledZ);  
+  Serial.println(scaledZ);  
   //Serial.print(",");
   //Serial.println((scaledXInner+scaledYInner+scaledZInner)/3);  
 
@@ -54,6 +66,10 @@ void strangeAttractor2()
   // Serial.println(scaledZInner);  
 
 }
+
+  ////////////////////
+  ////////////////////        Set the LED colors by Mode
+  ////////////////////
 
 void attractorzPixel()
 {
@@ -135,8 +151,8 @@ void attractorzPixel()
       strip.setPixelColor(0, (scaledX)/5, (scaledX), (0));
       strip.setPixelColor(1, (scaledY)/3, (scaledY), (0));
       strip.setPixelColor(2, (scaledZ)/1, (scaledZ), (0));
-      pixel.setPixelColor(0, (scaledZInner)/2, (scaledXInner)/2, (0));   //Single Output Scaled XYZ
-      inner.setPixelColor(0, (scaledZInner)/2, (scaledXInner)/2, (0));   //Single Output Scaled XYZ
+      pixel.setPixelColor(0, (scaledZInner)/2, (scaledXInner)/2, (0));   //Double Output Scaled XYZ
+      inner.setPixelColor(0, (scaledZInner)/2, (scaledXInner)/2, (0));   //Double Output Scaled XYZ
   }
   else if (Mode == 7)
   {
@@ -145,9 +161,9 @@ void attractorzPixel()
 
       // }
 
-      strip.setPixelColor(0, (scaledX)/5, (0), (scaledX));
-      strip.setPixelColor(1, (scaledY)/3, (0), (scaledY));
-      strip.setPixelColor(2, (scaledZ)/1, (0), (scaledZ));
+      strip.setPixelColor(0, (scaledX), (scaledX), (scaledX)/10);
+      strip.setPixelColor(1, (scaledY)/5, (scaledY), (scaledY)/10);
+      strip.setPixelColor(2, (scaledZ), (scaledZ), (scaledZ)/10);
       pixel.setPixelColor(0, (0), (0), (scaledXInner));   //Single Output Scaled XYZ
       inner.setPixelColor(0, (0), (0), (scaledXInner));   //Single Output Scaled XYZ       
 }
@@ -158,65 +174,45 @@ void attractorzPixel()
 
       // }
 
-      strip.setPixelColor(0, (scaledX)/5, (0), (scaledX));
-      strip.setPixelColor(1, (scaledY)/3, (0), (scaledY));
-      strip.setPixelColor(2, (scaledZ)/1, (0), (scaledZ));
-      pixel.setPixelColor(0, (scaledYInner)/2, (0), (scaledXInner)/2);   //Single Output Scaled XYZ
-      inner.setPixelColor(0, (scaledYInner)/2, (0), (scaledXInner)/2);   //Single Output Scaled XYZ       
+      strip.setPixelColor(0, (scaledX), (scaledX)/2, (scaledX)/10);
+      strip.setPixelColor(1, (scaledY), (scaledY)/2, (scaledY)/10);
+      strip.setPixelColor(2, (scaledZ)/2, (scaledZ)/2, (scaledZ)/10);
+      pixel.setPixelColor(0, (0), (scaledYInner)/2, (scaledXInner)/2);   //Double Output Scaled XYZ
+      inner.setPixelColor(0, (0), (scaledYInner)/2, (scaledXInner)/2);   //Double Output Scaled XYZ       
  }
   else if (Mode == 9)
   {
-      for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
-        strip.setPixelColor(p, (scaledZInner), (scaledZ), (scaledXInner/4));
+      // for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
+      //   strip.setPixelColor(p, (scaledZInner), (scaledZ), (scaledXInner/4));
 
-      }
-      pixel.setPixelColor(0, (scaledZInner), (scaledZInner), (scaledXInner/4));   //Single Output Scaled XYZ
-      inner.setPixelColor(0, (scaledZInner), (scaledZInner), (scaledXInner/4));   //Single Output Scaled XYZ
+      // }
+
+      strip.setPixelColor(0, (scaledX)/10, (scaledX), (scaledX)/5);
+      strip.setPixelColor(1, (scaledY)/10, (scaledY), (scaledY)/4);
+      strip.setPixelColor(2, (scaledZ)/10, (scaledZ), (scaledZ)/3);
+      pixel.setPixelColor(0, (0), (scaledYInner)/2, (scaledYInner)/2);   //Single Output Scaled XYZ
+      inner.setPixelColor(0, (0), (scaledYInner)/2, (scaledYInner)/2);   //Single Output Scaled XYZ   
   }
   else if (Mode == 10)
   {
-      for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
-        strip.setPixelColor(p, (scaledZInner/10), (scaledZ), (scaledXInner/14));
+      // for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
+      //   strip.setPixelColor(p, (scaledZInner/10), (scaledZ), (scaledXInner/14));
 
-      }
-      pixel.setPixelColor(0, (scaledZInner/10), (scaledZInner), (scaledXInner/14));   //Single Output Scaled XYZ
-      inner.setPixelColor(0, (scaledZInner/10), (scaledZInner), (scaledXInner/14));   //Single Output Scaled XYZ
+      // }
+ 
+      strip.setPixelColor(0, (scaledX)/6, (scaledX), (scaledX));
+      strip.setPixelColor(1, (scaledY)/6, (scaledY), (scaledY));
+      strip.setPixelColor(2, (scaledZ)/6, (scaledZ), (scaledZ));
+      pixel.setPixelColor(0, (0), (scaledYInner)/2, (scaledYInner)/2);   //Double Output Scaled XYZ
+      inner.setPixelColor(0, (0), (scaledYInner)/2, (scaledYInner)/2);   //Double Output Scaled XYZ  
   }
   else;
 }
 
-void attractorzSingle(){
-
-  for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
-        strip.setPixelColor(p, (0), (0), (scaledZ));
-
-      }
-      pixel.setPixelColor(0, (0), (0), (scaledZInner));   //Triple Output Scaled XYZ
-      inner.setPixelColor(0, (0), (0), (scaledZInner));   //Triple Output Scaled XYZ
-
-}
-
-void attractorzDouble(){
-
-  for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
-        strip.setPixelColor(p, (0), (scaledY), (scaledZ));
-
-      }
-      pixel.setPixelColor(0, (0), (scaledYInner), (scaledZInner));   //Triple Output Scaled XYZ
-      inner.setPixelColor(0, (0), (scaledYInner), (scaledZInner));   //Triple Output Scaled XYZ
-
-}
-
-void attractorzTriple(){
-
-  for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
-        strip.setPixelColor(p, (scaledX), (scaledY), (scaledZ));
-
-      }
-      pixel.setPixelColor(0, (scaledXInner), (scaledYInner), (scaledZInner));   //Triple Output Scaled XYZ
-      inner.setPixelColor(0, (scaledXInner), (scaledYInner), (scaledZInner));   //Triple Output Scaled XYZ
-
-}
+  ////////////////////
+  ////////////////////        Set the attractorz type by Mode
+  ////////////////////        x,y,z and a,b,c,d,e,f,g starting values in the Bank/ Modez startup
+  ////////////////////
 
 void attractorzType()
 {
@@ -425,7 +421,7 @@ void chenFunction() {
   y += dy;
   z += dz;
 
-  //updateRange();
+  updateRange();
 
   b = mapfloat(analogRead(A2), 0, 1024, -10, -14);
   
@@ -477,9 +473,9 @@ void lorentz83() {
   y += dy;
   z += dz;
 
-  b = mapfloat(analogRead(A2), 0, 1024, 11, 7.91);
+  b = mapfloat(analogRead(A2), 0, 1024, 7.91, 11);
 
-  //updateRange();
+  updateRange();
 
   if(map(x,minValue,maxValue,1,255) == 255){
     checkRestart();
@@ -492,7 +488,9 @@ void lorentz83() {
   }
 }
 
-void updateRange() {
+void updateRange() 
+{
+
   if(x > maxValue){
     maxValue = x;
   }
@@ -511,6 +509,9 @@ void updateRange() {
   if(z < minValue){
     minValue = z;
   }
+
+  checkButtons();
+
 }
 
 

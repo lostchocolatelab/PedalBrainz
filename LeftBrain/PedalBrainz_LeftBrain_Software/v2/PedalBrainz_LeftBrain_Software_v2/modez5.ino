@@ -1,6 +1,9 @@
-
 /*
-///  Bank 5 - Modez
+
+  ////////////////////
+  ////////////////////        Bank 5 Attractorz
+  ////////////////////
+
   
 //thomas
 
@@ -152,7 +155,7 @@ void Bank5()
 
   /**
 
-    Fadez
+    Attractorz
 
   */
 
@@ -161,6 +164,7 @@ void Bank5()
   {
     //Serial.println("Mode 1 Started fadespeed " + String(fadeSpeed));
     
+    // Run a color palette routine to signify the specific Bank
     bankFlash();
     initialBank = false;
    
@@ -172,7 +176,8 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
       
-      //thomas
+      //  Thomas Attractor
+      //  Initialization Values
 
       b = 0.19;
 
@@ -180,7 +185,7 @@ void Bank5()
       y = 2;
       z = 1;
 
-      timestep = .1;
+      timestep = 0.1;
 
       //writeStartupDataz();
       
@@ -213,7 +218,8 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
       
-      //thomas
+      //  Thomas Attractor
+      //  Initialization Values
 
       b = 0.19;
 
@@ -254,7 +260,8 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
 
-      //arneodo
+      //  Arneodo Attractor
+      //  Initialization Values
 
       a = -5.5;
       b = 3.5;
@@ -299,7 +306,8 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
 
-      //arneodo
+      //  Arneodo Attractor
+      //  Initialization Values
 
       a = -5.5;
       b = 3.5;
@@ -343,7 +351,8 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
 
-      //chen
+      //  Chen Attractor
+      //  Initialization Values
 
       a = 5.0;
       b = -10.0;
@@ -386,7 +395,8 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
 
-      //chen
+      //  Chen Attractor
+      //  Initialization Values
 
       a = 5.0;
       b = -10.0;
@@ -428,7 +438,8 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
 
-      //scroll 3 
+      //  Scroll 3 Attractor
+      //  Initialization Values
 
       a = 40.0;
       b = 0.833;
@@ -473,7 +484,8 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
 
-      //scroll 3 
+      //  Scroll 3 Attractor
+      //  Initialization Values
 
       a = 40.0;
       b = 0.833;
@@ -518,7 +530,8 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
 
-      //lorentz83
+      //  Lorentz83 Attractor
+      //  Initialization Values
 
        a = 0.95;
        b = 7.91;
@@ -564,7 +577,8 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
 
-      //lorentz83
+      //  Lorentz83 Attractor
+      //  Initialization Values
 
        a = 0.95;
        b = 7.91;

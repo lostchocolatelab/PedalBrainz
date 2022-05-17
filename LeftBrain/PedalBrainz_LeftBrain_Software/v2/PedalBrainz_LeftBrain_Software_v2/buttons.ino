@@ -4,19 +4,20 @@ BUTTON declarations
 
 */
 
-      // variables will change:
-      //int buttonStateUp = 0;               // variable for reading the pushbutton status
-      //int buttonStateDown = 0;               // variable for reading the pushbutton status
-      //int lastButtonStateUp = 1;           // previous state of the buttons
-      //int lastButtonStateDown = 1;           // previous state of the buttons
+// variables will change:
+//int buttonStateUp = 0;               // variable for reading the pushbutton status
+//int buttonStateDown = 0;               // variable for reading the pushbutton status
+//int lastButtonStateUp = 1;           // previous state of the buttons
+//int lastButtonStateDown = 1;           // previous state of the buttons
 
 
 
-      // MULTI-CLICK: One Button, Multiple Events
+// MULTI-CLICK: One Button, Multiple Events
 
-      // Button timing variables
+// Button timing variables
+
 int debounce = 50;       // ms debounce period to prevent flickering when pressing or releasing the button
-int DCgap = 250;       // max ms between clicks for a double click event
+int DCgap = 300;       // max ms between clicks for a double click event
 int holdTime = 1000;       // ms hold period: how long to wait for press+hold event
 int longHoldTime = 3000;       // ms long hold period: how long to wait for press+hold event
 
@@ -220,6 +221,7 @@ void clickEventUp()
   Serial.println("click up");
 
   buttonBreak = true;
+  already = false;
 
   if (Mode == 98) {
 
@@ -282,6 +284,7 @@ void doubleClickEventUp()
 
   clicked = true;
   WaitForModeChange = false;
+  already = false;
 
   Serial.println("doubleclick up");
 
@@ -351,6 +354,8 @@ void longHoldEventUp()
 {
   Serial.println("longhold up");
 
+  already = false;
+
   if (Mode == 98) {
     clicked = true;
     readStartupMode();
@@ -375,6 +380,7 @@ void clickEventDown()
   Serial.println("click down");
 
   buttonBreak = true;
+  already = false;
 
   if (Mode == 98) {
 
@@ -443,6 +449,7 @@ void doubleClickEventDown()
 
   clicked = true;
   WaitForModeChange = false;
+  already = false;
 
 
   Serial.println("doubleclick down");
@@ -512,8 +519,7 @@ void longHoldEventDown()
 {
   Serial.println("longhold down");
 
-
-
+  already = false;
 
   if (Mode == 98) // If it's Mode 98 = Light Loopz then go to Mode 102 = Max Bright Settings
   {

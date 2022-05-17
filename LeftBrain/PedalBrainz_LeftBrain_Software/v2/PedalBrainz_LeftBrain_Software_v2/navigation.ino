@@ -48,6 +48,9 @@ void modeFlash() {
  void bankFlash()
  {
 
+    // If it's the first time switching to the bank the initialBank will be set == true
+    // Then run a color palette to signify the current Bank
+
     if (initialBank == true)
     {
       

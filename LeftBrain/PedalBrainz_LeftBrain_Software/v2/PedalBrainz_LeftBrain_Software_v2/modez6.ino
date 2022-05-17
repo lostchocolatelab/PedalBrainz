@@ -157,6 +157,13 @@ void Bank6()
 
         //Call the main routine and loop the thing
         palette1();
+        //fire1();
+        //popFade();
+        //breather1();
+        //dripz();
+        //meteorz();
+        //meteorz();
+        //meteorz2();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -188,6 +195,13 @@ void Bank6()
 
         // Call the main routine and loop the thing
         palette1();
+        //fire1();
+        //popFade();
+        //breather1();
+        //dripz();
+        //meteorz();
+        //meteorz();
+        //meteorz2();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -222,10 +236,14 @@ void Bank6()
       {
 
         // Call the main routine and loop the thing
+        palette1();
+        //fire1();
         //popFade();
         //breather1();
         //dripz();
-        meteorz();
+        //meteorz();
+        //meteorz();
+        //meteorz2();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -256,10 +274,14 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
+        palette1();
+        //fire1();
         //popFade();
         //breather1();
         //dripz();
-        meteorz();
+        //meteorz();
+        //meteorz();
+        //meteorz2();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -290,8 +312,14 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        mountainSnack ();
-        reRandom = true;
+        palette1();
+        //fire1();
+        //popFade();
+        //breather1();
+        //dripz();
+        //meteorz();
+        //meteorz();
+        //meteorz2();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -322,8 +350,14 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        mountainSnack ();
-        reRandom = true;
+        palette1();
+        //fire1();
+        //popFade();
+        //breather1();
+        //dripz();
+        //meteorz();
+        //meteorz();
+        //meteorz2();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -353,7 +387,14 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        RainbowSquarez();
+        palette1();
+        //fire1();
+        //popFade();
+        //breather1();
+        //dripz();
+        //meteorz();
+        //meteorz();
+        //meteorz2();
         
       }
         // Wait for the Mode Change
@@ -385,7 +426,14 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        RainbowSquarez();
+        palette1();
+        //fire1();
+        //popFade();
+        //breather1();
+        //dripz();
+        //meteorz();
+        //meteorz();
+        //meteorz2();
         
       }
         // Wait for the Mode Change
@@ -419,9 +467,14 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        increaseValue = true;
-        //fadeSpeed = 10;
-        RainbowSquarez();
+        palette1();
+        //fire1();
+        //popFade();
+        //breather1();
+        //dripz();
+        //meteorz();
+        //meteorz();
+        //meteorz2();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -452,8 +505,14 @@ void Bank6()
       {
 
         // Call the main routine and loop the thing
-        valueA0  = 7;
-        rainbowNew();
+        palette1();
+        //fire1();
+        //popFade();
+        //breather1();
+        //dripz();
+        //meteorz();
+        //meteorz();
+        //meteorz2();
       }
         // Wait for the Mode Change
         modeChangeWait();

@@ -95,7 +95,7 @@ int greenValue = 107;
 int fadeValueScaled;
 int scaledBright;
 
-int fadeSpeed = 13;
+float fadeSpeed = 13;
 int fullDelay = 0;
 int darkDelay = 0;
 

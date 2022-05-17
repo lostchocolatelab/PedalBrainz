@@ -1,14 +1,15 @@
 /**
 
-STRANGE ATTRACTORS
+  STRANGE ATTRACTORS 1
+
+  Attractorz Maths implemented in code by Timothy Franceschi
 
 */
+
+
   //
   //  This Section is the Strange Attractor loop
   //
-
-
-
 
 void strangeAttractor()
 {
@@ -57,12 +58,8 @@ void strangeAttractor()
 void strangeBright() {
 
   //A1 potentiometer controls for maximum brightness
-  maxBrightness = map(analogRead(A1), 0, 1024, 0, maxBrightnessTemp);
-  MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
-  pixel.setBrightness(maxBrightness);
-  strip.setBrightness(MaxBrightReduction);
-  FastLED.setBrightness(MaxBrightReduction);
-  inner.setBrightness(maxBrightness);
+  maxBrightnessAdjust();
+
   showLEDS();
 
   //Serial.println("maxBrightness : " + String(maxBrightness));
@@ -117,6 +114,7 @@ void strangeBright() {
 void strangeBrightMinDark() {
 
   if ((scaledY >= 0) && (scaledY <= 50)) {
+    
     pixel.setBrightness(maxBrightness - 255);
     strip.setBrightness(maxBrightness);
     FastLED.setBrightness(maxBrightness);
@@ -133,12 +131,7 @@ void strangeBrightMinDark() {
   else if ((scaledY >= 51) && (scaledY <= 255))
   {
     //A1 potentiometer controls for maximum brightness
-    maxBrightness = map(analogRead(A1), 0, 1024, 0, maxBrightnessTemp);
-    MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
-    pixel.setBrightness(maxBrightness);
-    strip.setBrightness(MaxBrightReduction);
-    FastLED.setBrightness(MaxBrightReduction);
-    inner.setBrightness(maxBrightness);
+    maxBrightnessAdjust();
     showLEDS();
     //Serial.println(maxBrightness);
 
@@ -147,6 +140,8 @@ void strangeBrightMinDark() {
 
     if (Mode == 8)
     {
+      maxBrightnessAdjust();
+
       for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
         strip.setPixelColor(p, (scaledX / 2), 0, (scaledX / 4));
       }
@@ -157,6 +152,8 @@ void strangeBrightMinDark() {
     }
     if (Mode == 9)
     {
+      maxBrightnessAdjust();
+
       for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
         strip.setPixelColor(p, (scaledX / 2), 0, (scaledZ / 2));
 
@@ -168,6 +165,8 @@ void strangeBrightMinDark() {
     }
     if (Mode == 10)
     {
+      maxBrightnessAdjust();
+
       for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
         strip.setPixelColor(p, (scaledX), (scaledY / 3), (scaledZ));
 
@@ -205,27 +204,24 @@ void strangeSlow() {
 
 void strangeSlow2() {
 
+  maxBrightnessAdjust();
 
   if ((strangeSlowCount >= 0) && (strangeSlowCount <= 20)) {
-    strangeSlowCount = strangeSlowCount + 1;
+       strangeSlowCount = strangeSlowCount + 1;
   }
-  else {
+  else 
+  {
     // Slow down the simulation when the value is low
-    if ((scaledY >= 0) && (scaledY <= 50)) {
+  if ((scaledY >= 0) && (scaledY <= 50)) {
       valueA0 = map(analogRead(A0), 0, 1024, 1000, 0);
       strangeRandom = random(20, 200);
       strangeSlowAmount = (strangeRandom + valueA0);
       darkDelay = strangeSlowAmount;
-    //darkDelay = strangeSlowAmount;
+    
       checkButtons();
       delayA2(darkDelay);
 
-      maxBrightness = map(analogRead(A1), 0, 1024, 0, maxBrightnessTemp);
-      MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
-      pixel.setBrightness(maxBrightness);
-      strip.setBrightness(MaxBrightReduction);
-      FastLED.setBrightness(MaxBrightReduction);
-      inner.setBrightness(maxBrightness);
+      maxBrightnessAdjust();
       showLEDS();
       
       //Serial.println("strangeSlow: " + String(darkDelay) + " strangeSlowAmount : " + String(strangeSlowAmount));
@@ -252,12 +248,7 @@ void strangeSlow3() {
       checkButtons();
       delayA2(darkDelay);
 
-      maxBrightness = map(analogRead(A1), 0, 1024, 0, maxBrightnessTemp);
-      MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
-      pixel.setBrightness(maxBrightness);
-      strip.setBrightness(MaxBrightReduction);
-      FastLED.setBrightness(MaxBrightReduction);
-      inner.setBrightness(maxBrightness);
+      maxBrightnessAdjust();
       showLEDS();
       
       //Serial.println("strangeSlow: " + String(darkDelay) + " strangeSlowAmount : " + String(strangeSlowAmount));
@@ -324,6 +315,8 @@ Nothing happens to not affect the colors
 */
 
 void brightenColors() {
+
+  maxBrightnessAdjust();
 
   // When brightness should be minimum:
   // Variables are decreased to obtain minimum brightness without affecting the color
