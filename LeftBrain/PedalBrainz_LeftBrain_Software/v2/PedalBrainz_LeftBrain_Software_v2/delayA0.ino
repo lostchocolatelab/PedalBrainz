@@ -30,6 +30,7 @@ void delayA0(int count)
   ////////////////////
   ////////////////////        BANK 1 - Greatz
   ////////////////////
+  
   if (Bank == 1)
   {
 
@@ -463,6 +464,7 @@ void delayA0(int count)
   ////////////////////
   ////////////////////        BANK 3 - Rainbowz
   ////////////////////
+
   else if (Bank == 3)
   {
     int delayCountA0 = fadeSpeed;
@@ -625,6 +627,7 @@ void delayA0(int count)
   ////////////////////
   ////////////////////        BANK 4 - Naturez
   ////////////////////
+
   else if (Bank == 4)
   {
     int delayCountA0 = fadeSpeed;
@@ -760,9 +763,11 @@ void delayA0(int count)
         //Serial.println("Count if Waiting = False: " + String(count));
     }
   }
+
   ////////////////////
   ////////////////////        BANK 5 - Attractorz
   ////////////////////
+
   else if (Bank == 5)
   {
     int delayCountA0 = fadeSpeed;
@@ -821,9 +826,11 @@ void delayA0(int count)
         //Serial.println("Count if Waiting = False: " + String(count));
     }
   }
+
   ////////////////////
   ////////////////////        BANK 5
   ////////////////////
+
   else if (Bank == 6)
   {
     int delayCountA0 = fadeSpeed;

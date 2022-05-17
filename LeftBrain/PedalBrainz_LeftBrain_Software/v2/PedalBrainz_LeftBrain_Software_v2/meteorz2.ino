@@ -26,14 +26,7 @@ void meteorz2(){
 void meteorShower2(){
 
   //A1 potentiometer controls for maximum brightness
-  maxBrightness = map(analogRead(A1), 0, 1024, 0, maxBrightnessTemp);
-  MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
-  pixel.setBrightness(maxBrightness);
-  FastLED.setBrightness(MaxBrightReduction);
-  inner.setBrightness(maxBrightness);
-  //Serial.println("maxBrightness : " + String(maxBrightness));
-  //Serial.println("MaxBright : " + String(MaxBright));
-  //Serial.println("MaxBrightReduction : " + String(MaxBrightReduction));
+  maxBrightnessAdjust();
 
   fadeSpeed = map(analogRead(A0), 0, 1024, 9000, 1000);
 

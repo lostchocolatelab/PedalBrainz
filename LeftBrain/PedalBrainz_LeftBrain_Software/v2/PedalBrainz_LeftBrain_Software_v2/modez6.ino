@@ -1,53 +1,6 @@
 /**
 
-  Bank 2 - Modez
-  
-  This is where the Mode switching and waiting happens within the loop.
-
-  If Bank and Mode are True:
-  -Initialize some things
-  -Loop the Mode
-  -Wait for the Mode Change
-
-  Mode 1 | Quad Rainbowz Fixed - Uses randomBright01-04 Declared in General Declarations
-  A0 = Rainbow Cycle Speed
-  A1 = Maximum Brightness
-  A2 = Duration when LED is fully off (It's Dark)
-
-  Mode 2 | Quad Rainbowz Random Once - Randomize Brightness values for the 4 values once at startup
-  A0 = Rainbow Cycle Speed
-  A1 = Randomized Maximum Brightness
-  A2 = Duration when LED is fully off (It's Dark)
-
-  Modez 3 | Quad Rainbowz Random Random - Randomize Brightness values for the 4 values after each cycle
-  A0 = Duration of 4th brightness after brightness changes for a single color
-  A1 = Delay of each Brightness Value (4) for a Single Color
-  A2 = Duration of Darkness after full Color Cycle (or betwixt each color if darkDelayBetwixtColors is enabled)
-
-  Mode 4 | Mountainz Rainbow Random Repeat
-  A0 = Cycle Speed
-  A1 = Amount of Randomness
-  A2 = Chance of Snack
-
-  Mode 5 | Mountainz Rainbow Random Random
-  A0 = Cycle Speed
-  A1 = Amount of Randomness
-  A2 = Chance of Snack
-
-  Mode 6 | Mountainz Rainbow Random Random Slow
-  A0 = Cycle Speed
-  A1 = Amount of Randomness
-  A2 = Chance of Snack 
-
-  Mode 7 | Rainbow Squarez 
-  A0 = Rainbow Cycle Speed
-  A1 = Maximum Brightness
-  A2 = Duration when LED is fully off (It's Dark)
-
-  Mode 8 | Rainbow Squarez Modulate
-  A0 = Rainbow Cycle Speed
-  A1 = Maximum Brightness
-  A2 = Duration when LED is fully off (It's Dark)  
+  Bank 6 - Modez
 
 */
 
@@ -58,16 +11,13 @@ void modeStartupBank6(){
     if (Mode == 1)
       {
 
- 
       }
     else if (Mode == 2)
       {
 
-
       }
     else if (Mode == 3)
       {
-
       
       }
     else if (Mode == 4)
@@ -121,13 +71,8 @@ void Bank6()
 
   plotCycle();
 
-  /**
 
-    Fadez
-
-  */
-
-  // RainbowQuad
+  
   if (Mode == 1)
   {
     //Serial.println("Mode 1 Started fadespeed " + String(fadeSpeed));
@@ -156,8 +101,8 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        palette1();
-        //fire1();
+        //palette1();
+        fire1();
         //popFade();
         //breather1();
         //dripz();
@@ -170,7 +115,7 @@ void Bank6()
     }
   }
 
-  // RainbowQuad
+
   if (Mode == 2)
   {
     if (!waitingFlag)
@@ -194,9 +139,9 @@ void Bank6()
       {
 
         // Call the main routine and loop the thing
-        palette1();
+        //palette1();
         //fire1();
-        //popFade();
+        popFade();
         //breather1();
         //dripz();
         //meteorz();
@@ -208,7 +153,7 @@ void Bank6()
     }
   }
 
-  // RainbowQuad
+
   if (Mode == 3)
   {
     if (!waitingFlag)
@@ -236,13 +181,12 @@ void Bank6()
       {
 
         // Call the main routine and loop the thing
-        palette1();
+        //palette1();
         //fire1();
         //popFade();
         //breather1();
         //dripz();
-        //meteorz();
-        //meteorz();
+        meteorz();
         //meteorz2();
       }
         // Wait for the Mode Change
@@ -274,14 +218,14 @@ void Bank6()
       {
 
         //Call the main routine and loop the thing
-        palette1();
+        //palette1();
         //fire1();
         //popFade();
         //breather1();
         //dripz();
         //meteorz();
         //meteorz();
-        //meteorz2();
+        meteorz2();
       }
         // Wait for the Mode Change
         modeChangeWait();
