@@ -452,6 +452,8 @@ void Bank5()
       z = 1.2;
 
       timestep = 0.01;
+
+
     
       //writeStartupDataz();
       
@@ -487,18 +489,29 @@ void Bank5()
       //  Scroll 3 Attractor
       //  Initialization Values
 
-      a = 40.0;
-      b = 0.833;
-      c = 20.0;
-      d = 0.5;
-      e = 0.65;
+      // a = 40.0;
+      // b = 0.833;
+      // c = 20.0;
+      // d = 0.5;
+      // e = 0.65;
 
-      x = 2.1;
-      y = 0.9;
-      z = 1.2;
+      // x = 2.1;
+      // y = 0.9;
+      // z = 1.2;
 
-      timestep = 0.01;
-    
+      // timestep = 0.01;
+
+      // halvorsen
+
+ x = -1.48;
+ y = -1.51;
+ z = 2.04;
+
+ a = 1.89;
+
+ timestep = 0.01;      
+
+
       //writeStartupDataz();
       
       //Do the last thing and WaitForModeChange
@@ -533,16 +546,30 @@ void Bank5()
       //  Lorentz83 Attractor
       //  Initialization Values
 
-       a = 0.95;
-       b = 7.91;
-       f = 4.83;
-       g = 4.66;
+      //  a = 0.95;
+      //  b = 7.91;
+      //  f = 4.83;
+      //  g = 4.66;
 
-       x = -0.2;
-       y = -2.82;
-       z = 2.71;
+      //  x = -0.2;
+      //  y = -2.82;
+      //  z = 2.71;
 
-      timestep = 0.005;
+      // timestep = 0.005;
+
+      // Rabinovich-Fabrikant 
+
+      Blink1 = true;
+
+       x = -1.00;
+       y = 0.00;
+       z = 0.50;
+
+       a = 0.14;
+       b = 0.1;
+
+       timestep = 0.01;
+
       
       //writeStartupDataz();
       
@@ -580,16 +607,29 @@ void Bank5()
       //  Lorentz83 Attractor
       //  Initialization Values
 
-       a = 0.95;
-       b = 7.91;
-       f = 4.83;
-       g = 4.66;
+      //  a = 0.95;
+      //  b = 7.91;
+      //  f = 4.83;
+      //  g = 4.66;
 
-       x = -0.2;
-       y = -2.82;
-       z = 2.71;
+      //  x = -0.2;
+      //  y = -2.82;
+      //  z = 2.71;
 
-      timestep = 0.005;
+      // timestep = 0.005;
+
+      //  Rossler Attractor
+      //  Initialization Values
+
+ x = 10.0;
+ y = 0;
+ z = 10.0;
+
+ a = 0.2;
+ b = 0.2;
+ c = 5.7;
+
+ timestep = 0.01;
       
       //writeStartupDataz();
       

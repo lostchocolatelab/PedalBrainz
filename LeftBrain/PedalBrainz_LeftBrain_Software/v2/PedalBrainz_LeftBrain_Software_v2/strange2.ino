@@ -223,8 +223,11 @@ void attractorzType()
     //arneodoFunction();
     //chenFunction();
     //scroll3Function();
-    //lorentz83();
+    //lorentz83Function();
     //dadrasFunction();
+    //halvorsenFunction();
+    //rabinovichFunction();
+    //rosslerFunction();
 
   }
   else if (Mode == 2)
@@ -234,8 +237,11 @@ void attractorzType()
     //arneodoFunction();
     //chenFunction();
     //scroll3Function();
-    //lorentz83();
+    //lorentz83Function();
     //dadrasFunction();
+    //halvorsenFunction();
+    //rabinovichFunction();
+    //rosslerFunction();
 
   }
   else if (Mode == 3)
@@ -245,8 +251,11 @@ void attractorzType()
     arneodoFunction();
     //chenFunction();
     //scroll3Function();
-    //lorentz83();
+    //lorentz83Function();
     //dadrasFunction();
+    //halvorsenFunction();
+    //rabinovichFunction();
+    //rosslerFunction();
 
   }
   else if (Mode == 4)
@@ -256,8 +265,11 @@ void attractorzType()
     arneodoFunction();
     //chenFunction();
     //scroll3Function();
-    //lorentz83();
+    //lorentz83Function();
     //dadrasFunction();
+    //halvorsenFunction();
+    //rabinovichFunction();
+    //rosslerFunction();
 
   }
   else if (Mode == 5)
@@ -267,8 +279,11 @@ void attractorzType()
     //arneodoFunction();
     chenFunction();
     //scroll3Function();
-    //lorentz83();
+    //lorentz83Function();
     //dadrasFunction();
+    //halvorsenFunction();
+    //rabinovichFunction();
+    //rosslerFunction();
 
   }
   else if (Mode == 6)
@@ -278,8 +293,11 @@ void attractorzType()
     //arneodoFunction();
     chenFunction();
     //scroll3Function();
-    //lorentz83();
+    //lorentz83Function();
     //dadrasFunction();
+    //halvorsenFunction();
+    //rabinovichFunction();
+    //rosslerFunction();
 
   }
   else if (Mode == 7)
@@ -289,8 +307,11 @@ void attractorzType()
     //arneodoFunction();
     //chenFunction();
     scroll3Function();
-    //lorentz83();
+    //lorentz83Function();
     //dadrasFunction();
+    //halvorsenFunction();
+    //rabinovichFunction();
+    //rosslerFunction();
 
   }
   else if (Mode == 8)
@@ -299,9 +320,12 @@ void attractorzType()
     //thomasFunction();
     //arneodoFunction();
     //chenFunction();
-    scroll3Function();
-    //lorentz83();
+    //scroll3Function();
+    //lorentz83Function();
     //dadrasFunction();
+    halvorsenFunction();
+    //rabinovichFunction();
+    //rosslerFunction();
 
   }
   else if (Mode == 9)
@@ -311,8 +335,11 @@ void attractorzType()
     //arneodoFunction();
     //chenFunction();
     //scroll3Function();
-    lorentz83();
+    //lorentz83Function();
     //dadrasFunction();
+    //halvorsenFunction();
+    rabinovichFunction();
+    //rosslerFunction();
 
   }
   else if (Mode == 10)
@@ -322,8 +349,11 @@ void attractorzType()
     //arneodoFunction();
     //chenFunction();
     //scroll3Function();
-    lorentz83();
+    //lorentz83Function();
     //dadrasFunction();
+    //halvorsenFunction();
+    //rabinovichFunction();
+    rosslerFunction();
 
   }
   else;
@@ -462,7 +492,7 @@ void scroll3Function() {
   }
 }
 
-void lorentz83() {
+void lorentz83Function() {
   // put your main code here, to run repeatedly:
 
   dx = (((-a)*x)-(y*y)-(z*z)+(a*f)) * timestep;
@@ -474,6 +504,129 @@ void lorentz83() {
   z += dz;
 
   b = mapfloat(analogRead(A2), 0, 1024, 7.91, 11);
+
+  updateRange();
+
+  if(map(x,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(y,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(z,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } {
+    already = false;
+  }
+}
+
+void halvorsenFunction() {
+  // put your main code here, to run repeatedly:
+
+  dx = ( -(a*x) - (4 * y) - (4 * z) - (y * y)) * timestep;
+  dy = ( -(a*y) - (4 * z) - (4 * x) - (z * z)) * timestep;
+  dz = ( -(a*z) - (4 * x) - (4 * y) - (x * x)) * timestep;
+
+  x += dx;
+  y += dy;
+  z += dz;
+
+  a = mapfloat(analogRead(A2), 0, 1024, 3, 1.89); // Working
+
+  updateRange();
+
+  if(map(x,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(y,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(z,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } {
+    already = false;
+  }
+}
+
+void rabinovichFunction() {
+  // put your main code here, to run repeatedly:
+
+  float val = .11;
+
+  dx = ( y * (z - 1 + (x * x)) + (b * x)) * timestep;
+  dy = (( x * ((3 * z) + 1 - (x * x))) + (b * y)) * timestep;
+  dz = ((-2 * z) * (a + (x * y))) * timestep;
+
+  x += dx;
+  y += dy;
+  z += dz;
+
+  //a = mapfloat(analogRead(A2), 0, 1024, 1, 0.14);
+  b = mapfloat(analogRead(A2), 0, 1024, 0.001, val); // Stable
+  //b = mapfloat(analogRead(A2), 0, 1024, 0.001, 0.11); // Cool wiggles, overruns
+  //b = mapfloat(analogRead(A2), 0, 1024, 0.001, 0.1); // Cool wiggles, overruns
+
+  count = count+1;
+
+  if (count >= 8000)
+  {
+    //already = false;
+
+    if (Blink1 == true)
+    {
+      x = -1.00;
+      y = 0.00;
+      z = 0.50;
+
+      a = 0.14;
+      b = 0.11;
+      //val = 0.11;
+
+      Blink1 = false;
+      count = 0;
+    }
+    else if (Blink1 == false)
+    {
+      x = -1.00;
+      y = 0.00;
+      z = 0.50;
+
+      a = 0.14;
+      b = 0.106;
+      //val = 0.106;
+
+      Blink1 = true;
+      count = 0;
+    }
+    else;
+
+  }
+  else;
+
+  updateRange();
+
+  if(map(x,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(y,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(z,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } {
+    already = false;
+  }
+}
+
+void rosslerFunction() {
+  // put your main code here, to run repeatedly:
+
+  dx = (-(y+z)) * timestep;
+  dy = (x + (a * y)) * timestep;
+  dz = (b + z * (x - c)) * timestep;
+
+  x += dx;
+  y += dy;
+  z += dz;
+
+  //a = mapfloat(analogRead(A2), 0, 1024, 0.5, 0.2);
+  //b = mapfloat(analogRead(A2), 0, 1024, 5, 0.01);  // Working
+  b = mapfloat(analogRead(A2), 0, 1024, 5, 0.001);  
+  //c = mapfloat(analogRead(A2), 0, 1024, 1, 5.7);
 
   updateRange();
 
@@ -527,3 +680,113 @@ void checkRestart() {
 }
 
 
+
+//thomas
+
+// b = 0.19;
+
+// x = 1;
+// y = 2;
+// z = 1;
+
+// timestep = .1;
+
+//dadras
+
+// a = 3;
+// b = 2.7;
+// c = 1.7;
+// d = 2;
+// e = 9;
+
+// x = 0.5;
+// y = 0.1;
+// z = 0.3;
+
+// timestep = 0.01;
+
+// arneodo
+
+// a = -5.5;
+// b = 3.5;
+// c = -1;
+
+// x = 0.5;
+// y = 0.1;
+// z = 0.3;
+
+// //timestep = 0.01;
+// timestep = 0.008;
+
+// chen
+
+// a = 5.0;
+// b = -10.0;
+// c = -0.38;
+
+// x = 5;
+// y = 10;
+// z = 10;
+
+// timestep = 0.005;
+
+// scroll 3 
+
+// a = 40.0;
+// b = 0.833;
+// c = 20.0;
+// d = 0.5;
+// e = 0.65;
+
+// x = 2.1;
+// y = 0.9;
+// z = 1.2;
+
+// timestep = 0.01;
+
+// lorentz83
+
+ // a = 0.95;
+ // b = 7.91;
+ // f = 4.83;
+ // g = 4.66;
+
+ // x = -0.2;
+ // y = -2.82;
+ // z = 2.71;
+
+ // timestep = 0.005;
+
+// halvorsen
+
+//  x = -1.48;
+//  y = -1.51;
+//  z = 2.04;
+
+//  a = 1.89;
+
+//  timestep = 0.01;
+
+// Rabinovich-Fabrikant 
+
+
+//  x = -1.00;
+//  y = 0.00;
+//  z = 0.50;
+
+//  a = 0.14;
+//  b = 0.1;
+
+//  timestep = 0.01;
+
+// rossler
+
+//  x = 10.0;
+//  y = 0;
+//  z = 10.0;
+
+//  a = 0.2;
+//  b = 0.2;
+//  c = 5.7;
+
+//  timestep = 0.01;

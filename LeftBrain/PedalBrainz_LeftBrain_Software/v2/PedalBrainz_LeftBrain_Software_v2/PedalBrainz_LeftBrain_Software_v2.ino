@@ -291,10 +291,12 @@ float maxValue, minValue;
 
 float brightness = 0;
 int brightnessScaled;
-float fadeAmount = 1;  //Change it to adjust the fading between each step (fading speed)
 int maxBrightness = 190; //Pixel Max Bright
 int maxBrightnessTemp = 190; //Pixel Max Bright
+
+float fadeAmount = 1;  //Change it to adjust the fading between each step (fading speed)
 int delayAmount = 0;
+
 int strangeRandom;
 int strangeSlowAmount;
 int strangeSlowCount;
@@ -449,6 +451,10 @@ void setup() {
   initialBank = false;
   
   // Set a Startup Mode
+  // Default:
+  // Bank = 1;
+  // Mode = 0;
+
   Bank = 5;
   Mode = 1;
 
