@@ -49,12 +49,14 @@ void strangeAttractor2()
   // Serial.print(",");
   // Serial.println(z);
 
-  //Serial.print(",");
+  Serial.print(",");
   Serial.print(scaledX);
   Serial.print(",");
   Serial.print(scaledY);
   Serial.print(",");
-  Serial.println(scaledZ);  
+  Serial.print(scaledZ);  
+  Serial.print(",");
+  Serial.println(b);  
   //Serial.print(",");
   //Serial.println((scaledXInner+scaledYInner+scaledZInner)/3);  
 
@@ -323,9 +325,12 @@ void attractorzType()
     //scroll3Function();
     //lorentz83Function();
     //dadrasFunction();
-    halvorsenFunction();
+    //halvorsenFunction();
     //rabinovichFunction();
     //rosslerFunction();
+    sprottFunction();
+    //fourwingsFunction();
+    //aizawaFunction();
 
   }
   else if (Mode == 9)
@@ -338,8 +343,11 @@ void attractorzType()
     //lorentz83Function();
     //dadrasFunction();
     //halvorsenFunction();
-    rabinovichFunction();
+    //rabinovichFunction();
     //rosslerFunction();
+    //sprottFunction();
+    fourwingsFunction();
+    //aizawaFunction();
 
   }
   else if (Mode == 10)
@@ -353,7 +361,10 @@ void attractorzType()
     //dadrasFunction();
     //halvorsenFunction();
     //rabinovichFunction();
-    rosslerFunction();
+    //rosslerFunction();
+    //sprottFunction();
+    //fourwingsFunction();
+    aizawaFunction();
 
   }
   else;
@@ -641,6 +652,88 @@ void rosslerFunction() {
   }
 }
 
+void sprottFunction() {
+  // put your main code here, to run repeatedly:
+
+  dx = (y + (a * x * y) + (x * z)) * timestep;
+  dy = (1 - (b * pow(x,2)) + (y * z)) * timestep;
+  dz = (x - pow(x,2) - pow(y,2)) * timestep;
+
+  x += dx;
+  y += dy;
+  z += dz;
+
+  a = mapfloat(analogRead(A2), 0, 1024, 10.03, 2.07);
+  b = mapfloat(analogRead(A2), 0, 1024, 1.06, 1.28);
+
+  updateRange();
+
+  if(map(x,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(y,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(z,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } {
+    already = false;
+  }
+}
+
+void fourwingsFunction() {
+  // put your main code here, to run repeatedly:
+
+  dx = ((a * x) + (y * z)) * timestep;
+  dy = ((b * x) + (c * y) - (x * z)) * timestep;
+  dz = (-z - (x * y)) * timestep;
+
+  x += dx;
+  y += dy;
+  z += dz;
+
+  a = mapfloat(analogRead(A2), 0, 1024, 0.1, 0.25);
+  b = mapfloat(analogRead(A2), 0, 1024, 0.12, 0.01);
+
+  updateRange();
+
+  if(map(x,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(y,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(z,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } {
+    already = false;
+  }
+}
+
+void aizawaFunction() {
+  // put your main code here, to run repeatedly:
+
+  dx = (((z - b) * x) - (d * y)) * timestep;
+  dy = ((d * x) + ((z - b) * y)) * timestep;
+  dz = (c + (a * z) - (pow(z,3)/3) - ((pow(x,2) + pow(y,2)) * (1 + (e * z))) + (f * z * pow(x,3))) * timestep;
+
+  x += dx;
+  y += dy;
+  z += dz;
+
+  //b = mapfloat(analogRead(A2), 0, 1024, 2.01, 0.7); //stable
+  b = mapfloat(analogRead(A2), 0, 1024, 2.01, 0.7); 
+  //a = mapfloat(analogRead(A2), 0, 1024, 0.2, 3.5); 
+
+  updateRange();
+
+  if(map(x,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(y,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(z,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } {
+    already = false;
+  }
+}
+
 void updateRange() 
 {
 
@@ -790,3 +883,43 @@ void checkRestart() {
 //  c = 5.7;
 
 //  timestep = 0.01;
+
+// Sprott  
+
+// x = 0.63;
+// y = 0.47;
+// z = -0.54;
+
+// a = 2.07;
+// b = 1.79;
+
+// timestep = 0.01;
+
+//  Four wings 
+
+
+// x = 0.63;
+// y = 0.47;
+// z = -0.54;
+
+// a = 0.2;
+// b = 0.01;
+// c = -0.4;
+
+// timestep = 0.05;
+
+
+//  Aizawa 
+
+// x = 0.1;
+// y = 1;
+// z = 0.01;
+
+// a = 0.95;
+// b = 0.7;
+// c = 0.6;
+// d = 3.5;
+// e = 0.25;
+// f = 0.1;
+
+// timestep = 0.01;

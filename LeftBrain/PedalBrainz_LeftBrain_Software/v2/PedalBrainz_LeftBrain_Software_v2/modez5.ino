@@ -501,15 +501,16 @@ void Bank5()
 
       // timestep = 0.01;
 
-      // halvorsen
+// Sprott  
 
- x = -1.48;
- y = -1.51;
- z = 2.04;
+x = 0.63;
+y = 0.47;
+z = -0.54;
 
- a = 1.89;
+a = 2.07;
+b = 1.79;
 
- timestep = 0.01;      
+timestep = 0.01;
 
 
       //writeStartupDataz();
@@ -559,16 +560,29 @@ void Bank5()
 
       // Rabinovich-Fabrikant 
 
-      Blink1 = true;
+      // Blink1 = true;
 
-       x = -1.00;
-       y = 0.00;
-       z = 0.50;
+      //  x = -1.00;
+      //  y = 0.00;
+      //  z = 0.50;
 
-       a = 0.14;
-       b = 0.1;
+      //  a = 0.14;
+      //  b = 0.1;
 
-       timestep = 0.01;
+      //  timestep = 0.01;
+
+      //  Four wings 
+
+
+x = 0.63;
+y = 0.47;
+z = -0.54;
+
+a = 0.2;
+b = 0.01;
+c = -0.4;
+
+timestep = 0.05;
 
       
       //writeStartupDataz();
@@ -618,18 +632,20 @@ void Bank5()
 
       // timestep = 0.005;
 
-      //  Rossler Attractor
-      //  Initialization Values
+//  Aizawa 
 
- x = 10.0;
- y = 0;
- z = 10.0;
+x = 0.1;
+y = 1;
+z = 0.01;
 
- a = 0.2;
- b = 0.2;
- c = 5.7;
+a = 0.95;
+b = 0.7;
+c = 0.6;
+d = 3.5;
+e = 0.25;
+f = 0.1;
 
- timestep = 0.01;
+timestep = 0.01;
       
       //writeStartupDataz();
       
