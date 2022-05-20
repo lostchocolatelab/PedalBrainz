@@ -239,12 +239,12 @@ void strangeSlow3() {
   }
   else {
     // Slow down the simulation when the value is low
-    if ((scaledX >= 0) && (scaledX <= 50) || (scaledY >= 0) && (scaledY <= 50) || (scaledZ >= 0) && (scaledZ <= 50)) {
+    if ((scaledInnerCombined >= 0) && (scaledInnerCombined <= 50))  {
       valueA0 = map(analogRead(A0), 0, 1024, 1000, 0);
       strangeRandom = random(20, 200);
       strangeSlowAmount = (strangeRandom + valueA0);
       darkDelay = strangeSlowAmount;
-    //darkDelay = strangeSlowAmount;
+      //darkDelay = strangeSlowAmount;
       checkButtons();
       delayA2(darkDelay);
 

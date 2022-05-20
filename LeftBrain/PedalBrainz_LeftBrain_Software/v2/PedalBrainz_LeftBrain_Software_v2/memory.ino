@@ -153,6 +153,13 @@ int freeMemory() {
 #endif    // __arm__
 }
 
+extern "C" char *sbrk(int i);
+
+int FreeRam () {
+  char stack_dummy = 0;
+  return &stack_dummy - sbrk(0);
+}
+
 
 \
 

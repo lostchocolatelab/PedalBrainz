@@ -9,13 +9,19 @@ This is where the Mode switching and waiting happens within the loop.
 void Routines()
 {
 
-      // Pring the Mode value currently initialized
-      //Serial.println("Mode : "+ String(Mode));
+     
+  // Check to se if both buttons are down on startup 
+  //if they are both pressed, set the Bank to 1 and Mode to 0
 
-      plotCycle();
+  startupCheckReset();
 
-      //This is the initial startup mode (Mode = 0)
-      //Things are about to start kicking in...
+  // Pring the Mode value currently initialized
+  //Serial.println("Mode : "+ String(Mode));
+
+  plotCycle();
+
+  //This is the initial startup mode (Mode = 0)
+  //Things are about to start kicking in...
 
   if (Mode == 0)
   {
@@ -65,6 +71,8 @@ void Routines()
     */
 
       //delay(1000);
+
+      // Get the starup data from a location in memory
       EEPROM.get(storedAddress, startup);
 
       // If the EEPROM is empty then no STARTUP_DATA
@@ -72,13 +80,34 @@ void Routines()
       // Read the values of Startup Mode
       readStartupMode();
       readStartupBank();
+
       //Serial.println("I Read startupMode - " + String(startupMode));
       //Serial.println("I Read startupBank - " + String(startupBank));
 
-      // Set the Mode to the value of startupMode
+      
+      // If both buttons are being held
+      // reset the Bank and Mode and 
+      // set values as startup data
+      // write the values
+      if (buttonValUp == LOW && buttonValDown == LOW)
+      {
+        Bank = 1;
+        Mode = 1;
+        MaxBright = 255;
+
+        startupBank = Bank;
+        startupMode = Mode;
+        startupMaxBright = MaxBright;
+
+        writeStartupDataz();
+      }
+      else;
+
+      // Set the Bank, Mode, and MaxBright to the value of the StartupDataz
       Mode = startupMode;
       Bank = startupBank;
       MaxBright = startupMaxBright;
+      
 
       Serial.println("startupMode = " + String(startupMode));
       Serial.println("startupBank = " + String(startupBank));
@@ -168,7 +197,10 @@ void Routines()
       //Bank1();
   }
 
+  // When it's the first runthrough of routines:
+  // set the Bank & Mode as the startup and write the data to EEPROM
   if (routinesStartup == true) {
+
 
       //Serial.println("Routinez Startup Bank - " + String(Bank));
       //Serial.println("Routinez Startup Mode - " + String(Mode));

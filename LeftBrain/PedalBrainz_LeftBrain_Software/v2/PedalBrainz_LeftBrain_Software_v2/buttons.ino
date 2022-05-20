@@ -564,3 +564,46 @@ void longHoldEventDown()
   waitingFlag = false;
   WaitForModeChange = false;
 }
+
+
+void startupCheckReset()
+{
+  // if (routinesStartup == true )
+  // {
+  //   if (buttonValUp == LOW && buttonValDown == LOW)
+  //   {
+  //     Bank = 1;
+  //     Mode = 0;
+  //     MaxBright = 255;
+
+  //     Serial.println("Startup Check Reset ");
+
+  //     startupBank = Bank;
+  //     startupMode = Mode;
+  //     startupMaxBright = MaxBright;
+
+  //     writeStartupDataz();
+  //     //Serial.println("Setting Routines Startup False " + String(routinesStartup));
+  //   }
+  //   else;
+  // }
+  // else;
+
+    if (buttonValUp == LOW && buttonValDown == LOW)
+    {
+      Bank = 1;
+      Mode = 0;
+      MaxBright = 255;
+
+      Serial.println("Startup Check Reset ");
+
+      startupBank = Bank;
+      startupMode = Mode;
+      startupMaxBright = MaxBright;
+
+      writeStartupDataz();
+      //Serial.println("Setting Routines Startup False " + String(routinesStartup));
+    }
+    else;
+
+}

@@ -99,6 +99,10 @@ float fadeSpeed = 13;
 int fullDelay = 0;
 int darkDelay = 0;
 
+float fadeAmount = 1;  //Change it to adjust the fading between each step (fading speed)
+int delayAmount = 0;
+bool fadeUp;
+
 int randomAmountA0 = 0;
 int randomAmountA1 = 0;
 int randomAmountA2 = 0;
@@ -248,6 +252,7 @@ float effectiveB = 0;
 float scaledXInner;
 float scaledYInner;
 float scaledZInner;
+float scaledInnerCombined;
 
 
 //Constants for the lorenz function, KEEP UNCHANGED
@@ -288,20 +293,13 @@ float maxValue, minValue;
 
  void (* resetFunc)(void)=0; // declare reset function @ address 0 
 
-
-float brightness = 0;
-int brightnessScaled;
-int maxBrightness = 190; //Pixel Max Bright
-int maxBrightnessTemp = 190; //Pixel Max Bright
-
-float fadeAmount = 1;  //Change it to adjust the fading between each step (fading speed)
-int delayAmount = 0;
-
 int strangeRandom;
 int strangeSlowAmount;
 int strangeSlowCount;
 
-bool fadeUp;
+bool firstAttractorzType;
+int attractorzIndicatorValue = 0;
+int attractorzLEDType = 0;
 
 /**
 
@@ -391,6 +389,14 @@ bool pressedTapzDown = false;
 boolean empty = false;
 unsigned long startMillis;
 
+// Brightness Variables
+
+float brightness = 0;
+int brightnessScaled;
+int maxBrightness = 190; //Pixel Max Bright
+int maxBrightnessTemp = 190; //Pixel Max Bright
+
+
 // Average LEDS for getting the values of the Knob LEDs and using them
 
 int avgLight;
@@ -399,14 +405,15 @@ int avgLight1;
 int avgLight2;
 int avgLightInner;
 
-bool initialBank;
-float startIndex = 0;
-int STEPS = 30;// STEPS set dynamically once we've started up
-
 CRGBPalette16 currentPalette;
 TBlendType    currentBlending;
 
 #define FRAMES_PER_SECOND 60
+
+bool initialBank;
+float startIndex = 0;
+int STEPS = 30;// STEPS set dynamically once we've started up
+
 
 /**
 
@@ -455,11 +462,11 @@ void setup() {
   // Bank = 1;
   // Mode = 0;
 
-  Bank = 5;
-  Mode = 1;
+  Bank = 1;
+  Mode = 0;
 
+  // This catches at the end of the Routines() and writeStartupDataz()
   routinesStartup = true;
-  readStartupBank();
 
   // Game Setups
   difficultyLevel = 1;
@@ -600,9 +607,33 @@ void pixelScaling()
   scaledY = mapfloat(y, scalings[0][1], scalings[1][1], 0, 255);
   scaledZ = mapfloat(z, scalings[0][2], scalings[1][2], 0, 255);
 
-  scaledXInner = mapfloat(scaledX, 0, 255, 0, 190);
-  scaledYInner = mapfloat(scaledY, 0, 255, 0, 190);
-  scaledZInner = mapfloat(scaledZ, 0, 255, 0, 190);  
+  
+  if (attractorzLEDType == 1)
+  {
+    scaledXInner = mapfloat(scaledX, 0, 255, -10, 200);
+    scaledYInner = mapfloat(scaledY, 0, 255, -10, 200);
+    scaledZInner = mapfloat(scaledZ, 0, 255, -10, 200);
+    scaledInnerCombined = scaledXInner;  
+    scaledInnerCombined = constrain(scaledInnerCombined, 0, scaledInnerCombined);
+  }  
+  else if (attractorzLEDType == 2)
+  {
+    scaledXInner = mapfloat(scaledX, 0, 255, -30, 220);
+    scaledYInner = mapfloat(scaledY, 0, 255, -30, 220);
+    scaledZInner = mapfloat(scaledZ, 0, 255, -30, 220); 
+    scaledInnerCombined = (scaledXInner+scaledYInner)/2;  
+    scaledInnerCombined = constrain(scaledInnerCombined, 0, scaledInnerCombined);
+  }
+  else if (attractorzLEDType == 3)
+  {
+    scaledXInner = mapfloat(scaledX, 0, 255, -50, 230);
+    scaledYInner = mapfloat(scaledY, 0, 255, -50, 230);
+    scaledZInner = mapfloat(scaledZ, 0, 255, -50, 230);  
+    scaledInnerCombined = (scaledXInner+scaledYInner+scaledZInner)/3; 
+    scaledInnerCombined = constrain(scaledInnerCombined, 0, scaledInnerCombined);
+
+  } 
+  else; 
 
 }
 

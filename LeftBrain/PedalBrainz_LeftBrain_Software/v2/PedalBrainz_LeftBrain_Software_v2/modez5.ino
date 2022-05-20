@@ -176,8 +176,7 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
       
-      //  Thomas Attractor
-      //  Initialization Values
+      //          thomas attractor init maths
 
       b = 0.19;
 
@@ -185,7 +184,7 @@ void Bank5()
       y = 2;
       z = 1;
 
-      timestep = 0.1;
+      timestep = .1;
 
       //writeStartupDataz();
       
@@ -218,16 +217,17 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
       
-      //  Thomas Attractor
-      //  Initialization Values
+      //          arneodo attractor init maths
 
-      b = 0.19;
+      a = -5.5;
+      b = 3.5;
+      c = -1;
 
-      x = 1;
-      y = 2;
-      z = 1;
+      x = 0.5;
+      y = 0.1;
+      z = 0.3;
 
-      timestep = .1;
+      timestep = 0.008;
 
       //writeStartupDataz();
       
@@ -260,19 +260,17 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
 
-      //  Arneodo Attractor
-      //  Initialization Values
+      //          chen attractor init maths
 
-      a = -5.5;
-      b = 3.5;
-      c = -1;
+      a = 5.0;
+      b = -10.0;
+      c = -0.38;
 
-      x = 0.5;
-      y = 0.1;
-      z = 0.3;
+      x = 5;
+      y = 10;
+      z = 10;
 
-      //timestep = 0.01;
-      timestep = 0.008;
+      timestep = 0.005;
 
   
       //writeStartupDataz();
@@ -306,19 +304,19 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
 
-      //  Arneodo Attractor
-      //  Initialization Values
+      //          scroll 3 attractor init maths
 
-      a = -5.5;
-      b = 3.5;
-      c = -1;
+      a = 40.0;
+      b = 0.833;
+      c = 20.0;
+      d = 0.5;
+      e = 0.65;
 
-      x = 0.5;
-      y = 0.1;
-      z = 0.3;
+      x = 2.1;
+      y = 0.9;
+      z = 1.2;
 
-      //timestep = 0.01;
-      timestep = 0.008;
+      timestep = 0.01;
       
       //writeStartupDataz();
       
@@ -351,16 +349,16 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
 
-      //  Chen Attractor
-      //  Initialization Values
+      //          lorentz83 attractor init maths
 
-      a = 5.0;
-      b = -10.0;
-      c = -0.38;
+      a = 0.95;
+      b = 7.91;
+      f = 4.83;
+      g = 4.66;
 
-      x = 5;
-      y = 10;
-      z = 10;
+      x = -0.2;
+      y = -2.82;
+      z = 2.71;
 
       timestep = 0.005;
 
@@ -395,18 +393,15 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
 
-      //  Chen Attractor
-      //  Initialization Values
+      //          halvorsen attractor init maths
 
-      a = 5.0;
-      b = -10.0;
-      c = -0.38;
+       x = -1.48;
+       y = -1.51;
+       z = 2.04;
 
-      x = 5;
-      y = 10;
-      z = 10;
+       a = 1.89;
 
-      timestep = 0.005;
+       timestep = 0.01;
       
       //writeStartupDataz();
       
@@ -438,22 +433,18 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
 
-      //  Scroll 3 Attractor
-      //  Initialization Values
+      //          Rabinovich-Fabrikant attractor init maths
 
-      a = 40.0;
-      b = 0.833;
-      c = 20.0;
-      d = 0.5;
-      e = 0.65;
+       Blink1 = true;
+       
+       x = -1.00;
+       y = 0.00;
+       z = 0.50;
 
-      x = 2.1;
-      y = 0.9;
-      z = 1.2;
+       a = 0.14;
+       b = 0.1;
 
-      timestep = 0.01;
-
-
+       timestep = 0.01;
     
       //writeStartupDataz();
       
@@ -486,31 +477,17 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
 
-      //  Scroll 3 Attractor
-      //  Initialization Values
+      //          rossler attractor init maths
 
-      // a = 40.0;
-      // b = 0.833;
-      // c = 20.0;
-      // d = 0.5;
-      // e = 0.65;
+       x = 10.0;
+       y = 0;
+       z = 10.0;
 
-      // x = 2.1;
-      // y = 0.9;
-      // z = 1.2;
+       a = 0.2;
+       b = 0.2;
+       c = 5.7;
 
-      // timestep = 0.01;
-
-// Sprott  
-
-x = 0.63;
-y = 0.47;
-z = -0.54;
-
-a = 2.07;
-b = 1.79;
-
-timestep = 0.01;
+       timestep = 0.01;
 
 
       //writeStartupDataz();
@@ -544,47 +521,18 @@ timestep = 0.01;
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
 
-      //  Lorentz83 Attractor
-      //  Initialization Values
+      //          Sprott attractor init maths
 
-      //  a = 0.95;
-      //  b = 7.91;
-      //  f = 4.83;
-      //  g = 4.66;
+      x = 0.63;
+      y = 0.47;
+      z = -0.54;
 
-      //  x = -0.2;
-      //  y = -2.82;
-      //  z = 2.71;
+      a = 2.07;
+      b = 1.79;
 
-      // timestep = 0.005;
+      timestep = 0.01;
 
-      // Rabinovich-Fabrikant 
-
-      // Blink1 = true;
-
-      //  x = -1.00;
-      //  y = 0.00;
-      //  z = 0.50;
-
-      //  a = 0.14;
-      //  b = 0.1;
-
-      //  timestep = 0.01;
-
-      //  Four wings 
-
-
-x = 0.63;
-y = 0.47;
-z = -0.54;
-
-a = 0.2;
-b = 0.01;
-c = -0.4;
-
-timestep = 0.05;
-
-      
+    
       //writeStartupDataz();
       
       //Do the last thing and WaitForModeChange

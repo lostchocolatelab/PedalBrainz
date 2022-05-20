@@ -8,9 +8,9 @@
 
 void strangeAttractor2()
 {
-  //timestep = map(analogRead(A0), 0, 1024, 0.01, 0.1);
 
-  //fadeSpeed = 0;
+  firstAttractorzType = true;
+  attractorzIndicator();
 
   //  This handles the maximum brightness adjustment using the A1 control
   maxBrightnessAdjust();
@@ -22,7 +22,7 @@ void strangeAttractor2()
   
   //  Scale the values of the attractorz to 0-255 for the A0, A1, A2 LEDs and 0-190 for the inner LEDs
   pixelScaling();
-  attractorzPixel();
+  attractorzPixel2();
   showLEDS();
   checkButtons();
 
@@ -31,7 +31,7 @@ void strangeAttractor2()
   checkButtons();
 
   //  Slow things down when the values are low
-  //strangeSlow3();
+  strangeSlow3();
   checkButtons();
 
   // Serial.print(", X:");
@@ -49,14 +49,14 @@ void strangeAttractor2()
   // Serial.print(",");
   // Serial.println(z);
 
-  Serial.print(",");
-  Serial.print(scaledX);
-  Serial.print(",");
-  Serial.print(scaledY);
-  Serial.print(",");
-  Serial.print(scaledZ);  
-  Serial.print(",");
-  Serial.println(b);  
+  // Serial.print(",");
+  // Serial.print(scaledX);
+  // Serial.print(",");
+  // Serial.print(scaledY);
+  // Serial.print(",");
+  // Serial.print(scaledZ);  
+  //Serial.print(",");
+  //Serial.println(b);  
   //Serial.print(",");
   //Serial.println((scaledXInner+scaledYInner+scaledZInner)/3);  
 
@@ -69,9 +69,138 @@ void strangeAttractor2()
 
 }
 
+
+void attractorzIndicator()
+{
+
+  attractorzIndicatorValue = mapfloat(analogRead(A2), 0, 1024, 0, 300);
+
+  if (firstAttractorzType == true)
+  {
+
+    if (attractorzIndicatorValue <= 100)
+    {
+      attractorzLEDType = 1;
+      attractorzIndicatorRoutine();
+    }
+    else if ((attractorzIndicatorValue >= 101) && (attractorzIndicatorValue <= 199))
+    {
+      attractorzLEDType = 2;
+      attractorzIndicatorRoutine();
+    }
+    else if (attractorzIndicatorValue >= 200)
+    {
+      attractorzLEDType = 3;
+      attractorzIndicatorRoutine();
+    }
+    else;
+
+    //firstAttractorzType = false;
+
+  }
+  else;
+
+  //firstAttractorzType = false
+
+}
+
+void attractorzIndicatorRoutine()
+{
+
+  if (attractorzLEDType == 1)
+  {
+      strip.setPixelColor(0, 255, 255, 255);
+      strip.show();
+      //Serial.print("Single");
+  }
+  else if (attractorzLEDType == 2)
+  {
+      strip.setPixelColor(1, 255, 255, 255);
+      strip.show();
+      //Serial.print("Double");    
+  }
+  else if (attractorzLEDType == 3)
+  {
+      strip.setPixelColor(2, 255, 255, 255);
+      strip.show();
+      //Serial.print("Triple");
+  }
+  else;
+
+}
+
+
+
   ////////////////////
   ////////////////////        Set the LED colors by Mode
   ////////////////////
+
+void attractorzPixel2()
+{
+
+
+    if (attractorzLEDType == 1)
+    {
+        for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
+          strip.setPixelColor(p, (scaledX), (scaledY), (scaledZ/5));
+
+        }
+        //Single Output Scaled Inner XYZ
+        pixel.setPixelColor(0, (scaledInnerCombined), (0), (0));   
+        inner.setPixelColor(0, (scaledInnerCombined), (0), (0));  
+
+    Serial.print(",");
+    Serial.print(scaledX);
+    Serial.print(",");
+    Serial.print(scaledY);
+    Serial.print(",");
+    Serial.print(scaledZ);  
+    Serial.print(",");
+    Serial.println(scaledXInner);  
+
+    }
+    else if (attractorzLEDType == 2)
+    {
+        for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
+          strip.setPixelColor(p, (scaledX)/5, (scaledY), (scaledZ/10));
+
+        }
+        //Double Output Scaled Inner XYZ
+        pixel.setPixelColor(0, (scaledInnerCombined), (0), (scaledInnerCombined));   
+        inner.setPixelColor(0, (scaledInnerCombined), (0), (scaledInnerCombined)); 
+
+    Serial.print(",");
+    Serial.print(scaledX);
+    Serial.print(",");
+    Serial.print(scaledY);
+    Serial.print(",");
+    Serial.print(scaledZ);  
+    Serial.print(",");
+    Serial.println(scaledInnerCombined);            
+    }
+    else if (attractorzLEDType == 3)
+    {
+        for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
+          strip.setPixelColor(p, (scaledX)/8, (scaledY)/2, (scaledZ));
+
+        }
+        //Triple Output Scaled Inner XYZ
+        pixel.setPixelColor(0, (scaledInnerCombined), (scaledInnerCombined), (scaledInnerCombined));   
+        inner.setPixelColor(0, (scaledInnerCombined), (scaledInnerCombined), (scaledInnerCombined)); 
+
+    Serial.print(",");
+    Serial.print(scaledX);
+    Serial.print(",");
+    Serial.print(scaledY);
+    Serial.print(",");
+    Serial.print(scaledZ);  
+    Serial.print(",");
+    Serial.println(scaledInnerCombined);           
+    }
+    else;      
+
+}
+
 
 void attractorzPixel()
 {
@@ -230,13 +359,16 @@ void attractorzType()
     //halvorsenFunction();
     //rabinovichFunction();
     //rosslerFunction();
+    //sprottFunction();
+    //fourwingsFunction();
+    //aizawaFunction();
 
   }
   else if (Mode == 2)
   {
     
-    thomasFunction();
-    //arneodoFunction();
+    //thomasFunction();
+    arneodoFunction();
     //chenFunction();
     //scroll3Function();
     //lorentz83Function();
@@ -244,65 +376,29 @@ void attractorzType()
     //halvorsenFunction();
     //rabinovichFunction();
     //rosslerFunction();
+    //sprottFunction();
+    //fourwingsFunction();
+    //aizawaFunction();
 
   }
   else if (Mode == 3)
   {
     
     //thomasFunction();
-    arneodoFunction();
-    //chenFunction();
+    //arneodoFunction();
+    chenFunction();
     //scroll3Function();
     //lorentz83Function();
     //dadrasFunction();
     //halvorsenFunction();
     //rabinovichFunction();
     //rosslerFunction();
+    //sprottFunction();
+    //fourwingsFunction();
+    //aizawaFunction();
 
   }
   else if (Mode == 4)
-  {
-    
-    //thomasFunction();
-    arneodoFunction();
-    //chenFunction();
-    //scroll3Function();
-    //lorentz83Function();
-    //dadrasFunction();
-    //halvorsenFunction();
-    //rabinovichFunction();
-    //rosslerFunction();
-
-  }
-  else if (Mode == 5)
-  {
-    
-    //thomasFunction();
-    //arneodoFunction();
-    chenFunction();
-    //scroll3Function();
-    //lorentz83Function();
-    //dadrasFunction();
-    //halvorsenFunction();
-    //rabinovichFunction();
-    //rosslerFunction();
-
-  }
-  else if (Mode == 6)
-  {
-    
-    //thomasFunction();
-    //arneodoFunction();
-    chenFunction();
-    //scroll3Function();
-    //lorentz83Function();
-    //dadrasFunction();
-    //halvorsenFunction();
-    //rabinovichFunction();
-    //rosslerFunction();
-
-  }
-  else if (Mode == 7)
   {
     
     //thomasFunction();
@@ -314,6 +410,60 @@ void attractorzType()
     //halvorsenFunction();
     //rabinovichFunction();
     //rosslerFunction();
+    //sprottFunction();
+    //fourwingsFunction();
+    //aizawaFunction();
+
+  }
+  else if (Mode == 5)
+  {
+    
+    //thomasFunction();
+    //arneodoFunction();
+    //chenFunction();
+    //scroll3Function();
+    lorentz83Function();
+    //dadrasFunction();
+    //halvorsenFunction();
+    //rabinovichFunction();
+    //rosslerFunction();
+    //sprottFunction();
+    //fourwingsFunction();
+    //aizawaFunction();
+
+  }
+  else if (Mode == 6)
+  {
+    
+    //thomasFunction();
+    //arneodoFunction();
+    //chenFunction();
+    //scroll3Function();
+    //lorentz83Function();
+    //dadrasFunction();
+    halvorsenFunction();
+    //rabinovichFunction();
+    //rosslerFunction();
+    //sprottFunction();
+    //fourwingsFunction();
+    //aizawaFunction();
+
+  }
+  else if (Mode == 7)
+  {
+    
+    //thomasFunction();
+    //arneodoFunction();
+    //chenFunction();
+    //scroll3Function();
+    //lorentz83Function();
+    //dadrasFunction();
+    //halvorsenFunction();
+    rabinovichFunction();
+    //rosslerFunction();
+    //sprottFunction();
+    //fourwingsFunction();
+    //aizawaFunction();
 
   }
   else if (Mode == 8)
@@ -327,8 +477,8 @@ void attractorzType()
     //dadrasFunction();
     //halvorsenFunction();
     //rabinovichFunction();
-    //rosslerFunction();
-    sprottFunction();
+    rosslerFunction();
+    //sprottFunction();
     //fourwingsFunction();
     //aizawaFunction();
 
@@ -345,8 +495,8 @@ void attractorzType()
     //halvorsenFunction();
     //rabinovichFunction();
     //rosslerFunction();
-    //sprottFunction();
-    fourwingsFunction();
+    sprottFunction();
+    //fourwingsFunction();
     //aizawaFunction();
 
   }
@@ -363,8 +513,8 @@ void attractorzType()
     //rabinovichFunction();
     //rosslerFunction();
     //sprottFunction();
-    //fourwingsFunction();
-    aizawaFunction();
+    fourwingsFunction();
+    //aizawaFunction();
 
   }
   else;
@@ -382,7 +532,7 @@ void thomasFunction() {
 
   updateRange();
 
-  b = mapfloat(analogRead(A2), 0, 1024, .2, .01);
+  //b = mapfloat(analogRead(A2), 0, 1024, .2, .01);
 
   if(map(x,minValue,maxValue,1,255) == 255){
     checkRestart();
@@ -437,7 +587,7 @@ void arneodoFunction() {
   
   updateRange();
 
-  b = mapfloat(analogRead(A2), 0, 1024, 8, 3.5);
+  //b = mapfloat(analogRead(A2), 0, 1024, 8, 3.5);
 
   if(map(x,minValue,maxValue,1,255) == 255){
     checkRestart();
@@ -464,7 +614,7 @@ void chenFunction() {
 
   updateRange();
 
-  b = mapfloat(analogRead(A2), 0, 1024, -10, -14);
+  //b = mapfloat(analogRead(A2), 0, 1024, -10, -14);
   
   if(map(x,minValue,maxValue,1,255) == 255){
     checkRestart();
@@ -490,7 +640,7 @@ void scroll3Function() {
 
   updateRange();
 
-  c = mapfloat(analogRead(A2), 0, 1024, 21.3, 20.3);  
+  //c = mapfloat(analogRead(A2), 0, 1024, 21.3, 20.3);  
 
   if(map(x,minValue,maxValue,1,255) == 255){
     checkRestart();
@@ -514,7 +664,7 @@ void lorentz83Function() {
   y += dy;
   z += dz;
 
-  b = mapfloat(analogRead(A2), 0, 1024, 7.91, 11);
+  //b = mapfloat(analogRead(A2), 0, 1024, 7.91, 11);
 
   updateRange();
 
@@ -540,7 +690,7 @@ void halvorsenFunction() {
   y += dy;
   z += dz;
 
-  a = mapfloat(analogRead(A2), 0, 1024, 3, 1.89); // Working
+  //a = mapfloat(analogRead(A2), 0, 1024, 3, 1.89); // Working
 
   updateRange();
 
@@ -569,7 +719,7 @@ void rabinovichFunction() {
   z += dz;
 
   //a = mapfloat(analogRead(A2), 0, 1024, 1, 0.14);
-  b = mapfloat(analogRead(A2), 0, 1024, 0.001, val); // Stable
+  //b = mapfloat(analogRead(A2), 0, 1024, 0.001, val); // Stable
   //b = mapfloat(analogRead(A2), 0, 1024, 0.001, 0.11); // Cool wiggles, overruns
   //b = mapfloat(analogRead(A2), 0, 1024, 0.001, 0.1); // Cool wiggles, overruns
 
@@ -636,7 +786,7 @@ void rosslerFunction() {
 
   //a = mapfloat(analogRead(A2), 0, 1024, 0.5, 0.2);
   //b = mapfloat(analogRead(A2), 0, 1024, 5, 0.01);  // Working
-  b = mapfloat(analogRead(A2), 0, 1024, 5, 0.001);  
+  //b = mapfloat(analogRead(A2), 0, 1024, 5, 0.001);  
   //c = mapfloat(analogRead(A2), 0, 1024, 1, 5.7);
 
   updateRange();
@@ -663,8 +813,8 @@ void sprottFunction() {
   y += dy;
   z += dz;
 
-  a = mapfloat(analogRead(A2), 0, 1024, 10.03, 2.07);
-  b = mapfloat(analogRead(A2), 0, 1024, 1.06, 1.28);
+  //a = mapfloat(analogRead(A2), 0, 1024, 10.03, 2.07);
+  //b = mapfloat(analogRead(A2), 0, 1024, 1.06, 1.28);
 
   updateRange();
 
@@ -690,8 +840,8 @@ void fourwingsFunction() {
   y += dy;
   z += dz;
 
-  a = mapfloat(analogRead(A2), 0, 1024, 0.1, 0.25);
-  b = mapfloat(analogRead(A2), 0, 1024, 0.12, 0.01);
+  //a = mapfloat(analogRead(A2), 0, 1024, 0.1, 0.25);
+  //b = mapfloat(analogRead(A2), 0, 1024, 0.12, 0.01);
 
   updateRange();
 
@@ -718,7 +868,7 @@ void aizawaFunction() {
   z += dz;
 
   //b = mapfloat(analogRead(A2), 0, 1024, 2.01, 0.7); //stable
-  b = mapfloat(analogRead(A2), 0, 1024, 2.01, 0.7); 
+  //b = mapfloat(analogRead(A2), 0, 1024, 2.01, 0.7); 
   //a = mapfloat(analogRead(A2), 0, 1024, 0.2, 3.5); 
 
   updateRange();
@@ -774,152 +924,152 @@ void checkRestart() {
 
 
 
-//thomas
+      //          thomas attractor init maths
 
-// b = 0.19;
+      // b = 0.19;
 
-// x = 1;
-// y = 2;
-// z = 1;
+      // x = 1;
+      // y = 2;
+      // z = 1;
 
-// timestep = .1;
+      // timestep = .1;
 
-//dadras
+      //          arneodo attractor init maths
 
-// a = 3;
-// b = 2.7;
-// c = 1.7;
-// d = 2;
-// e = 9;
+      // a = -5.5;
+      // b = 3.5;
+      // c = -1;
 
-// x = 0.5;
-// y = 0.1;
-// z = 0.3;
+      // x = 0.5;
+      // y = 0.1;
+      // z = 0.3;
 
-// timestep = 0.01;
+      // timestep = 0.008;
 
-// arneodo
+      //          chen attractor init maths
 
-// a = -5.5;
-// b = 3.5;
-// c = -1;
+      // a = 5.0;
+      // b = -10.0;
+      // c = -0.38;
 
-// x = 0.5;
-// y = 0.1;
-// z = 0.3;
+      // x = 5;
+      // y = 10;
+      // z = 10;
 
-// //timestep = 0.01;
-// timestep = 0.008;
+      // timestep = 0.005;
 
-// chen
+      //          scroll 3 attractor init maths
 
-// a = 5.0;
-// b = -10.0;
-// c = -0.38;
+      // a = 40.0;
+      // b = 0.833;
+      // c = 20.0;
+      // d = 0.5;
+      // e = 0.65;
 
-// x = 5;
-// y = 10;
-// z = 10;
+      // x = 2.1;
+      // y = 0.9;
+      // z = 1.2;
 
-// timestep = 0.005;
+      // timestep = 0.01;
 
-// scroll 3 
+      //          lorentz83 attractor init maths
 
-// a = 40.0;
-// b = 0.833;
-// c = 20.0;
-// d = 0.5;
-// e = 0.65;
+      // a = 0.95;
+      // b = 7.91;
+      // f = 4.83;
+      // g = 4.66;
 
-// x = 2.1;
-// y = 0.9;
-// z = 1.2;
+      // x = -0.2;
+      // y = -2.82;
+      // z = 2.71;
 
-// timestep = 0.01;
+      // timestep = 0.005;
 
-// lorentz83
+      //          dadras attractor init maths
 
- // a = 0.95;
- // b = 7.91;
- // f = 4.83;
- // g = 4.66;
+      // a = 3;
+      // b = 2.7;
+      // c = 1.7;
+      // d = 2;
+      // e = 9;
 
- // x = -0.2;
- // y = -2.82;
- // z = 2.71;
+      // x = 0.5;
+      // y = 0.1;
+      // z = 0.3;
 
- // timestep = 0.005;
+      // timestep = 0.01;
 
-// halvorsen
+      //          halvorsen attractor init maths
 
-//  x = -1.48;
-//  y = -1.51;
-//  z = 2.04;
+      //  x = -1.48;
+      //  y = -1.51;
+      //  z = 2.04;
 
-//  a = 1.89;
+      //  a = 1.89;
 
-//  timestep = 0.01;
-
-// Rabinovich-Fabrikant 
+      //  timestep = 0.01;
 
 
-//  x = -1.00;
-//  y = 0.00;
-//  z = 0.50;
+      //          Rabinovich-Fabrikant attractor init maths
 
-//  a = 0.14;
-//  b = 0.1;
+      //  Blink1 = true;
+      //  x = -1.00;
+      //  y = 0.00;
+      //  z = 0.50;
 
-//  timestep = 0.01;
+      //  a = 0.14;
+      //  b = 0.1;
 
-// rossler
+      //  timestep = 0.01;
 
-//  x = 10.0;
-//  y = 0;
-//  z = 10.0;
+      //          rossler attractor init maths
 
-//  a = 0.2;
-//  b = 0.2;
-//  c = 5.7;
+      //  x = 10.0;
+      //  y = 0;
+      //  z = 10.0;
 
-//  timestep = 0.01;
+      //  a = 0.2;
+      //  b = 0.2;
+      //  c = 5.7;
 
-// Sprott  
+      //  timestep = 0.01;
 
-// x = 0.63;
-// y = 0.47;
-// z = -0.54;
+      //          Sprott attractor init maths
 
-// a = 2.07;
-// b = 1.79;
+      // x = 0.63;
+      // y = 0.47;
+      // z = -0.54;
 
-// timestep = 0.01;
+      // a = 2.07;
+      // b = 1.79;
 
-//  Four wings 
+      // timestep = 0.01;
 
-
-// x = 0.63;
-// y = 0.47;
-// z = -0.54;
-
-// a = 0.2;
-// b = 0.01;
-// c = -0.4;
-
-// timestep = 0.05;
+      //          Four wings attractor init maths
 
 
-//  Aizawa 
+      // x = 0.63;
+      // y = 0.47;
+      // z = -0.54;
 
-// x = 0.1;
-// y = 1;
-// z = 0.01;
+      // a = 0.2;
+      // b = 0.01;
+      // c = -0.4;
 
-// a = 0.95;
-// b = 0.7;
-// c = 0.6;
-// d = 3.5;
-// e = 0.25;
-// f = 0.1;
+      // timestep = 0.05;
 
-// timestep = 0.01;
+
+      //          Aizawa attractor init maths
+
+      // x = 0.1;
+      // y = 1;
+      // z = 0.01;
+
+      // a = 0.95;
+      // b = 0.7;
+      // c = 0.6;
+      // d = 3.5;
+      // e = 0.25;
+      // f = 0.1;
+
+      // timestep = 0.01;
