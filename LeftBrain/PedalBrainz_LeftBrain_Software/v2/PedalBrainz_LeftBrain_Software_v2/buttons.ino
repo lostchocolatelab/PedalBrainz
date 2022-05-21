@@ -282,6 +282,7 @@ void clickEventUp()
 void doubleClickEventUp()
 {
 
+  buttonBreak = true;
   clicked = true;
   WaitForModeChange = false;
   already = false;
@@ -450,6 +451,7 @@ void doubleClickEventDown()
 {
 
 
+  buttonBreak = true;
   clicked = true;
   WaitForModeChange = false;
   already = false;
@@ -582,8 +584,8 @@ void checkResetDefault()
         Mode = 0;
         MaxBright = 255;
 
-        Serial.println("Startup Check Reset = Initial True");
-        Serial.println("Initial " + String(initial));
+        //Serial.println("Startup Check Reset = Initial True");
+        //Serial.println("Initial " + String(initial));
 
         startupBank = Bank;
         startupMode = Mode;
@@ -600,8 +602,8 @@ void checkResetDefault()
       Mode = 1;
       MaxBright = 255;
 
-      Serial.println("Startup Check Reset = Initial False");
-      Serial.println("Initial " + String(initial));
+      //Serial.println("Startup Check Reset = Initial False");
+      //Serial.println("Initial " + String(initial));
 
       startupBank = Bank;
       startupMode = Mode;
@@ -622,8 +624,8 @@ void checkResetDefault()
       buttonLongHoldUp = false;
       buttonLongHoldDown = false;
 
-      Serial.println("Startup Check Reset Else = Initial False");
-      Serial.println("Initial " + String(initial));
+      //Serial.println("Startup Check Reset Else = Initial False");
+      //Serial.println("Initial " + String(initial));
 
     }
 

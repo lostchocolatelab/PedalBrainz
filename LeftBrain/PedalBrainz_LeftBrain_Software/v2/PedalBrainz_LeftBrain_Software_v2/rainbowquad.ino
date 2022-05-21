@@ -48,6 +48,7 @@ void RainbowQuad() {
 
     
     buttonBreak = false;
+    checkButtons();
 
     //maxBrightness = map(analogRead(A1), 0, 1024, 0, maxBrightnessTemp);
 
@@ -101,6 +102,8 @@ void rainbowSaw(){
 
     int i;
     int x;
+
+    checkButtons();
 
     for(i=0;i<6;i++) 
     {
@@ -222,8 +225,11 @@ void rainbowPyramid(){
             }
             else if (buttonBreak == false)
             {
+                checkButtons();
+
                 for(x=4;x<0;x++) 
                         {
+                            checkButtons();
 
                             if (buttonBreak == true) 
                             {
@@ -238,6 +244,8 @@ void rainbowPyramid(){
                             }
                                 else if (buttonBreak == false)
                                 {
+                                    checkButtons();
+
                                     brightnessNumber(x);
                                     Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
 
@@ -259,6 +267,8 @@ void rainbowPyramid(){
 void quadNumber(int quadStep)
 {
     //Serial.println("colorone");
+
+    checkButtons();
 
     if (quadStep == 0) 
     {
@@ -326,7 +336,8 @@ void quadNumber(int quadStep)
 
 void showQuad()
 {
-        
+        checkButtons();
+
         LEDBrightness = pixel.getBrightness();
         Serial.println("Setting the quadBrightnessAmount: " + String(LEDBrightness));
 
@@ -345,6 +356,8 @@ void showQuad()
 
 void quadBrightnessAmount(int quadBrightnessNumber)
 {
+
+    checkButtons();
 
     if (quadBrightnessNumber = 0)
     {
@@ -395,6 +408,8 @@ void quadBrightnessAmount(int quadBrightnessNumber)
 
 void brightnessNumber(int brightnessCount)
 {
+    checkButtons();
+
     if (brightnessCount == 0)
     {
         //randomBright0 = 50;
@@ -440,6 +455,8 @@ void brightnessNumber(int brightnessCount)
 
 void brightnessStatic()
 {
+    checkButtons();
+
     randomBright0 = 50;
     randomBright1 = 90;
     randomBright2 = 155;
@@ -447,6 +464,8 @@ void brightnessStatic()
 }
 
 void setRandomBrights() {
+
+    checkButtons();
 
     randomBright0  = random(10, 255);
     randomBright1  = random(10, 255);
@@ -456,6 +475,8 @@ void setRandomBrights() {
 }
 
 void setRandomBrightsOnce() {
+    checkButtons();
+
     if (randomOnce == 0) {
 
         randomBright0  = random(10, 255);
@@ -476,6 +497,8 @@ void setRandomBrightsOnce() {
 
 void darkLEDS() {
 
+    checkButtons();
+
     // Make the pixel dark
 
     strip.setBrightness(0);
@@ -490,14 +513,14 @@ void darkLEDS() {
     inner.setPixelColor(0, 0, 0, 0);
     showLEDS();
 
-    
-
     //delayA2(darkDelay);
     //Serial.println("dark");
 
 }
 
 void darkLEDSDelay() {
+
+    checkButtons();
 
     darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
     //Serial.println("darkDelay " + String(darkDelay));
@@ -528,6 +551,7 @@ void darkLEDSDelay() {
 
 void darkDelayBetwixtColors() {
 
+    checkButtons();
     
     //darkLEDS();
 

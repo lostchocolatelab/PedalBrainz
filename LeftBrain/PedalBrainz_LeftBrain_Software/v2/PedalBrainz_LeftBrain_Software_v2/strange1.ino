@@ -106,7 +106,12 @@ void strangeBright() {
   
   // Print some stuff
   //Serial.println("scaledx: " + String(scaledX) + " scaledY : " + String(scaledY) + " scaledz : " + String(scaledZ));
-  Serial.println("," + String(scaledX) + "," + String(scaledY) + "," + String(scaledZ));
+  
+  if (plotterPrint == true)
+  {
+    Serial.println("," + String(scaledX) + "," + String(scaledY) + "," + String(scaledZ));
+  }
+  else;
 
 }
 

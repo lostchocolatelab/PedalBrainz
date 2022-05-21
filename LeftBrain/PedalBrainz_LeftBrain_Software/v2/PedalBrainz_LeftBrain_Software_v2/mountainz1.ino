@@ -203,35 +203,44 @@ void mountainSnack() {
     //   Serial.println(snackRandom);
   }
 
-
-  snackDecision();
-  Serial.println(scaledVal);
-  mountainzColorMap();
-  
-  showLEDS();
-
-
-              //Serial.println(scaledVal);
-
-       if (Bank == 2 && Mode == 4){
+    snackDecision();
     
-          }
-       else if ((scaledVal >= 0) && (scaledVal <= 10)) {
-              
-                // Slow down the simulation when the value is low
-                
-                strangeRandom = random(20, 200);
-                strangeSlowAmount = (strangeRandom+(delayAmount*3));
-                delay(strangeSlowAmount);
-                Serial.println("StrangeSlow: " + String(strangeSlowAmount));
-                Serial.println("currentVal: " + String(currentVal));
-                 Serial.println("scaledVal: " + String(scaledVal));
-                //Serial.println("ScaledVal: " + String(scaledVal));
-                //Serial.println("CurrentVal: " + String(currentVal));
+    if (plotterPrint == true)
+    {
+      Serial.println(scaledVal);    
+    }
+
+    mountainzColorMap();
     
-                showLEDS();
-           }  
-           else;
+    showLEDS();
+
+    //Serial.println(scaledVal);
+
+    if (Bank == 2 && Mode == 4)
+    {
+
+    }
+    else if ((scaledVal >= 0) && (scaledVal <= 10)) {
+          
+            // Slow down the simulation when the value is low
+            
+            strangeRandom = random(20, 200);
+            strangeSlowAmount = (strangeRandom+(delayAmount*3));
+            delay(strangeSlowAmount);
+
+            if (plotterPrint == true)
+            {
+              Serial.println("StrangeSlow: " + String(strangeSlowAmount));
+              Serial.println("currentVal: " + String(currentVal));
+              Serial.println("scaledVal: " + String(scaledVal));
+              //Serial.println("ScaledVal: " + String(scaledVal));
+              //Serial.println("CurrentVal: " + String(currentVal));
+            }
+            else;
+
+            showLEDS();
+    }  
+    else;
         
 
   plotCycle();
@@ -261,18 +270,22 @@ void snackDecision(){
         //snackLengthRandom = random(snackLength+1000)-(snackLength+50);
         delaySnackLength = snackLength+snackLengthRandom;
         //delaySnackLength = snackLength;
-        Serial.println("SNACK TIME");
-        //Serial.println(snackLength+snackLengthRandom);
         //delay(snackLength+snackLengthRandom);
-        Serial.println("delaySnackLength :" + String(delaySnackLength));
         
         delaySnack(delaySnackLength);
-        
-        Serial.println("WaitDelay is True");
-          
         //delayA2(darkDelay);
-        Serial.println(scaledVal);
-        //Serial.println(currentVal);
+
+        if (plotterPrint == true)
+        {
+          Serial.println("SNACK TIME");
+          //Serial.println(snackLength+snackLengthRandom);
+          Serial.println("delaySnackLength :" + String(delaySnackLength));
+          Serial.println("WaitDelay is True");
+          Serial.println(scaledVal);
+          //Serial.println(currentVal);          
+        }
+        else;
+
     
     }
 
@@ -307,7 +320,6 @@ void snackDecision(){
 void scaledLowDelay(){
         if ((scaledVal >= 0) && (scaledVal <= .1)) {
                
-               Serial.println("WaitDelay is True");
                // Delay between cycles
                for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                     strip.setPixelColor(p, 0, 0, 0);
@@ -323,9 +335,15 @@ void scaledLowDelay(){
                 showLEDS();
                 
                 delayA2(darkDelay);
-                Serial.println(scaledVal);
+
+                if (plotterPrint == true)
+                {
+                  Serial.println("WaitDelay is True");
+                  Serial.println(scaledVal);
+                }
+                else;
+                
                 currentVal = 2;
-             
            
           }
 }

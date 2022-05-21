@@ -34,13 +34,16 @@ void strangeAttractor2()
   strangeSlow3();
   checkButtons();
 
-  // Serial.print(", X:");
-  // Serial.print(x);
-  // Serial.print(",Y:");
-  // Serial.print(y);
-  // Serial.print(",Z:");
-  // Serial.println(z);
-
+  if (plotterPrint == true)
+  {
+    Serial.print(", X:");
+    Serial.print(x);
+    Serial.print(",Y:");
+    Serial.print(y);
+    Serial.print(",Z:");
+    Serial.println(z);
+  }
+  else;
 
   //Serial.print(",");
   // Serial.print(x);
@@ -68,7 +71,6 @@ void strangeAttractor2()
   // Serial.println(scaledZInner);  
 
 }
-
 
 void attractorzIndicator()
 {

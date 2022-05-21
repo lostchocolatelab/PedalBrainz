@@ -14,6 +14,9 @@
 //  A2 =  Duration of Darkness after full Color Cycle
 
 void brightnessA1(){
+    
+    checkButtons();
+
     //valueA1 = map(analogRead(A1), 0, 1024, 0, 20);
     //pixel.setBrightness(valueA1);  
     //inner.setBrightness(valueA1);  
@@ -42,9 +45,9 @@ void RainbowSquarez(){
 
     //Serial.println("RainbowSquarez " + String(fadeSpeed));
     
-    
-    ModulateControl();
+    checkButtons();
 
+    ModulateControl();
 
     // Set the color
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
@@ -54,16 +57,13 @@ void RainbowSquarez(){
     inner.setPixelColor(0, colorRed);
     brightnessA1(); 
     showLEDS();
-    
-    
- 
+  
     // Delay the change to the next color by the amount of A0
     delayA0(fadeSpeed);
     // Add an amount of darness by the amount of A2
     //darkDelayBetwixtColors();
 
     ModulateControl();
-
 
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorOrange);
@@ -73,13 +73,10 @@ void RainbowSquarez(){
     brightnessA1();
     showLEDS();
     
-    
-    
     delayA0(fadeSpeed);
     //darkDelayBetwixtColors();
 
     ModulateControl();
-
 
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorYellow);
@@ -89,13 +86,10 @@ void RainbowSquarez(){
     brightnessA1();
     showLEDS();
     
-    
-    
     delayA0(fadeSpeed);
     //darkDelayBetwixtColors();
 
     ModulateControl();
-
 
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorGreen);
@@ -110,7 +104,6 @@ void RainbowSquarez(){
 
     ModulateControl();
 
-
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorBlue);
     }
@@ -119,13 +112,10 @@ void RainbowSquarez(){
     brightnessA1();
     showLEDS();
     
-    
-    
     delayA0(fadeSpeed);
     //darkDelayBetwixtColors();
     
     ModulateControl();
-
 
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorPurple);
@@ -140,7 +130,6 @@ void RainbowSquarez(){
 
     ModulateControl();
 
-
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorBlue);
     }
@@ -154,7 +143,6 @@ void RainbowSquarez(){
     
     ModulateControl();
 
-
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorGreen);
     }
@@ -166,7 +154,6 @@ void RainbowSquarez(){
     delayA0(fadeSpeed);
 
     ModulateControl();
-
 
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorYellow);
@@ -181,7 +168,6 @@ void RainbowSquarez(){
 
     ModulateControl();
 
-    
     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
                   strip.setPixelColor(p, colorOrange);
     }
@@ -230,6 +216,8 @@ void RainbowSquarez(){
 
 void changeValue() {
      
+     checkButtons();
+
       if (increaseValue == true) {
         if ((modulateSpeed >= 1) && (modulateSpeed <= 100)){
            modulateSpeed = modulateSpeed+1;
@@ -270,6 +258,8 @@ void changeValue() {
 
 void valueRangeLimits() {
 
+      checkButtons();
+
       if (modulateSpeed < 1){
         increaseValue = true;
         
@@ -282,6 +272,8 @@ void valueRangeLimits() {
 }
 
 void ModulateControl() {
+
+      checkButtons();
 
       Serial.println("Increase " + String(increaseValue));
       Serial.println("Increase false - fadeSpeed: " + String(fadeSpeed));
