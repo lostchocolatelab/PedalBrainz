@@ -76,6 +76,9 @@ int valueA2 = 0;
 const int buttonPinUp = A9;     // Button Up
 const int buttonPinDown =  A10;      // Button Down
 
+bool buttonLongHoldUp;
+bool buttonLongHoldDown;
+
 /**
 
   General declarations
@@ -465,6 +468,9 @@ void setup() {
   Bank = 1;
   Mode = 0;
 
+  buttonLongHoldUp = false;
+  buttonLongHoldDown = false;
+
   // This catches at the end of the Routines() and writeStartupDataz()
   routinesStartup = true;
 
@@ -494,6 +500,7 @@ void loop() {
  
   // This is the function that handles startup and Mode switching
   
+  checkResetDefault();
   Routines();
 
   

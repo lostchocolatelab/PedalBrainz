@@ -13,11 +13,12 @@ void Routines()
   // Check to se if both buttons are down on startup 
   //if they are both pressed, set the Bank to 1 and Mode to 0
 
-  startupCheckReset();
+  //checkResetDefault();
 
   // Pring the Mode value currently initialized
   //Serial.println("Mode : "+ String(Mode));
 
+  checkButtons();
   plotCycle();
 
   //This is the initial startup mode (Mode = 0)
@@ -26,6 +27,8 @@ void Routines()
   if (Mode == 0)
   {
     // On first power cycle, do this thing so that folks know things are getting ready
+
+    initial = true;
 
     // Fade in from the beginning of the Rainbow cycle (starts with the color Red) using some default values
     // This "for loop" adds to "x" which is set to zero (0) until it reaches 255 (Max Brightness)
@@ -107,7 +110,8 @@ void Routines()
       Mode = startupMode;
       Bank = startupBank;
       MaxBright = startupMaxBright;
-      
+
+      initial = false;
 
       Serial.println("startupMode = " + String(startupMode));
       Serial.println("startupBank = " + String(startupBank));

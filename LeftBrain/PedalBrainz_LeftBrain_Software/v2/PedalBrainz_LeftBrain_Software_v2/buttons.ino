@@ -354,6 +354,8 @@ void longHoldEventUp()
 {
   Serial.println("longhold up");
 
+  buttonLongHoldUp = true;
+
   already = false;
 
   if (Mode == 98) {
@@ -366,6 +368,7 @@ void longHoldEventUp()
   {
     writeStartupDataz();
     clicked = true;
+    initial = false;
     Mode = 98;       // Light Loopz
     Serial.println("Changing from Modez to LightLoopz");
   }
@@ -520,6 +523,7 @@ void longHoldEventDown()
   Serial.println("longhold down");
 
   already = false;
+  buttonLongHoldDown = true;
 
   if (Mode == 98) // If it's Mode 98 = Light Loopz then go to Mode 102 = Max Bright Settings
   {
@@ -566,7 +570,7 @@ void longHoldEventDown()
 }
 
 
-void startupCheckReset()
+void checkResetDefault()
 {
   // if (routinesStartup == true )
   // {
@@ -589,21 +593,56 @@ void startupCheckReset()
   // }
   // else;
 
-    if (buttonValUp == LOW && buttonValDown == LOW)
+    if (initial == true)
+    {
+      if (buttonValUp == LOW && buttonValDown == LOW)
+      {
+        Bank = 1;
+        Mode = 0;
+        MaxBright = 255;
+
+        Serial.println("Startup Check Reset = Initial True");
+        Serial.println("Initial " + String(initial));
+
+        startupBank = Bank;
+        startupMode = Mode;
+        startupMaxBright = MaxBright;
+
+        writeStartupDataz();
+        //Serial.println("Setting Routines Startup False " + String(routinesStartup));
+      }
+    }
+    else if (buttonLongHoldUp == true && buttonLongHoldDown == true)
     {
       Bank = 1;
-      Mode = 0;
+      Mode = 1;
       MaxBright = 255;
 
-      Serial.println("Startup Check Reset ");
+      Serial.println("Startup Check Reset = Initial False");
+      Serial.println("Initial " + String(initial));
 
       startupBank = Bank;
       startupMode = Mode;
       startupMaxBright = MaxBright;
 
       writeStartupDataz();
+
+      buttonLongHoldUp = false;
+      buttonLongHoldDown = false;
+
       //Serial.println("Setting Routines Startup False " + String(routinesStartup));
     }
-    else;
+    else
+    {
+
+      initial = false;
+      buttonLongHoldUp = false;
+      buttonLongHoldDown = false;
+
+      Serial.println("Startup Check Reset Else = Initial False");
+      Serial.println("Initial " + String(initial));
+
+    }
+
 
 }
