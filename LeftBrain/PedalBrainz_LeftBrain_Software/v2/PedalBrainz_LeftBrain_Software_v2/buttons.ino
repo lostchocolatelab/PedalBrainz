@@ -572,27 +572,8 @@ void longHoldEventDown()
 
 void checkResetDefault()
 {
-  // if (routinesStartup == true )
-  // {
-  //   if (buttonValUp == LOW && buttonValDown == LOW)
-  //   {
-  //     Bank = 1;
-  //     Mode = 0;
-  //     MaxBright = 255;
 
-  //     Serial.println("Startup Check Reset ");
-
-  //     startupBank = Bank;
-  //     startupMode = Mode;
-  //     startupMaxBright = MaxBright;
-
-  //     writeStartupDataz();
-  //     //Serial.println("Setting Routines Startup False " + String(routinesStartup));
-  //   }
-  //   else;
-  // }
-  // else;
-
+    // If it's during the initial startup and both buttons are held down reset the Bank/ Mode/ and MaxBright to default
     if (initial == true)
     {
       if (buttonValUp == LOW && buttonValDown == LOW)
@@ -612,6 +593,7 @@ void checkResetDefault()
         //Serial.println("Setting Routines Startup False " + String(routinesStartup));
       }
     }
+    // If both buttons are long held during routines reset the Bank/ MaxBright to default and set the Mode to 1
     else if (buttonLongHoldUp == true && buttonLongHoldDown == true)
     {
       Bank = 1;
@@ -635,6 +617,7 @@ void checkResetDefault()
     else
     {
 
+      // Otherwise, set these to false
       initial = false;
       buttonLongHoldUp = false;
       buttonLongHoldDown = false;
