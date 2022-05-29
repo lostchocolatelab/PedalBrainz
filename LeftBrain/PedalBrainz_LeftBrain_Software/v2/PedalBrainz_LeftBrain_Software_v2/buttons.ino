@@ -223,6 +223,8 @@ void clickEventUp()
   buttonBreak = true;
   already = false;
 
+  setRandoms();
+
   if (Mode == 98) {
 
     pressedTapzUp = true;
@@ -385,6 +387,8 @@ void clickEventDown()
 
   buttonBreak = true;
   already = false;
+
+  setRandoms();
 
   if (Mode == 98) {
 
@@ -592,6 +596,11 @@ void checkResetDefault()
         startupMaxBright = MaxBright;
 
         writeStartupDataz();
+
+        resetAttractorz();
+        already = false;
+
+
         //Serial.println("Setting Routines Startup False " + String(routinesStartup));
       }
     }
@@ -610,6 +619,9 @@ void checkResetDefault()
       startupMaxBright = MaxBright;
 
       writeStartupDataz();
+
+      resetAttractorz();
+      already = false;
 
       buttonLongHoldUp = false;
       buttonLongHoldDown = false;

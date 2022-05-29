@@ -924,6 +924,31 @@ void checkRestart() {
   Serial.println("I Reset");
 }
 
+void resetAttractorz()
+{
+  x = 0;
+  y = 0;
+  z = 0;
+
+  a = 0;
+  b = 0;
+  c = 0;
+  d = 0;
+  e = 0;
+  f = 0;
+
+  dx = 0;
+  dy = 0;
+  dz = 0;
+
+  scaledX = 0;
+  scaledY = 0;
+  scaledZ = 0;
+
+  scaledXInner = 0;
+  scaledYInner = 0;
+  scaledZInner = 0;
+}
 
 
       //          thomas attractor init maths

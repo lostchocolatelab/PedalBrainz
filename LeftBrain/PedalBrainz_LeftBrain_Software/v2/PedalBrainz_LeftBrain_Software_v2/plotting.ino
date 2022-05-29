@@ -12,7 +12,10 @@ void plotCycle()
 //Serial.println(" A0 = " + String(analogRead(A0)) + " A1 = " + String(analogRead(A1)) + " A2 = " + String(analogRead(A2)));
 
 if (plotterPrint == true){
-          
+
+if (Bank == 1)      
+{
+
   ///*
   if (Mode == 1)
 {
@@ -33,7 +36,7 @@ if (plotterPrint == true){
 
     LEDBrightness = pixel.getBrightness();
     //Serial.println(LEDBrightness);
-    Serial.println(redValue);
+    Serial.println(fadeValueScaled);
     //LEDBrightness = redValue + blueValue + greenValue;
   }
 
@@ -63,6 +66,9 @@ if (plotterPrint == true){
     printStrangeXYZ(); // This one is the coolest
   }
   else;
+}
+else;
+
 } 
   //*/
 }

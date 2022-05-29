@@ -205,11 +205,6 @@ void mountainSnack() {
 
     snackDecision();
     
-    if (plotterPrint == true)
-    {
-      Serial.println(scaledVal);    
-    }
-
     mountainzColorMap();
     
     showLEDS();
@@ -230,9 +225,9 @@ void mountainSnack() {
 
             if (plotterPrint == true)
             {
-              Serial.println("StrangeSlow: " + String(strangeSlowAmount));
-              Serial.println("currentVal: " + String(currentVal));
-              Serial.println("scaledVal: " + String(scaledVal));
+              //Serial.println("StrangeSlow: " + String(strangeSlowAmount));
+              //Serial.println("currentVal: " + String(currentVal));
+              //Serial.println("scaledVal: " + String(scaledVal));
               //Serial.println("ScaledVal: " + String(scaledVal));
               //Serial.println("CurrentVal: " + String(currentVal));
             }
@@ -277,11 +272,11 @@ void snackDecision(){
 
         if (plotterPrint == true)
         {
-          Serial.println("SNACK TIME");
+          //Serial.println("SNACK TIME");
           //Serial.println(snackLength+snackLengthRandom);
-          Serial.println("delaySnackLength :" + String(delaySnackLength));
-          Serial.println("WaitDelay is True");
-          Serial.println(scaledVal);
+          //Serial.println("delaySnackLength :" + String(delaySnackLength));
+          //Serial.println("WaitDelay is True");
+          //Serial.println(scaledVal);
           //Serial.println(currentVal);          
         }
         else;
@@ -338,8 +333,8 @@ void scaledLowDelay(){
 
                 if (plotterPrint == true)
                 {
-                  Serial.println("WaitDelay is True");
-                  Serial.println(scaledVal);
+                  //Serial.println("WaitDelay is True");
+                  //Serial.println(scaledVal);
                 }
                 else;
                 
