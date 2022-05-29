@@ -193,20 +193,22 @@ void delayA1(int count)
 
       }
       else if (Mode == 2) {
-        
-        // mapScaledA1();
-        // fullDelay = mapfloat(scaledA1, 0, 2300, speedMinimum, 0);
 
-        //mapScaledA1();
-        //fadeSpeed = map(scaledA1, 0, 2300, speedMinimum, 10);
+        delayValueA1 = map(analogRead(A0), 0, 1024, 50, 5);
+        valueA1 = map(analogRead(A1), 0, 1024, 100, durationMaximum);
+        randomAmountA1 = random(0, (delayValueA1*valueA1));
+        //fullDelay = valueA1 + randomAmountA1;
+        fullDelay = randomAmountA1;
+          
+        //fullDelay = mapfloat(analogRead(A1), 0, 1024, 0, speedMinimum/2);
 
       }
       else if (Mode == 3) {
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
-        valueA1 = map(analogRead(A1), 0, 1024, 0, durationMaximum);
-        fullDelay = valueA1;
+        // valueA1 = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+        // fullDelay = valueA1;
       }
       else if (Mode == 4) {
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value

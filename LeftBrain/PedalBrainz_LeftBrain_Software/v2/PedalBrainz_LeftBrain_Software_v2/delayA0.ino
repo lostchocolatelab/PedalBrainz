@@ -297,7 +297,7 @@ void delayA0(int count)
       else if (Mode == 3) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 30);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -411,7 +411,56 @@ void delayA0(int count)
         }
 
       }
-      else if (Mode == 2)   //  Double Trianglez
+      else if (Mode == 2)    //  Squarez Controlled
+      {
+        delay(0);
+
+        // trianglezCalcA1();
+        // trianglezCalcA2();
+
+        maxBrightness = 255;
+
+        // Update the brightness of each blink color depending on which Blink it is
+        if (Blink1 == true)
+        {
+
+          maxBrightnessSet();
+          showLEDS();
+
+          //valueA1 = map(analogRead(A1), 0, 1024, 0, 10);
+          pixel.setPixelColor(0, fadeAmountA1, 0, (fadeAmountA1 / 10));         // Blink 1
+          inner.setPixelColor(0, fadeAmountA1, 0, (fadeAmountA1 / 10));         // Blink 1
+          //for(int p=0; p<strip.numPixels(); p++) {         // For each pixel in strip...
+          //      strip.setPixelColor(p, valueA1, (valueA1/10), 0);
+          //}
+          strip.setPixelColor(0, fadeAmountA1, 0, (fadeAmountA1 / 10));         // Blink 1
+          strip.setPixelColor(1, fadeAmountA1, 0, (fadeAmountA1 / 10));         // Blink 1
+
+          showLEDS();
+
+
+        }
+        if (Blink1 == false)
+        {
+
+          maxBrightnessSet();
+          showLEDS();
+
+          //valueA2 = map(analogRead(A2), 0, 1024, 0, 10);
+          pixel.setPixelColor(0, 0, 0, 0);         // Blink 2
+          inner.setPixelColor(0, 0, 0, 0);         // Blink 2
+          //for(int p=0; p<strip.numPixels(); p++) {         // For each pixel in strip...
+          //      strip.setPixelColor(p, (valueA2/6), valueA2, valueA2);
+          //}
+          strip.setPixelColor(1, fadeAmountA1, 0, (fadeAmountA1 / 10));         // Blink 2
+          strip.setPixelColor(1, 0, 0, 0);         // Blink 2
+          strip.setPixelColor(2, 0, 0, 0);         // Blink 2
+
+          showLEDS();
+        }
+
+      }
+      else if (Mode == 3)   //  Double Trianglez
       {
         delay(0);
 

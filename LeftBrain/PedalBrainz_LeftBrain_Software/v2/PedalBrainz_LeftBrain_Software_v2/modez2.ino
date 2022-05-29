@@ -86,6 +86,15 @@ void modeStartupBank2() {
   else if (Mode == 3)
   {
 
+    maxBrightness = 255;
+
+    for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
+      strip.setPixelColor(p, 255, 0, 255/10);
+    }
+    pixel.setPixelColor(0, 255, 0, 255/10);
+    inner.setPixelColor(0, 255, 0, 255/10);
+
+    showLEDS();
 
   }
   else if (Mode == 4)
@@ -179,7 +188,7 @@ void Bank2()
       {
 
       //Call the main routine and loop the thing
-        Squarez_03();
+        Squarez_03(); // Squarez Tilt
       }
       // Wait for the Mode Change
       modeChangeWait();
@@ -215,7 +224,7 @@ void Bank2()
       {
 
       // Call the main routine and loop the thing
-        Squarez_02();
+        Squarez_03(); // Squarez Tilt
       }
       // Wait for the Mode Change
       modeChangeWait();
@@ -233,8 +242,9 @@ void Bank2()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank2();
 
+      maxBrightness = 255;
+
       //writeStartupDataz();
-      startIndex = 0;
 
       //Do the last thing and WaitForModeChange
       waitingFlag = true;
@@ -247,7 +257,7 @@ void Bank2()
       {
 
       // Call the main routine and loop the thing
-        trianglez1();
+        Squarez_02(); // Double Trianglez
       }
       // Wait for the Mode Change
       modeChangeWait();
