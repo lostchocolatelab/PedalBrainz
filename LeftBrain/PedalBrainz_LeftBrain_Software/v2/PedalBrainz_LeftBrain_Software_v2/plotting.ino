@@ -73,6 +73,10 @@ else
 {
     averageLEDSPlot();
     Serial.print(","); //Un-comment this for a smooth line
+    Serial.print(avgLight);
+    Serial.print(","); //Un-comment this for a smooth line
+    Serial.print(scaledBright);
+    Serial.print(","); //Un-comment this for a smooth line
     Serial.println(avgLightInner);
 }
 

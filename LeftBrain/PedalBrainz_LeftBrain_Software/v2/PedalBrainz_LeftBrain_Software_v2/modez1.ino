@@ -75,6 +75,8 @@ void modeStartupBank1() {
     pixel.setPixelColor(0, 0, 0, 0);       //
     inner.setPixelColor(0, 0, 0, 0);       //
 
+    showLEDS();
+
   }
   else if (Mode == 2)
   {

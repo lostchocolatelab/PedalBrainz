@@ -198,8 +198,7 @@ void delayA2(int count)
 
       if (Mode == 1) {
 
-      // mapScaledA2();
-      // darkDelay = mapfloat(scaledA2, 0, 2300, speedMinimum, 0);
+      darkDelay = mapfloat(analogRead(A2), 0, 1024, 0, speedMinimum/2);
 
       //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }

@@ -189,8 +189,7 @@ void delayA1(int count)
 
       if (Mode == 1) {
         
-        // mapScaledA1();
-        // fullDelay = mapfloat(scaledA1, 0, 2300, speedMinimum, 0);
+        fullDelay = mapfloat(analogRead(A1), 0, 1024, 0, speedMinimum/2);
 
       }
       else if (Mode == 2) {
