@@ -4,7 +4,7 @@ A0 Delay - Fade Speed
 
 */
 
-int scaledA;
+int scaledA0;
 
 void mapScaledA0() {
 
@@ -17,7 +17,7 @@ void mapScaledA0() {
         // This maps the potentiometer scale.
         controlAmount  = map(analogRead(A0), 0, 1024, 255, 0);
         // This is a multimap that assigns values from the [in] array (potentiometer) to values from the [out] array (curve)
-        scaledA = multiMap(controlAmount, scaleAin, scaleAout, 11);
+        scaledA0 = multiMap(controlAmount, scaleAin, scaleAout, 11);
         // This maps the values for the Modez.
 
         //Serial.println("Mode 1 controlAmount: " + String(controlAmount));
@@ -81,7 +81,7 @@ void delayA0(int count)
       if (Mode == 1) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 30);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 30);
 
         valueA1 = map(analogRead(A1), 0, 1024, 0, 90);
         valueA2 = map(analogRead(A2), 0, 1024, 0, 90);
@@ -91,11 +91,11 @@ void delayA0(int count)
 
         //Fadez_01
         //mapScaledA0();
-        //fadeSpeed = map(scaledA, 0, 2300, speedMinimum, 0);
+        //fadeSpeed = map(scaledA0, 0, 2300, speedMinimum, 0);
 
         //Fadez_03
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, 10, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, 10, 0);
 
         //Serial.println("Mode 2 controlAmount: " + String(controlAmount));
         //Serial.println("Mode 2 fadeSpeeed: " + String(fadeSpeed));
@@ -108,11 +108,11 @@ void delayA0(int count)
 
         //Fadez_01
         //mapScaledA0();
-        //fadeSpeed = map(scaledA, 0, 2300, speedMinimum, 0);
+        //fadeSpeed = map(scaledA0, 0, 2300, speedMinimum, 0);
 
         //Fadez_03
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, 10, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, 10, 0);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Mode 3 fadeSpeeed: " + String(fadeSpeed));
@@ -120,7 +120,7 @@ void delayA0(int count)
       else if (Mode == 4) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum / 10, -1);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum / 10, -1);
 
         //Serial.println("Mode 4 controlAmount: " + String(controlAmount));
         //Serial.println("Mode 4 fadeSpeeed: " + String(fadeSpeed));
@@ -130,7 +130,7 @@ void delayA0(int count)
       else if (Mode == 5) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum / 10, -1);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum / 10, -1);
 
         //Serial.println("Mode 5 controlAmount: " + String(controlAmount));
         //Serial.println("Mode 5 fadeSpeeed: " + String(fadeSpeed));
@@ -274,10 +274,10 @@ void delayA0(int count)
       if (Mode == 1) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 30);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 30);
 
-        valueA1 = map(analogRead(A1), 0, 1024, 0, 90);
-        valueA2 = map(analogRead(A2), 0, 1024, 0, 90);
+        // valueA1 = map(analogRead(A1), 0, 1024, 0, 90);
+        // valueA2 = map(analogRead(A2), 0, 1024, 0, 90);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -285,10 +285,10 @@ void delayA0(int count)
       else if (Mode == 2) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 30);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 30);
 
-        valueA1 = map(analogRead(A1), 0, 1024, 0, 90);
-        valueA2 = map(analogRead(A2), 0, 1024, 0, 90);
+        // valueA1 = map(analogRead(A1), 0, 1024, 0, 90);
+        // valueA2 = map(analogRead(A2), 0, 1024, 0, 90);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -297,7 +297,7 @@ void delayA0(int count)
       else if (Mode == 3) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -305,7 +305,7 @@ void delayA0(int count)
       else if (Mode == 4) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -313,7 +313,7 @@ void delayA0(int count)
       else if (Mode == 5) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -321,7 +321,7 @@ void delayA0(int count)
       else if (Mode == 6) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -329,7 +329,7 @@ void delayA0(int count)
       else if (Mode == 7) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
 
         //fadeSpeed = map(analogRead(A0), 0, 1024, durationMaximum, 0);
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -337,21 +337,21 @@ void delayA0(int count)
       else if (Mode == 8) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
 
         //Serial.println("delayA0 fadeSpeeed: " + String(fadeSpeed));
       }
       else if (Mode == 9) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
 
         //Serial.println("delayA0 fadeSpeeed: " + String(fadeSpeed));
       }
       else if (Mode == 10) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
 
         //Serial.println("Mode 2 controlAmount: " + String(controlAmount));
         //Serial.println("Mode 2 fadeSpeeed: " + String(fadeSpeed));
@@ -366,6 +366,9 @@ void delayA0(int count)
       {
         delay(0);
 
+        trianglezCalcA1();
+        trianglezCalcA2();
+
         // Update the brightness of each blink color depending on which Blink it is
         if (Blink1 == true)
         {
@@ -373,14 +376,14 @@ void delayA0(int count)
           maxBrightnessSet();
           showLEDS();
 
-          valueA1 = map(analogRead(A1), 0, 1024, 0, 255);
-          pixel.setPixelColor(0, valueA1, (valueA1 / 10), 0);         // Blink 1
-          inner.setPixelColor(0, valueA1, (valueA1 / 10), 0);         // Blink 1
+          valueA1 = map(analogRead(A1), 0, 1024, 0, 10);
+          pixel.setPixelColor(0, fadeAmountA1, 0, (fadeAmountA1 / 10));         // Blink 1
+          inner.setPixelColor(0, fadeAmountA1, 0, (fadeAmountA1 / 10));         // Blink 1
           //for(int p=0; p<strip.numPixels(); p++) {         // For each pixel in strip...
           //      strip.setPixelColor(p, valueA1, (valueA1/10), 0);
           //}
-          strip.setPixelColor(0, valueA1, (valueA1 / 10), 0);         // Blink 1
-          strip.setPixelColor(1, valueA1, (valueA1 / 10), 0);         // Blink 1
+          strip.setPixelColor(0, fadeAmountA1, 0, (fadeAmountA1 / 10));         // Blink 1
+          strip.setPixelColor(1, fadeAmountA1, 0, (fadeAmountA1 / 10));         // Blink 1
 
           showLEDS();
 
@@ -392,15 +395,15 @@ void delayA0(int count)
           maxBrightnessSet();
           showLEDS();
 
-          valueA2 = map(analogRead(A2), 0, 1024, 0, 255);
-          pixel.setPixelColor(0, (valueA2 / 6), valueA2, valueA2);         // Blink 2
-          inner.setPixelColor(0, (valueA2 / 6), valueA2, valueA2);         // Blink 2
+          valueA2 = map(analogRead(A2), 0, 1024, 0, 10);
+          pixel.setPixelColor(0, (fadeAmountA2 / 6), 0, fadeAmountA2);         // Blink 2
+          inner.setPixelColor(0, (fadeAmountA2 / 6), 0, fadeAmountA2);         // Blink 2
           //for(int p=0; p<strip.numPixels(); p++) {         // For each pixel in strip...
           //      strip.setPixelColor(p, (valueA2/6), valueA2, valueA2);
           //}
-          strip.setPixelColor(1, valueA1, (valueA1 / 10), 0);         // Blink 2
-          strip.setPixelColor(1, (valueA2 / 6), valueA2, valueA2);         // Blink 2
-          strip.setPixelColor(2, (valueA2 / 6), valueA2, valueA2);         // Blink 2
+          strip.setPixelColor(1, fadeAmountA1, 0, (fadeAmountA1 / 10));         // Blink 2
+          strip.setPixelColor(1, (fadeAmountA2 / 6), 0, fadeAmountA2);         // Blink 2
+          strip.setPixelColor(2, (fadeAmountA2 / 6), 0, fadeAmountA2);         // Blink 2
 
           showLEDS();
         }
@@ -410,6 +413,9 @@ void delayA0(int count)
       {
         delay(0);
 
+        trianglezCalcA1();
+        trianglezCalcA2();
+
         // Update the brightness of each blink color depending on which Blink it is
         if (Blink1 == true)
         {
@@ -417,14 +423,14 @@ void delayA0(int count)
           maxBrightnessSet();
           showLEDS();
 
-          valueA1 = map(analogRead(A1), 0, 1024, 0, 255);
-          pixel.setPixelColor(0, valueA1, (valueA1 / 10), 0);         // Blink 1
-          inner.setPixelColor(0, valueA1, (valueA1 / 10), 0);         // Blink 1
+          valueA1 = map(analogRead(A1), 0, 1024, 0, 10);
+          pixel.setPixelColor(0, fadeAmountA1, (fadeAmountA1 / 10), 0);         // Blink 1
+          inner.setPixelColor(0, fadeAmountA1, (fadeAmountA1 / 10), 0);         // Blink 1
           //for(int p=0; p<strip.numPixels(); p++) {         // For each pixel in strip...
           //      strip.setPixelColor(p, valueA1, (valueA1/10), 0);
           //}
-          strip.setPixelColor(0, valueA1, (valueA1 / 10), 0);         // Blink 1
-          strip.setPixelColor(1, valueA1, (valueA1 / 10), 0);         // Blink 1
+          strip.setPixelColor(0, fadeAmountA1, (fadeAmountA1 / 10), 0);         // Blink 1
+          strip.setPixelColor(1, fadeAmountA1, (fadeAmountA1 / 10), 0);         // Blink 1
 
           showLEDS();
 
@@ -436,15 +442,15 @@ void delayA0(int count)
           maxBrightnessSet();
           showLEDS();
 
-          valueA2 = map(analogRead(A2), 0, 1024, 0, 255);
-          pixel.setPixelColor(0, (valueA2 / 6), valueA2, valueA2);         // Blink 2
-          inner.setPixelColor(0, (valueA2 / 6), valueA2, valueA2);         // Blink 2
+          valueA2 = map(analogRead(A2), 0, 1024, 0, 10);
+          pixel.setPixelColor(0, (fadeAmountA2 / 6), fadeAmountA2, fadeAmountA2);         // Blink 2
+          inner.setPixelColor(0, (fadeAmountA2 / 6), fadeAmountA2, fadeAmountA2);         // Blink 2
           //for(int p=0; p<strip.numPixels(); p++) {         // For each pixel in strip...
           //      strip.setPixelColor(p, (valueA2/6), valueA2, valueA2);
           //}
-          strip.setPixelColor(1, valueA1, (valueA1 / 10), 0);         // Blink 2
-          strip.setPixelColor(1, (valueA2 / 6), valueA2, valueA2);         // Blink 2
-          strip.setPixelColor(2, (valueA2 / 6), valueA2, valueA2);         // Blink 2
+          strip.setPixelColor(1, fadeAmountA1, (fadeAmountA1 / 10), 0);         // Blink 2
+          strip.setPixelColor(1, (fadeAmountA2 / 6), fadeAmountA2, fadeAmountA2);         // Blink 2
+          strip.setPixelColor(2, (fadeAmountA2 / 6), fadeAmountA2, fadeAmountA2);         // Blink 2
 
           showLEDS();
         }
@@ -452,7 +458,7 @@ void delayA0(int count)
       }
       else
       {
-        delay(.5);
+        delay(0);
       };
 
         //Serial.println("Bank - " + String(Bank) + " Mode - " + String(Mode) + " fadeSpeeed: " + String(fadeSpeed));
@@ -515,7 +521,7 @@ void delayA0(int count)
       if (Mode == 1) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -523,7 +529,7 @@ void delayA0(int count)
       else if (Mode == 2) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 10);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 10);
 
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
@@ -533,7 +539,7 @@ void delayA0(int count)
       else if (Mode == 3) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 10);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 10);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -541,7 +547,7 @@ void delayA0(int count)
       else if (Mode == 4) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 10);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 10);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -549,7 +555,7 @@ void delayA0(int count)
       else if (Mode == 5) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 10);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 10);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -557,7 +563,7 @@ void delayA0(int count)
       else if (Mode == 6) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 10);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 10);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -565,7 +571,7 @@ void delayA0(int count)
       else if (Mode == 7) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 10);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 10);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -597,7 +603,7 @@ void delayA0(int count)
       else if (Mode == 10) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
 
         //Serial.println("Mode 2 controlAmount: " + String(controlAmount));
         //Serial.println("Mode 2 fadeSpeeed: " + String(fadeSpeed));
@@ -678,7 +684,7 @@ void delayA0(int count)
       if (Mode == 1) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 10);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 10);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -686,7 +692,7 @@ void delayA0(int count)
       else if (Mode == 2) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 10);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 10);
 
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
@@ -696,7 +702,7 @@ void delayA0(int count)
       else if (Mode == 3) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 10);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 10);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -737,7 +743,7 @@ void delayA0(int count)
       else if (Mode == 10) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
 
         //Serial.println("Mode 2 controlAmount: " + String(controlAmount));
         //Serial.println("Mode 2 fadeSpeeed: " + String(fadeSpeed));
@@ -816,7 +822,7 @@ void delayA0(int count)
         // Potentiometer Top Right | A0 - Map the value of the Potentiometer to a Variable
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum/ 10, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum/ 10, 0);
         
         delay(.5);
       
@@ -881,7 +887,7 @@ void delayA0(int count)
       if (Mode == 1) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 10);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 10);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -889,7 +895,7 @@ void delayA0(int count)
       else if (Mode == 2) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 10);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 10);
 
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
@@ -899,7 +905,7 @@ void delayA0(int count)
       else if (Mode == 3) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 10);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 10);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -940,7 +946,7 @@ void delayA0(int count)
       else if (Mode == 10) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA, 0, 2300, speedMinimum, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
 
         //Serial.println("Mode 2 controlAmount: " + String(controlAmount));
         //Serial.println("Mode 2 fadeSpeeed: " + String(fadeSpeed));

@@ -146,6 +146,8 @@ void Bank2()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank2();
 
+      maxBrightness = 255;
+
       //writeStartupDataz();
 
       //Do the last thing and WaitForModeChange
@@ -159,7 +161,7 @@ void Bank2()
       {
 
       //Call the main routine and loop the thing
-        Squarez_01 ();
+        Squarez_02 ();
       }
       // Wait for the Mode Change
       modeChangeWait();

@@ -16,19 +16,19 @@ if (plotterPrint == true){
 if (Bank == 1)      
 {
 
-  ///*
-  if (Mode == 1)
-{
-  Serial.println("Min:0,Max:100"); //Un-comment this for a smooth line
-  //Serial.println(","); //Un-comment this for a smooth line
-  Serial.println(currentVal);
-  //Serial.println(valueA1);
-  //Serial.println(valueA2);
-  
-}
+    ///*
+    if (Mode == 1)
+  {
+    Serial.println("Min:0,Max:100"); //Un-comment this for a smooth line
+    //Serial.println(","); //Un-comment this for a smooth line
+    Serial.println(currentVal);
+    //Serial.println(valueA1);
+    //Serial.println(valueA2);
+    
+  }
 
   // If the Mode is 2-5, run print for fades
-   if ((Mode >= 2) && (Mode <= 5))
+  else if ((Mode >= 2) && (Mode <= 5))
   {
     //Serial.println("Min:0,Max:255");
     Serial.println("Min:0,Max:255"); //Un-comment this for a smooth line
@@ -40,7 +40,7 @@ if (Bank == 1)
     //LEDBrightness = redValue + blueValue + greenValue;
   }
 
-  if ((Mode >= 6) && (Mode <= 7))
+  else if ((Mode >= 6) && (Mode <= 7))
     //if (6 <= Mode)
   {
     //Serial.print("Min:0,Max:300"); //Un-comment this for a smooth line
@@ -48,7 +48,7 @@ if (Bank == 1)
     Serial.println(currentVal);
     //Serial.print(","); //Un-comment this for a smooth line
   }
-  if ((Mode >= 8) && (Mode <= 10))
+  else if ((Mode >= 8) && (Mode <= 10))
     //if (6 <= Mode)
   {
     //Print some things
@@ -66,8 +66,15 @@ if (Bank == 1)
     printStrangeXYZ(); // This one is the coolest
   }
   else;
+
+
 }
-else;
+else
+{
+    averageLEDSPlot();
+    Serial.print(","); //Un-comment this for a smooth line
+    Serial.println(avgLightInner);
+}
 
 } 
   //*/

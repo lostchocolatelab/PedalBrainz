@@ -566,34 +566,20 @@ void Bank5()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank5();
 
-      //  Lorentz83 Attractor
-      //  Initialization Values
+      //          Four wings attractor init maths
 
-      //  a = 0.95;
-      //  b = 7.91;
-      //  f = 4.83;
-      //  g = 4.66;
 
-      //  x = -0.2;
-      //  y = -2.82;
-      //  z = 2.71;
+      x = 0.63;
+      y = 0.47;
+      z = -0.54;
 
-      // timestep = 0.005;
+      a = 0.2;
+      b = 0.01;
+      c = -0.4;
 
-//  Aizawa 
+      timestep = 0.05;
 
-x = 0.1;
-y = 1;
-z = 0.01;
 
-a = 0.95;
-b = 0.7;
-c = 0.6;
-d = 3.5;
-e = 0.25;
-f = 0.1;
-
-timestep = 0.01;
       
       //writeStartupDataz();
       

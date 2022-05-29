@@ -103,8 +103,14 @@ int fullDelay = 0;
 int darkDelay = 0;
 
 float fadeAmount = 1;  //Change it to adjust the fading between each step (fading speed)
+float fadeAmountA1;
+float fadeAmountA2;
+
 int delayAmount = 0;
+
 bool fadeUp;
+bool fadeUpA1;
+bool fadeUpA2;
 
 int randomAmountA0 = 0;
 int randomAmountA1 = 0;
@@ -485,7 +491,7 @@ void setup() {
   initial = true;
 
   setRandoms();
-  plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
+  plotterPrint = true; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
   startMillis = millis();  //initial start time
 }
 
@@ -546,6 +552,10 @@ void maxBrightnessSet(){
   inner.setBrightness(maxBrightness);
   FastLED.setBrightness(MaxBrightReduction);
   showLEDS();
+
+  //Serial.println("maxBrightness : " + String(maxBrightness));
+  //Serial.println("MaxBright : " + String(MaxBright));
+  //Serial.println("MaxBrightReduction : " + String(MaxBrightReduction));
 }
 
 void maxBrightnessAdjust()
@@ -599,6 +609,19 @@ void averageLEDSBrightness(){
   inner.setPixelColor(0, avgLightInner,avgLightInner,avgLightInner);  
 
   showLEDS();
+}
+
+void averageLEDSPlot(){
+
+  avgLight0 = leds[0].getAverageLight();
+  avgLight1 = leds[1].getAverageLight();
+  avgLight2 = leds[2].getAverageLight();
+  avgLight = avgLight0+avgLight1+avgLight2;
+
+  mapScaledBright(avgLight);
+
+  avgLightInner = map(scaledBright, 0, 255, 0, 190);
+
 }
 
 void pixelScaling()

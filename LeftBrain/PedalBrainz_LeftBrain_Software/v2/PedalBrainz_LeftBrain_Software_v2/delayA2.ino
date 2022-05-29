@@ -4,6 +4,8 @@ A2 Delay - Dark Delay
 
 */
 
+int scaledA2;
+
 void mapScaledA2() {
 
 
@@ -15,7 +17,7 @@ void mapScaledA2() {
         // This maps the potentiometer scale.
         controlAmount  = map(analogRead(A2), 0, 1024, 255, 0);
         // This is a multimap that assigns values from the [in] array (potentiometer) to values from the [out] array (curve)
-        scaledA = multiMap(controlAmount, scaleAin, scaleAout, 11);
+        scaledA2 = multiMap(controlAmount, scaleAin, scaleAout, 11);
         // This maps the values for the Modez.
 
         //Serial.println("Mode 1 controlAmount: " + String(controlAmount));
@@ -196,12 +198,16 @@ void delayA2(int count)
 
       if (Mode == 1) {
 
-      darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
+      // mapScaledA2();
+      // darkDelay = mapfloat(scaledA2, 0, 2300, speedMinimum, 0);
+
       //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
       else if (Mode == 2) {
 
-      darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
+      // mapScaledA2();
+      // darkDelay = mapfloat(scaledA2, 0, 2300, speedMinimum, 0);
+
       //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
       else if (Mode == 3) {
