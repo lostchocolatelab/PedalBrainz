@@ -69,6 +69,16 @@ if (Bank == 1)
 
 
 }
+else if (Bank == 2 && Mode == 4)
+{
+    //Print some things
+    Serial.print(",");
+    Serial.print(scaledX);
+    Serial.print(",");
+    Serial.print(scaledY);
+    Serial.print(",");
+    Serial.print(scaledZ);  
+}
 else
 {
     averageLEDSPlot();

@@ -28,7 +28,7 @@ const int _GBASE_ = __COUNTER__ + 1; // Index of 1st __COUNTER__ ref below
 // common '5050' type used in NeoPixel strips and shapes.
 #define BASECURRENT 10
 #define LEDCURRENT  18 // Try using 18 for '5050' NeoPixels
-uint16_t  count = 0;    // Frame count, results displayed every 256 frames
+//uint16_t  count = 0;    // Frame count, results displayed every 256 frames
 //uint32_t sum   = 0;    // Cumulative current, for calculating average
 //uint8_t *pixelPtr;     // -> NeoPixel color data
 

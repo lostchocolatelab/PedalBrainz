@@ -708,39 +708,52 @@ void setDark2()
 void fadez4()
 {
 
-  MaxBrightReduction = constrain(fadeAmount, 0, MaxBright);
-
   //A1 potentiometer controls for maximum brightness
   //maxBrightness = map(analogRead(A1), 0, 1024, 0, maxBrightnessTemp);
-  maxBrightnessSet();
+  maxBrightnessAdjust();
+
+  MaxBrightReduction = constrain(fadeAmount, 0, MaxBright);
+
+  // attractorzCalc();
+  // thomasFunction(); 
+  // Serial.println("," + String(scaledVal)); 
+
+  //count = count+1;
+  thomasFunctionCalc();
+
+  valueA2 = map(analogRead(A2), 0, 1024, 3000, 60);
+  //valueA2 = 510;
+
+  if (count >= valueA2)
+  {
+      
+      scaledVal = mapfloat(x, -4, 4, 0, 10);
+      //Serial.println("scaledX: " + String(scaledX));  
+      count = 0;
+  }
+  else
+  {
+  count = count+1;
+  }
+
 
   if (fadeAmount >= 255)      
   {
 
-    delayA1(fullDelay);
+    //delayA1(fullDelay);
     //Serial.println("Delay when LED fully lit (ms): " + String(fullDelay));
 
     plotCycle();
     checkButtons();
 
-    if (Mode == 1)
-    {
-      fadeAmount = 0;
-      setDark();
-    }
-    else
-    {
       fadeUp = false;
       fadeAmount = 255;
-    }
-
-    
 
   }
   else if (fadeAmount <= 0)
   {
 
-    delayA2(darkDelay);
+    //delayA2(darkDelay);
     //Serial.println("Delay when LED fully dark (ms): " + String(darkDelay));
 
     plotCycle();
@@ -753,59 +766,35 @@ void fadez4()
   else;
 
 
+
   if (fadeUp == true)
   {
         fadeAmount = fadeAmount + 0.5;
 
-        //lorenzFunction();
-        Serial.println("scaledX: " + String(scaledX));
-    
-        fadeAmount = fadeAmount+scaledX;
-        Serial.println("fadeAmount+scaledX: " + String(fadeAmount));
+        valueA2 = map(analogRead(A2), 0, 1024, 3000, 60);
 
-        //Serial.println("FADE UP || fadeAmount = " + String(fadeAmount) + " A0 = " + String(valueA0) + " fadeUp = " + String(fadeUp));
+        fadeAmount = fadeAmount+scaledVal;
 
   }
   else if (fadeUp == false)
   {
         fadeAmount = fadeAmount - 0.5;
 
-        //lorenzFunction();
-        Serial.println("scaledX: " + String(scaledX));
-    
-        fadeAmount = fadeAmount-scaledX;
-        Serial.println("fadeAmount-scaledX: " + String(fadeAmount));
+        valueA2 = map(analogRead(A2), 0, 1024, 3000, 60);
 
-        //Serial.println("FADE DOWN || fadeAmount = " + String(fadeAmount) + " A0 = " + String(valueA0) + " fadeDown = " + String(fadeUp));
-
+        fadeAmount = fadeAmount-scaledVal;
+ 
   }
   else;
 
-    lorenzFunction();
-    scaledX = map(scaledX, 0, 255, 1, 30);
-    //Serial.println("scaledX: " + String(scaledX));
-
-    valueA0 = map(analogRead(A0), 0, 1024, 0.5, 17.5);
-
-    fadeAmount = constrain(fadeAmount, 0.0, 255.0);
-    //fadeAmount = constrain(scaledX, 0.0, 255.0);
-    //FastLED.setBrightness(fadeAmount);
-
-    //scalePixelBrightness(i);
-    scalePixelRed(fadeAmount);
+    fadeAmount = mapfloat(fadeAmount, 0, 255, 0, 255);
 
     for (int i = 0; i < NUM_LEDS; i++) {     // For each pixel in strip...
-    //strip.setPixelColor(p, (i/5), 0, i);
-    //strip.setPixelColor(p, (redValue), 0, redValue);
-    leds[i] = CRGB(redValue, 0, redValue);
+    leds[i] = CRGB(fadeAmount, 0, fadeAmount);
     }
 
-    pixel.setPixelColor(0, redValue, 0, redValue);
-    inner.setPixelColor(0, redValue, 0, redValue);
-
-    delayA0(fadeSpeed);
-    //FastLED.delay(fadeSpeed);
-    //Serial.println("Rate of Fade in/ Fade out: " + String(fadeSpeed));
+    pixel.setPixelColor(0, fadeAmount, 0, fadeAmount);
+    inner.setPixelColor(0, fadeAmount, 0, fadeAmount);
 
     plotCycle();
     checkButtons();
@@ -814,6 +803,46 @@ void fadez4()
     FastLED.show();
        
 }
+
+void thomasFunctionCalc() {
+  // put your main code here, to run repeatedly:
+  dx = ((-b * x)+sin(y)) * timestep;
+  dy = ((-b * y)+sin(z)) * timestep;
+  dz = ((-b * z)+sin(x)) * timestep;
+
+  x += dx;
+  y += dy;
+  z += dz;
+
+  updateRange();
+
+  //b = mapfloat(analogRead(A2), 0, 1024, .2, .01);
+
+  if(map(x,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(y,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } else if(map(z,minValue,maxValue,1,255) == 255){
+    checkRestart();
+  } {
+    already = false;
+  }
+
+        //scaledVal = mapfloat(x, -4, 4, 1, 30);
+
+        Serial.print(",");
+        Serial.print(count);
+        // Serial.print(",");
+        // Serial.print(x);
+        Serial.print(",");
+        Serial.print(fadeAmount);
+        Serial.print(",");
+        Serial.println(scaledVal);  
+
+        delayA0(fadeSpeed);
+}
+  
+
 
 ////////////////////
 ////////////////////        Boolean Fadez Calculate
@@ -900,7 +929,7 @@ void trianglezCalcA2()
 {
 
   maxBrightnessSet();
-  
+
   //  Get ready to start the fade
   //  If the fadeAmount is equal or over 255 (maximum) then fade down
 

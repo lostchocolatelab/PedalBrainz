@@ -217,8 +217,8 @@ void delayA1(int count)
         //mapScaledA1();
         //fadeSpeed = map(scaledA1, 0, 2300, speedMinimum, 10);
 
-        valueA1 = map(analogRead(A1), 0, 1024, 0, durationMaximum);
-        fullDelay = valueA1;
+        // valueA1 = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+        // fullDelay = valueA1;
       }
       else if (Mode == 5) {
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value

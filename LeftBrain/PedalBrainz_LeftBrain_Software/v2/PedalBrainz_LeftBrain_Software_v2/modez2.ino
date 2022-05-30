@@ -275,8 +275,17 @@ void Bank2()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank2();
 
+      //thomas
+
+      b = 0.19;
+
+      x = 1;
+      y = 2;
+      z = 1;
+      
+      timestep = .1;
+
       //writeStartupDataz();
-      startIndex = 0;
 
       //Do the last thing and WaitForModeChange
       waitingFlag = true;
@@ -289,7 +298,7 @@ void Bank2()
       {
 
       //Call the main routine and loop the thing
-        trianglez1();
+        fadez4();
       }
       // Wait for the Mode Change
       modeChangeWait();

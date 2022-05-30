@@ -122,6 +122,8 @@ int delayValueA0 = 0;
 int delayValueA1 = 0;
 int delayValueA2 = 0;
 
+uint16_t  count = 0;
+
 // Sets the value in milleseconds of the slowest fadeSpeed for delayA0
 int speedMinimum = 10000;
 int speedMaximum = 0;
@@ -491,7 +493,7 @@ void setup() {
   initial = true;
 
   setRandoms();
-  plotterPrint = true; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
+  plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
   startMillis = millis();  //initial start time
 }
 
