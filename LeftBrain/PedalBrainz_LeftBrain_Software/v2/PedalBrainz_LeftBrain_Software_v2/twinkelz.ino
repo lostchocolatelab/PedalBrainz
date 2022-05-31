@@ -113,12 +113,16 @@ void setupTwinkelz(){
 
 void twinkelz()
 {
+  maxBrightnessAdjust();
+
   if (initial == true) {
     setupTwinkelz();
     }
     else;
   
-  SECONDS_PER_PALETTE = map(analogRead(A1), 0, 1024, 20, 0);
+
+
+  SECONDS_PER_PALETTE = 3;
   EVERY_N_SECONDS( SECONDS_PER_PALETTE ) { 
     chooseNextColorPalette( gTargetPalette ); 
   }

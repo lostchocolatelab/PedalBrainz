@@ -312,7 +312,7 @@ void delayA0(int count)
       else if (Mode == 5) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 70);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -320,7 +320,7 @@ void delayA0(int count)
       else if (Mode == 6) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 70);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -328,7 +328,7 @@ void delayA0(int count)
       else if (Mode == 7) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 70);
 
         //fadeSpeed = map(analogRead(A0), 0, 1024, durationMaximum, 0);
         //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
@@ -336,7 +336,7 @@ void delayA0(int count)
       else if (Mode == 8) {
 
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 70);
 
         //Serial.println("delayA0 fadeSpeeed: " + String(fadeSpeed));
       }

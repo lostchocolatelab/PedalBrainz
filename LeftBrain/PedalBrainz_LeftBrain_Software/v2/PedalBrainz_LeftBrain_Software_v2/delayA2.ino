@@ -234,18 +234,28 @@ void delayA2(int count)
       }
       else if (Mode == 6) {
 
-      //valueA2 = map(analogRead(A2), 0, 1024, 0, durationMaximum);
-      //darkDelay =  valueA2 / 5;
+      delayValueA2 = map(analogRead(A0), 0, 1024, 50, 5);
+      valueA2 = map(analogRead(A2), 0, 1024, 100, durationMaximum);
+      randomAmountA2 = random(0, (delayValueA2*valueA2));
+      //darkDelay = valueA2 + randomAmountA2;
+      darkDelay = randomAmountA2;
+
       //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
       else if (Mode == 7) {
 
+      darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
       //darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
       //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
       else if (Mode == 8) {
 
-        darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
+      delayValueA2 = map(analogRead(A0), 0, 1024, 50, 5);
+      valueA2 = map(analogRead(A2), 0, 1024, 100, durationMaximum);
+      randomAmountA2 = random(0, (delayValueA2*valueA2));
+      //darkDelay = valueA2 + randomAmountA2;
+      darkDelay = randomAmountA2;
+      
       //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
       else if (Mode == 9) {

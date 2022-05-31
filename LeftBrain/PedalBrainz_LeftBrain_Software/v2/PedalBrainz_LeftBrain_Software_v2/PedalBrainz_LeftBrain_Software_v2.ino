@@ -89,7 +89,7 @@ bool buttonLongHoldDown;
 // Set a default variable for the red, blue, and green (RGB) value of the on-board Dot Star
 // Pink! Potentiometer A0: 236 Potentiometer A1: 73 Potentiometer A2: 107
 
-int      head  = 0, tail = -10; // Index of first 'on' and 'off' pixels
+int head  = 0, tail = -10; // Index of first 'on' and 'off' pixels
 
 int redValue = 236;
 int blueValue = 73;
@@ -112,9 +112,11 @@ bool fadeUp;
 bool fadeUpA1;
 bool fadeUpA2;
 
-int randomAmountA0 = 0;
-int randomAmountA1 = 0;
-int randomAmountA2 = 0;
+float randomAmountA0 = 0;
+float randomAmountA1 = 0;
+float randomAmountA2 = 0;
+
+int randomSaw = 0;
 
 int delayRandom = random(0, 1000);
 int delayValue = 0;
@@ -168,13 +170,7 @@ uint32_t colorBlue = 0x0000FF;
 uint32_t colorPurple = 0x660CCF;
 uint32_t colorPink = 0xFF69B4;
 
-
-
-
 uint32_t CurrentColor = Sketch2Pink;
-
-
-
 
 int rainbowBright = 255;
 int rainbowBrightReducation;
@@ -209,6 +205,11 @@ bool breakdelayA2 = false;
 
 long WaitTime = 200;
 
+/**
+
+  MEMORY Declarations
+
+*/
 
 const int STARTUP_DATA = 0xBEEFDEED;
 uint16_t storedAddress = 0;
@@ -360,7 +361,11 @@ int randomCore[randomDensity];
 int randomNumbers[loopLength];
 
 
-// Rainbowz2
+/**
+
+  RAINBOWZ2 Declarations
+
+*/
 
 int randomOnce = 0;
 boolean increaseValue = true;
@@ -371,7 +376,11 @@ static uint16_t xx;
 static uint16_t yy;
 static uint16_t zz;
 
-// Game Stuff
+/**
+
+  GAME Declarations
+
+*/
 
 // A counter to record the number of button presses made by the player
 int numButtonPresses;
@@ -393,14 +402,23 @@ int nextState;
 int difficultyLevel;
 
 
-// Redorderz Stuff
+/**
+
+  LIGHT LOOPZ Declarations
+
+*/
 
 bool pressedTapzUp = false;
 bool pressedTapzDown = false;
 boolean empty = false;
 unsigned long startMillis;
 
-// Brightness Variables
+
+/**
+
+  BRIGHTNESS Declarations
+
+*/
 
 float brightness = 0;
 int brightnessScaled;
@@ -416,14 +434,24 @@ int avgLight1;
 int avgLight2;
 int avgLightInner;
 
+/**
+
+  PALETTE Declarations
+
+*/
+
 CRGBPalette16 currentPalette;
 TBlendType    currentBlending;
 
 #define FRAMES_PER_SECOND 60
 
+int STEPS = 30;// STEPS set dynamically once we've started up
+
+
+
 bool initialBank;
 float startIndex = 0;
-int STEPS = 30;// STEPS set dynamically once we've started up
+
 
 
 /**
@@ -622,7 +650,7 @@ void averageLEDSPlot(){
 
   mapScaledBright(avgLight);
 
-  avgLightInner = map(scaledBright, 0, 255, 0, 190);
+  avgLightInner = mapfloat(scaledBright, 0, 255, 0, 190);
 
 }
 
@@ -688,7 +716,7 @@ void mapScaledBright (int val){
       // This is a multimap that assigns values from the [in] array (potentiometer) to values from the [out] array (curve)
       x = multiMap(controlAmount, in, out, 11);
       // This maps the values for the Modez.
-      scaledBright = map(x, 0, 255, 0, 255);
+      scaledBright = mapfloat(x, 0, 255, 0, 255);
 
       //int redValue = 236;
       //int blueValue = 73;

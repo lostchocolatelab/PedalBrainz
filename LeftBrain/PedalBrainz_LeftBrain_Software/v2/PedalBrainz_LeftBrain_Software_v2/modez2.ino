@@ -275,6 +275,8 @@ void Bank2()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank2();
 
+      maxBrightness = 255;
+
       //thomas
 
       b = 0.19;
@@ -316,8 +318,10 @@ void Bank2()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank2();
 
+      maxBrightness = 255;
+
       //writeStartupDataz();
-      startIndex = 0;
+      fadeUp = true;
 
       //Do the last thing and WaitForModeChange
       waitingFlag = true;
@@ -330,7 +334,7 @@ void Bank2()
       {
 
       //Call the main routine and loop the thing
-        trianglez1();
+        sawzUp1();
       }
       // Wait for the Mode Change
       modeChangeWait();
@@ -348,8 +352,10 @@ void Bank2()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank2();
 
+      maxBrightness = 255;
+
       //writeStartupDataz();
-      startIndex = 0;
+      fadeUp = true;
 
       //Do the last thing and WaitForModeChange
       waitingFlag = true;
@@ -368,7 +374,7 @@ void Bank2()
       modeChangeWait();
     }
   }
-      // RainbowSquarez
+  //  Sawz Down
   if (Mode == 7)
   {
     if (!waitingFlag)
@@ -379,8 +385,10 @@ void Bank2()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank2();
 
+      maxBrightness = 255;
+
       //writeStartupDataz();
-      startIndex = 0;
+      fadeUp = false;
 
       //Do the last thing and WaitForModeChange
       waitingFlag = true;
@@ -393,7 +401,7 @@ void Bank2()
       {
 
       //Call the main routine and loop the thing
-        sawzUp1();
+        sawzDown1();
       }
       // Wait for the Mode Change
       modeChangeWait();
@@ -411,8 +419,10 @@ void Bank2()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank2();
 
+      maxBrightness = 255;
+
       //writeStartupDataz();
-      startIndex = 0;
+      fadeUp = false;
 
       //Do the last thing and WaitForModeChange
       waitingFlag = true;
@@ -425,7 +435,7 @@ void Bank2()
       {
 
       //Call the main routine and loop the thing
-      sawzUp1();
+      sawzDown1();
       }
       // Wait for the Mode Change
       modeChangeWait();
@@ -443,6 +453,8 @@ void Bank2()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank2();
 
+      maxBrightness = 255;
+
       //writeStartupDataz();
 
       //Do the last thing and WaitForModeChange
@@ -456,7 +468,7 @@ void Bank2()
       {
 
       //Call the main routine and loop the thing
-      fadez3();
+      sawzRandom1();
       }
       // Wait for the Mode Change
       modeChangeWait();
@@ -473,6 +485,8 @@ void Bank2()
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank2();
+
+      maxBrightness = 255;
 
       //writeStartupDataz();
 
