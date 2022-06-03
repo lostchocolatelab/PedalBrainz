@@ -133,6 +133,8 @@ int speedMaximum = 0;
 // Sets the value in milleseconds of the longest duration for delayA1 and delayA2
 int durationMaximum = 10000;
 
+int timeMultiplier = 1;
+
 int valueLog;
 int controlAmount;
 
@@ -503,6 +505,9 @@ void setup() {
 
   Bank = 1;
   Mode = 0;
+
+  speedMinimum = speedMinimum*timeMultiplier;
+  durationMaximum = durationMaximum*timeMultiplier;
 
   buttonLongHoldUp = false;
   buttonLongHoldDown = false;
