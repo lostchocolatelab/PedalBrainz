@@ -28,7 +28,14 @@ if (Bank == 1)
   }
 
   // If the Mode is 2-5, run print for fades
-  else if ((Mode >= 2) && (Mode <= 5))
+  else if ((Mode >= 2) && (Mode <= 3))
+  {
+    //averageLEDSPlot();
+    printAverage();
+  }
+
+  // If the Mode is 2-5, run print for fades
+  else if ((Mode >= 4) && (Mode <= 5))
   {
     //Serial.println("Min:0,Max:255");
     Serial.println("Min:0,Max:255"); //Un-comment this for a smooth line
@@ -82,6 +89,15 @@ else if (Bank == 2 && Mode == 4)
 else
 {
     averageLEDSPlot();
+    printAverage();
+}
+
+} 
+  //*/
+}
+
+void printAverage()
+{
     Serial.print(","); //Un-comment this for a smooth line
     Serial.print(avgLight);
     Serial.print(","); //Un-comment this for a smooth line
@@ -89,11 +105,6 @@ else
     Serial.print(","); //Un-comment this for a smooth line
     Serial.println(avgLightInner);
 }
-
-} 
-  //*/
-}
-
 void printStrangeXYZ()
 {
   Serial.println("x:  " + String(x + 100) + " y:  " + String(y + 100) + " z:  " + String(z + 100));

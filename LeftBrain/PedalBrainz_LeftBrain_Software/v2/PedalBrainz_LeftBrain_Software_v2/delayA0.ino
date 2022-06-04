@@ -95,7 +95,7 @@ void delayA0(int count)
 
         //Fadez_03
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA0, 0, 2300, 10, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum/(9000/timeMultiplier), 0);
 
         //Serial.println("Mode 2 controlAmount: " + String(controlAmount));
         //Serial.println("Mode 2 fadeSpeeed: " + String(fadeSpeed));
@@ -112,7 +112,7 @@ void delayA0(int count)
 
         //Fadez_03
         mapScaledA0();
-        fadeSpeed = mapfloat(scaledA0, 0, 2300, 10, 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum/(9000/timeMultiplier), 0);
 
         //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
         //Serial.println("Mode 3 fadeSpeeed: " + String(fadeSpeed));

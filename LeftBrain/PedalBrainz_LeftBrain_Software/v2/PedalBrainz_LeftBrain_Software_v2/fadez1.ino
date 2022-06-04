@@ -266,7 +266,7 @@ void fadez2()
   }
   else;
 
-    valueA0 = map(analogRead(A0), 0, 1024, 0.5, 17.5);
+    valueA0 = mapfloat(analogRead(A0), 0, 1024, 0.5, 17.5);
     fadeAmount = constrain(fadeAmount, 0.0, 255.0);
     //FastLED.setBrightness(fadeAmount);
 
@@ -371,7 +371,7 @@ void trianglez1()
 
     //  Update the fadeAmount, rate of the cycle
 
-    valueA0 = map(analogRead(A0), 0, 1024, 0.5, 17.5);
+    valueA0 = mapfloat(analogRead(A0), 0, 1024, 0.5, 17.5);
     fadeAmount = constrain(fadeAmount, 0.0, 255.0);
     //FastLED.setBrightness(fadeAmount);
 
@@ -459,7 +459,7 @@ void sawzUp1()
   }
   else;
 
-    valueA0 = map(analogRead(A0), 0, 1024, 0.5, 17.5);
+    valueA0 = mapfloat(analogRead(A0), 0, 1024, 0.5, 17.5);
     fadeAmount = constrain(fadeAmount, 0.0, 255.0);
 
     fadeFillPixelsSawzUp();
@@ -619,7 +619,7 @@ void fadeFillPixelsSawzDown()
 
 void setDark()
 {
-    valueA0 = map(analogRead(A0), 0, 1024, 0.5, 17.5);
+    valueA0 = mapfloat(analogRead(A0), 0, 1024, 0.5, 17.5);
     fadeAmount = constrain(fadeAmount, 0.0, 255.0);
     //FastLED.setBrightness(fadeAmount);
 
@@ -726,19 +726,19 @@ void fadez3()
 
         if (Bank == 1 && Mode == 3)
       {
-        valueA0 = map(analogRead(A0), 0, 1024, 0.01, 30);
+        valueA0 = mapfloat(analogRead(A0), 0, 1024, 0.01, 30);
       }
       else
       {
-        valueA0 = map(analogRead(A0), 0, 1024, 0.1, 30);
+        valueA0 = mapfloat(analogRead(A0), 0, 1024, 0.01, 30);
       }
         startIndex = startIndex + 0.1;
         startIndex = startIndex+valueA0;
-        startIndex = constrain(startIndex, 0, 200);
+        startIndex = constrain(startIndex, 0, 255);
         //scalePixelFade(startIndex);
         //startIndex = fadeValueScaled;
         
-        //delayA0(fadeSpeed);
+        delayA0(fadeSpeed);
         
 
         //FastLED.setBrightness(startIndex);
@@ -764,24 +764,24 @@ void fadez3()
 
       if (Bank == 1 && Mode == 3)
       {
-        valueA0 = map(analogRead(A0), 0, 1024, 0.01, 10);
+        valueA0 = mapfloat(analogRead(A0), 0, 1024, 0.01, 10);
       }
       else
       {
-        valueA0 = map(analogRead(A0), 0, 1024, 0.1, 30);
+        valueA0 = mapfloat(analogRead(A0), 0, 1024, 0.01, 30);
       }
 
         startIndex = startIndex - 0.1;
         startIndex = startIndex-valueA0;
-        startIndex = constrain(startIndex, 0, 200);
+        startIndex = constrain(startIndex, 0, 255);
         //scalePixelFade(startIndex);
         //startIndex = fadeValueScaled;
 
-        //delayA0(fadeSpeed);
+        delayA0(fadeSpeed);
         
         //FastLED.setBrightness(startIndex);
         FillLEDsFromPaletteColors2(startIndex);
-        //FastLED.setBrightness(startIndex);
+        FastLED.setBrightness(startIndex);
 
         //averageLEDS();
 
@@ -1225,7 +1225,7 @@ void sawzRandom1()
         fadeAmount = fadeAmount+valueA0;
 
         //  Update the fadeAmount, rate of the cycle
-        valueA0 = map(analogRead(A0), 0, 1024, 0.5, 17.5);
+        valueA0 = mapfloat(analogRead(A0), 0, 1024, 0.5, 17.5);
         fadeAmount = constrain(fadeAmount, 0.0, 255.0);
 
         fadeFillPixelsSawzUp();
@@ -1254,7 +1254,7 @@ void sawzRandom1()
         fadeAmount = fadeAmount-valueA0;
         
         //  Update the fadeAmount, rate of the cycle
-        valueA0 = map(analogRead(A0), 0, 1024, 0.5, 17.5);
+        valueA0 = mapfloat(analogRead(A0), 0, 1024, 0.5, 17.5);
         fadeAmount = constrain(fadeAmount, 0.0, 255.0);
 
         fadeFillPixelsSawzDown();

@@ -533,7 +533,7 @@ void setup() {
   initial = true;
 
   setRandoms();
-  plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
+  plotterPrint = true; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
   startMillis = millis();  //initial start time
 }
 
@@ -641,7 +641,7 @@ void averageLEDSBrightness(){
 
   mapScaledBright(avgLight);
 
-  avgLightInner = map(scaledBright, 0, 255, 0, 190);
+  avgLightInner = mapfloat(scaledBright, 0, 190, 0, 190);
 
   //Serial.println("Average : " + String(avgLight));
   pixel.setBrightness(avgLightInner);
@@ -653,16 +653,39 @@ void averageLEDSBrightness(){
   showLEDS();
 }
 
-void averageLEDSPlot(){
+void averageLEDSBrightnessPalette(){
 
   avgLight0 = leds[0].getAverageLight();
   avgLight1 = leds[1].getAverageLight();
   avgLight2 = leds[2].getAverageLight();
   avgLight = avgLight0+avgLight1+avgLight2;
 
-  mapScaledBright(avgLight);
+  mapScaledBrightPalette(startIndex);
 
-  avgLightInner = mapfloat(scaledBright, 0, 255, 0, 190);
+  avgLightInner = mapfloat(scaledBright, 0, 190.0, 0, 600.0);
+
+  //Serial.println("Average : " + String(avgLight));
+  pixel.setBrightness(avgLightInner);
+  inner.setBrightness(avgLightInner);
+
+  pixel.setPixelColor(0, avgLightInner,avgLightInner,avgLightInner); 
+  inner.setPixelColor(0, avgLightInner,avgLightInner,avgLightInner);  
+
+  //showLEDS();
+}
+
+
+
+void averageLEDSPlot(){
+
+  // avgLight0 = leds[0].getAverageLight();
+  // avgLight1 = leds[1].getAverageLight();
+  // avgLight2 = leds[2].getAverageLight();
+  // avgLight = avgLight0+avgLight1+avgLight2;
+
+  // mapScaledBright(avgLight);
+
+  // avgLightInner = mapfloat(scaledBright, 0, 190, 0, 190);
 
 }
 
@@ -709,6 +732,33 @@ void pixelScaling()
 
 }
 
+void mapScaledBrightPalette (int val){
+
+      //controlAmount = map(analogRead(A0), 0, 1024, 0, 100);
+      //valueLog = log(analogRead(A0)+1)/log(1024)*255;
+      //Serial.println("Mode 1 valueLog: " + String(valueLog));
+      //fadeSpeed = map(valueLog, 0, 255, (speedMinimum), (40/2)); // Logarithmic Potentiometer Value
+      //fadeSpeed = map(valueLog, 0, 255, (speedMinimum/2), (40/2)); // Logarithmic Potentiometer Value
+
+      // This makes the potentiometer slower to change when reducting from full and gives better control fidelity at higher speeds
+      // This is a map of values for the potentiometer. note: the in array should have increasing values
+      int in[]  = {0, 25,51,76,102,127,153,178,204,229,255};
+      // This is a map of values for potentiometer curve type.
+      int out[] = {0, 1, 2,  4,  8,  16,  32,  48,  70,  100,  255 };  // 11
+      //int out[] = {10, 55, 90,  100,  110,  120,  130,  140,  150,  160,  255 };  // 11
+      // This maps the potentiometer scale.
+      controlAmount  = val;
+      // This is a multimap that assigns values from the [in] array (potentiometer) to values from the [out] array (curve)
+      x = multiMap(controlAmount, in, out, 11);
+      // This maps the values for the Modez.
+      scaledBright = mapfloat(x, 0, 255.0, 0, 255.0);
+      //scaledBright = constrain(x, 0.0, 255.0);
+
+      //int redValue = 236;
+      //int blueValue = 73;
+      //int greenValue = 107;
+      
+}
 
 void mapScaledBright (int val){
 
@@ -722,13 +772,15 @@ void mapScaledBright (int val){
       // This is a map of values for the potentiometer. note: the in array should have increasing values
       int in[]  = {0, 25,51,76,102,127,153,178,204,229,255};
       // This is a map of values for potentiometer curve type.
-      int out[] = {0, 5, 10,  15,  20,  25,  30,  35,  50,  80,  190 };  // 11
+      //int out[] = {0, 5, 10,  15,  20,  25,  30,  35,  50,  80,  255 };  // 11
+      int out[] = {0, 5, 10,  15,  20,  25,  30,  35,  50,  80,  255 };  // 11
       // This maps the potentiometer scale.
       controlAmount  = val;
       // This is a multimap that assigns values from the [in] array (potentiometer) to values from the [out] array (curve)
       x = multiMap(controlAmount, in, out, 11);
       // This maps the values for the Modez.
-      scaledBright = mapfloat(x, 0, 255, 0, 255);
+      scaledBright = mapfloat(x, 0, 255.0, 0, 255.0);
+      //scaledBright = constrain(x, 0.0, 255.0);
 
       //int redValue = 236;
       //int blueValue = 73;

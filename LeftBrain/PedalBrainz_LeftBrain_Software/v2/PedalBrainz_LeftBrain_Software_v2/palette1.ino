@@ -580,21 +580,27 @@ void FillLEDsFromPaletteColors2( uint8_t startIndex)
         FastLED.show();
         //averageLEDSBrightness();
 
-        scalePixelFade(startIndex);
+        // scalePixelFade(startIndex);
 
-        avgLightInner = map(fadeValueScaled, 0, 255, 0, 255);
+        // avgLightInner = mapfloat(fadeValueScaled, 0, 255, 10, 190);
+        // avgLightInner = mapfloat(fadeValueScaled, 0, 255, 10, 190);
 
-        //Serial.println("Average : " + String(avgLight));
-        pixel.setBrightness(avgLightInner);
-        inner.setBrightness(avgLightInner);
+        // //Serial.println("Average : " + String(avgLight));
+        // pixel.setBrightness(avgLightInner);
+        // inner.setBrightness(avgLightInner);
 
-        pixel.setPixelColor(0, avgLightInner,avgLightInner,avgLightInner); 
-        inner.setPixelColor(0, avgLightInner,avgLightInner,avgLightInner);  
+        // pixel.setPixelColor(0, avgLightInner,avgLightInner,avgLightInner); 
+        // inner.setPixelColor(0, avgLightInner,avgLightInner,avgLightInner);  
 
-        showLEDS();
+        // showLEDS();
+
+        averageLEDSBrightnessPalette();
+        //averageLEDSBrightness();
+
 
         //showLEDS();
-        //Serial.println("colorIndex : " + String(colorIndex));
+        //Serial.print(", ");
+        //Serial.print(startIndex);
     }
     //colorIndex += 3;
     //FastLED.delay(fadeSpeed);

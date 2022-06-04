@@ -197,6 +197,8 @@ void Bank1()
 
       modeStartupBank1();
 
+      maxBrightness = 255;
+
       //writeStartupDataz();
 
       //Do the last thing and WaitForModeChange
@@ -210,7 +212,7 @@ void Bank1()
       {
 
       // Call the main routine and loop the thing
-        fadeSpeed = 0;
+        //fadeSpeed = 0;
         fadez3();
         
       }
@@ -228,6 +230,8 @@ void Bank1()
       //modeFlash();
 
       modeStartupBank1();
+
+      maxBrightness = 255;
 
       //writeStartupDataz();
 
