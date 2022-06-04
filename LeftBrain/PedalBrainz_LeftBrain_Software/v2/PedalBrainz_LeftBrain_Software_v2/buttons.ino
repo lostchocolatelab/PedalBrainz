@@ -258,6 +258,15 @@ void clickEventUp()
       Serial.println("Returning to Modez Now");
       Serial.println("Mode Change = " + String(Mode));
     }
+    else if (Mode == 100)
+    {
+      readStartupMultiplier();
+      Serial.println("I read startupMultiplier before = " + String(startupMultiplier));
+      startupMultiplier = timeMultiplier;
+      Serial.println("I set startupMultiplier as timeMultiplier and now startupMultiplier = " + String(startupMultiplier));
+      Serial.println("Returning to Modez Now");
+      writeMultiplierDataz();
+    }    
     else if (Mode == 102)
     {
       readStartupMode();
@@ -278,6 +287,9 @@ void clickEventUp()
       //Serial.println(" WaitForModeChange = False & WaitingFlag = False");
       //Serial.println("Totally advancing Modez Now");
       //delay(200);
+
+    Serial.println("Current speedMinimum =  " + String(speedMinimum));
+    Serial.println("Current durationMaximum =  " + String(durationMaximum));        
   }
 }
 
@@ -367,6 +379,12 @@ void longHoldEventUp()
     Mode = startupMode;       //
     Serial.println("Changing from Light Loopz to Startup Mode");
   }
+  else if (Mode == 100) {
+    clicked = true;
+    readStartupMode();
+    Mode = startupMode;       //
+    Serial.println("Changing from Time Multiplier to Startup Mode");
+  }
   else
   {
     writeStartupDataz();
@@ -406,7 +424,7 @@ void clickEventDown()
     if ((Mode >= 2) && (Mode <= 10))
     {
       Mode = Mode - 1;
-      Serial.println("Mode Change 2 - 9 = " + String(Mode));
+      Serial.println("Mode Change between 2 and 9 = " + String(Mode));
       Serial.println("Totally REVERSING Modez Now");
       writeStartupDataz();
     }
@@ -414,7 +432,7 @@ void clickEventDown()
     else if (Mode == 1)
     {
       Mode = 10;
-      Serial.println("Mode Change 1 = " + String(Mode));
+      Serial.println("Mode Change = " + String(Mode));
       Serial.println("Totally REVERSING Modez Now");
       writeStartupDataz();
     }
@@ -426,13 +444,26 @@ void clickEventDown()
       Serial.println("Mode Change = " + String(Mode));
       Serial.println("Returning to Modez Now");
     }
+    else if (Mode == 100)
+    {
+      readStartupMultiplier();
+      Serial.println("I read startupMultiplier before = " + String(startupMultiplier));
+      startupMultiplier = timeMultiplier;
+      Serial.println("I set startupMultiplier as timeMultiplier and now startupMultiplier = " + String(startupMultiplier));
+      writeMultiplierDataz();
+      readStartupMode();
+      Serial.println("StartupMode = " + String(startupMode));
+      Mode = startupMode;
+      Serial.println("Mode Change = " + String(Mode));
+      Serial.println("Returning to Modez Now");
+    }    
     else if (Mode == 102)
     {
       readStartupMode();
       Serial.println("StartupMaxBright = " + String(startupMaxBright));
       MaxBright = MaxBrightTemp;
       Mode = startupMode;
-      Serial.println("Max Bright = " + String(startupMaxBright));
+      Serial.println("I set MaxBrightTemp to Max Bright = " + String(MaxBright));
       Serial.println("Returning to Modez Now");
       writeMaxBrightDataz();
     }
@@ -447,6 +478,9 @@ void clickEventDown()
       //Serial.println("ButtonStateDown= " + String(buttonStateDown));
       //Serial.println("Totally REVERSING Modez Now = " + String(Mode));
       //delay(200);
+
+    Serial.println("Current speedMinimum =  " + String(speedMinimum));
+    Serial.println("Current durationMaximum =  " + String(durationMaximum));       
 
   }
 }
@@ -474,7 +508,7 @@ void doubleClickEventDown()
     else if (Mode == 98) {
 
       // Disable double click to allow for button entry
-      Serial.println("Mode is 98 and Don't ChangebBank");
+      Serial.println("Mode is 98 and Don't Change Bank");
 
     }
     else 
@@ -496,7 +530,7 @@ void doubleClickEventDown()
     else if (Mode == 98) {
 
       // Disable double click to allow for button entry
-      Serial.println("Mode is 98 and Don't ChangebBank");
+      Serial.println("Mode is 98 and Don't Change Bank");
 
     }
     else
@@ -536,6 +570,18 @@ void longHoldEventDown()
     Mode = 102;       // Mode 102 = Max Bright Settings
     Serial.println("Changing from Light Loopz to Max Bright");
   }
+  else if (Mode == 100) // If it's Mode 100 Time Multiplier then go to Mode 99 = Color Mix
+  {
+    //readStartupMultiplier();
+    Serial.println("I read startupMultiplier before = " + String(startupMultiplier));
+    startupMultiplier = timeMultiplier;
+    Serial.println("I set startupMultiplier as timeMultiplier and now startupMultiplier = " + String(startupMultiplier));
+    Serial.println("Returning to Modez Now");
+    writeMultiplierDataz();
+    
+    Mode = 99;       // Mode 99 = Color Mix
+    Serial.println("Changing from Time Multiplier to Color Mix");
+  }
   else if (Mode == 102) // If it's Mode 102 = Max Bright Settings then go to Mode 99 = Color Mix
   {
     //readStartupMode();
@@ -543,10 +589,9 @@ void longHoldEventDown()
     MaxBright = MaxBrightTemp;
     writeMaxBrightDataz();
 
-    Mode = 99;        // Mode 99 = Color Mix
+    Mode = 100;        // Mode 100 = Time Multiplier
     Serial.println("Max Bright = " + String(startupMaxBright));
-    Serial.println("Changing from Max Bright to Color Mix");
-
+    Serial.println("Changing from Max Bright to Time Multiplier");
   }
   else if (Mode == 99) // If it's Mode 99 = Color Mix then go to Mode 999 = Memory Game
   {

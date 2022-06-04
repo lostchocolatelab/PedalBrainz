@@ -83,6 +83,7 @@ void Routines()
       // Read the values of Startup Mode
       readStartupMode();
       readStartupBank();
+      readStartupMultiplier();
 
       //Serial.println("I Read startupMode - " + String(startupMode));
       //Serial.println("I Read startupBank - " + String(startupBank));
@@ -97,10 +98,14 @@ void Routines()
         Bank = 1;
         Mode = 1;
         MaxBright = 255;
+        timeMultiplier = 1;
 
         startupBank = Bank;
         startupMode = Mode;
         startupMaxBright = MaxBright;
+        startupMultiplier = timeMultiplier;
+
+        setTimeMultiplier();
 
         writeStartupDataz();
       }
@@ -110,15 +115,18 @@ void Routines()
       Mode = startupMode;
       Bank = startupBank;
       MaxBright = startupMaxBright;
+      timeMultiplier = startupMultiplier;
 
       initial = false;
 
       Serial.println("startupMode = " + String(startupMode));
       Serial.println("startupBank = " + String(startupBank));
       Serial.println("startupMaxBright = " + String(startupMaxBright));
+      Serial.println("startupMultiplier = " + String(startupMultiplier));
       Serial.println("Mode set to startupMode = " + String(Mode));
       Serial.println("Bank set to startupBank = " + String(Bank));
       Serial.println("MaxBright set to startupMaxBright = " + String(MaxBright));
+      Serial.println("timeMultiplier set to startupMultiplier = " + String(timeMultiplier));
 
       // If the Bank is 1 or less, set the Bank to 1
       // If there's nothing saved start Modes from the beginning
@@ -134,7 +142,7 @@ void Routines()
     else if (2 <= Bank)
     {
       Mode = startupBank;
-      Serial.println("Bank was greater than one - " + String(Bank));
+      Serial.println("Bank was greater than one: " + String(Bank));
     }
     else
     {
@@ -146,7 +154,7 @@ void Routines()
     if (-1 >= Mode)
     {
       Mode = 1;
-      Serial.println("Mode was equal to or less than - " + String(Mode));
+      Serial.println("Mode was equal to or less than: " + String(Mode));
     }
 
       // If the Mode is 2 or more, set the Mode to startupMode
@@ -154,7 +162,7 @@ void Routines()
     else if (2 <= Mode)
     {
       Mode = startupMode;
-      Serial.println("Mode was greater than one - " + String(Mode));
+      Serial.println("Mode was greater than one: " + String(Mode));
     }
     else
     {
@@ -164,12 +172,40 @@ void Routines()
     if (-1 >= MaxBright)
     {
       MaxBright = 255;
-      Serial.println("MaxBright was equal to or less than - " + String(MaxBright));
+      Serial.println("MaxBright was equal to or less than: " + String(MaxBright));
     }
-    Serial.println("Routinez post-if Bank - " + String(Bank));
-    Serial.println("Routinez post-if Mode - " + String(Mode));
-    Serial.println("Routinez post-if MaxBright - " + String(MaxBright));
+    else;
 
+      // If the timeMultiplier is 1 or less, set the Mode to 1
+      // If there's nothing saved start Modes from the beginning
+    if (-1 >= timeMultiplier)
+    {
+      timeMultiplier = 1;
+      Serial.println("timeMultiplier was equal to or less than: " + String(timeMultiplier));
+    }
+
+      // If the timeMultiplier is 2 or more, set the timeMultiplier to startupMultiplier
+      // If a mode has been saved, set the saved startupMode as the Mode
+    else if (2 <= timeMultiplier)
+    {
+      timeMultiplier = startupMultiplier;
+      Serial.println("timeMultiplier was greater than one: " + String(timeMultiplier));
+    }
+    else
+    {
+      timeMultiplier = startupMultiplier;
+    }
+
+    Serial.println("Routinez post-if Bank: " + String(Bank));
+    Serial.println("Routinez post-if Mode: " + String(Mode));
+    Serial.println("Routinez post-if MaxBright: " + String(MaxBright));
+    Serial.println("Routinez post-if timeMultiplier: " + String(timeMultiplier));
+
+    setTimeMultiplier();
+
+    Serial.println("Read in DATAZ startupMultiplier - " + String(startupMultiplier));
+    Serial.println("Set speedMinimum =  " + String(speedMinimum));
+    Serial.println("Set durationMaximum =  " + String(durationMaximum));    
 
   }
 

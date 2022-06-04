@@ -73,6 +73,80 @@ writeStartupDataz();
 
 }
 
+void multiplierIndicator()
+{
+
+  multiplierIndicatorValue = mapfloat(analogRead(A0), 0, 1024, 0, 300);
+
+
+    if (multiplierIndicatorValue <= 100)
+    {
+      MultiplierTemp = 1;
+      timeMultiplierRoutine();
+    }
+    else if ((multiplierIndicatorValue >= 101) && (multiplierIndicatorValue <= 199))
+    {
+      MultiplierTemp = 2;
+      timeMultiplierRoutine();
+    }
+    else if (multiplierIndicatorValue >= 200)
+    {
+      MultiplierTemp = 3;
+      timeMultiplierRoutine();
+    }
+    else;
+
+    checkButtons();
+
+}
+
+void timeMultiplierRoutine()
+{
+
+  if (MultiplierTemp == 1)
+  {
+      strip.setBrightness(255);
+      strip.setPixelColor(0, 255, 255, 255);
+      strip.setPixelColor(1, 0, 0, 0);
+      strip.setPixelColor(2, 0, 0, 0);
+      strip.show();
+      //Serial.print("Single");
+      timeMultiplier = 1;
+  }
+  else if (MultiplierTemp == 2)
+  {
+      strip.setBrightness(255);
+      strip.setPixelColor(1, 255, 255, 255);
+      strip.setPixelColor(0, 0, 0, 0);
+      strip.setPixelColor(2, 0, 0, 0);
+      strip.show();
+      //Serial.print("Double");  
+      timeMultiplier = 2;  
+  }
+  else if (MultiplierTemp == 3)
+  {
+      strip.setBrightness(255);
+      strip.setPixelColor(2, 255, 255, 255);
+      strip.setPixelColor(0, 0, 0, 0);
+      strip.setPixelColor(1, 0, 0, 0);
+      strip.show();
+      //Serial.print("Triple");
+      timeMultiplier = 3;
+  }
+  else;
+
+  checkButtons();
+
+}
+
+void setTimeMultiplier()
+{
+  speedMinimum = 10000;
+  durationMaximum = 10000;
+  speedMinimum = speedMinimum*timeMultiplier;
+  durationMaximum = durationMaximum*timeMultiplier;
+}
+
 //  This Section is waiting for all potentiometers to be fully counter-clockwise for a duration 
 //  and then will start flashing a pattern of light in preparation for advancing Modez
 //  If A2 is above zero (turned clockwise) mode will advance in Routines 

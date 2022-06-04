@@ -133,7 +133,7 @@ int speedMaximum = 0;
 // Sets the value in milleseconds of the longest duration for delayA1 and delayA2
 int durationMaximum = 10000;
 
-int timeMultiplier = 1;
+int timeMultiplier;
 
 int valueLog;
 int controlAmount;
@@ -224,6 +224,7 @@ typedef struct
   int savedBank;
   int savedMode;
   int savedMaxBright;
+  int savedMultiplier;
 } savedData;
 
 
@@ -236,6 +237,10 @@ int startup;
 int startupBank;
 int startupMode;
 int startupMaxBright;
+int startupMultiplier;
+int MultiplierTemp;
+
+int multiplierIndicatorValue;
 
 int Mode = 1;
 int Bank = 1;
@@ -506,8 +511,10 @@ void setup() {
   Bank = 1;
   Mode = 0;
 
-  speedMinimum = speedMinimum*timeMultiplier;
-  durationMaximum = durationMaximum*timeMultiplier;
+  speedMinimum = 10000;
+  durationMaximum = 10000;
+
+  setTimeMultiplier();
 
   buttonLongHoldUp = false;
   buttonLongHoldDown = false;

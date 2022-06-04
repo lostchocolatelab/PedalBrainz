@@ -518,7 +518,7 @@ void Bank1()
       modeChangeWait();
     }
   }
-  if (Mode == 99)
+  if (Mode == 99)  //  Potentiometer RGB Color test
   {
     if (!waitingFlag)
     {
@@ -551,6 +551,40 @@ void Bank1()
       modeChangeWait();
     }
   }
+
+  if (Mode == 100)  // Time Multiplier
+  {
+    if (!waitingFlag)
+    {
+      // Flash the pixel at the start of a mode chnage
+      //modeFlash();
+
+      modeStartupBank1();
+
+      //writeStartupDataz();
+
+      //Do the last thing and WaitForModeChange
+
+      x = 0.5;
+      y = 0.9;
+      z = 0.1;
+
+      waitingFlag = true;
+      WaitForModeChange = true;
+      Serial.println(" WaitForModeChange = True");
+    }
+    else
+    {
+      if (WaitForModeChange)
+      {
+
+      // Call the main routine and loop the thing
+        multiplierIndicator();
+      }
+      // Wait for the Mode Change
+      modeChangeWait();
+    }
+  }  
   if (Mode == 102)
   {
     if (!waitingFlag)

@@ -31,10 +31,12 @@ void readStartupMode()        // Reads the Startup Bank, Mode, MaxBright when Mo
   startupBank = dataz.savedBank;
   startupMode = dataz.savedMode;
   startupMaxBright = dataz.savedMaxBright;
+  startupMultiplier = dataz.savedMultiplier;
 
   Serial.println(startupBank);
   Serial.println(startupMode);
   Serial.println(startupMaxBright);
+  Serial.println(startupMultiplier);
 }
 
 void writeStartupDataz()      // Writes the Startup Bank, Mode, MaxBright to the flash memory
@@ -50,14 +52,16 @@ void writeStartupDataz()      // Writes the Startup Bank, Mode, MaxBright to the
 
     EEPROM.put(storedAddress, STARTUP_DATA);
 
-    Serial.println("Filling in DATAZ Bank - " + String(Bank));
-    Serial.println("Filling in DATAZ Mode - " + String(Mode));
-    Serial.println("Filling in DATAZ MaxBright - " + String(MaxBright));
+    Serial.println("Filling in DATAZ Bank: " + String(Bank));
+    Serial.println("Filling in DATAZ Mode: " + String(Mode));
+    Serial.println("Filling in DATAZ MaxBright: " + String(MaxBright));
+    Serial.println("Filling in DATAZ Multiplier: " + String(timeMultiplier));
 
     // Fill the "dataz" structure with the data entered by the user...
     dataz.savedBank = Bank;
     dataz.savedMode = Mode;
     dataz.savedMaxBright = MaxBright;
+    dataz.savedMultiplier = timeMultiplier;
 
     // ...and finally save everything into emulated-EEPROM
     EEPROM.put(storedAddress + sizeof(startup), dataz);
@@ -76,6 +80,7 @@ void writeStartupDataz()      // Writes the Startup Bank, Mode, MaxBright to the
         Serial.print("<< Your Bank "); Serial.print(dataz.savedBank);
         Serial.print(". Your Mode: "); Serial.print(dataz.savedMode);
         Serial.print(". Your MaxBright: "); Serial.print(dataz.savedMaxBright);
+        Serial.print(". Your Multiplier: "); Serial.print(dataz.savedMultiplier);
         Serial.println(" >> have been saved. Thank you!");
       }
   else
@@ -89,20 +94,10 @@ void writeMaxBrightDataz()    // Writes the MaxBright to the flash memory
 {
   Serial.println("Writing MazBright STARTUP_DATAZ");
 
-  //startupBank = Bank;
-  //startupMode = Mode;
-  //savedMaxBright = MaxBright;
-
   EEPROM.put(storedAddress, STARTUP_DATA);
 
-  //Serial.println("Filling in DATAZ Bank - " + String(Bank));
-  //Serial.println("Filling in DATAZ Mode - " + String(Mode));
   Serial.println("Filling in DATAZ MaxBright - " + String(MaxBright));
 
-
-  // Fill the "dataz" structure with the data entered by the user...
-  //dataz.savedBank = Bank;
-  //dataz.savedMode = Mode;
   dataz.savedMaxBright = MaxBright;
 
   // ...and finally save everything into emulated-EEPROM
@@ -115,10 +110,49 @@ void writeMaxBrightDataz()    // Writes the MaxBright to the flash memory
   }
 
   // Print a confirmation of the data inserted.
-  //Serial.print("<< Your Bank "); Serial.print(dataz.savedBank);
-  //Serial.print(". Your Mode: "); Serial.print(dataz.savedMode);
   Serial.print(". Your MaxBright: "); Serial.print(dataz.savedMaxBright);
   Serial.println(" >> have been saved. Thank you!");
+}
+
+void writeMultiplierDataz()    // Writes the MaxBright to the flash memory
+{
+  Serial.println("Writing Multiplier STARTUP_DATAZ");
+
+  EEPROM.put(storedAddress, STARTUP_DATA);
+
+  Serial.println("Filling in DATAZ timeMultiplier - " + String(timeMultiplier));
+
+  dataz.savedMultiplier = timeMultiplier;
+
+  // ...and finally save everything into emulated-EEPROM
+  EEPROM.put(storedAddress + sizeof(startup), dataz);
+
+  if (!EEPROM.getCommitASAP())
+  {
+    Serial.println("CommitASAP not set. Need commit()");
+    EEPROM.commit();
+  }
+
+  setTimeMultiplier();
+
+  // Print a confirmation of the data inserted.
+  Serial.println("Set speedMinimum =  " + String(speedMinimum));
+  Serial.println("Set durationMaximum =  " + String(durationMaximum));  
+  Serial.print(". Your savedMultiplier: "); Serial.print(dataz.savedMultiplier);
+  Serial.println(" >> have been saved. Thank you!");
+}
+
+void readStartupMultiplier()        // Reads the Startup Bank, Mode, MaxBright when Mode is zero
+{
+  EEPROM.get(storedAddress + sizeof(startup), dataz);
+
+  startupMultiplier = dataz.savedMultiplier;
+
+  setTimeMultiplier();
+
+  Serial.println("Read in DATAZ startupMultiplier - " + String(startupMultiplier));
+  Serial.println("Set speedMinimum =  " + String(speedMinimum));
+  Serial.println("Set durationMaximum =  " + String(durationMaximum));
 }
 
 void readStartupBank()        // Currently Unused
@@ -135,30 +169,30 @@ This Section is used for memory reporting
 
 */
 
-#ifdef __arm__
-  // should use uinstd.h to define sbrk but Due causes a conflict
-extern "C" char* sbrk(int incr);
-#else    // __ARM__
-extern char *__brkval;
-#endif    // __arm__
+// #ifdef __arm__
+//   // should use uinstd.h to define sbrk but Due causes a conflict
+// extern "C" char* sbrk(int incr);
+// #else    // __ARM__
+// extern char *__brkval;
+// #endif    // __arm__
 
-int freeMemory() {
-  char top;
-#ifdef __arm__
-  return &top - reinterpret_cast<char*>(sbrk(0));
-#elif defined(CORE_TEENSY) || (ARDUINO > 103 && ARDUINO != 151)
-  return &top - __brkval;
-#else    // __arm__
-  return __brkval ? &top - __brkval : &top - __malloc_heap_start;
-#endif    // __arm__
-}
+// int freeMemory() {
+//   char top;
+// #ifdef __arm__
+//   return &top - reinterpret_cast<char*>(sbrk(0));
+// #elif defined(CORE_TEENSY) || (ARDUINO > 103 && ARDUINO != 151)
+//   return &top - __brkval;
+// #else    // __arm__
+//   return __brkval ? &top - __brkval : &top - __malloc_heap_start;
+// #endif    // __arm__
+// }
 
-extern "C" char *sbrk(int i);
+// extern "C" char *sbrk(int i);
 
-int FreeRam () {
-  char stack_dummy = 0;
-  return &stack_dummy - sbrk(0);
-}
+// int FreeRam () {
+//   char stack_dummy = 0;
+//   return &stack_dummy - sbrk(0);
+// }
 
 
 \
