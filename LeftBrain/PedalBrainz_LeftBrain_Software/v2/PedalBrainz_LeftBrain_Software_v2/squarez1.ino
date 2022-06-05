@@ -11,7 +11,7 @@ void Squarez_01()
       //Serial.println("Mode 1 fadeSpeeed: " + String(fadeSpeed));
       //Serial.println("AM SQUAREZ");
 
-      maxBrightnessAdjust();
+      maxBrightnessSet();
 
       //Serial.println("maxBrightness : " + String(maxBrightness));
       //Serial.println("MaxBright : " + String(MaxBright));
@@ -24,6 +24,7 @@ void Squarez_01()
       // Alternate between two different blink values
       Blink1 = true;
       valueA1 = map(analogRead(A1), 0, 1024, 0, 255);
+      valueA2 = map(analogRead(A2), 0, 1024, 0, 255);
       pixel.setPixelColor(0, valueA1, (valueA1 / 10), 0);       // Blink 1
       inner.setPixelColor(0, valueA1, (valueA1 / 10), 0);       // Blink 1
       //for(int p=0; p<strip.numPixels(); p++) {       // For each pixel in strip...
@@ -31,7 +32,7 @@ void Squarez_01()
       //}
       strip.setPixelColor(0, valueA1, (valueA1 / 10), 0);       // Blink 1
       strip.setPixelColor(1, valueA1, (valueA1 / 10), 0);       // Blink 1
-      //strip.setPixelColor(2, 0, 0, 0);       // Blink 1
+      strip.setPixelColor(2, (valueA2 / 6), valueA2, valueA2);       // Blink 2
       //pixel.setBrightness(maxBrightness);
       //strip.setBrightness(MaxBright);
       //inner.setBrightness(MaxBright);
@@ -50,6 +51,7 @@ void Squarez_01()
   ////////////////////
 
       Blink1 = false;
+      valueA1 = map(analogRead(A1), 0, 1024, 0, 255);
       valueA2 = map(analogRead(A2), 0, 1024, 0, 255);
       pixel.setPixelColor(0, (valueA2 / 6), valueA2, valueA2);       // Blink 2
       inner.setPixelColor(0, (valueA2 / 6), valueA2, valueA2);       // Blink 2
@@ -57,7 +59,7 @@ void Squarez_01()
       //      strip.setPixelColor(p, (valueA2/6), valueA2, valueA2);
       //}
       //strip.setPixelColor(0, (valueA2/6), valueA2, valueA2);       // Blink 2
-      //strip.setPixelColor(1, valueA1, (valueA1/10), 0);       // Blink 1
+      strip.setPixelColor(0, valueA1, (valueA1 / 10), 0);       // Blink 1
       //strip.setPixelColor(0, 0, 0, 0);       // Blink 1
       strip.setPixelColor(1, (valueA2 / 6), valueA2, valueA2);       // Blink 2
       strip.setPixelColor(2, (valueA2 / 6), valueA2, valueA2);       // Blink 2

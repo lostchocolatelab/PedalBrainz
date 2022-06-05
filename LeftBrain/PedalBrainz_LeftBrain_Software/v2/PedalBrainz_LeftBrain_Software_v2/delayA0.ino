@@ -174,13 +174,15 @@ void delayA0(int count)
           showLEDS();
 
           valueA1 = map(analogRead(A1), 0, 1024, 0, 255);
-          pixel.setPixelColor(0, valueA1, (valueA1 / 10), 0);         // Blink 1
-          inner.setPixelColor(0, valueA1, (valueA1 / 10), 0);         // Blink 1
-          //for(int p=0; p<strip.numPixels(); p++) {         // For each pixel in strip...
+          valueA2 = map(analogRead(A2), 0, 1024, 0, 255);
+          pixel.setPixelColor(0, valueA1, (valueA1 / 10), 0);       // Blink 1
+          inner.setPixelColor(0, valueA1, (valueA1 / 10), 0);       // Blink 1
+          //for(int p=0; p<strip.numPixels(); p++) {       // For each pixel in strip...
           //      strip.setPixelColor(p, valueA1, (valueA1/10), 0);
           //}
-          strip.setPixelColor(0, valueA1, (valueA1 / 10), 0);         // Blink 1
-          strip.setPixelColor(1, valueA1, (valueA1 / 10), 0);         // Blink 1
+          strip.setPixelColor(0, valueA1, (valueA1 / 10), 0);       // Blink 1
+          strip.setPixelColor(1, valueA1, (valueA1 / 10), 0);       // Blink 1
+          strip.setPixelColor(2, (valueA2 / 6), valueA2, valueA2);       // Blink 2
 
           showLEDS();
 
@@ -192,15 +194,18 @@ void delayA0(int count)
           maxBrightnessSet();
           showLEDS();
 
+          valueA1 = map(analogRead(A1), 0, 1024, 0, 255);
           valueA2 = map(analogRead(A2), 0, 1024, 0, 255);
-          pixel.setPixelColor(0, (valueA2 / 6), valueA2, valueA2);         // Blink 2
-          inner.setPixelColor(0, (valueA2 / 6), valueA2, valueA2);         // Blink 2
-          //for(int p=0; p<strip.numPixels(); p++) {         // For each pixel in strip...
+          pixel.setPixelColor(0, (valueA2 / 6), valueA2, valueA2);       // Blink 2
+          inner.setPixelColor(0, (valueA2 / 6), valueA2, valueA2);       // Blink 2
+          //for(int p=0; p<strip.numPixels(); p++) {       // For each pixel in strip...
           //      strip.setPixelColor(p, (valueA2/6), valueA2, valueA2);
           //}
-          strip.setPixelColor(1, valueA1, (valueA1 / 10), 0);         // Blink 2
-          strip.setPixelColor(1, (valueA2 / 6), valueA2, valueA2);         // Blink 2
-          strip.setPixelColor(2, (valueA2 / 6), valueA2, valueA2);         // Blink 2
+          //strip.setPixelColor(0, (valueA2/6), valueA2, valueA2);       // Blink 2
+          strip.setPixelColor(0, valueA1, (valueA1 / 10), 0);       // Blink 1
+          //strip.setPixelColor(0, 0, 0, 0);       // Blink 1
+          strip.setPixelColor(1, (valueA2 / 6), valueA2, valueA2);       // Blink 2
+          strip.setPixelColor(2, (valueA2 / 6), valueA2, valueA2);       // Blink 2
 
           showLEDS();
         }
