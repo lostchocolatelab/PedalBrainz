@@ -454,25 +454,28 @@ void Bank4()
     }
   }
 
-/*
- * 
- * 
- * 
- *        BONUS MODEZ
- * 
- * 
- */
-  if (Mode == 98)
+ /*
+  *
+  *
+  *
+  *        BONUS MODEZ
+  *
+  *
+  */
+
+  if (Mode == 98)  // Light Loopz 
   {
     if (!waitingFlag)
     {
       // Flash the pixel at the start of a mode chnage
-      modeFlash();
+      //modeFlash();
+
+      modeStartupBank1();
+
+      //writeStartupDataz();
 
       //Do the last thing and WaitForModeChange
 
-      //writeStartupDataz();
-      
       x = 0.5;
       y = 0.9;
       z = 0.1;
@@ -481,40 +484,31 @@ void Bank4()
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
     }
-     else
+    else
     {
       if (WaitForModeChange)
       {
 
-        // Call the main routine and loop the thing
+      // Call the main routine and loop the thing
         lightLoopz();
       }
-        // Wait for the Mode Change
-        modeChangeWait();
+      // Wait for the Mode Change
+      modeChangeWait();
     }
   }
-  
-  if (Mode == 99)
+  if (Mode == 99)  //  Potentiometer RGB Color test
   {
     if (!waitingFlag)
     {
       // Flash the pixel at the start of a mode chnage
-      modeFlash();
+      //modeFlash();
+
+      modeStartupBank1();
+
+      //writeStartupDataz();
 
       //Do the last thing and WaitForModeChange
 
-      pixel.setBrightness(100);
-      pixel.setPixelColor(0, 36, 200, 10);
-      pixel.show();
-
-      strip.setBrightness(MaxBright);
-      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-         strip.setPixelColor(p, 36, 200, 10);
-      }
-      strip.show(); 
-      
-      //writeStartupDataz();
-      
       x = 0.5;
       y = 0.9;
       z = 0.1;
@@ -523,39 +517,65 @@ void Bank4()
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
     }
-     else
+    else
     {
       if (WaitForModeChange)
       {
 
-        // Call the main routine and loop the thing
+      // Call the main routine and loop the thing
         testColorPotentiometer();
       }
-        // Wait for the Mode Change
-        modeChangeWait();
+      // Wait for the Mode Change
+      modeChangeWait();
     }
   }
+
+  if (Mode == 100)  // Time Multiplier
+  {
+    if (!waitingFlag)
+    {
+      // Flash the pixel at the start of a mode chnage
+      //modeFlash();
+
+      modeStartupBank1();
+
+      //writeStartupDataz();
+
+      //Do the last thing and WaitForModeChange
+
+      x = 0.5;
+      y = 0.9;
+      z = 0.1;
+
+      waitingFlag = true;
+      WaitForModeChange = true;
+      Serial.println(" WaitForModeChange = True");
+    }
+    else
+    {
+      if (WaitForModeChange)
+      {
+
+      // Call the main routine and loop the thing
+        multiplierIndicator();
+      }
+      // Wait for the Mode Change
+      modeChangeWait();
+    }
+  }  
   if (Mode == 102)
   {
     if (!waitingFlag)
     {
       // Flash the pixel at the start of a mode chnage
-      modeFlash();
+      //modeFlash();
+
+      modeStartupBank1();
+
+      //writeStartupDataz();
 
       //Do the last thing and WaitForModeChange
 
-      pixel.setBrightness(100);
-      pixel.setPixelColor(0, 36, 200, 10);
-      pixel.show();
-
-      strip.setBrightness(MaxBright);
-      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-         strip.setPixelColor(p, 36, 200, 10);
-      }
-      strip.show(); 
-      
-      //writeStartupDataz();
-      
       x = 0.5;
       y = 0.9;
       z = 0.1;
@@ -564,16 +584,48 @@ void Bank4()
       WaitForModeChange = true;
       Serial.println(" WaitForModeChange = True");
     }
-     else
+    else
     {
       if (WaitForModeChange)
       {
 
-        // Call the main routine and loop the thing
+      // Call the main routine and loop the thing
         testBrightPotentiometer();
       }
-        // Wait for the Mode Change
-        modeChangeWait();
+      // Wait for the Mode Change
+      modeChangeWait();
     }
   }
+  if (Mode == 999)
+  {
+    if (!waitingFlag)
+    {
+      // Flash the pixel at the start of a mode chnage
+      //modeFlash();
+
+      modeStartupBank1();
+
+      //writeStartupDataz();
+
+      //Do the last thing and WaitForModeChange
+      darkLED();
+      //writeStartupDataz();
+
+      waitingFlag = true;
+      WaitForModeChange = true;
+      Serial.println(" WaitForModeChange = True");
+    }
+    else
+    {
+      if (WaitForModeChange)
+      {
+
+      // Call the main routine and loop the thing
+        memoryGame();
+      }
+      // Wait for the Mode Change
+      modeChangeWait();
+    }
+  }
+
 }

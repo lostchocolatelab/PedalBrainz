@@ -489,6 +489,15 @@ void Bank1()
   }
 
 
+ /*
+  *
+  *
+  *
+  *        BONUS MODEZ
+  *
+  *
+  */
+
   if (Mode == 98)  // Light Loopz 
   {
     if (!waitingFlag)

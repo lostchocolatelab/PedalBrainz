@@ -450,6 +450,7 @@ int avgLightInner;
 CRGBPalette16 currentPalette;
 TBlendType    currentBlending;
 
+#define DITHER = 1;
 #define FRAMES_PER_SECOND 60
 
 int STEPS = 30;// STEPS set dynamically once we've started up
@@ -655,14 +656,9 @@ void averageLEDSBrightness(){
 
 void averageLEDSBrightnessPalette(){
 
-  avgLight0 = leds[0].getAverageLight();
-  avgLight1 = leds[1].getAverageLight();
-  avgLight2 = leds[2].getAverageLight();
-  avgLight = avgLight0+avgLight1+avgLight2;
-
   mapScaledBrightPalette(startIndex);
 
-  avgLightInner = mapfloat(scaledBright, 0, 190.0, 0, 600.0);
+  avgLightInner = mapfloat(scaledBright, 0, 190.0, -5, 600.0);
 
   //Serial.println("Average : " + String(avgLight));
   pixel.setBrightness(avgLightInner);
@@ -678,14 +674,14 @@ void averageLEDSBrightnessPalette(){
 
 void averageLEDSPlot(){
 
-  // avgLight0 = leds[0].getAverageLight();
-  // avgLight1 = leds[1].getAverageLight();
-  // avgLight2 = leds[2].getAverageLight();
-  // avgLight = avgLight0+avgLight1+avgLight2;
+  avgLight0 = leds[0].getAverageLight();
+  avgLight1 = leds[1].getAverageLight();
+  avgLight2 = leds[2].getAverageLight();
+  avgLight = avgLight0+avgLight1+avgLight2;
 
-  // mapScaledBright(avgLight);
+  mapScaledBright(avgLight);
 
-  // avgLightInner = mapfloat(scaledBright, 0, 190, 0, 190);
+  avgLightInner = mapfloat(scaledBright, 0, 190, 0, 190);
 
 }
 
@@ -744,7 +740,7 @@ void mapScaledBrightPalette (int val){
       // This is a map of values for the potentiometer. note: the in array should have increasing values
       int in[]  = {0, 25,51,76,102,127,153,178,204,229,255};
       // This is a map of values for potentiometer curve type.
-      int out[] = {0, 1, 2,  4,  8,  16,  32,  48,  70,  100,  255 };  // 11
+      int out[] = {5, 7, 9,  11,  15,  20,  32,  48,  70,  100,  255 };  // 11
       //int out[] = {10, 55, 90,  100,  110,  120,  130,  140,  150,  160,  255 };  // 11
       // This maps the potentiometer scale.
       controlAmount  = val;
