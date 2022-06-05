@@ -139,6 +139,25 @@ else if (Bank == 3)
     printAverage();
   }
 }
+else if (Bank == 4)
+{
+  if ((Mode >= 1) && (Mode <= 10))
+  {
+      //averageLEDSPlot();
+      //Print some things
+      Serial.print(",");
+      Serial.println(currentVal);
+      // Serial.print(",");
+      // Serial.print(avgLight);
+      // Serial.print(",");
+      // Serial.println(avgLightInner);
+  }
+  else
+  {
+    averageLEDSPlot();
+    printAverage();
+  }
+}
 else
 {
     averageLEDSPlot();
