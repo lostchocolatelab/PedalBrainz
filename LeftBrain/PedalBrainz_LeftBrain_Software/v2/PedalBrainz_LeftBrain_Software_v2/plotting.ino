@@ -78,7 +78,7 @@ if (Bank == 1)
 }
 else if (Bank == 2)
 {
-  if ((Mode == 1) && (Mode == 3))
+  if ((Mode >= 1) && (Mode <= 3))
   {
       //Print some things
       Serial.print(",");
@@ -104,13 +104,34 @@ else if (Bank == 2)
       // Serial.print(",");
       // Serial.println(scaledZ);  
   }
-  else if ((Mode == 5) && (Mode == 9))
+  else if ((Mode >= 5) && (Mode <= 9))
   {
       //Print some things
       Serial.print(",");
       Serial.print(fadeAmount);
       Serial.print(",");
       Serial.println(redValue); 
+  }
+  else
+  {
+    averageLEDSPlot();
+    printAverage();
+  }
+}
+else if (Bank == 3)
+{
+  if ((Mode >= 2) && (Mode <= 10))
+  {
+      averageLEDSPlot();
+      //Print some things
+      // Serial.print(",");
+      // Serial.print(avgLight);
+      // Serial.print(",");
+      // Serial.print(avgLightInner);
+      Serial.print(",");
+      Serial.print(InnerBrightReductionQuad);
+      Serial.print(",");
+      Serial.println(MaxBrightReductionQuad);
   }
   else
   {

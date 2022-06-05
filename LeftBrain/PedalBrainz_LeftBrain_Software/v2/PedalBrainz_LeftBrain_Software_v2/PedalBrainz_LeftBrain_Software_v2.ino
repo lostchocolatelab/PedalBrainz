@@ -383,6 +383,34 @@ static uint16_t xx;
 static uint16_t yy;
 static uint16_t zz;
 
+int randomBright0 = 50;
+int randomBright1 = 90;
+int randomBright2 = 155;
+int randomBright3 = 255;
+
+int MaxBrightReductionQuad;
+int MaxBrightReductionQuad0;
+int MaxBrightReductionQuad1;
+int MaxBrightReductionQuad2;
+int MaxBrightReductionQuad3;
+
+int InnerBrightReductionQuad;
+int InnerBrightReductionQuad0;
+int InnerBrightReductionQuad1;
+int InnerBrightReductionQuad2;
+int InnerBrightReductionQuad3;
+
+
+
+/* rainbow2 */
+uint32_t colorone = 0xFF007F;
+uint32_t colortwo = 0x6200FF;
+uint32_t colorthree = 0xBEFF00;
+uint32_t colorfour = 0x00FF34;
+uint32_t colorfive = 0x0400FF;
+uint32_t colorsix = 0x2600CA;
+
+
 /**
 
   GAME Declarations
@@ -534,7 +562,7 @@ void setup() {
   initial = true;
 
   setRandoms();
-  plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
+  plotterPrint = true; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
   startMillis = millis();  //initial start time
 }
 

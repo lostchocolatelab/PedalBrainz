@@ -11,32 +11,7 @@
       //  A1 = Delay of each Brightness Value (4) for a Single Color
       //  A2 = Duration of Darkness after full Color Cycle (or betwixt each color if darkDelayBetwixtColors is enabled)
 
-int randomBright0 = 50;
-int randomBright1 = 90;
-int randomBright2 = 155;
-int randomBright3 = 255;
 
-int MaxBrightReductionQuad;
-int MaxBrightReductionQuad0;
-int MaxBrightReductionQuad1;
-int MaxBrightReductionQuad2;
-int MaxBrightReductionQuad3;
-
-int InnerBrightReductionQuad;
-int InnerBrightReductionQuad0;
-int InnerBrightReductionQuad1;
-int InnerBrightReductionQuad2;
-int InnerBrightReductionQuad3;
-
-
-
-/* rainbow2 */
-uint32_t colorone = 0xFF007F;
-uint32_t colortwo = 0x6200FF;
-uint32_t colorthree = 0xBEFF00;
-uint32_t colorfour = 0x00FF34;
-uint32_t colorfive = 0x0400FF;
-uint32_t colorsix = 0x2600CA;
 
 /**
 
