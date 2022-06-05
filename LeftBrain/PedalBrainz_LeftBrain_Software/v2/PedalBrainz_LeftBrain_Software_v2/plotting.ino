@@ -76,15 +76,47 @@ if (Bank == 1)
 
 
 }
-else if (Bank == 2 && Mode == 4)
+else if (Bank == 2)
 {
-    //Print some things
-    Serial.print(",");
-    Serial.print(scaledX);
-    Serial.print(",");
-    Serial.print(scaledY);
-    Serial.print(",");
-    Serial.print(scaledZ);  
+  if ((Mode == 1) && (Mode == 3))
+  {
+      //Print some things
+      Serial.print(",");
+      Serial.print(fadeAmountA1);
+      Serial.print(",");
+      Serial.println(fadeAmountA2);
+  }
+  else if (Mode == 4)
+  {
+      //Print some things
+      Serial.print(",");
+      Serial.print(fadeAmount);
+      Serial.print(",");
+      Serial.println(scaledInnerCombined); 
+
+      // //Print some things ATTRACTORZ
+      // Serial.print(",");
+      // Serial.print(valueA2);      
+      // Serial.print(",");
+      // Serial.print(scaledX);
+      // Serial.print(",");
+      // Serial.print(scaledY);
+      // Serial.print(",");
+      // Serial.println(scaledZ);  
+  }
+  else if ((Mode == 5) && (Mode == 9))
+  {
+      //Print some things
+      Serial.print(",");
+      Serial.print(fadeAmount);
+      Serial.print(",");
+      Serial.println(redValue); 
+  }
+  else
+  {
+    averageLEDSPlot();
+    printAverage();
+  }
 }
 else
 {

@@ -155,7 +155,7 @@ void Bank2()
 
   */
 
-      // RainbowQuad
+  // Squarez Tilt
   if (Mode == 1)
   {
       //Serial.println("Mode 1 Started fadespeed " + String(fadeSpeed));
@@ -195,7 +195,7 @@ void Bank2()
     }
   }
 
-      // RainbowQuad
+  // Squarez Tilt Random
   if (Mode == 2)
   {
 
@@ -231,7 +231,7 @@ void Bank2()
     }
   }
 
-      // RainbowQuad
+  // Trianglez Doublez
   if (Mode == 3)
   {
     if (!waitingFlag)
@@ -257,14 +257,14 @@ void Bank2()
       {
 
       // Call the main routine and loop the thing
-        Squarez_02(); // Double Trianglez
+        Squarez_02(); // Trianglez Doublez
       }
       // Wait for the Mode Change
       modeChangeWait();
     }
   }
 
-      // RainbowMountainRepeat
+  // RainbowMountainRepeat
   if (Mode == 4)
   {
     if (!waitingFlag)
@@ -300,7 +300,7 @@ void Bank2()
       {
 
       //Call the main routine and loop the thing
-        fadez4();
+        fadez4(); //  Trainglez Attractorz
       }
       // Wait for the Mode Change
       modeChangeWait();

@@ -170,7 +170,7 @@ void Bank7()
 
         // Call the main routine and loop the thing
         fadeSpeed = 10;
-        Fadez_01 ();
+        fadez1 ();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -210,7 +210,7 @@ void Bank7()
 
         // Call the main routine and loop the thing
         fadeSpeed = 10;
-        Fadez_01 ();
+        fadez1 ();
       }
         // Wait for the Mode Change
         modeChangeWait();

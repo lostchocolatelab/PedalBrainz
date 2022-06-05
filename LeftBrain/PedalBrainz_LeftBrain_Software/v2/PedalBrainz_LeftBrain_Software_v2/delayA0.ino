@@ -89,7 +89,7 @@ void delayA0(int count)
       // Potentiometer Top Right | A0 - Map the value of the Potentiometer to a Variable
       else if (Mode == 2) {
 
-        //Fadez_01
+        //fadez1
         //mapScaledA0();
         //fadeSpeed = map(scaledA0, 0, 2300, speedMinimum, 0);
 
@@ -106,7 +106,7 @@ void delayA0(int count)
         //Serial.println("Delay Random (ms) A0: " + String(randomAmountA0));
         //Serial.println("Mode 2 fadeSpeeed: " + String(fadeSpeed));
 
-        //Fadez_01
+        //fadez1
         //mapScaledA0();
         //fadeSpeed = map(scaledA0, 0, 2300, speedMinimum, 0);
 
