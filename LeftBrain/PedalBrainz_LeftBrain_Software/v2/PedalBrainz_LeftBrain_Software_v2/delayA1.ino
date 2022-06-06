@@ -338,7 +338,7 @@ void delayA1(int count)
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
         mapScaledA1();
-        fullDelay = map(scaledA1, 0, 2300, speedMinimum, 100);
+        fullDelay = map(scaledA1, 0, 2300, speedMinimum, 50);
 
       }
       else if (Mode == 3) {
@@ -346,35 +346,35 @@ void delayA1(int count)
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
         mapScaledA1();
-        fullDelay = map(scaledA1, 0, 2300, speedMinimum, 100);
+        fullDelay = map(scaledA1, 0, 2300, speedMinimum, 50);
       }
       else if (Mode == 4) {
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
         mapScaledA1();
-        fullDelay = map(scaledA1, 0, 2300, speedMinimum, 100);
+        fullDelay = map(scaledA1, 0, 2300, speedMinimum, 50);
       }
       else if (Mode == 5) {
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
         mapScaledA1();
-        fullDelay = map(scaledA1, 0, 2300, speedMinimum, 100);
+        fullDelay = map(scaledA1, 0, 2300, speedMinimum, 50);
       }
       else if (Mode == 6) {
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
         mapScaledA1();
-        fullDelay = map(scaledA1, 0, 2300, speedMinimum, 100);
+        fullDelay = map(scaledA1, 0, 2300, speedMinimum, 50);
       }
       else if (Mode == 7) {
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
         mapScaledA1();
-        fullDelay = map(scaledA1, 0, 2300, speedMinimum, 100);
+        fullDelay = map(scaledA1, 0, 2300, speedMinimum, 50);
       }
       else {
         fullDelay = 100;

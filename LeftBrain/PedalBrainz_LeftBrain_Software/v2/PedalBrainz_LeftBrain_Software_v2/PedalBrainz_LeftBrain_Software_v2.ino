@@ -400,7 +400,7 @@ int InnerBrightReductionQuad1;
 int InnerBrightReductionQuad2;
 int InnerBrightReductionQuad3;
 
-
+int sawzDirection;
 
 /* rainbow2 */
 uint32_t colorone = 0xFF007F;
@@ -539,6 +539,8 @@ void setup() {
 
   Bank = 3;
   Mode = 3;
+
+  timeMultiplier = 1;
 
   speedMinimum = 10000;
   durationMaximum = 10000;
