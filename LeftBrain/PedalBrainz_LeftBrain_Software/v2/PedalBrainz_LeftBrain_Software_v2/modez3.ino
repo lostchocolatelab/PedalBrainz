@@ -191,6 +191,7 @@ void Bank3()
       {
 
         //Call the main routine and loop the thing
+        fadeUp = true;
         RainbowQuad();
       }
         // Wait for the Mode Change
@@ -208,6 +209,8 @@ void Bank3()
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank3();
+
+      fadeUp = true;
       
       //writeStartupDataz();
       
@@ -270,6 +273,8 @@ void Bank3()
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank3();
+
+      fadeUp = true;
       
       //writeStartupDataz();
       
@@ -332,6 +337,8 @@ void Bank3()
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank3();
+
+      fadeUp = true;
       
       //writeStartupDataz();
       

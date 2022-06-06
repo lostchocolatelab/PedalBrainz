@@ -40,30 +40,30 @@ void RainbowQuad() {
 
 
     if (Mode == 2) {
-        brightnessStatic();
+        brightnessStatic();  //  Quad Brightness is the same (static) values for 0,1,2,3
         rainbowSaw();
     }
     else if (Mode == 3) {
-        randomOnce = 0;
-        setRandomBrightsOnce();
-        rainbowSaw();
+        brightnessStatic();  //  Quad Brightness is the same (static) values for 0,1,2,3
+        rainbowStairz();
     }
     else if (Mode == 4) {
-        setRandomBrights();
+        randomOnce = 0;
+        setRandomBrightsOnce();
         rainbowSaw();
     }
     else if (Mode == 5) {
-        brightnessStatic();
-        rainbowPyramid();
-    }
-    else if (Mode == 6) {
         randomOnce = 0;
         setRandomBrightsOnce();
-        rainbowPyramid();
+        rainbowStairz();
+    }    
+    else if (Mode == 6) {
+        setRandomBrights();
+        rainbowSaw();
     }
     else if (Mode == 7) {
         setRandomBrights();
-        rainbowPyramid();
+        rainbowStairz();
     }
     else;
 
@@ -130,13 +130,16 @@ void rainbowSaw(){
 
 }
 
-void rainbowPyramid(){
+void rainbowStairz(){
 
     int i;
     int x;
 
+if (fadeUp == true)
+  {
     for(i=0;i<6;i++) 
     {
+        Serial.println("Pyramid Counting Up");
         quadNumber(i);
 
         if (buttonBreak == true) 
@@ -149,32 +152,35 @@ void rainbowPyramid(){
             //clicked = false;
             break;
 
-            }
-            else if (buttonBreak == false)
+        }
+        else if (buttonBreak == false)
+        {
+            for(x=0;x<4;x++) 
             {
-                for(x=0;x<4;x++) 
-                        {
+                if (buttonBreak == true) 
+                {
 
-                            if (buttonBreak == true) 
-                            {
+                    Serial.println("I Broke because showQuad button was clicked");
+                    breakdelayA0 = true;
+                    breakdelayA1 = true;
+                    breakdelayA2 = true;
+                    //clicked = false;
+                    break;
 
-                                Serial.println("I Broke because showQuad button was clicked");
-                                breakdelayA0 = true;
-                                breakdelayA1 = true;
-                                breakdelayA2 = true;
-                                //clicked = false;
-                                break;
+                }
+                else if (buttonBreak == false)
+                {
+                    brightnessNumber(x);
+                    Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
 
-                            }
-                                else if (buttonBreak == false)
-                                {
-                                    brightnessNumber(x);
-                                    Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
-
-                                    showQuad(); 
-                                } 
-                        }
+                    showQuad(); 
+                } 
             }
+        }
+        else;
+
+        fadeUp = false;
+
         if (buttonBreak == true) 
         {
             break;
@@ -182,9 +188,14 @@ void rainbowPyramid(){
         }
         else;
     }
+    
+  }  
 
-    for(i=6;i<0;i++) 
+else if (fadeUp == false)
+  {
+    for(i=6;i>0;i--) 
     {
+        Serial.println("Pyramid Counting Down");
         quadNumber(i);
 
         if (buttonBreak == true) 
@@ -198,36 +209,37 @@ void rainbowPyramid(){
             break;
 
             }
-            else if (buttonBreak == false)
+        else if (buttonBreak == false)
+        {
+            checkButtons();
+
+            for(x=4;x>=0;x--) 
             {
                 checkButtons();
 
-                for(x=4;x<0;x++) 
-                        {
-                            checkButtons();
+                if (buttonBreak == true) 
+                {
 
-                            if (buttonBreak == true) 
-                            {
+                    Serial.println("I Broke because showQuad button was clicked");
+                    breakdelayA0 = true;
+                    breakdelayA1 = true;
+                    breakdelayA2 = true;
+                    //clicked = false;
+                    break;
 
-                                Serial.println("I Broke because showQuad button was clicked");
-                                breakdelayA0 = true;
-                                breakdelayA1 = true;
-                                breakdelayA2 = true;
-                                //clicked = false;
-                                break;
+                }
+                    else if (buttonBreak == false)
+                    {
+                        checkButtons();
 
-                            }
-                                else if (buttonBreak == false)
-                                {
-                                    checkButtons();
+                        brightnessNumber(x);
+                        Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
 
-                                    brightnessNumber(x);
-                                    Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
-
-                                    showQuad(); 
-                                } 
-                        }
+                        showQuad(); 
+                    } 
             }
+            fadeUp = true;
+        }
         if (buttonBreak == true) 
         {
             break;
@@ -235,6 +247,8 @@ void rainbowPyramid(){
         }
         else;
     }    
+  }
+  else;
 
 }
 
@@ -392,8 +406,8 @@ void brightnessNumber(int brightnessCount)
         InnerBrightReductionQuad = map(randomBright0, 0, 255, 0, 190);
         MaxBrightReductionQuad = map(randomBright0, 0, 255, 0, MaxBright);
 
-        Serial.println("brightnessCount variable: " + String(brightnessCount));
-        Serial.println("brightnessCount: 0");
+        //Serial.println("brightnessCount variable: " + String(brightnessCount));
+        //Serial.println("brightnessCount: 0");
     }
     else if (brightnessCount == 1)
     {
@@ -402,8 +416,8 @@ void brightnessNumber(int brightnessCount)
         InnerBrightReductionQuad = map(randomBright1, 0, 255, 0, 190);
         MaxBrightReductionQuad = map(randomBright1, 0, 255, 0, MaxBright);
 
-        Serial.println("brightnessCount variable: " + String(brightnessCount));
-        Serial.println("brightnessCount: 1");
+        //Serial.println("brightnessCount variable: " + String(brightnessCount));
+        //Serial.println("brightnessCount: 1");
     }
     else if (brightnessCount == 2)
     {
@@ -412,8 +426,8 @@ void brightnessNumber(int brightnessCount)
         InnerBrightReductionQuad = map(randomBright2, 0, 255, 0, 190);
         MaxBrightReductionQuad = map(randomBright2, 0, 255, 0, MaxBright);
 
-        Serial.println("brightnessCount variable: " + String(brightnessCount));
-        Serial.println("brightnessCount: 2");
+        //Serial.println("brightnessCount variable: " + String(brightnessCount));
+        //Serial.println("brightnessCount: 2");
     }
     else if (brightnessCount == 3)
     {
@@ -422,8 +436,8 @@ void brightnessNumber(int brightnessCount)
         InnerBrightReductionQuad = map(randomBright3, 0, 255, 0, 190);
         MaxBrightReductionQuad = map(randomBright3, 0, 255, 0, MaxBright);
 
-        Serial.println("brightnessCount variable: " + String(brightnessCount));
-        Serial.println("brightnessCount: 3");
+        //Serial.println("brightnessCount variable: " + String(brightnessCount));
+        //Serial.println("brightnessCount: 3");
     }
     else;
 }

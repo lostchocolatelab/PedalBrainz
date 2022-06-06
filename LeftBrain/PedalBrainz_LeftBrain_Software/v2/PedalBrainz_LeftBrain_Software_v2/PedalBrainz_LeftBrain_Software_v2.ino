@@ -537,8 +537,8 @@ void setup() {
   // Bank = 1;
   // Mode = 0;
 
-  Bank = 1;
-  Mode = 0;
+  Bank = 3;
+  Mode = 3;
 
   speedMinimum = 10000;
   durationMaximum = 10000;
