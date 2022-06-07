@@ -36,29 +36,29 @@ void RainbowQuad() {
 
     if (Mode == 2) {
         brightnessStatic();  //  Quad Brightness is the same (static) values for 0,1,2,3
-        rainbowSawz2();
+        rainbowStairz2();
     }
     else if (Mode == 3) {
-        brightnessStatic();  //  Quad Brightness is the same (static) values for 0,1,2,3
+        randomOnce = 0;
+        setRandomBrightsOnce();
         rainbowStairz2();
     }
     else if (Mode == 4) {
-        randomOnce = 0;
-        setRandomBrightsOnce();
-        rainbowSawz();
+        setRandomBrights();
+        rainbowStairz2();
     }
     else if (Mode == 5) {
-        randomOnce = 0;
-        setRandomBrightsOnce();
-        rainbowStairz();
+        brightnessStatic();  //  Quad Brightness is the same (static) values for 0,1,2,3
+        rainbowSawz2();
     }    
     else if (Mode == 6) {
-        setRandomBrights();
-        rainbowSawz();
+        randomOnce = 0;
+        setRandomBrightsOnce();
+        rainbowSawz2();
     }
     else if (Mode == 7) {
         setRandomBrights();
-        rainbowStairz();
+        rainbowSawz2();
     }
     else;
 
@@ -231,7 +231,8 @@ void rainbowSawz2(){
             {
                     sawzDirection = mapfloat(analogRead(A2), 0, 1024, 0, 200);
 
-                    if (sawzDirection <= 100)
+
+                    if (sawzDirection <= 100)  //  Stairz Down
                     {
                         for(x=4;x>=0;x--) 
                         {
@@ -259,8 +260,9 @@ void rainbowSawz2(){
                             } 
                             else;
                         }
+                        delayA1(fullDelay);
                     }
-                    else if (sawzDirection >= 101)
+                    else if (sawzDirection >= 101)  //  Stairz Up
                     {
                         for(x=0;x<4;x++) 
                         {
@@ -287,6 +289,7 @@ void rainbowSawz2(){
                             } 
                             else;
                         }
+                        delayA1(fullDelay);
                     }
                     else;
             }
@@ -305,122 +308,122 @@ void rainbowStairz(){
     int i;
     int x;
 
-if (fadeUp == true)
-  {
-    for(i=0;i<6;i++) 
-    {
-        Serial.println("Pyramid Counting Up");
-        quadNumber(i);
-
-        if (buttonBreak == true) 
+    if (fadeUp == true)
+      {
+        for(i=0;i<6;i++) 
         {
+            Serial.println("Pyramid Counting Up");
+            quadNumber(i);
 
-            Serial.println("I Broke because quadNumber button was clicked");
-            breakdelayA0 = true;
-            breakdelayA1 = true;
-            breakdelayA2 = true;
-            //clicked = false;
-            break;
-
-        }
-        else if (buttonBreak == false)
-        {
-            for(x=0;x<4;x++) 
+            if (buttonBreak == true) 
             {
-                if (buttonBreak == true) 
-                {
 
-                    Serial.println("I Broke because showQuad button was clicked");
-                    breakdelayA0 = true;
-                    breakdelayA1 = true;
-                    breakdelayA2 = true;
-                    //clicked = false;
-                    break;
+                Serial.println("I Broke because quadNumber button was clicked");
+                breakdelayA0 = true;
+                breakdelayA1 = true;
+                breakdelayA2 = true;
+                //clicked = false;
+                break;
+
+            }
+            else if (buttonBreak == false)
+            {
+                for(x=0;x<4;x++) 
+                {
+                    if (buttonBreak == true) 
+                    {
+
+                        Serial.println("I Broke because showQuad button was clicked");
+                        breakdelayA0 = true;
+                        breakdelayA1 = true;
+                        breakdelayA2 = true;
+                        //clicked = false;
+                        break;
+
+                    }
+                    else if (buttonBreak == false)
+                    {
+                        brightnessNumber(x);
+                        Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
+
+                        showQuad(); 
+                    } 
+                    else;
+                }
+            }
+            else;
+
+            fadeUp = false;
+
+            if (buttonBreak == true) 
+            {
+                break;
+                buttonBreak == false;
+            }
+            else;
+        }
+        
+      }  
+
+    else if (fadeUp == false)
+      {
+        for(i=6;i>0;i--) 
+        {
+            Serial.println("Pyramid Counting Down");
+            quadNumber(i);
+
+            if (buttonBreak == true) 
+            {
+
+                Serial.println("I Broke because quadNumber button was clicked");
+                breakdelayA0 = true;
+                breakdelayA1 = true;
+                breakdelayA2 = true;
+                //clicked = false;
+                break;
 
                 }
-                else if (buttonBreak == false)
-                {
-                    brightnessNumber(x);
-                    Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
-
-                    showQuad(); 
-                } 
-                else;
-            }
-        }
-        else;
-
-        fadeUp = false;
-
-        if (buttonBreak == true) 
-        {
-            break;
-            buttonBreak == false;
-        }
-        else;
-    }
-    
-  }  
-
-else if (fadeUp == false)
-  {
-    for(i=6;i>0;i--) 
-    {
-        Serial.println("Pyramid Counting Down");
-        quadNumber(i);
-
-        if (buttonBreak == true) 
-        {
-
-            Serial.println("I Broke because quadNumber button was clicked");
-            breakdelayA0 = true;
-            breakdelayA1 = true;
-            breakdelayA2 = true;
-            //clicked = false;
-            break;
-
-            }
-        else if (buttonBreak == false)
-        {
-            checkButtons();
-
-            for(x=4;x>=0;x--) 
+            else if (buttonBreak == false)
             {
                 checkButtons();
 
-                if (buttonBreak == true) 
-                {
-
-                    Serial.println("I Broke because showQuad button was clicked");
-                    breakdelayA0 = true;
-                    breakdelayA1 = true;
-                    breakdelayA2 = true;
-                    //clicked = false;
-                    break;
-
-                }
-                else if (buttonBreak == false)
+                for(x=4;x>=0;x--) 
                 {
                     checkButtons();
 
-                    brightnessNumber(x);
-                    Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
+                    if (buttonBreak == true) 
+                    {
 
-                    showQuad(); 
-                } 
-                else;
+                        Serial.println("I Broke because showQuad button was clicked");
+                        breakdelayA0 = true;
+                        breakdelayA1 = true;
+                        breakdelayA2 = true;
+                        //clicked = false;
+                        break;
+
+                    }
+                    else if (buttonBreak == false)
+                    {
+                        checkButtons();
+
+                        brightnessNumber(x);
+                        Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
+
+                        showQuad(); 
+                    } 
+                    else;
+                }
+                fadeUp = true;
             }
-            fadeUp = true;
-        }
-        if (buttonBreak == true) 
-        {
-            break;
-            buttonBreak == false;
-        }
-        else;
-    }    
-  }
-  else;
+            if (buttonBreak == true) 
+            {
+                break;
+                buttonBreak == false;
+            }
+            else;
+        }    
+      }
+      else;
 
 }
 
@@ -448,7 +451,7 @@ void rainbowStairz2(){
             }
             else if (buttonBreak == false)
             {
-                for(x=0;x<4;x++) 
+                for(x=0;x<4;x++) //  Stairz Up
                 {
 
                     if (buttonBreak == true) 
@@ -473,7 +476,11 @@ void rainbowStairz2(){
                     } 
                     else;
                 }
-                for(x=4;x>=0;x--) 
+
+                fullDelay = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+                delayA1(fullDelay);
+
+                for(x=4;x>=0;x--)  //  Stairz Down
                 {
                     checkButtons();
 
@@ -506,6 +513,8 @@ void rainbowStairz2(){
             buttonBreak == false;
         }
         else;
+
+        delayA2(darkDelay);
     }
 
 }
@@ -574,10 +583,10 @@ void quadNumber(int quadStep)
     else;
 
     // Delay the change to the next color by the amount of A0
-    delayA0(fadeSpeed);
+    //delayA0(fadeSpeed);
 
     // Add an amount of darkness by the amount of A2
-    darkDelayBetwixtColors();
+    //darkDelayBetwixtColors();
 }
 
 void showQuad()
@@ -595,64 +604,64 @@ void showQuad()
         showLEDS();
 
         // Delay the change to the next brightness by the amount of A1
-        delayA1(fullDelay);
+        delayA0(fadeSpeed);
 
         //Serial.println("Full Delay Quad: " + String(fullDelay));
 }
 
 
 
-void quadBrightnessAmount(int quadBrightnessNumber)
-{
+// void quadBrightnessAmount(int quadBrightnessNumber)
+// {
 
-    checkButtons();
+//     checkButtons();
 
-    if (quadBrightnessNumber = 0)
-    {
+//     if (quadBrightnessNumber = 0)
+//     {
 
-        // Set the brightness
-        pixel.setBrightness(InnerBrightReductionQuad0);
-        inner.setBrightness(InnerBrightReductionQuad0);
-        strip.setBrightness(MaxBrightReductionQuad0);
-        FastLED.setBrightness(MaxBrightReductionQuad0);
-    }
-    else if (quadBrightnessNumber = 1)
-    {
-        // Set the brightness
-        pixel.setBrightness(InnerBrightReductionQuad1);
-        inner.setBrightness(InnerBrightReductionQuad1);
-        strip.setBrightness(MaxBrightReductionQuad1);
-        FastLED.setBrightness(MaxBrightReductionQuad1);
-    }
-    else if (quadBrightnessNumber = 2)
-    {
-        // Set the brightness
-        pixel.setBrightness(InnerBrightReductionQuad2);
-        inner.setBrightness(InnerBrightReductionQuad2);
-        strip.setBrightness(MaxBrightReductionQuad2);
-        FastLED.setBrightness(MaxBrightReductionQuad2);
-    }
-    else if (quadBrightnessNumber = 3)
-    {
-        // Set the brightness
-        pixel.setBrightness(InnerBrightReductionQuad3);
-        inner.setBrightness(InnerBrightReductionQuad3);
-        strip.setBrightness(MaxBrightReductionQuad3);
-        FastLED.setBrightness(MaxBrightReductionQuad3);
-    }
-    else;
+//         // Set the brightness
+//         pixel.setBrightness(InnerBrightReductionQuad0);
+//         inner.setBrightness(InnerBrightReductionQuad0);
+//         strip.setBrightness(MaxBrightReductionQuad0);
+//         FastLED.setBrightness(MaxBrightReductionQuad0);
+//     }
+//     else if (quadBrightnessNumber = 1)
+//     {
+//         // Set the brightness
+//         pixel.setBrightness(InnerBrightReductionQuad1);
+//         inner.setBrightness(InnerBrightReductionQuad1);
+//         strip.setBrightness(MaxBrightReductionQuad1);
+//         FastLED.setBrightness(MaxBrightReductionQuad1);
+//     }
+//     else if (quadBrightnessNumber = 2)
+//     {
+//         // Set the brightness
+//         pixel.setBrightness(InnerBrightReductionQuad2);
+//         inner.setBrightness(InnerBrightReductionQuad2);
+//         strip.setBrightness(MaxBrightReductionQuad2);
+//         FastLED.setBrightness(MaxBrightReductionQuad2);
+//     }
+//     else if (quadBrightnessNumber = 3)
+//     {
+//         // Set the brightness
+//         pixel.setBrightness(InnerBrightReductionQuad3);
+//         inner.setBrightness(InnerBrightReductionQuad3);
+//         strip.setBrightness(MaxBrightReductionQuad3);
+//         FastLED.setBrightness(MaxBrightReductionQuad3);
+//     }
+//     else;
 
-    // Show the LEDS after the Brightness values have been set
-    showLEDS();
+//     // Show the LEDS after the Brightness values have been set
+//     showLEDS();
 
-    // Delay the change to the next brightness by the amount of A1
-    delayA1(fullDelay);
+//     // Delay the change to the next brightness by the amount of A1
+//     delayA2(darkDelay);
 
-    //Serial.println("Full Delay 1: " + String(fullDelay));
-    LEDBrightness = pixel.getBrightness();
-    Serial.println("Setting the quadBrightnessAmount: " + String(LEDBrightness));
+//     //Serial.println("Full Delay 1: " + String(fullDelay));
+//     LEDBrightness = pixel.getBrightness();
+//     Serial.println("Setting the quadBrightnessAmount: " + String(LEDBrightness));
 
-}
+// }
 
 void brightnessNumber(int brightnessCount)
 {
@@ -803,22 +812,24 @@ void darkDelayBetwixtColors() {
     
     //darkLEDS();
 
-    // Make the pixel dark
-    /*FastLED.setBrightness(0);
-    for(int p=0; p<strip.numPixels(); p++) {       // For each pixel in strip...
-    strip.setPixelColor(p, 0,0,0);
-    }
-    strip.show();
+    // // Make the pixel dark
+    // FastLED.setBrightness(0);
+    // for(int p=0; p<strip.numPixels(); p++) {       // For each pixel in strip...
+    // strip.setPixelColor(p, 0,0,0);
+    // }
+    // strip.show();
 
-    pixel.setPixelColor(0, 0,0,0);
-    pixel.setBrightness(0);
-    pixel.show();
+    // pixel.setPixelColor(0, 0,0,0);
+    // pixel.setBrightness(0);
+    // pixel.show();
 
-    inner.setPixelColor(0, 0,0,0);
-    inner.setBrightness(0);
-    inner.show();*/
+    // inner.setPixelColor(0, 0,0,0);
+    // inner.setBrightness(0);
+    // inner.show();
 
-    // Delay by the amount of A2 - Remove the following comment to turn the led off between each color
-    //delayA2(darkDelay);
+    // // Delay by the amount of A2 - Remove the following comment to turn the led off between each color
+    // delayA2(darkDelay);
+
+
 
 }
