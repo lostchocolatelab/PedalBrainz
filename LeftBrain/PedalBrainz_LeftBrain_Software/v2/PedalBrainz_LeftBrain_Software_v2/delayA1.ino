@@ -339,6 +339,7 @@ void delayA1(int count)
 
         mapScaledA1();
         fullDelay = mapfloat(scaledA1, 0, 2300, (durationMaximum*timeMultiplier), 0);
+        //fullDelay = mapfloat(analogRead(A1), 0, 1024, (durationMaximum*timeMultiplier), 0);
       }
       else if (Mode == 3) {
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
