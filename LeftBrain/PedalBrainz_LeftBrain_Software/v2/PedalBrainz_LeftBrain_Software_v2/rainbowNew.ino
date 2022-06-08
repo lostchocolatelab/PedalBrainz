@@ -58,7 +58,7 @@ uint32_t hsv2rgb(int32_t h, uint8_t s, uint8_t v, boolean gc=false) {
     
                 
                 v1 = map(analogRead(A1), 0, 1024, 0, 255);
-                s2 = map(analogRead(A2), 0, 1024, 0, 255);
+                s2 = map(analogRead(A2), 0, 1024, 255, 0);
                 //strip.setBrightness(MaxBrightReduction);
                 
          }

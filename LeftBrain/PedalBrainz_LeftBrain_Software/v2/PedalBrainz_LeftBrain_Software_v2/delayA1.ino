@@ -39,13 +39,13 @@ void delayA1(int count)
 
     if (Mode == 2)
     {
-      valueA1 = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+      valueA1 = map(analogRead(A1), 0, 1024, (durationMaximum*timeMultiplier), 0);
       fullDelay = valueA1;
     }
     else if (Mode == 3)
     {
       delayValueA1 = map(analogRead(A0), 0, 1024, 5000, 100);
-      valueA1 = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+      valueA1 = map(analogRead(A1), 0, 1024, (durationMaximum*timeMultiplier), 0);
       randomAmountA1 = random(0, delayValueA1);
       fullDelay = valueA1 + randomAmountA1;
 
@@ -104,13 +104,13 @@ void delayA1(int count)
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
         //Serial.println("Mode 1 delayValueA1: " + String(delayValueA1));
 
-        valueA1 = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+        valueA1 = map(analogRead(A1), 0, 1024, (durationMaximum*timeMultiplier), 0);
         fullDelay = valueA1;
 
       }
       else if (Mode == 3) {
 
-        valueA1 = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+        valueA1 = map(analogRead(A1), 0, 1024, (durationMaximum*timeMultiplier), 0);
         delayValueA1 = map(analogRead(A0), 0, 1024, 10000, 400);
         fullDelay = valueA1 + randomAmountA1;
         //Serial.println("Mode 3 fullDelay Random: " + String(randomAmountA1));
@@ -189,13 +189,13 @@ void delayA1(int count)
 
       if (Mode == 1) {
         
-        fullDelay = mapfloat(analogRead(A1), 0, 1024, 0, speedMinimum/2);
+        fullDelay = mapfloat(analogRead(A1), 0, 1024, (durationMaximum*timeMultiplier)/2, 0);
 
       }
       else if (Mode == 2) {
 
         delayValueA1 = map(analogRead(A0), 0, 1024, 50, 5);
-        valueA1 = map(analogRead(A1), 0, 1024, 100, durationMaximum);
+        valueA1 = map(analogRead(A1), 0, 1024, (durationMaximum*timeMultiplier), 100);
         randomAmountA1 = random(0, (delayValueA1*valueA1));
         //fullDelay = valueA1 + randomAmountA1;
         fullDelay = randomAmountA1;
@@ -224,7 +224,7 @@ void delayA1(int count)
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
-        valueA1 = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+        valueA1 = map(analogRead(A1), 0, 1024, (durationMaximum*timeMultiplier), 0);
         fullDelay = valueA1;
       }
       else if (Mode == 6) {
@@ -232,7 +232,7 @@ void delayA1(int count)
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
         delayValueA1 = map(analogRead(A0), 0, 1024, 50, 5);
-        valueA1 = map(analogRead(A1), 0, 1024, 100, durationMaximum);
+        valueA1 = map(analogRead(A1), 0, 1024, (durationMaximum*timeMultiplier), 100);
         randomAmountA1 = random(0, (delayValueA1*valueA1));
         //fullDelay = valueA1 + randomAmountA1;
         fullDelay = randomAmountA1;
@@ -242,7 +242,7 @@ void delayA1(int count)
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
-        valueA1 = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+        valueA1 = map(analogRead(A1), 0, 1024, (durationMaximum*timeMultiplier), 0);
         fullDelay = valueA1;
       }
       else if (Mode == 8) {
@@ -250,7 +250,7 @@ void delayA1(int count)
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
         delayValueA1 = map(analogRead(A0), 0, 1024, 50, 5);
-        valueA1 = map(analogRead(A1), 0, 1024, 100, durationMaximum);
+        valueA1 = map(analogRead(A1), 0, 1024, (durationMaximum*timeMultiplier), 100);
         randomAmountA1 = random(0, (delayValueA1*valueA1));
         //fullDelay = valueA1 + randomAmountA1;
         fullDelay = randomAmountA1;
@@ -259,7 +259,7 @@ void delayA1(int count)
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
-        valueA1 = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+        valueA1 = map(analogRead(A1), 0, 1024, (durationMaximum*timeMultiplier), 0);
         fullDelay = valueA1;
       }
       else if (Mode == 10) {
@@ -337,56 +337,61 @@ void delayA1(int count)
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
-        fullDelay = map(analogRead(A1), 0, 1024, 0, durationMaximum);
-
+        mapScaledA1();
+        fullDelay = mapfloat(scaledA1, 0, 2300, (durationMaximum*timeMultiplier), 0);
       }
       else if (Mode == 3) {
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
-        fullDelay = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+        mapScaledA1();
+        fullDelay = mapfloat(scaledA1, 0, 2300, (durationMaximum*timeMultiplier), 0);
       }
       else if (Mode == 4) {
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
-        fullDelay = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+        mapScaledA1();
+        fullDelay = mapfloat(scaledA1, 0, 2300, (durationMaximum*timeMultiplier), 0);
       }
       else if (Mode == 5) {
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
-        fullDelay = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+        mapScaledA1();
+        fullDelay = mapfloat(scaledA1, 0, 2300, (durationMaximum*timeMultiplier), 0);
       }
       else if (Mode == 6) {
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
-        fullDelay = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+        mapScaledA1();
+        fullDelay = mapfloat(scaledA1, 0, 2300, (durationMaximum*timeMultiplier), 0);
       }
       else if (Mode == 7) {
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
-        fullDelay = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+        mapScaledA1();
+        fullDelay = mapfloat(scaledA1, 0, 2300, (durationMaximum*timeMultiplier), 0);
       }
       else if (Mode == 8) {
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
-        fullDelay = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+        fullDelay = map(analogRead(A1), 0, 1024, (durationMaximum*timeMultiplier), 0);
       }
       else if (Mode == 9) {
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
-        fullDelay = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+        fullDelay = map(analogRead(A1), 0, 1024, (durationMaximum*timeMultiplier), 0);
       }
       else if (Mode == 10) {
         //fullDelay = map(analogRead(A1), 0, 1024, speedMinimum, 100);         // Linear Potentiometer Value
         //Serial.println("Mode 1 fullDelay: " + String(fullDelay));
 
-        fullDelay = map(analogRead(A1), 0, 1024, 0, durationMaximum);
+        fullDelay = map(analogRead(A1), 0, 1024, (durationMaximum*timeMultiplier), 0);
       }
       else {
         fullDelay = 100;

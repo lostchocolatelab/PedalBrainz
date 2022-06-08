@@ -104,7 +104,7 @@ void mountainSnack() {
     //Serial.println("newCalibrate :" + String(newCalibrate1));
   }
 
-  valueA2 = analogRead(A2); // Increases Chance for Snack
+  valueA2 = map(analogRead(A2), 0, 1024, 1024, 0); // Increases Chance for Snack
   valueA1 = analogRead(A1); // Amount of Randomness to the Cycle
   
   speedControl = float(valueA0) / 256; // speed control bit shifted and then goes from 0-1
@@ -257,7 +257,7 @@ void snackDecision(){
                
         snackChance = 1024;
                    
-        snackLength = map(analogRead(A2), 0, 1024, 0, 10000); // Control the amount of Random Snack
+        snackLength = map(analogRead(A2), 0, 1024, (durationMaximum*timeMultiplier), 0); // Control the amount of Random Snack
         //snackLength = int(targetSpeed/3);
         lastMillis += snackLength;
         snackRandom = 1024;

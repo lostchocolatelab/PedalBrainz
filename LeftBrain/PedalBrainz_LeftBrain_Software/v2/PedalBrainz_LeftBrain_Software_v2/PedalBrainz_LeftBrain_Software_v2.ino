@@ -537,8 +537,8 @@ void setup() {
   // Bank = 1;
   // Mode = 0;
 
-  Bank = 3;
-  Mode = 2;
+  Bank = 1;
+  Mode = 0;
 
   timeMultiplier = 1;
 
