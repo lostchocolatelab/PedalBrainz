@@ -122,7 +122,7 @@ else if (Bank == 3)
 {
   if ((Mode >= 2) && (Mode <= 10))
   {
-      averageLEDSPlot();
+      //averageLEDSPlot();
       //Print some things
       // Serial.print(",");
       // Serial.print(avgLight);

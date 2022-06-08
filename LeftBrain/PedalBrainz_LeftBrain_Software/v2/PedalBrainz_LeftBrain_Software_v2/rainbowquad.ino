@@ -66,145 +66,6 @@ void RainbowQuad() {
 
 }
 
-void rainbowSawz()
-{
-    checkButtons();
-
-    sawzDirection = mapfloat(analogRead(A2), 0, 1024, 0, 200);
-
-    if (sawzDirection <= 100)
-    {
-        rainbowSawzUp();
-    }
-    else if (sawzDirection >= 101)
-    {
-        rainbowSawzDown();
-    }
-    else;
-
-}
-
-
-void rainbowSawzUp()
-{
-
-    int i;
-    int x;
-
-    checkButtons();
-
-    for(i=0;i<6;i++) 
-    {
-        quadNumber(i);
-
-        if (buttonBreak == true) 
-        {
-
-            Serial.println("I Broke because quadNumber button was clicked");
-            breakdelayA0 = true;
-            breakdelayA1 = true;
-            breakdelayA2 = true;
-            //clicked = false;
-            break;
-
-            }
-            else if (buttonBreak == false)
-            {
-                for(x=0;x<4;x++) 
-                        {
-
-                            if (buttonBreak == true) 
-                            {
-
-                                Serial.println("I Broke because showQuad button was clicked");
-                                breakdelayA0 = true;
-                                breakdelayA1 = true;
-                                breakdelayA2 = true;
-                                //clicked = false;
-                                break;
-
-                            }
-                                else if (buttonBreak == false)
-                                {
-                                    sawzDirection = mapfloat(analogRead(A2), 0, 1024, 0, 200);
-
-                                    brightnessNumber(x);
-                                    Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
-
-                                    showQuad(); 
-                                } 
-                        }
-            }
-        if (buttonBreak == true) 
-        {
-            break;
-            buttonBreak == false;
-        }
-        else;
-    }
-
-}
-
-void rainbowSawzDown()
-{
-
-    int i;
-    int x;
-
-    checkButtons();
-
-    for(i=6;i>0;i--) 
-    {
-        quadNumber(i);
-
-        if (buttonBreak == true) 
-        {
-
-            Serial.println("I Broke because quadNumber button was clicked");
-            breakdelayA0 = true;
-            breakdelayA1 = true;
-            breakdelayA2 = true;
-            //clicked = false;
-            break;
-
-            }
-            else if (buttonBreak == false)
-            {
-                for(x=4;x>=0;x--) 
-                        {
-
-                            if (buttonBreak == true) 
-                            {
-
-                                Serial.println("I Broke because showQuad button was clicked");
-                                breakdelayA0 = true;
-                                breakdelayA1 = true;
-                                breakdelayA2 = true;
-                                //clicked = false;
-                                break;
-
-                            }
-                                else if (buttonBreak == false)
-                                {
-                                    sawzDirection = mapfloat(analogRead(A2), 0, 1024, 0, 200);
-
-                                    brightnessNumber(x);
-                                    Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
-
-                                    showQuad(); 
-                                } 
-                        }
-            }
-        if (buttonBreak == true) 
-        {
-            break;
-            buttonBreak == false;
-        }
-        else;
-    }
-
-}
-
 void rainbowSawz2(){
 
   int i;
@@ -254,13 +115,19 @@ void rainbowSawz2(){
                                 checkButtons();
 
                                 brightnessNumber(x);
-                                Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
+                                //Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
 
                                 showQuad(); 
+
+                                if (x == 0 || x == 3)
+                                {
+                                    delayA1(fullDelay);
+                                }
+                                else;
+
                             } 
                             else;
                         }
-                        delayA1(fullDelay);
                     }
                     else if (sawzDirection >= 101)  //  Stairz Up
                     {
@@ -283,13 +150,18 @@ void rainbowSawz2(){
                                 sawzDirection = mapfloat(analogRead(A2), 0, 1024, 0, 200);
 
                                 brightnessNumber(x);
-                                Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
+                                //Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
 
                                 showQuad(); 
+
+                                if (x == 0 || x == 3)
+                                {
+                                    delayA1(fullDelay);
+                                }
+                                else;
                             } 
                             else;
                         }
-                        delayA1(fullDelay);
                     }
                     else;
             }
@@ -299,6 +171,100 @@ void rainbowSawz2(){
             buttonBreak == false;
         }
         else;
+    }
+
+}
+
+void rainbowStairz2(){
+
+  int i;
+    int x;
+
+    checkButtons();
+
+    for(i=0;i<6;i++) 
+    {
+        quadNumber(i);
+
+        if (buttonBreak == true) 
+        {
+
+            Serial.println("I Broke because quadNumber button was clicked");
+            breakdelayA0 = true;
+            breakdelayA1 = true;
+            breakdelayA2 = true;
+            //clicked = false;
+            break;
+
+            }
+            else if (buttonBreak == false)
+            {
+                for(x=0;x<4;x++) //  Stairz Up
+                {
+
+                    if (buttonBreak == true) 
+                    {
+
+                        Serial.println("I Broke because showQuad button was clicked");
+                        breakdelayA0 = true;
+                        breakdelayA1 = true;
+                        breakdelayA2 = true;
+                        //clicked = false;
+                        break;
+
+                    }
+                    else if (buttonBreak == false)
+                    {
+                        sawzDirection = mapfloat(analogRead(A2), 0, 1024, 0, 200);
+
+                        brightnessNumber(x);
+                        //Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
+
+                        showQuad(); 
+                    } 
+                    else;
+                }
+
+                delayA1(fullDelay);
+
+                for(x=4;x>=0;x--)  //  Stairz Down
+                {
+                    checkButtons();
+
+                    if (buttonBreak == true) 
+                    {
+
+                        Serial.println("I Broke because showQuad button was clicked");
+                        breakdelayA0 = true;
+                        breakdelayA1 = true;
+                        breakdelayA2 = true;
+                        //clicked = false;
+                        break;
+
+                    }
+                    else if (buttonBreak == false)
+                    {
+                        checkButtons();
+
+                        brightnessNumber(x);
+                        //Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
+
+                        showQuad(); 
+                    } 
+                    else;                    
+                }
+                
+            }
+
+        delayA2(darkDelay);
+
+        if (buttonBreak == true) 
+        {
+            break;
+            buttonBreak == false;
+        }
+        else;
+
     }
 
 }
@@ -427,9 +393,28 @@ void rainbowStairz(){
 
 }
 
-void rainbowStairz2(){
+void rainbowSawz()
+{
+    checkButtons();
 
-  int i;
+    sawzDirection = mapfloat(analogRead(A2), 0, 1024, 0, 200);
+
+    if (sawzDirection <= 100)
+    {
+        rainbowSawzUp();
+    }
+    else if (sawzDirection >= 101)
+    {
+        rainbowSawzDown();
+    }
+    else;
+
+}
+
+void rainbowSawzUp()
+{
+
+    int i;
     int x;
 
     checkButtons();
@@ -451,61 +436,30 @@ void rainbowStairz2(){
             }
             else if (buttonBreak == false)
             {
-                for(x=0;x<4;x++) //  Stairz Up
-                {
+                for(x=0;x<4;x++) 
+                        {
 
-                    if (buttonBreak == true) 
-                    {
+                            if (buttonBreak == true) 
+                            {
 
-                        Serial.println("I Broke because showQuad button was clicked");
-                        breakdelayA0 = true;
-                        breakdelayA1 = true;
-                        breakdelayA2 = true;
-                        //clicked = false;
-                        break;
+                                Serial.println("I Broke because showQuad button was clicked");
+                                breakdelayA0 = true;
+                                breakdelayA1 = true;
+                                breakdelayA2 = true;
+                                //clicked = false;
+                                break;
 
-                    }
-                    else if (buttonBreak == false)
-                    {
-                        sawzDirection = mapfloat(analogRead(A2), 0, 1024, 0, 200);
+                            }
+                                else if (buttonBreak == false)
+                                {
+                                    sawzDirection = mapfloat(analogRead(A2), 0, 1024, 0, 200);
 
-                        brightnessNumber(x);
-                        Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
+                                    brightnessNumber(x);
+                                    Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
 
-                        showQuad(); 
-                    } 
-                    else;
-                }
-
-                fullDelay = map(analogRead(A1), 0, 1024, 0, durationMaximum);
-                delayA1(fullDelay);
-
-                for(x=4;x>=0;x--)  //  Stairz Down
-                {
-                    checkButtons();
-
-                    if (buttonBreak == true) 
-                    {
-
-                        Serial.println("I Broke because showQuad button was clicked");
-                        breakdelayA0 = true;
-                        breakdelayA1 = true;
-                        breakdelayA2 = true;
-                        //clicked = false;
-                        break;
-
-                    }
-                    else if (buttonBreak == false)
-                    {
-                        checkButtons();
-
-                        brightnessNumber(x);
-                        Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
-
-                        showQuad(); 
-                    } 
-                    else;
-                }
+                                    showQuad(); 
+                                } 
+                        }
             }
         if (buttonBreak == true) 
         {
@@ -513,8 +467,66 @@ void rainbowStairz2(){
             buttonBreak == false;
         }
         else;
+    }
 
-        delayA2(darkDelay);
+}
+
+void rainbowSawzDown()
+{
+
+    int i;
+    int x;
+
+    checkButtons();
+
+    for(i=6;i>0;i--) 
+    {
+        quadNumber(i);
+
+        if (buttonBreak == true) 
+        {
+
+            Serial.println("I Broke because quadNumber button was clicked");
+            breakdelayA0 = true;
+            breakdelayA1 = true;
+            breakdelayA2 = true;
+            //clicked = false;
+            break;
+
+            }
+            else if (buttonBreak == false)
+            {
+                for(x=4;x>=0;x--) 
+                        {
+
+                            if (buttonBreak == true) 
+                            {
+
+                                Serial.println("I Broke because showQuad button was clicked");
+                                breakdelayA0 = true;
+                                breakdelayA1 = true;
+                                breakdelayA2 = true;
+                                //clicked = false;
+                                break;
+
+                            }
+                                else if (buttonBreak == false)
+                                {
+                                    sawzDirection = mapfloat(analogRead(A2), 0, 1024, 0, 200);
+
+                                    brightnessNumber(x);
+                                    Serial.println("Setting the brightnessCount/ brightnessNumber: " + String(x));
+
+                                    showQuad(); 
+                                } 
+                        }
+            }
+        if (buttonBreak == true) 
+        {
+            break;
+            buttonBreak == false;
+        }
+        else;
     }
 
 }
@@ -594,7 +606,7 @@ void showQuad()
         checkButtons();
 
         LEDBrightness = pixel.getBrightness();
-        Serial.println("Setting the quadBrightnessAmount: " + String(LEDBrightness));
+        //Serial.println("Setting the quadBrightnessAmount: " + String(LEDBrightness));
 
         // Set the brightness
         pixel.setBrightness(InnerBrightReductionQuad);
@@ -801,7 +813,7 @@ void darkLEDSDelay() {
     }
     
 
-    delayA2(darkDelay);
+    //delayA2(darkDelay);
     //Serial.println("dark");
 
 }

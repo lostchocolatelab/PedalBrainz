@@ -168,32 +168,29 @@ void delayA2(int count)
 
       if (clicked == true) {
 
-      //Serial.println("I Broke delayA2 Mode" + String(Mode) + " because button was clicked");
+        //Serial.println("I Broke delayA2 Mode" + String(Mode) + " because button was clicked");
         clicked = false;
         breakdelayA0 = true;
         breakdelayA1 = true;
         breakdelayA2 = true;
         break;
-      //count = 1;
+        //count = 1;
         fadeSpeed = 0;
         fullDelay = 0;
         darkDelay = 0;
         randomAmount = 0;
         delayCountA2 = 0;
       }
-      else {
-
-      }
+      else;
 
       if (breakdelayA2 == true)
       {
-      //Serial.println("I Broke delayA2 Because A2 was true");
+        Serial.println("I Broke delayA2 Because A2 was true");
         breakdelayA2 = false;
         break;
-
       }
       else {
-
+        breakdelayA2 = false;
       }
 
       if (Mode == 1) {
@@ -314,11 +311,13 @@ void delayA2(int count)
         randomAmount = 0;
         delayCountA2 = 0;
       }
-      else if (breakdelayA2 == true)
+      else;
+
+      if (breakdelayA2 == true)
       {
         Serial.println("I Broke delayA2 Because A2 was true");
-        break;
         breakdelayA2 = false;
+        break;
       }
       else {
         breakdelayA2 = false;
@@ -346,17 +345,17 @@ void delayA2(int count)
       }
       else if (Mode == 5) {
 
-      darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
+      //darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
       //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
       else if (Mode == 6) {
 
-      darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
+      //darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
       //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
       else if (Mode == 7) {
 
-      darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
+      //darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
       //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
       else if (Mode == 8) {
@@ -411,32 +410,29 @@ void delayA2(int count)
 
       if (clicked == true) {
 
-      //Serial.println("I Broke delayA2 Mode" + String(Mode) + " because button was clicked");
+        //Serial.println("I Broke delayA2 Mode" + String(Mode) + " because button was clicked");
         clicked = false;
         breakdelayA0 = true;
         breakdelayA1 = true;
         breakdelayA2 = true;
         break;
-      //count = 1;
+        //count = 1;
         fadeSpeed = 0;
         fullDelay = 0;
         darkDelay = 0;
         randomAmount = 0;
         delayCountA2 = 0;
       }
-      else {
-
-      }
+      else;
 
       if (breakdelayA2 == true)
       {
-      //Serial.println("I Broke delayA2 Because A2 was true");
+        Serial.println("I Broke delayA2 Because A2 was true");
         breakdelayA2 = false;
         break;
-
       }
       else {
-
+        breakdelayA2 = false;
       }
 
       if (Mode == 1) {
@@ -517,32 +513,29 @@ void delayA2(int count)
 
       if (clicked == true) {
 
-      //Serial.println("I Broke delayA2 Mode" + String(Mode) + " because button was clicked");
+        //Serial.println("I Broke delayA2 Mode" + String(Mode) + " because button was clicked");
         clicked = false;
         breakdelayA0 = true;
         breakdelayA1 = true;
         breakdelayA2 = true;
         break;
-      //count = 1;
+        //count = 1;
         fadeSpeed = 0;
         fullDelay = 0;
         darkDelay = 0;
         randomAmount = 0;
         delayCountA2 = 0;
       }
-      else {
-
-      }
+      else;
 
       if (breakdelayA2 == true)
       {
-      //Serial.println("I Broke delayA2 Because A2 was true");
+        Serial.println("I Broke delayA2 Because A2 was true");
         breakdelayA2 = false;
         break;
-
       }
       else {
-
+        breakdelayA2 = false;
       }
 
   
@@ -579,32 +572,29 @@ void delayA2(int count)
 
       if (clicked == true) {
 
-      //Serial.println("I Broke delayA2 Mode" + String(Mode) + " because button was clicked");
+        //Serial.println("I Broke delayA2 Mode" + String(Mode) + " because button was clicked");
         clicked = false;
         breakdelayA0 = true;
         breakdelayA1 = true;
         breakdelayA2 = true;
         break;
-      //count = 1;
+        //count = 1;
         fadeSpeed = 0;
         fullDelay = 0;
         darkDelay = 0;
         randomAmount = 0;
         delayCountA2 = 0;
       }
-      else {
-
-      }
+      else;
 
       if (breakdelayA2 == true)
       {
-      //Serial.println("I Broke delayA2 Because A2 was true");
+        Serial.println("I Broke delayA2 Because A2 was true");
         breakdelayA2 = false;
         break;
-
       }
       else {
-
+        breakdelayA2 = false;
       }
 
       if (Mode == 1) {
