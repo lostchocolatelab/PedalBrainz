@@ -880,7 +880,9 @@ void delayA0(int count)
         fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum/ 10, 0);
         
         delay(.5);
-      
+        
+        attractorzPixel2();
+        showLEDS();
 
         //Serial.println("Bank - " + String(Bank) + " Mode - " + String(Mode) + " fadeSpeeed: " + String(fadeSpeed));
         //controlsMax();

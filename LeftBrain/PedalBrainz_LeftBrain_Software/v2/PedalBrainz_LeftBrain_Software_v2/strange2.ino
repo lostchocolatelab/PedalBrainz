@@ -36,12 +36,47 @@ void strangeAttractor2()
 
   if (plotterPrint == true)
   {
-    Serial.print(", X:");
-    Serial.print(x);
-    Serial.print(",Y:");
-    Serial.print(y);
-    Serial.print(",Z:");
-    Serial.println(z);
+    // Serial.print(",");
+    // Serial.print(scaledX);
+    // Serial.print(",");
+    // Serial.print(scaledY);
+    // Serial.print(",");
+    // Serial.print(scaledZ);  
+    // Serial.print(",");
+    // Serial.print(scaledXInner);  
+    // Serial.print(",");
+    // Serial.println(scaledInnerCombined); 
+
+    // Serial.print(",");
+    // Serial.print(x);
+    // Serial.print(",");
+    // Serial.print(y);
+    // Serial.print(",");
+    // Serial.println(z);  
+
+    // Serial.print(",");
+    // Serial.print(x);
+    Serial.print(",");
+    Serial.print(scaledX);  
+    Serial.print(",");
+    Serial.print(scaledXInner);  
+    Serial.print(",");
+    Serial.println(scaledInnerCombined);         
+
+    // Serial.print(",");
+    // Serial.print(scaledX);
+    // Serial.print(",");
+    // Serial.print(scaledY);
+    // Serial.print(",");
+    // Serial.println(scaledZ);     
+
+    // Serial.print(",");
+    // Serial.print(dx);
+    // Serial.print(",");
+    // Serial.print(dy);
+    // Serial.print(",");
+    // Serial.println(dz);      
+
   }
   else;
 
@@ -109,22 +144,37 @@ void attractorzIndicator()
 void attractorzIndicatorRoutine()
 {
 
+  attractorzIndicatorValue = mapfloat(analogRead(A2), 0, 1024, 0, 300);
+  showLEDS();
+
+  int constrainedBright;
+  int attractorzIndicatorBright;
+
   if (attractorzLEDType == 1)
   {
-      strip.setPixelColor(0, 255, 255, 255);
-      strip.show();
+      attractorzIndicatorBright = scaledX+255;
+      constrainedBright = constrain(attractorzIndicatorBright, 0, 255);
+      strip.setPixelColor(0, constrainedBright, constrainedBright, constrainedBright);
+      //strip.show();
+      showLEDS();
       //Serial.print("Single");
   }
   else if (attractorzLEDType == 2)
   {
-      strip.setPixelColor(1, 255, 255, 255);
-      strip.show();
+      attractorzIndicatorBright = scaledX+255;
+      constrainedBright = constrain(scaledX, 0, 255);
+      strip.setPixelColor(1, constrainedBright, constrainedBright, constrainedBright);
+      //strip.show();
+      showLEDS();
       //Serial.print("Double");    
   }
   else if (attractorzLEDType == 3)
   {
-      strip.setPixelColor(2, 255, 255, 255);
-      strip.show();
+      attractorzIndicatorBright = scaledX+255;
+      constrainedBright = constrain(scaledX, 0, 255);
+      strip.setPixelColor(2, constrainedBright, constrainedBright, constrainedBright);
+      //strip.show();
+      showLEDS();
       //Serial.print("Triple");
   }
   else;
@@ -140,25 +190,19 @@ void attractorzIndicatorRoutine()
 void attractorzPixel2()
 {
 
+    checkButtons();
+    pixelScaling();
+    attractorzIndicator();
 
     if (attractorzLEDType == 1)
     {
         for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
-          strip.setPixelColor(p, (scaledX), (scaledY), (scaledZ/5));
+          strip.setPixelColor(p, (scaledX)/8, (scaledY)/2, (scaledZ));
 
         }
-        //Single Output Scaled Inner XYZ
-        pixel.setPixelColor(0, (scaledInnerCombined), (0), (0));   
-        inner.setPixelColor(0, (scaledInnerCombined), (0), (0));  
-
-    Serial.print(",");
-    Serial.print(scaledX);
-    Serial.print(",");
-    Serial.print(scaledY);
-    Serial.print(",");
-    Serial.print(scaledZ);  
-    Serial.print(",");
-    Serial.println(scaledXInner);  
+        //Triple Output Scaled Inner XYZ
+        pixel.setPixelColor(0, (scaledInnerCombined), (scaledInnerCombined), (scaledInnerCombined));   
+        inner.setPixelColor(0, (scaledInnerCombined), (scaledInnerCombined), (scaledInnerCombined)); 
 
     }
     else if (attractorzLEDType == 2)
@@ -170,34 +214,18 @@ void attractorzPixel2()
         //Double Output Scaled Inner XYZ
         pixel.setPixelColor(0, (scaledInnerCombined), (0), (scaledInnerCombined));   
         inner.setPixelColor(0, (scaledInnerCombined), (0), (scaledInnerCombined)); 
-
-    Serial.print(",");
-    Serial.print(scaledX);
-    Serial.print(",");
-    Serial.print(scaledY);
-    Serial.print(",");
-    Serial.print(scaledZ);  
-    Serial.print(",");
-    Serial.println(scaledInnerCombined);            
+          
     }
     else if (attractorzLEDType == 3)
     {
+
         for (int p = 0; p < strip.numPixels(); p++) {   // For each pixel in strip...
-          strip.setPixelColor(p, (scaledX)/8, (scaledY)/2, (scaledZ));
+          strip.setPixelColor(p, (scaledX), (scaledY), (scaledZ/5));
 
         }
-        //Triple Output Scaled Inner XYZ
-        pixel.setPixelColor(0, (scaledInnerCombined), (scaledInnerCombined), (scaledInnerCombined));   
-        inner.setPixelColor(0, (scaledInnerCombined), (scaledInnerCombined), (scaledInnerCombined)); 
-
-    Serial.print(",");
-    Serial.print(scaledX);
-    Serial.print(",");
-    Serial.print(scaledY);
-    Serial.print(",");
-    Serial.print(scaledZ);  
-    Serial.print(",");
-    Serial.println(scaledInnerCombined);           
+        //Single Output Scaled Inner XYZ
+        pixel.setPixelColor(0, (scaledInnerCombined), (0), (0));   
+        inner.setPixelColor(0, (scaledInnerCombined), (0), (0));           
     }
     else;      
 
@@ -349,6 +377,9 @@ void attractorzPixel()
 
 void attractorzType()
 {
+  pixelScaling();
+  attractorzIndicator();
+
   if (Mode == 1)
   {
     
@@ -532,19 +563,17 @@ void thomasFunction() {
   y += dy;
   z += dz;
 
-  updateRange();
+  scaledX = mapfloat(x, -3.5, 4, 0, 255);
+  scaledY = mapfloat(y, -3.5, 4, 0, 255);
+  scaledZ = mapfloat(z, -3.5, 4, 0, 255);
+  scaledX = constrain(scaledX, 0, 255);
+  scaledY = constrain(scaledY, 0, 255);
+  scaledZ = constrain(scaledZ, 0, 255);
+
+  updateRange();  
 
   //b = mapfloat(analogRead(A2), 0, 1024, .2, .01);
 
-  if(map(x,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(y,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(z,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } {
-    already = false;
-  }
 }
 
 void dadrasFunction() {
@@ -563,16 +592,6 @@ void dadrasFunction() {
   updateRange();
 
   //c = mapfloat(analogRead(A0), 0, 1024, 10, 3.1);
-
-  if(mapfloat(x,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(mapfloat(y,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(mapfloat(z,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } {
-    already = false;
-  }
   
 }
 
@@ -586,20 +605,16 @@ void arneodoFunction() {
   x += dx;
   y += dy;
   z += dz;
-  
-  updateRange();
+
+  scaledX = mapfloat(x, -3.5, 3.5, 0, 255);
+  scaledY = mapfloat(y, -3.5, 3.5, 0, 255);
+  scaledZ = mapfloat(z, -3.5, 3.5, 0, 255);
+  scaledX = constrain(scaledX, 0, 255);
+  scaledY = constrain(scaledY, 0, 255);
+  scaledZ = constrain(scaledZ, 0, 255);
+  updateRange();  
 
   //b = mapfloat(analogRead(A2), 0, 1024, 8, 3.5);
-
-  if(map(x,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(y,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(z,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } {
-    already = false;
-  }
   
 }
 
@@ -614,19 +629,16 @@ void chenFunction() {
   y += dy;
   z += dz;
 
-  updateRange();
+  scaledX = mapfloat(x, -12, 12, 0, 255);
+  scaledY = mapfloat(y, -12, 12, 0, 255);
+  scaledZ = mapfloat(z, -12, 12, 0, 255); 
+  scaledX = constrain(scaledX, 0, 255);
+  scaledY = constrain(scaledY, 0, 255);
+  scaledZ = constrain(scaledZ, 0, 255); 
+  updateRange();  
 
   //b = mapfloat(analogRead(A2), 0, 1024, -10, -14);
-  
-  if(map(x,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(y,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(z,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } {
-    already = false;
-  }  
+
 }
 
 void scroll3Function() {
@@ -640,19 +652,16 @@ void scroll3Function() {
   y += dy;
   z += dz;
 
-  updateRange();
+  scaledX = mapfloat(x, -70, 70, 0, 255);
+  scaledY = mapfloat(y, -70, 70, 0, 255);
+  scaledZ = mapfloat(z, -70, 70, 0, 255); 
+  scaledX = constrain(scaledX, 0, 255);
+  scaledY = constrain(scaledY, 0, 255);
+  scaledZ = constrain(scaledZ, 0, 255);
+  updateRange();    
 
   //c = mapfloat(analogRead(A2), 0, 1024, 21.3, 20.3);  
 
-  if(map(x,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(y,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(z,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } {
-    already = false;
-  }
 }
 
 void lorentz83Function() {
@@ -668,17 +677,14 @@ void lorentz83Function() {
 
   //b = mapfloat(analogRead(A2), 0, 1024, 7.91, 11);
 
-  updateRange();
+  scaledX = mapfloat(x, -1.5, 2, 0, 255);
+  scaledY = mapfloat(y, -1.5, 2, 0, 255);
+  scaledZ = mapfloat(z, -1.5, 2, 0, 255);  
+  scaledX = constrain(scaledX, 0, 255);
+  scaledY = constrain(scaledY, 0, 255);
+  scaledZ = constrain(scaledZ, 0, 255);
+  updateRange();  
 
-  if(map(x,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(y,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(z,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } {
-    already = false;
-  }
 }
 
 void halvorsenFunction() {
@@ -694,17 +700,14 @@ void halvorsenFunction() {
 
   //a = mapfloat(analogRead(A2), 0, 1024, 3, 1.89); // Working
 
-  updateRange();
+  scaledX = mapfloat(x, -13, 6, 0, 255);
+  scaledY = mapfloat(y, -13, 6, 0, 255);
+  scaledZ = mapfloat(z, -13, 6, 0, 255); 
+  scaledX = constrain(scaledX, 0, 255);
+  scaledY = constrain(scaledY, 0, 255);
+  scaledZ = constrain(scaledZ, 0, 255);
+  updateRange();  
 
-  if(map(x,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(y,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(z,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } {
-    already = false;
-  }
 }
 
 void rabinovichFunction() {
@@ -762,17 +765,14 @@ void rabinovichFunction() {
   }
   else;
 
-  updateRange();
+  scaledX = mapfloat(x, -2.4, 0.8, 0, 255);
+  scaledY = mapfloat(y, -2.4, 0.8, 0, 255);
+  scaledZ = mapfloat(z, -2.4, 0.8, 0, 255);
+  scaledX = constrain(scaledX, 0, 255);
+  scaledY = constrain(scaledY, 0, 255);
+  scaledZ = constrain(scaledZ, 0, 255);
+  updateRange();   
 
-  if(map(x,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(y,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(z,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } {
-    already = false;
-  }
 }
 
 void rosslerFunction() {
@@ -791,17 +791,14 @@ void rosslerFunction() {
   //b = mapfloat(analogRead(A2), 0, 1024, 5, 0.001);  
   //c = mapfloat(analogRead(A2), 0, 1024, 1, 5.7);
 
-  updateRange();
+  scaledX = mapfloat(x, -9, 10, 0, 255);
+  scaledY = mapfloat(y, -9, 10, 0, 255);
+  scaledZ = mapfloat(z, -9, 10, 0, 255); 
+  scaledX = constrain(scaledX, 0, 255);
+  scaledY = constrain(scaledY, 0, 255);
+  scaledZ = constrain(scaledZ, 0, 255);
+  updateRange();    
 
-  if(map(x,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(y,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(z,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } {
-    already = false;
-  }
 }
 
 void sprottFunction() {
@@ -818,17 +815,14 @@ void sprottFunction() {
   //a = mapfloat(analogRead(A2), 0, 1024, 10.03, 2.07);
   //b = mapfloat(analogRead(A2), 0, 1024, 1.06, 1.28);
 
-  updateRange();
+  scaledX = mapfloat(x, 0, 1.75, 0, 255);
+  scaledY = mapfloat(y, 0, 1.75, 0, 255);
+  scaledZ = mapfloat(z, 0, 1.75, 0, 255);
+  scaledX = constrain(scaledX, 0, 255);
+  scaledY = constrain(scaledY, 0, 255);
+  scaledZ = constrain(scaledZ, 0, 255);
+  updateRange();       
 
-  if(map(x,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(y,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(z,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } {
-    already = false;
-  }
 }
 
 void fourwingsFunction() {
@@ -845,17 +839,14 @@ void fourwingsFunction() {
   //a = mapfloat(analogRead(A2), 0, 1024, 0.1, 0.25);
   //b = mapfloat(analogRead(A2), 0, 1024, 0.12, 0.01);
 
-  updateRange();
+  scaledX = mapfloat(x, -2, 2.5, 0, 255);
+  scaledY = mapfloat(y, -2, 2.5, 0, 255);
+  scaledZ = mapfloat(z, -2, 2.5, 0, 255);  
+  scaledX = constrain(scaledX, 0, 255);
+  scaledY = constrain(scaledY, 0, 255);
+  scaledZ = constrain(scaledZ, 0, 255);
+  updateRange();   
 
-  if(map(x,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(y,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(z,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } {
-    already = false;
-  }
 }
 
 void aizawaFunction() {
@@ -875,15 +866,6 @@ void aizawaFunction() {
 
   updateRange();
 
-  if(map(x,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(y,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } else if(map(z,minValue,maxValue,1,255) == 255){
-    checkRestart();
-  } {
-    already = false;
-  }
 }
 
 void updateRange() 
@@ -907,6 +889,17 @@ void updateRange()
   if(z < minValue){
     minValue = z;
   }
+  else;
+
+  // if(mapfloat(x,minValue,maxValue,1,255) == 255){
+  //   checkRestart();
+  // } else if(mapfloat(y,minValue,maxValue,1,255) == 255){
+  //   checkRestart();
+  // } else if(mapfloat(z,minValue,maxValue,1,255) == 255){
+  //   checkRestart();
+  // } {
+  //   already = false;
+  // }  
 
   checkButtons();
 
@@ -926,28 +919,40 @@ void checkRestart() {
 
 void resetAttractorz()
 {
-  x = 0;
-  y = 0;
-  z = 0;
 
-  a = 0;
-  b = 0;
-  c = 0;
-  d = 0;
-  e = 0;
-  f = 0;
+    updateScaling(0, 0, 1, 0, 0);
+    updateScaling(0, 0, 1, 0, 0);
+    updateScaling(0, 0, 1, 0, 0);
 
-  dx = 0;
-  dy = 0;
-  dz = 0;
+    a = 0;
+    b = 0;
+    c = 0;
+    d = 0;
+    e = 0;
+    f = 0;
+    g = 0;
 
-  scaledX = 0;
-  scaledY = 0;
-  scaledZ = 0;
+    w = 0;
+    x = 0;
+    y = 0;
+    z = 0;
 
-  scaledXInner = 0;
-  scaledYInner = 0;
-  scaledZInner = 0;
+    dx = 0;
+    dy = 0;
+    dz = 0;
+
+    scaledX = 0;
+    scaledY = 0;
+    scaledZ = 0;
+    effectiveR = 0;
+    effectiveG = 0;
+    effectiveB = 0;
+    scaledXInner = 0;
+    scaledYInner = 0;
+    scaledZInner = 0;
+    scaledInnerCombined = 0;
+
+    timestep = 0.1;
 }
 
 

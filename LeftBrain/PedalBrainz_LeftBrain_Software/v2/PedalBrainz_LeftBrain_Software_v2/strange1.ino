@@ -238,6 +238,9 @@ void strangeSlow2() {
 
 void strangeSlow3() {
 
+  checkButtons();
+  pixelScaling();
+  attractorzIndicator();
 
   if ((strangeSlowCount >= 0) && (strangeSlowCount <= 20)) {
     strangeSlowCount = strangeSlowCount + 1;
@@ -383,5 +386,12 @@ void updateScaling(byte rowA, byte cellA, byte rowB, byte cellB, float checkValu
   if (checkValue > scalings[rowB][cellB]) {   //If the variable is lower than the current min scale value, then update the min scale value
     scalings[rowB][cellB] = checkValue;
   }
+
+    // Serial.print(",");
+    // Serial.print(checkValue);
+    // Serial.print(",");
+    // Serial.print(scalings[rowA][cellA]);
+    // Serial.print(",");
+    // Serial.println(scalings[rowB][cellB]);  
 
 }

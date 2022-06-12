@@ -86,6 +86,9 @@ timestep = 0.01;
 void modeStartupBank5(){
 
     maxBrightnessSet();
+
+    //  Reset all the things
+    resetAttractorz();
     
     if (Mode == 1)
       {
@@ -159,7 +162,7 @@ void Bank5()
 
   */
 
-  // Thomas
+  // Attractoz2
   if (Mode == 1)
   {
     //Serial.println("Mode 1 Started fadespeed " + String(fadeSpeed));
@@ -184,7 +187,7 @@ void Bank5()
       y = 2;
       z = 1;
 
-      timestep = .1;
+      timestep = 0.1;
 
       //writeStartupDataz();
       
@@ -206,7 +209,7 @@ void Bank5()
     }
   }
 
-  // 
+  // Attractoz2
   if (Mode == 2)
   {
     if (!waitingFlag)
@@ -249,7 +252,7 @@ void Bank5()
     }
   }
 
-  // RainbowQuad
+  // Attractoz2
   if (Mode == 3)
   {
     if (!waitingFlag)
@@ -293,7 +296,7 @@ void Bank5()
     }
   }
 
-  // RainbowMountainRepeat
+  // Attractoz2
   if (Mode == 4)
   {
     if (!waitingFlag)

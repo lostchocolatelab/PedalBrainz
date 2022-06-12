@@ -26,6 +26,7 @@
 // Declare our NeoPixel strip object:
 //Adafruit_NeoPixel strip(NUMPIXELS, 4, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel inner(1, 3, NEO_GRB + NEO_KHZ800);
+//Adafruit_NeoPixel pixel(1, 7); // SEEED XIAO
 Adafruit_NeoPixel pixel(1, PIN_NEOPIXEL);
 
 //FastLED_NeoPixel <NUMPIXELS, 4, NEO_GRB + NEO_KHZ800> strip;
@@ -537,8 +538,8 @@ void setup() {
   // Bank = 1;
   // Mode = 0;
 
-  Bank = 1;
-  Mode = 0;
+  Bank = 5;
+  Mode = 1;
 
   timeMultiplier = 1;
 
@@ -718,41 +719,71 @@ void averageLEDSPlot(){
 void pixelScaling()
 {
   
-  updateScaling(0, 0, 1, 0, x);
-  updateScaling(0, 1, 1, 1, y);
-  updateScaling(0, 2, 1, 2, z);
+  // updateScaling(0, 0, 1, 0, x);
+  // updateScaling(0, 1, 1, 1, y);
+  // updateScaling(0, 2, 1, 2, z);
 
-  //Values are scaled to 0-255 to adapt to the analogWrite function
+  // //Values are scaled to 0-255 to adapt to the analogWrite function
 
-  scaledX = mapfloat(x, scalings[0][0], scalings[1][0], 0, 255);
-  scaledY = mapfloat(y, scalings[0][1], scalings[1][1], 0, 255);
-  scaledZ = mapfloat(z, scalings[0][2], scalings[1][2], 0, 255);
+  // scaledX = mapfloat(x, scalings[0][0], scalings[1][0], 0, 255);
+  // scaledY = mapfloat(y, scalings[0][1], scalings[1][1], 0, 255);
+  // scaledZ = mapfloat(z, scalings[0][2], scalings[1][2], 0, 255);
 
-  
+  // scaledX = x;
+  // scaledY = y;
+  // scaledZ = z;
+
+  // scaledX = mapfloat(x, -10, 10, 0, 255);
+  // scaledY = mapfloat(y, -10, 10, 0, 255);
+  // scaledZ = mapfloat(z, -10, 10, 0, 255);
+
+  // scaledXInner = scaledX;
+  // scaledYInner = scaledY;
+  // scaledZInner = scaledZ;    
+
+  attractorzIndicatorValue = mapfloat(analogRead(A2), 0, 1024, 0, 300);
+
   if (attractorzLEDType == 1)
   {
-    scaledXInner = mapfloat(scaledX, 0, 255, -10, 200);
-    scaledYInner = mapfloat(scaledY, 0, 255, -10, 200);
-    scaledZInner = mapfloat(scaledZ, 0, 255, -10, 200);
-    scaledInnerCombined = scaledXInner;  
+    // scaledXInner = mapfloat(scaledX, 0, 255, -50, 230);
+    // scaledYInner = mapfloat(scaledY, 0, 255, -50, 230);
+    // scaledZInner = mapfloat(scaledZ, 0, 255, -50, 230);  
+    scaledXInner = mapfloat(scaledX, 0, 255, 0, 190);
+    scaledYInner = mapfloat(scaledY, 0, 255, 0, 190);
+    scaledZInner = mapfloat(scaledZ, 0, 255, 0, 190); 
+    // scaledXInner = scaledX;
+    // scaledYInner = scaledY;
+    // scaledZInner = scaledZ;   
+    scaledInnerCombined = (scaledXInner+scaledYInner+scaledZInner)/3; 
     scaledInnerCombined = constrain(scaledInnerCombined, 0, scaledInnerCombined);
   }  
   else if (attractorzLEDType == 2)
   {
-    scaledXInner = mapfloat(scaledX, 0, 255, -30, 220);
-    scaledYInner = mapfloat(scaledY, 0, 255, -30, 220);
-    scaledZInner = mapfloat(scaledZ, 0, 255, -30, 220); 
+    // scaledXInner = mapfloat(scaledX, 0, 255, -30, 220);
+    // scaledYInner = mapfloat(scaledY, 0, 255, -30, 220);
+    // scaledZInner = mapfloat(scaledZ, 0, 255, -30, 220); 
+    scaledXInner = mapfloat(scaledX, 0, 255, 0, 190);
+    scaledYInner = mapfloat(scaledY, 0, 255, 0, 190);
+    scaledZInner = mapfloat(scaledZ, 0, 255, 0, 190); 
+    // scaledXInner = scaledX;
+    // scaledYInner = scaledY;
+    // scaledZInner = scaledZ;  
     scaledInnerCombined = (scaledXInner+scaledYInner)/2;  
     scaledInnerCombined = constrain(scaledInnerCombined, 0, scaledInnerCombined);
   }
   else if (attractorzLEDType == 3)
   {
-    scaledXInner = mapfloat(scaledX, 0, 255, -50, 230);
-    scaledYInner = mapfloat(scaledY, 0, 255, -50, 230);
-    scaledZInner = mapfloat(scaledZ, 0, 255, -50, 230);  
-    scaledInnerCombined = (scaledXInner+scaledYInner+scaledZInner)/3; 
+    // scaledXInner = mapfloat(scaledX, 0, 255, -10, 200);
+    // scaledYInner = mapfloat(scaledY, 0, 255, -10, 200);
+    // scaledZInner = mapfloat(scaledZ, 0, 255, -10, 200);
+    scaledXInner = mapfloat(scaledX, 0, 255, 0, 190);
+    scaledYInner = mapfloat(scaledY, 0, 255, 0, 190);
+    scaledZInner = mapfloat(scaledZ, 0, 255, 0, 190); 
+    // scaledXInner = scaledX;
+    // scaledYInner = scaledY;
+    // scaledZInner = scaledZ;  
+    scaledInnerCombined = scaledXInner;  
     scaledInnerCombined = constrain(scaledInnerCombined, 0, scaledInnerCombined);
-
   } 
   else; 
 

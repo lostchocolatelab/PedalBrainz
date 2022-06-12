@@ -158,6 +158,11 @@ else if (Bank == 4)
     printAverage();
   }
 }
+else if (Bank == 5)
+{
+
+
+}
 else
 {
     averageLEDSPlot();
