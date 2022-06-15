@@ -1,85 +1,22 @@
 /*
 
-  ////////////////////
-  ////////////////////        Bank 5 Attractorz
-  ////////////////////
+  ////////////////////        Bank 5 
+  ////////////////////        Attractorz
+  ////////////////////        Modez
 
-  
-//thomas
+   
+This is where the Mode switching and waiting happens within the loop.
 
-b = 0.19;
+If Bank and Mode are True:
+-Initialize some things
+-Loop the Mode
+-Wait for the Mode Change
 
-x = 1;
-y = 2;
-z = 1;
+Mode 1 - 10 | Attractorz
+A0 = Cycle Speed
+A1 = Maximum Brightness
+A2 = Roughness
 
-timestep = .1;
-
-//arneodo
-
-a = -5.5;
-b = 3.5;
-c = -1;
-
-x = 0.5;
-y = 0.1;
-z = 0.3;
-
-//timestep = 0.01;
-timestep = 0.008;
-
-//chen
-
-a = 5.0;
-b = -10.0;
-c = -0.38;
-
-x = 5;
-y = 10;
-z = 10;
-
-timestep = 0.005;
-
-//scroll 3 
-
-a = 40.0;
-b = 0.833;
-c = 20.0;
-d = 0.5;
-e = 0.65;
-
-x = 2.1;
-y = 0.9;
-z = 1.2;
-
-timestep = 0.01;
-
-//lorentz83
-
- a = 0.95;
- b = 7.91;
- f = 4.83;
- g = 4.66;
-
- x = -0.2;
- y = -2.82;
- z = 2.71;
-
-timestep = 0.005;
-
-//dadras
-
-a = 3;
-b = 2.7;
-c = 1.7;
-d = 2;
-e = 9;
-
-x = 0.5;
-y = 0.1;
-z = 0.3;
-
-timestep = 0.01;
 */
 
 

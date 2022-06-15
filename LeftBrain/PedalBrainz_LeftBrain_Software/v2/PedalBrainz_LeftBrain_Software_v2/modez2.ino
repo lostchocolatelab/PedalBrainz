@@ -1,6 +1,8 @@
 /**
 
-Bank 2 - Modez
+  ////////////////////        Bank 2
+  ////////////////////        Shapez
+  ////////////////////        Modez
 
 This is where the Mode switching and waiting happens within the loop.
 
@@ -9,45 +11,55 @@ If Bank and Mode are True:
 -Loop the Mode
 -Wait for the Mode Change
 
-Mode 1 | Quad Rainbowz Fixed - Uses randomBright01-04 Declared in General Declarations
-A0 = Rainbow Cycle Speed
+Mode 1 | Squarez Tilt
+A0 = Blink Speed
+A1 = Duration of Maximum Brightness
+A2 = Duration of Minimum Brightness
+
+Mode 2 | Squarez Random
+A0 = Amount of Random Time Added to A1, A2
+A1 = Duration of Maximum Brightness (Random)
+A2 = Duration of Minimum Brightness (Random)
+
+Mode 3 | Trainglez Doublez
+A0 = Alternate Speed
+A1 = Trianglez1 Fade Speed
+A2 = Trianglez2 Fade Speed
+
+Mode 4 | Trainglez Attractorz
+A0 = Fade Speed
 A1 = Maximum Brightness
-A2 = Duration when LED is fully off (It's Dark)
+A2 = Update Speed (How often the speed of the Attractor is applied)
 
-Mode 2 | Quad Rainbowz Random Once - Randomize Brightness values for the 4 values once at startup
-A0 = Rainbow Cycle Speed
-A1 = Randomized Maximum Brightness
-A2 = Duration when LED is fully off (It's Dark)
+Mode 5 | Sawz Up
+A0 = Fade Speed
+A1 = Duration of Maximum Brightness
+A2 = Duration of Minimum Brightness
 
-Modez 3 | Quad Rainbowz Random Random - Randomize Brightness values for the 4 values after each cycle
-A0 = Duration of 4th brightness after brightness changes for a single color
-A1 = Delay of each Brightness Value (4) for a Single Color
-A2 = Duration of Darkness after full Color Cycle (or betwixt each color if darkDelayBetwixtColors is enabled)
+Mode 6 | Sawz Up Random
+A0 = Fade Speed
+A1 = Duration of Maximum Brightness (Random)
+A2 = Duration of Minimum Brightness (Random)
 
-Mode 4 | Mountainz Rainbow Random Repeat
-A0 = Cycle Speed
-A1 = Amount of Randomness
-A2 = Chance of Snack
+Mode 7 | Sawz Down
+A0 = Fade Speed
+A1 = Duration of Maximum Brightness
+A2 = Duration of Minimum Brightness
 
-Mode 5 | Mountainz Rainbow Random Random
-A0 = Cycle Speed
-A1 = Amount of Randomness
-A2 = Chance of Snack
+Mode 8 | Sawz Down Random
+A0 = Fade Speed
+A1 = Duration of Maximum Brightness (Random)
+A2 = Duration of Minimum Brightness (Random)
 
-Mode 6 | Mountainz Rainbow Random Random Slow
-A0 = Cycle Speed
-A1 = Amount of Randomness
-A2 = Chance of Snack
+Mode 9 | Sawz Random
+A0 = Fade Speed
+A1 = Duration of Maximum Brightness
+A2 = Duration of Minimum Brightness
 
-Mode 7 | Rainbow Squarez
-A0 = Rainbow Cycle Speed
-A1 = Maximum Brightness
-A2 = Duration when LED is fully off (It's Dark)
-
-Mode 8 | Rainbow Squarez Modulate
-A0 = Rainbow Cycle Speed
-A1 = Maximum Brightness
-A2 = Duration when LED is fully off (It's Dark)
+Mode 10 | Twinkelz
+A0 = Fade Speed
+A1 = Duration of Maximum Brightness
+A2 = Twinkelz Frequency
 
 */
 

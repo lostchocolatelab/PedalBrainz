@@ -1,6 +1,21 @@
 /**
 
-  Bank 6 - Modez
+  ////////////////////        Bank 6 
+  ////////////////////        Fancyz
+  ////////////////////        Modez
+
+   
+This is where the Mode switching and waiting happens within the loop.
+
+If Bank and Mode are True:
+-Initialize some things
+-Loop the Mode
+-Wait for the Mode Change
+
+Mode 1 | Attractorz
+A0 = Cycle Speed
+A1 = Maximum Brightness
+A2 = Roughness  
 
 */
 

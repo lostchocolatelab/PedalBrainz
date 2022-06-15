@@ -1,6 +1,8 @@
 /**
 
-Bank 1 - Modez
+  ////////////////////        Bank 1 
+  ////////////////////        Greatezt Hitz
+  ////////////////////        Modez
 
 This is where the Mode switching and waiting happens within the loop.
 
@@ -10,29 +12,29 @@ If Bank and Mode are True:
 -Wait for the Mode Change
 
 Mode 1 | Squarez
-A0 = Speed between 2 Blinks
-A1 = Blink 1 Color Value (Brightness)
-A2 = Blink 2 Color Value (Brightness)
+A0 = Blink Speed
+A1 = Blink 1 Brightness
+A2 = Blink 2 Brightness
 
 Mode 2 | Trainglez
-A0 = Fade speed of LED
-A1 = Duration when LED is fully on (It's Lit)
-A2 = Duration when LED is fully off (It's Dark)
+A0 = Fade Speed
+A1 = Duration of Maximum Brightness
+A2 = Duration of Minimum Brightness
 
 Mode 3 | Trainglez Random
 A0 = Amount of Random Time Added to A1, A2
-A1 = Duration when LED is fully on (It's Lit)
-A2 = Duration when LED is fully off (It's Dark)
+A1 = Duration of Maximum Brightness
+A2 = Duration of Minimum Brightness
 
 Mode 4 | Rainbowz
 A0 = Rainbow Cycle Speed
 A1 = Maximum Brightness
-A2 = Duration when LED is fully off (It's Dark)
+A2 = Duration of Minimum Brightness
 
 Mode 5 | Rainbowz Random
 A0 = Rainbow Cycle Speed
 A1 = Randomized Maximum Brightness
-A2 = Duration when LED is fully off (It's Dark)
+A2 = Duration of Minimum Brightness
 
 Mode 6 | Mountainz Random Repeat
 A0 = Cycle Speed
@@ -44,17 +46,17 @@ A0 = Cycle Speed
 A1 = Amount of Randomness
 A2 = Chance of Snack
 
-Mode 8 | Strange Attractorz Single
+Mode 8 | Strange Attractorz Singlez
 A0 = Cycle Speed
 A1 = Maximum Brightness
 A2 = Amount of Randomness
 
-Mode 9 | Strange Attractorz Double
+Mode 9 | Strange Attractorz Doublez
 A0 = Cycle Speed
 A1 = Maximum Brightness
 A2 = Amount of Randomness
 
-Mode 10 | Strange Attractorz Triple
+Mode 10 | Strange Attractorz Triplez
 A0 = Cycle Speed
 A1 = Maximum Brightness
 A2 = Amount of Randomness

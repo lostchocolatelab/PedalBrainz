@@ -1,53 +1,65 @@
 /**
 
-  Bank 2 - Modez
+  ////////////////////        Bank 4 
+  ////////////////////        Naturez
+  ////////////////////        Modez
   
-  This is where the Mode switching and waiting happens within the loop.
+This is where the Mode switching and waiting happens within the loop.
 
-  If Bank and Mode are True:
-  -Initialize some things
-  -Loop the Mode
-  -Wait for the Mode Change
+If Bank and Mode are True:
+-Initialize some things
+-Loop the Mode
+-Wait for the Mode Change
 
-  Mode 1 | Quad Rainbowz Fixed - Uses randomBright01-04 Declared in General Declarations
-  A0 = Rainbow Cycle Speed
-  A1 = Maximum Brightness
-  A2 = Duration when LED is fully off (It's Dark)
+Mode 1 | Mountainz Random Repeat
+A0 = Cycle Speed
+A1 = Amount of Randomness
+A2 = Chance of Snack
 
-  Mode 2 | Quad Rainbowz Random Once - Randomize Brightness values for the 4 values once at startup
-  A0 = Rainbow Cycle Speed
-  A1 = Randomized Maximum Brightness
-  A2 = Duration when LED is fully off (It's Dark)
+Mode 2 | Mountainz Random Random
+A0 = Cycle Speed
+A1 = Amount of Randomness
+A2 = Chance of Snack
 
-  Modez 3 | Quad Rainbowz Random Random - Randomize Brightness values for the 4 values after each cycle
-  A0 = Duration of 4th brightness after brightness changes for a single color
-  A1 = Delay of each Brightness Value (4) for a Single Color
-  A2 = Duration of Darkness after full Color Cycle (or betwixt each color if darkDelayBetwixtColors is enabled)
+Mode 3 | 
+A0 = Fade Speed
+A1 = Duration of Maximum Brightness
+A2 = Duration of Minimum Brightness
 
-  Mode 4 | Mountainz Rainbow Random Repeat
-  A0 = Cycle Speed
-  A1 = Amount of Randomness
-  A2 = Chance of Snack
+Mode 4 | 
+A0 = Fade Speed
+A1 = Duration of Maximum Brightness
+A2 = Duration of Minimum Brightness
 
-  Mode 5 | Mountainz Rainbow Random Random
-  A0 = Cycle Speed
-  A1 = Amount of Randomness
-  A2 = Chance of Snack
+Mode 5 | 
+A0 = Fade Speed
+A1 = Duration of Maximum Brightness
+A2 = Duration of Minimum Brightness
 
-  Mode 6 | Mountainz Rainbow Random Random Slow
-  A0 = Cycle Speed
-  A1 = Amount of Randomness
-  A2 = Chance of Snack 
+Mode 6 | 
+A0 = Fade Speed
+A1 = Duration of Maximum Brightness
+A2 = Duration of Minimum Brightness
 
-  Mode 7 | Rainbow Squarez 
-  A0 = Rainbow Cycle Speed
-  A1 = Maximum Brightness
-  A2 = Duration when LED is fully off (It's Dark)
+Mode 7 | 
+A0 = Fade Speed
+A1 = Duration of Maximum Brightness
+A2 = Duration of Minimum Brightness
 
-  Mode 8 | Rainbow Squarez Modulate
-  A0 = Rainbow Cycle Speed
-  A1 = Maximum Brightness
-  A2 = Duration when LED is fully off (It's Dark)  
+Mode 8 | 
+A0 = Fade Speed
+A1 = Duration of Maximum Brightness
+A2 = Duration of Minimum Brightness
+
+Mode 9 | 
+A0 = Fade Speed
+A1 = Duration of Maximum Brightness
+A2 = Duration of Minimum Brightness
+
+Mode 10 | 
+A0 = Fade Speed
+A1 = Duration of Maximum Brightness
+A2 = Duration of Minimum Brightness
 
 */
 
@@ -446,8 +458,8 @@ void Bank4()
       {
 
         // Call the main routine and loop the thing
-        valueA0  = 7;
-        rainbowNew();
+        //valueA0  = 7;
+        oceanz();
       }
         // Wait for the Mode Change
         modeChangeWait();
