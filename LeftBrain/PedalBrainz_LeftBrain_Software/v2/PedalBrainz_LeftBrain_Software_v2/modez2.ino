@@ -4,140 +4,140 @@
   ////////////////////        Shapez
   ////////////////////        Modez
 
-This is where the Mode switching and waiting happens within the loop.
+  This is where the Mode switching and waiting happens within the loop.
 
-If Bank and Mode are True:
--Initialize some things
--Loop the Mode
--Wait for the Mode Change
+  If Bank and Mode are True:
+  -Initialize some things
+  -Loop the Mode
+  -Wait for the Mode Change
 
-Mode 1 | Squarez Tilt
-A0 = Blink Speed
-A1 = Duration of Maximum Brightness
-A2 = Duration of Minimum Brightness
+  Mode 1 | Squarez Tilt
+  A0 = Blink Speed
+  A1 = Duration of Maximum Brightness
+  A2 = Duration of Minimum Brightness
 
-Mode 2 | Squarez Random
-A0 = Amount of Random Time Added to A1, A2
-A1 = Duration of Maximum Brightness (Random)
-A2 = Duration of Minimum Brightness (Random)
+  Mode 2 | Squarez Random
+  A0 = Amount of Random Time Added to A1, A2
+  A1 = Duration of Maximum Brightness (Random)
+  A2 = Duration of Minimum Brightness (Random)
 
-Mode 3 | Trainglez Doublez
-A0 = Alternate Speed
-A1 = Trianglez1 Fade Speed
-A2 = Trianglez2 Fade Speed
+  Mode 3 | Trainglez Doublez
+  A0 = Alternate Speed
+  A1 = Trianglez1 Fade Speed
+  A2 = Trianglez2 Fade Speed
 
-Mode 4 | Trainglez Attractorz
-A0 = Fade Speed
-A1 = Maximum Brightness
-A2 = Update Speed (How often the speed of the Attractor is applied)
+  Mode 4 | Trainglez Attractorz
+  A0 = Fade Speed
+  A1 = Maximum Brightness
+  A2 = Update Speed (How often the speed of the Attractor is applied)
 
-Mode 5 | Sawz Up
-A0 = Fade Speed
-A1 = Duration of Maximum Brightness
-A2 = Duration of Minimum Brightness
+  Mode 5 | Sawz Up
+  A0 = Fade Speed
+  A1 = Duration of Maximum Brightness
+  A2 = Duration of Minimum Brightness
 
-Mode 6 | Sawz Up Random
-A0 = Fade Speed
-A1 = Duration of Maximum Brightness (Random)
-A2 = Duration of Minimum Brightness (Random)
+  Mode 6 | Sawz Up Random
+  A0 = Fade Speed
+  A1 = Duration of Maximum Brightness (Random)
+  A2 = Duration of Minimum Brightness (Random)
 
-Mode 7 | Sawz Down
-A0 = Fade Speed
-A1 = Duration of Maximum Brightness
-A2 = Duration of Minimum Brightness
+  Mode 7 | Sawz Down
+  A0 = Fade Speed
+  A1 = Duration of Maximum Brightness
+  A2 = Duration of Minimum Brightness
 
-Mode 8 | Sawz Down Random
-A0 = Fade Speed
-A1 = Duration of Maximum Brightness (Random)
-A2 = Duration of Minimum Brightness (Random)
+  Mode 8 | Sawz Down Random
+  A0 = Fade Speed
+  A1 = Duration of Maximum Brightness (Random)
+  A2 = Duration of Minimum Brightness (Random)
 
-Mode 9 | Sawz Random
-A0 = Fade Speed
-A1 = Duration of Maximum Brightness
-A2 = Duration of Minimum Brightness
+  Mode 9 | Sawz Random
+  A0 = Fade Speed
+  A1 = Duration of Maximum Brightness
+  A2 = Duration of Minimum Brightness
 
-Mode 10 | Twinkelz
-A0 = Fade Speed
-A1 = Duration of Maximum Brightness
-A2 = Twinkelz Frequency
+  Mode 10 | Twinkelz
+  A0 = Fade Speed
+  A1 = Duration of Maximum Brightness
+  A2 = Twinkelz Frequency
 
 */
 
 void modeStartupBank2() {
 
   maxBrightnessSet();
+  //  Set Up something before jumping into the Mode Routine
+    if (Mode == 1)
+    {
 
-  if (Mode == 1)
-  {
+      maxBrightness = 255;
 
-    maxBrightness = 255;
+      for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
+        strip.setPixelColor(p, 255, 0, 255/10);
+      }
+      pixel.setPixelColor(0, 255, 0, 255/10);
+      inner.setPixelColor(0, 255, 0, 255/10);
 
-    for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
-      strip.setPixelColor(p, 255, 0, 255/10);
+      showLEDS();
+
     }
-    pixel.setPixelColor(0, 255, 0, 255/10);
-    inner.setPixelColor(0, 255, 0, 255/10);
+    else if (Mode == 2)
+    {
 
-    showLEDS();
+      maxBrightness = 255;
 
-  }
-  else if (Mode == 2)
-  {
+      for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
+        strip.setPixelColor(p, 255, 0, 255/10);
+      }
+      pixel.setPixelColor(0, 255, 0, 255/10);
+      inner.setPixelColor(0, 255, 0, 255/10);
 
-    maxBrightness = 255;
+      showLEDS();
 
-    for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
-      strip.setPixelColor(p, 255, 0, 255/10);
     }
-    pixel.setPixelColor(0, 255, 0, 255/10);
-    inner.setPixelColor(0, 255, 0, 255/10);
+    else if (Mode == 3)
+    {
 
-    showLEDS();
+      maxBrightness = 255;
 
-  }
-  else if (Mode == 3)
-  {
+      for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
+        strip.setPixelColor(p, 255, 0, 255/10);
+      }
+      pixel.setPixelColor(0, 255, 0, 255/10);
+      inner.setPixelColor(0, 255, 0, 255/10);
 
-    maxBrightness = 255;
+      showLEDS();
 
-    for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
-      strip.setPixelColor(p, 255, 0, 255/10);
     }
-    pixel.setPixelColor(0, 255, 0, 255/10);
-    inner.setPixelColor(0, 255, 0, 255/10);
+    else if (Mode == 4)
+    {
 
-    showLEDS();
+    }
+    else if (Mode == 5)
+    {
 
-  }
-  else if (Mode == 4)
-  {
+    }
+    else if (Mode == 6)
+    {
 
-  }
-  else if (Mode == 5)
-  {
+    }
+    else if (Mode == 7)
+    {
 
-  }
-  else if (Mode == 6)
-  {
+    }
+    else if (Mode == 8)
+    {
 
-  }
-  else if (Mode == 7)
-  {
+    }
+    else if (Mode == 9)
+    {
 
-  }
-  else if (Mode == 8)
-  {
+    }
+    else if (Mode == 10)
+    {
 
-  }
-  else if (Mode == 9)
-  {
-
-  }
-  else if (Mode == 10)
-  {
-
-  }
-  else;
+    }
+    else;
 
   showLEDS();
 }
@@ -523,177 +523,14 @@ void Bank2()
   }
 
  /*
+  *       BONUS MODEZ
   *
-  *
-  *
-  *        BONUS MODEZ
-  *
+  *       Loop into some special Modez     
+  *       and possibly do something cool
+  *       Under certain conditionz
   *
   */
 
-  if (Mode == 98)  // Light Loopz 
-  {
-    if (!waitingFlag)
-    {
-      // Flash the pixel at the start of a mode chnage
-      //modeFlash();
-
-      modeStartupBank1();
-
-      //writeStartupDataz();
-
-      //Do the last thing and WaitForModeChange
-
-      x = 0.5;
-      y = 0.9;
-      z = 0.1;
-
-      waitingFlag = true;
-      WaitForModeChange = true;
-      Serial.println(" WaitForModeChange = True");
-    }
-    else
-    {
-      if (WaitForModeChange)
-      {
-
-      // Call the main routine and loop the thing
-        lightLoopz();
-      }
-      // Wait for the Mode Change
-      modeChangeWait();
-    }
-  }
-  if (Mode == 99)  //  Potentiometer RGB Color test
-  {
-    if (!waitingFlag)
-    {
-      // Flash the pixel at the start of a mode chnage
-      //modeFlash();
-
-      modeStartupBank1();
-
-      //writeStartupDataz();
-
-      //Do the last thing and WaitForModeChange
-
-      x = 0.5;
-      y = 0.9;
-      z = 0.1;
-
-      waitingFlag = true;
-      WaitForModeChange = true;
-      Serial.println(" WaitForModeChange = True");
-    }
-    else
-    {
-      if (WaitForModeChange)
-      {
-
-      // Call the main routine and loop the thing
-        testColorPotentiometer();
-      }
-      // Wait for the Mode Change
-      modeChangeWait();
-    }
-  }
-
-  if (Mode == 100)  // Time Multiplier
-  {
-    if (!waitingFlag)
-    {
-      // Flash the pixel at the start of a mode chnage
-      //modeFlash();
-
-      modeStartupBank1();
-
-      //writeStartupDataz();
-
-      //Do the last thing and WaitForModeChange
-
-      x = 0.5;
-      y = 0.9;
-      z = 0.1;
-
-      waitingFlag = true;
-      WaitForModeChange = true;
-      Serial.println(" WaitForModeChange = True");
-    }
-    else
-    {
-      if (WaitForModeChange)
-      {
-
-      // Call the main routine and loop the thing
-        multiplierIndicator();
-      }
-      // Wait for the Mode Change
-      modeChangeWait();
-    }
-  }  
-  if (Mode == 102)
-  {
-    if (!waitingFlag)
-    {
-      // Flash the pixel at the start of a mode chnage
-      //modeFlash();
-
-      modeStartupBank1();
-
-      //writeStartupDataz();
-
-      //Do the last thing and WaitForModeChange
-
-      x = 0.5;
-      y = 0.9;
-      z = 0.1;
-
-      waitingFlag = true;
-      WaitForModeChange = true;
-      Serial.println(" WaitForModeChange = True");
-    }
-    else
-    {
-      if (WaitForModeChange)
-      {
-
-      // Call the main routine and loop the thing
-        testBrightPotentiometer();
-      }
-      // Wait for the Mode Change
-      modeChangeWait();
-    }
-  }
-  if (Mode == 999)
-  {
-    if (!waitingFlag)
-    {
-      // Flash the pixel at the start of a mode chnage
-      //modeFlash();
-
-      modeStartupBank1();
-
-      //writeStartupDataz();
-
-      //Do the last thing and WaitForModeChange
-      darkLED();
-      //writeStartupDataz();
-
-      waitingFlag = true;
-      WaitForModeChange = true;
-      Serial.println(" WaitForModeChange = True");
-    }
-    else
-    {
-      if (WaitForModeChange)
-      {
-
-      // Call the main routine and loop the thing
-        memoryGame();
-      }
-      // Wait for the Mode Change
-      modeChangeWait();
-    }
-  }
+   modezBonus();
 
 }
