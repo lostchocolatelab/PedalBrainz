@@ -40,8 +40,8 @@ void delayA2(int count)
 
     if (Mode == 2)
     {
-      valueA2 = map(analogRead(A2), 0, 1024, (durationMaximum*timeMultiplier), 0);
-      darkDelay = valueA2;
+      // valueA2 = map(analogRead(A2), 0, 1024, (durationMaximum*timeMultiplier), 0);
+      // darkDelay = valueA2;
     }
     else if (Mode == 3)
     {
@@ -98,8 +98,11 @@ void delayA2(int count)
       //Potentiometer Bottom Right | A2 - Map the value of the potentiometer to a variable and Update the Variable(s)
       else if (Mode == 2) {
 
-        valueA2 = map(analogRead(A2), 0, 1024, (durationMaximum*timeMultiplier), 0);
-        darkDelay = valueA2;
+      mapScaledA2();
+      darkDelay = mapfloat(scaledA2, 0, 2300, (durationMaximum*timeMultiplier), 0);
+
+        // valueA2 = map(analogRead(A2), 0, 1024, (durationMaximum*timeMultiplier), 0);
+        // darkDelay = valueA2;
       //Serial.println("Mode 1 darkDelay: " + String(darkDelay));
       //Serial.println("Mode 1 delayValueA2: " + String(delayValueA2));
 
@@ -407,7 +410,8 @@ void delayA2(int count)
     plotCycle();
     checkButtons();
 
-    for (int count = 0; count <= delayCountA2; count++) {
+    for (int count = 0; count <= delayCountA2; count++) 
+    {
 
       delayCountA2 = darkDelay;
       //Serial.println("delayA2 delayCountA2: " + String(delayCountA2));
@@ -419,7 +423,8 @@ void delayA2(int count)
       plotCycle();
       checkButtons();
 
-      if (clicked == true) {
+      if (clicked == true) 
+      {
 
         //Serial.println("I Broke delayA2 Mode" + String(Mode) + " because button was clicked");
         clicked = false;
@@ -442,54 +447,47 @@ void delayA2(int count)
         breakdelayA2 = false;
         break;
       }
-      else {
+      else 
+      {
         breakdelayA2 = false;
       }
 
-      if (Mode == 1) {
+      if (Mode == 1) 
+      {
 
-        darkDelay = map(analogRead(A2), 0, 1024, (durationMaximum*timeMultiplier), 0);
-      //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
-      else if (Mode == 2) {
+      else if (Mode == 2) 
+      {
 
-        darkDelay = map(analogRead(A2), 0, 1024, (durationMaximum*timeMultiplier), 0);
-      //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
-      else if (Mode == 3) {
+      else if (Mode == 3) 
+      {
 
-        darkDelay = map(analogRead(A2), 0, 1024, (durationMaximum*timeMultiplier), 0);
-      //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
-      else if (Mode == 6) {
+      else if (Mode == 6) 
+      {
 
-        valueA2 = map(analogRead(A2), 0, 1024, (durationMaximum*timeMultiplier), 0);
-        darkDelay =  valueA2 / 5;
-      //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
-      else if (Mode == 7) {
+      else if (Mode == 7) 
+      {
 
-        darkDelay = map(analogRead(A2), 0, 1024, (durationMaximum*timeMultiplier), 0);
-      //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
-      else if (Mode == 8) {
+      else if (Mode == 8) 
+      {
 
-        darkDelay = map(analogRead(A2), 0, 1024, (durationMaximum*timeMultiplier), 0);
-      //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
-      else if (Mode == 9) {
+      else if (Mode == 9) 
+      {
 
-        darkDelay = map(analogRead(A2), 0, 1024, (durationMaximum*timeMultiplier), 0);
-      //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
-      else if (Mode == 10) {
+      else if (Mode == 10) 
+      {
 
-        darkDelay = map(analogRead(A2), 0, 1024, (durationMaximum*timeMultiplier), 0);
-      //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
-      else {
+      else 
+      {
         darkDelay = 100;
-      //Serial.println("Else darkDelay: " + String(darkDelay));
+        //Serial.println("Else darkDelay: " + String(darkDelay));
       }
 
       checkButtons();

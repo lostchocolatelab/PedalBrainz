@@ -736,88 +736,48 @@ void delayA0(int count)
 
         // Potentiometer Top Right | A0 - Map the value of the Potentiometer to a Variable
 
-      if (Mode == 1) {
-
-        mapScaledA0();
-        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 10);
-
-        //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
-        //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
-      }
-      else if (Mode == 2) {
-
-        mapScaledA0();
-        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 10);
-
-
-        //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
-        //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
+      if (Mode == 1) 
+      {
 
       }
-      else if (Mode == 3) {
-
-        mapScaledA0();
-        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 10);
-
-        //Serial.println("Mode 3 controlAmount: " + String(controlAmount));
-        //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
-      }
-      else if (Mode == 7) {
-
-        valueLog = log(analogRead(A0) + 1) / log(1024) * 255;
-        //Serial.println("Mode 1 valueLog: " + String(valueLog));
-        fadeSpeed = mapfloat(valueLog, 0, 255, (speedMinimum / 2), 30);         // Logarithmic Potentiometer Value
-
-        //fadeSpeed = map(analogRead(A0), 0, 1024, durationMaximum, 0);
-        //Serial.println("Bank - " + String(Bank) + "Mode" + String(Mode) + "fadeSpeeed: " + String(fadeSpeed));
-      }
-      else if (Mode == 8) {
-
-        //valueA0 = map(analogRead(A0), 0, 1024, 2000, 0);
-        valueA0 = log(analogRead(A0) + 1) / log(1024) * 255;
-        modulateConstrain = modulateSpeed + (valueA0 - 200);
-        fadeSpeed = constrain(modulateConstrain, 0, 3000);
-        //fadeSpeed = map(analogRead(A0), 0, 1024, durationMaximum, 0);
-        //ModulateControl();
-        //fadeSpeed = fadeSpeed;
-
-        //Serial.println("delayA0 fadeSpeeed: " + String(fadeSpeed));
-      }
-      else if (Mode == 9) {
-
-        //valueA0 = map(analogRead(A0), 0, 1024, 2000, 0);
-        valueA0 = log(analogRead(A0) + 1) / log(1024) * 255;
-        modulateConstrain = modulateSpeed + (valueA0 - 200);
-        fadeSpeed = constrain(modulateConstrain, 0, 3000);
-        //fadeSpeed = map(analogRead(A0), 0, 1024, durationMaximum, 0);
-        //ModulateControl();
-        //fadeSpeed = fadeSpeed;
-
-        //Serial.println("delayA0 fadeSpeeed: " + String(fadeSpeed));
-      }
-      else if (Mode == 10) {
-
-        mapScaledA0();
-        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
-
-        //Serial.println("Mode 2 controlAmount: " + String(controlAmount));
-        //Serial.println("Mode 2 fadeSpeeed: " + String(fadeSpeed));
+      else if (Mode == 2) 
+      {
 
       }
-      else {
+      else if (Mode == 3) 
+      {
+
+      }
+      else if (Mode == 6) 
+      {
+
+      }
+      else if (Mode == 7) 
+      {
+
+      }
+      else if (Mode == 8) 
+      {
+
+      }
+      else if (Mode == 9) 
+      {
+
+      }
+      else if (Mode == 10) 
+      {
+
+      }
+      else 
+      {
         fadeSpeed = 7;
         //Serial.println("Else fadeSpeeed: " + String(fadeSpeed));
       }
 
-        //Make this number smaller to fade faster
-      if (Mode == 3)
-      {
-        delay(1);
-      }
-      else
-      {
-        delay(.5);
-      }
+      //Make this number smaller to fade faster
+
+      delay(.5);
+
 
         //Serial.println("Bank - " + String(Bank) + " Mode - " + String(Mode) + " fadeSpeeed: " + String(fadeSpeed));
         //controlsMax();

@@ -94,9 +94,6 @@ void mountainSnack() {
       // This maps the values for the Modez.
       newValue1 = mapfloat(x, 0, 2300, 255, 0);
   
-  //newValue1 = map(analogRead(A0), 0, 1024, 255, 0); // Control the Speed
-  
-  
   if (abs(newValue1 - newCalibrate1) > 1) { // this further smooths the knob, at the expense of some accuracy. probably worth it.
     valueA0 = newValue1;
     newCalibrate1 = newValue1;
@@ -104,11 +101,20 @@ void mountainSnack() {
     //Serial.println("newCalibrate :" + String(newCalibrate1));
   }
 
-  valueA2 = map(analogRead(A2), 0, 1024, 1024, 0); // Increases Chance for Snack
-  valueA1 = analogRead(A1); // Amount of Randomness to the Cycle
-  
+  // valueA1 = analogRead(A1); // Amount of Randomness to the Cycle
+  // valueA2 = map(analogRead(A2), 0, 1024, 1024, 0); // Increases Chance for Snack
+
+  // Amount of Randomness to the Cycle
+  mapScaledA1();
+  valueA1 = map(scaledA1, 0, 2300, 0, 1024);
+
+  // Increases Chance for Snack
+  mapScaledA2();
+  valueA2 = map(scaledA2, 0, 2300, 0, 1024);
+   
   speedControl = float(valueA0) / 256; // speed control bit shifted and then goes from 0-1
   randomAmount = float(valueA1) / 2048; // random depth from 0-0.5
+
   if (Bank == 2 && Mode == 4){
     
   }
@@ -248,7 +254,7 @@ void mountainSnack() {
 }
 
 void snackDecision(){
-    // if you've decided to have your snack
+  // if you've decided to have your snack
 
   if (Bank == 2 && Mode == 4){
 
@@ -257,7 +263,7 @@ void snackDecision(){
                
         snackChance = 1024;
                    
-        snackLength = map(analogRead(A2), 0, 1024, (durationMaximum*timeMultiplier), 0); // Control the amount of Random Snack
+        snackLength = map(analogRead(A2), 0, 1024, 0, (durationMaximum*timeMultiplier)); // Control the amount of Random Snack
         //snackLength = int(targetSpeed/3);
         lastMillis += snackLength;
         snackRandom = 1024;
@@ -288,7 +294,7 @@ void snackDecision(){
   else {
     if (snackRandom < snackChance) {
     
-        snackLength = map(analogRead(A0), 0, 1024, 0, 1000); // Control the amount of Random Snack
+        snackLength = map(analogRead(A2), 0, 1024, 0, (durationMaximum*timeMultiplier)/10); // Control the amount of Random Snack
         //snackLength = int(targetSpeed/3);
         lastMillis += snackLength;
         snackRandom = 1024;
@@ -892,6 +898,10 @@ else;
 void delaySnack(int count)
 {
   
+  // Increases Chance for Snack
+  mapScaledA2();
+  valueA2 = map(scaledA2, 0, 2300, 0, 1024);
+
   int delaySnackLength = snackLength+snackLengthRandom;
   int delaySnacking = delaySnackLength;
 
@@ -946,17 +956,17 @@ void delaySnack(int count)
               
             }
    
-     for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-          strip.setPixelColor(p, 0, 0, 0);
-      }
-      pixel.setPixelColor(0, 0, 0, 0);
-      inner.setPixelColor(0, 0, 0, 0);
-      showLEDS();
+     // for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+     //      strip.setPixelColor(p, 0, 0, 0);
+     //  }
+     //  pixel.setPixelColor(0, 0, 0, 0);
+     //  inner.setPixelColor(0, 0, 0, 0);
+     //  showLEDS();
       
-      strip.setBrightness(MaxBrightReduction);
-      FastLED.setBrightness(0);
-      pixel.setBrightness(0);
-      inner.setBrightness(0);
+     //  strip.setBrightness(MaxBrightReduction);
+     //  FastLED.setBrightness(0);
+     //  pixel.setBrightness(0);
+     //  inner.setBrightness(0);
       showLEDS();
       
       delay(1);
