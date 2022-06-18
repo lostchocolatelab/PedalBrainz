@@ -105,25 +105,26 @@ void mountainSnack() {
     //Serial.println("newCalibrate :" + String(newCalibrate1));
   }
 
-  // valueA1 = analogRead(A1); // Amount of Randomness to the Cycle
-  // valueA2 = map(analogRead(A2), 0, 1024, 1024, 0); // Increases Chance for Snack
+  // valueA1 = analogRead(A1); // Increases Chance for Snack
+  // valueA2 = map(analogRead(A2), 0, 1024, 1024, 0); // Amount of Randomness to the Cycle
+
+  
+  // Increases Chance for Snack
+  mapScaledA1();
+  valueA1 = map(scaledA1, 0, 2300, 1024, 0);
 
   // Amount of Randomness to the Cycle
-  mapScaledA1();
-  valueA1 = map(scaledA1, 0, 2300, 0, 1024);
-
-  // Increases Chance for Snack
   mapScaledA2();
   valueA2 = map(scaledA2, 0, 2300, 0, 1024);
    
   speedControl = float(valueA0) / 256; // speed control bit shifted and then goes from 0-1
-  randomAmount = float(valueA1) / 2048; // random depth from 0-0.5
+  randomAmount = float(valueA2) / 2048; // random depth from 0-0.5
 
   if (Bank == 2 && Mode == 4){
     
   }
   else{
-    snackChance = valueA2; // chance of snack from 0-1024
+    snackChance = valueA1; // chance of snack from 0-1024
   }
   
 
@@ -902,7 +903,7 @@ else;
 void delaySnack(int count)
 {
   
-  // Increases Chance for Snack
+  // Amount of Randomness to the Cycle
   mapScaledA2();
   valueA2 = map(scaledA2, 0, 2300, 0, 1024);
 
