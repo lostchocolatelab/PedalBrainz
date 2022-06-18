@@ -138,6 +138,7 @@ void delayA0(int count)
       }
       else if (Mode == 8) {
 
+        maxBrightnessAdjust();
         fadeSpeed = mapfloat(analogRead(A0), 0, 1024, (speedMinimum / 10), 0);
 
         //Serial.println("Mode 8 fadeSpeeed: " + String(fadeSpeed));
@@ -145,6 +146,7 @@ void delayA0(int count)
       }
       else if (Mode == 9) {
 
+        maxBrightnessAdjust();
         fadeSpeed = mapfloat(analogRead(A0), 0, 1024, (speedMinimum / 10), 0);
 
         //Serial.println("Mode 9 fadeSpeeed: " + String(fadeSpeed));
@@ -152,6 +154,7 @@ void delayA0(int count)
       }
       else if (Mode == 10) {
 
+        maxBrightnessAdjust();
         fadeSpeed = mapfloat(analogRead(A0), 0, 1024, (speedMinimum / 10), 0);
 
         //Serial.println("Mode 10 fadeSpeeed: " + String(fadeSpeed));

@@ -1,6 +1,10 @@
 /**
 
-  Mountain Snack Mode Arrays of Numbers
+  Mountain Snack Mode Arrays of Numbers 
+
+  * Programmer : Yann Seznec
+  * Date       : 2021-May
+  * https://www.yannseznec.com/
 
 */
 

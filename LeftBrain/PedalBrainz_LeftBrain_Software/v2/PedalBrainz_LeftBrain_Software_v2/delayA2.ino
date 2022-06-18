@@ -129,6 +129,21 @@ void delayA2(int count)
         darkDelay =  valueA2;
       //Serial.println("Mode 4 darkDelay: " + String(fullDelay));
       }
+      else if (Mode == 8) {
+
+      maxBrightnessAdjust();
+
+      }
+      else if (Mode == 9) {
+
+      maxBrightnessAdjust();
+
+      }
+      else if (Mode == 10) {
+
+      maxBrightnessAdjust();
+      
+      }                  
       else {
         darkDelay = 0;
         //Serial.println("Else darkDelay: " + String(darkDelay));
