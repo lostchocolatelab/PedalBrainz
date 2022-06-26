@@ -120,7 +120,7 @@ else if (Bank == 2)
 }
 else if (Bank == 3)
 {
-  if ((Mode >= 2) && (Mode <= 10))
+  if ((Mode >= 2) && (Mode <= 7))
   {
       //averageLEDSPlot();
       //Print some things
@@ -140,8 +140,13 @@ else if (Bank == 3)
   }
   else
   {
-    averageLEDSPlot();
-    printAverage();
+    
+    EVERY_N_MILLISECONDS( 10 ) 
+    {
+      averageLEDSPlot();
+      printAverage();
+    }
+
   }
 }
 else if (Bank == 4)

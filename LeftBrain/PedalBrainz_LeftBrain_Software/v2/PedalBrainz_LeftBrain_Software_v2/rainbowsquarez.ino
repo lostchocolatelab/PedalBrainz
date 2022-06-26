@@ -1,14 +1,14 @@
-//  Mode 7 | Rainbow Squarez
+//  Mode | Rainbow Squarez
 //  A0 = Cycle Speed
 //  A1 = Brightness
 //  A2 =  Duration of Darkness after full Color Cycle
 //
-//  Mode 8 | Rainbow Squarez Ramping
+//  Mode | Rainbow Squarez Ramping
 //  A0 = Cycle Speed
 //  A1 = Amount of Randomness
 //  A2 =  Duration of Darkness after full Color Cycle
 //
-//  Mode 9 | Rainbow Squarez Random
+//  Mode | Rainbow Squarez Random
 //  A0 = Cycle Speed
 //  A1 = Amount of Randomness
 //  A2 =  Duration of Darkness after full Color Cycle
@@ -17,27 +17,14 @@ void brightnessA1(){
     
     checkButtons();
 
-    //valueA1 = map(analogRead(A1), 0, 1024, 0, 20);
-    //pixel.setBrightness(valueA1);  
-    //inner.setBrightness(valueA1);  
-    
-    //brightness = map(analogRead(A1), 0, 1024, 0, 255);
-    //MaxBrightReduction = map(brightness, 0, 255, 0, MaxBright);
-    //FastLED.setBrightness(MaxBrightReduction); 
- 
     //A1 potentiometer controls for maximum brightness
-    maxBrightness = map(analogRead(A1), 0, 1024, 0, maxBrightnessTemp);
-    MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
-    pixel.setBrightness(maxBrightness);
-    strip.setBrightness(MaxBrightReduction);
-    FastLED.setBrightness(MaxBrightReduction);
-    inner.setBrightness(maxBrightness);
+    maxBrightnessAdjust();
     showLEDS();
 
-    Serial.println("maxBrightnessTemp " + String(maxBrightnessTemp));
-    Serial.println("MaxBright " + String(MaxBright));
-    Serial.println("maxBrightness " + String(maxBrightness));
-    Serial.println("MaxBrightnessReduction " + String(MaxBrightReduction));
+    // Serial.println("maxBrightnessTemp " + String(maxBrightnessTemp));
+    // Serial.println("MaxBright " + String(MaxBright));
+    // Serial.println("maxBrightness " + String(maxBrightness));
+    // Serial.println("MaxBrightnessReduction " + String(MaxBrightReduction));
     
 }
 
@@ -177,37 +164,12 @@ void RainbowSquarez(){
     showLEDS(); 
     
     delayA0(fadeSpeed);
+
+    // darkLEDS();
+    // delayA2(darkDelay);
+
+    darkLEDSDelay();
     //darkDelayBetwixtColors();
-
-    darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
-    Serial.println("darkDelay " + String(darkDelay));
-
-    if (darkDelay > 30) {
-      // Make the pixel dark
-
-      //FastLED.setBrightness(0);
-      strip.show(); 
-      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-           strip.setPixelColor(p, 0,0,0);
-           strip.setBrightness(0);
-      }
-      pixel.setPixelColor(0, 0,0,0); 
-      pixel.setBrightness(0);
-      inner.setPixelColor(0, 0,0,0); 
-      inner.setBrightness(0);
-      showLEDS();
-      
-
-    // Delay by the amount of A2
-    delayA2(darkDelay);
-    //Serial.println("darkDelay " + String(darkDelay));
-
-    }
-    
-    //darkDelayBetwixtColors();
-    
- 
-  //pixel.show(); 
   
 
 }
@@ -221,15 +183,15 @@ void changeValue() {
       if (increaseValue == true) {
         if ((modulateSpeed >= 1) && (modulateSpeed <= 100)){
            modulateSpeed = modulateSpeed+1;
-           Serial.println("Increasing Modulation Least ");
+           //Serial.println("Increasing Modulation Least ");
         }
         else if ((modulateSpeed >= 101) && (modulateSpeed <= 200)){
            modulateSpeed = modulateSpeed+5;
-           Serial.println("Increasing Modulation Leser ");
+           //Serial.println("Increasing Modulation Leser ");
         }
         else if ((modulateSpeed >= 201) && (modulateSpeed <= 600)){
            modulateSpeed = modulateSpeed+10;
-           Serial.println("Increasing Modulation Less ");
+           //Serial.println("Increasing Modulation Less ");
         }
         else {
           modulateSpeed = modulateSpeed+40;
@@ -240,15 +202,15 @@ void changeValue() {
       if (increaseValue == false) {
         if ((modulateSpeed >= 1) && (modulateSpeed <= 100)){
            modulateSpeed = modulateSpeed-1;
-           Serial.println("Decreasing Modulation Least ");
+           //Serial.println("Decreasing Modulation Least ");
         }
         else if ((modulateSpeed >= 101) && (modulateSpeed <= 200)){
            modulateSpeed = modulateSpeed-5;
-           Serial.println("Decreasing Modulation Lesser ");
+           //Serial.println("Decreasing Modulation Lesser ");
         }
         else if ((modulateSpeed >= 201) && (modulateSpeed <= 600)){
            modulateSpeed = modulateSpeed-10;
-           Serial.println("Decreasing Modulation Less ");
+           //Serial.println("Decreasing Modulation Less ");
         }
         else {
           modulateSpeed = modulateSpeed-40;
@@ -275,16 +237,19 @@ void ModulateControl() {
 
       checkButtons();
 
-      Serial.println("Increase " + String(increaseValue));
-      Serial.println("Increase false - fadeSpeed: " + String(fadeSpeed));
-      Serial.println("Increase false - modulateSpeed: " + String(modulateSpeed));
+      // Serial.println("Increase " + String(increaseValue));
+      // Serial.println("Increase false - fadeSpeed: " + String(fadeSpeed));
+      // Serial.println("Increase false - modulateSpeed: " + String(modulateSpeed));
         
-       //Serial.println("Mode 1 valueLog: " + String(valueLog));
+      //Serial.println("Mode 1 valueLog: " + String(valueLog));
       //fadeSpeed = map(valueLog, 0, 255, (speedMinimum/2), (40/2)); // Logarithmic Potentiometer Value
       //fadeSpeed = map(analogRead(A0), 0, 1024, durationMaximum, 0);
       //fadeSpeed = fadeSpeed;
       
+      // Check to see whether the modulation should be increasing or decreasing
       valueRangeLimits();
+
+      // Check the value of the modulateSpeed and change the value of the modulation amount depending on the amount
       changeValue();
 
       

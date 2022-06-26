@@ -764,59 +764,6 @@ void setRandomBrightsOnce() {
 
 }
 
-void darkLEDS() {
-
-    checkButtons();
-
-    // Make the pixel dark
-
-    strip.setBrightness(0);
-    FastLED.setBrightness(0);
-    pixel.setBrightness(0);
-    inner.setBrightness(0);
-
-    for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
-        strip.setPixelColor(p, 0, 0, 0);
-    }
-    pixel.setPixelColor(0, 0, 0, 0);
-    inner.setPixelColor(0, 0, 0, 0);
-    showLEDS();
-
-    //delayA2(darkDelay);
-    //Serial.println("dark");
-
-}
-
-void darkLEDSDelay() {
-
-    checkButtons();
-
-    darkDelay = map(analogRead(A2), 0, 1024, 0, durationMaximum);
-    //Serial.println("darkDelay " + String(darkDelay));
-
-    if (darkDelay > 30) {
-
-      // Make the pixel dark
-
-        strip.setBrightness(0);
-        FastLED.setBrightness(0);
-        pixel.setBrightness(0);
-        inner.setBrightness(0);
-
-        for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
-            strip.setPixelColor(p, 0, 0, 0);
-        }
-        pixel.setPixelColor(0, 0, 0, 0);
-        inner.setPixelColor(0, 0, 0, 0);
-        showLEDS();
-
-    }
-    
-
-    //delayA2(darkDelay);
-    //Serial.println("dark");
-
-}
 
 void darkDelayBetwixtColors() {
 

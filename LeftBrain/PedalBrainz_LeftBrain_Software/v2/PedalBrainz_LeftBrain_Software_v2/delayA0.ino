@@ -636,26 +636,28 @@ void delayA0(int count)
       }
       else if (Mode == 8) {
 
-        //valueA0 = map(analogRead(A0), 0, 1024, 2000, 0);
-        valueA0 = log(analogRead(A0) + 1) / log(1024) * 255;
-        modulateConstrain = modulateSpeed + (valueA0 - 200);
-        fadeSpeed = constrain(modulateConstrain, 0, 3000);
-        //fadeSpeed = map(analogRead(A0), 0, 1024, durationMaximum, 0);
-        //ModulateControl();
-        //fadeSpeed = fadeSpeed;
+        mapScaledA0();
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 100);
+
+        //valueLog = log(analogRead(A0) + 1) / log(1024) * 255;
+        //Serial.println("Mode 1 valueLog: " + String(valueLog));
+        //fadeSpeed = mapfloat(valueLog, 0, 255, (speedMinimum / 2), 30);         // Logarithmic Potentiometer Value
+
 
         //Serial.println("delayA0 fadeSpeeed: " + String(fadeSpeed));
       }
       else if (Mode == 9) {
 
-        //valueA0 = map(analogRead(A0), 0, 1024, 2000, 0);
-        valueA0 = log(analogRead(A0) + 1) / log(1024) * 255;
+        valueA0 = map(analogRead(A0), 0, 1024, (speedMinimum/10), 0);
+        //valueA0 = log(analogRead(A0) + 1) / log(1024) * 255;
+
         modulateConstrain = modulateSpeed + (valueA0 - 200);
         fadeSpeed = constrain(modulateConstrain, 0, 3000);
         //fadeSpeed = map(analogRead(A0), 0, 1024, durationMaximum, 0);
         //ModulateControl();
         //fadeSpeed = fadeSpeed;
 
+        //Serial.println("valueA0 : " + String(valueA0));
         //Serial.println("delayA0 fadeSpeeed: " + String(fadeSpeed));
       }
       else if (Mode == 10) {
@@ -663,7 +665,6 @@ void delayA0(int count)
         mapScaledA0();
         fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum, 0);
 
-        //Serial.println("Mode 2 controlAmount: " + String(controlAmount));
         //Serial.println("Mode 2 fadeSpeeed: " + String(fadeSpeed));
 
       }

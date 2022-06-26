@@ -387,19 +387,19 @@ void delayA2(int count)
       else if (Mode == 8) {
 
       mapScaledA2();
-      darkDelay = mapfloat(scaledA2, 0, 2300, durationMaximum/(9000/timeMultiplier), 0);
+      darkDelay = mapfloat(scaledA2, 0, 2300, (durationMaximum*timeMultiplier), 0);
       //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
       else if (Mode == 9) {
 
       mapScaledA2();
-      darkDelay = mapfloat(scaledA2, 0, 2300, durationMaximum/(9000/timeMultiplier), 0);
+      darkDelay = mapfloat(scaledA2, 0, 2300, (durationMaximum*timeMultiplier), 0);
       //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
       else if (Mode == 10) {
 
       mapScaledA2();
-      darkDelay = mapfloat(scaledA2, 0, 2300, durationMaximum/(9000/timeMultiplier), 0);
+      darkDelay = mapfloat(scaledA2, 0, 2300, (durationMaximum*timeMultiplier), 0);
       //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
       else {

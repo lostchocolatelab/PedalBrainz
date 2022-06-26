@@ -424,7 +424,7 @@ void Bank3()
       {
 
         //Call the main routine and loop the thing
-        increaseValue = true;
+        //increaseValue = true;
         //fadeSpeed = 10;
         RainbowSquarez();
         
@@ -458,7 +458,8 @@ void Bank3()
       {
 
         //Call the main routine and loop the thing
-        twinkelz();
+        popFade();
+        //twinkelz();
       }
         // Wait for the Mode Change
         modeChangeWait();
