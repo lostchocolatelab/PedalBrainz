@@ -128,10 +128,15 @@ else if (Bank == 3)
       // Serial.print(avgLight);
       // Serial.print(",");
       // Serial.print(avgLightInner);
+    
+    EVERY_N_MILLISECONDS( 10 ) 
+    {
       Serial.print(",");
       Serial.print(InnerBrightReductionQuad);
       Serial.print(",");
       Serial.println(MaxBrightReductionQuad);
+    }
+
   }
   else
   {
