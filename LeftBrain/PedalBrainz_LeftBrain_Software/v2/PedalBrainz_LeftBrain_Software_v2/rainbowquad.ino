@@ -36,34 +36,60 @@ void RainbowQuad() {
 
     if (Mode == 2) {
         brightnessStatic();  //  Quad Brightness is the same (static) values for 0,1,2,3
+        colorStairz();
         rainbowStairz2();
     }
     else if (Mode == 3) {
         //randomOnce = 0;
         setRandomBrightsOnce();
+        colorStairz();
         rainbowStairz2();
     }
     else if (Mode == 4) {
         setRandomBrights();
+        colorStairz();
         rainbowStairz2();
     }
     else if (Mode == 5) {
         brightnessStatic();  //  Quad Brightness is the same (static) values for 0,1,2,3
+        colorSawz();
         rainbowSawz2();
     }    
     else if (Mode == 6) {
         //randomOnce = 0;
         setRandomBrightsOnce();
+        colorSawz();
         rainbowSawz2();
     }
     else if (Mode == 7) {
         setRandomBrights();
+        colorSawz();
         rainbowSawz2();
     }
     else;
 
     //darkLEDSDelay();
 
+}
+
+void colorStairz()
+{
+colorone = 0xFF007F;
+colortwo = 0x6200FF;
+colorthree = 0xBEFF00;
+colorfour = 0x00FF34;
+colorfive = 0x0400FF;
+colorsix = 0x2600CA;
+}
+
+void colorSawz()
+{
+colorone = 0x3800ff;
+colortwo = 0x00abff;
+colorthree = 0xa3ff00;
+colorfour = 0x8900ff;
+colorfive = 0xff0000;
+colorsix = 0x56ff00;
 }
 
 void rainbowSawz2(){
