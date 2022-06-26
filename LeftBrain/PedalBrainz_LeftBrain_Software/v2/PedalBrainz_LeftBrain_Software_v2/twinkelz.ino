@@ -59,10 +59,10 @@
 //
 //  -Mark Kriegsman, December 2015
 
-// Overall twinkle speed.
-// 0 (VERY slow) to 8 (VERY fast).  
-// 4, 5, and 6 are recommended, default is 4.
-//#define TWINKLE_SPEED 8
+//  Overall twinkle speed.
+//  0 (VERY slow) to 8 (VERY fast).  
+//  4, 5, and 6 are recommended, default is 4.
+//  #define TWINKLE_SPEED 8
 
 int TWINKLE_SPEED = 8;
 
@@ -229,8 +229,8 @@ void drawTwinkles( CRGBSet& L)
 
 CRGB computeOneTwinkle( uint32_t ms, uint8_t salt)
 {
-  TWINKLE_SPEED = map(analogRead(A0), 0, 1024, 0, 9);
-  TWINKLE_DENSITY = map(analogRead(A2), 0, 1024, 1, 10);
+  TWINKLE_DENSITY = map(analogRead(A0), 0, 1024, 0, 9); //  Frequency of Twinkelz
+  TWINKLE_SPEED = map(analogRead(A2), 0, 1024, 1, 10);  //  Fade Speed of Twinkelz
 
   uint16_t ticks = ms >> (8-TWINKLE_SPEED);
   uint8_t fastcycle8 = ticks;

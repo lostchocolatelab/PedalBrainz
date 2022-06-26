@@ -39,7 +39,7 @@ void RainbowQuad() {
         rainbowStairz2();
     }
     else if (Mode == 3) {
-        randomOnce = 0;
+        //randomOnce = 0;
         setRandomBrightsOnce();
         rainbowStairz2();
     }
@@ -52,7 +52,7 @@ void RainbowQuad() {
         rainbowSawz2();
     }    
     else if (Mode == 6) {
-        randomOnce = 0;
+        //randomOnce = 0;
         setRandomBrightsOnce();
         rainbowSawz2();
     }
@@ -736,10 +736,10 @@ void setRandomBrights() {
 
     checkButtons();
 
-    randomBright0  = random(10, 255);
-    randomBright1  = random(10, 255);
-    randomBright2  = random(10, 255);
-    randomBright3  = random(10, 255);
+    randomBright0  = random(0, 255);
+    randomBright1  = random(0, 255);
+    randomBright2  = random(0, 255);
+    randomBright3  = random(0, 255);
 
 }
 
@@ -748,10 +748,10 @@ void setRandomBrightsOnce() {
 
     if (randomOnce == 0) {
 
-        randomBright0  = random(10, 255);
-        randomBright1  = random(10, 255);
-        randomBright2  = random(10, 255);
-        randomBright3  = random(10, 255);
+        randomBright0  = random(0, 255);
+        randomBright1  = random(0, 255);
+        randomBright2  = random(0, 255);
+        randomBright3  = random(0, 255);
 
         randomOnce = 1;
 

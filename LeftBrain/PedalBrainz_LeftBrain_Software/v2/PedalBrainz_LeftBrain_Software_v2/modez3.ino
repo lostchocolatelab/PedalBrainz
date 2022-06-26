@@ -217,6 +217,7 @@ void Bank3()
       modeStartupBank3();
 
       fadeUp = true;
+      randomOnce = 0;
       
       //writeStartupDataz();
       
@@ -312,6 +313,8 @@ void Bank3()
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank3();
+
+      randomOnce = 0;
       
       //writeStartupDataz();
       

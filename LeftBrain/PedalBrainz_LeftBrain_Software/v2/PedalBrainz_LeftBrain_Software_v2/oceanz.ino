@@ -120,8 +120,8 @@ void checkSpeed(){
     controlAmount  = map(analogRead(A0), 0, 1024, 90, 0);
     averageLEDS();
       
-    hue1 = map(analogRead(A2), 0, 1024, 0, 150);
-    hue2 = map(analogRead(A2), 0, 1024, 0, 20); 
+    hue1 = map(analogRead(A2), 0, 1024, 150, 0);
+    hue2 = map(analogRead(A2), 0, 1024, 20, 0); 
 
     //showLEDS(); 
 }
