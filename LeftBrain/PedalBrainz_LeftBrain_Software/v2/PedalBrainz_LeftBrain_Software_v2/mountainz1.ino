@@ -118,7 +118,7 @@ void mountainSnack() {
   speedControl = float(valueA0) / 256; // speed control bit shifted and then goes from 0-1
   randomAmount = float(valueA2) / 2048; // random depth from 0-0.5
 
-  if (Bank == 2 && Mode == 4){
+  if (Bank == 4 && Mode == 4){
     
   }
   else{
@@ -178,9 +178,6 @@ void mountainSnack() {
             
   };
 
-
-
-
   // Set pulse rate
   valueA0 = newValue1;
   targetSpeed = (maxLength * speedControl) + minLength; // set number of milliseconds the loop will last by multiplying the longest possible length by a fraction calculated by the knob
@@ -198,9 +195,6 @@ void mountainSnack() {
  // currentLoc = (milli * ((maxLength + minLength) / targetSpeed)) / 2; // fix this so that lengths other than 1000-4096 can be selected
    currentLoc = (milli * ((maxLength + minLength) / targetSpeed)) / ((maxLength + minLength)/loopLength);
   currentVal = sumArray[int(currentLoc)];
-
-
-
 
   // every so often decide whether to stop for a snack, current 3 times per cycle
 
@@ -220,7 +214,7 @@ void mountainSnack() {
 
     //Serial.println(scaledVal);
 
-    if (Bank == 2 && Mode == 4)
+    if (Bank == 4 && Mode == 4)
     {
 
     }
@@ -250,8 +244,6 @@ void mountainSnack() {
   plotCycle();
   checkButtons();
   
-  
-
   // pixel.setPixelColor(pixel number, R, G, B);
   // pixel.setPixelColor(0, 64, 0, 0); pixel.show();delay(1000); //red brightness value 0-255
 }
@@ -259,10 +251,10 @@ void mountainSnack() {
 void snackDecision(){
   // if you've decided to have your snack
 
-  if (Bank == 2 && Mode == 4){
+  if (Bank == 4 && Mode == 4){
 
-
-    if ((scaledVal >= 0) && (scaledVal <= .1)) {
+    if ((scaledVal >= 0) && (scaledVal <= .1)) 
+    {
                
         snackChance = 1024;
                    
@@ -289,13 +281,14 @@ void snackDecision(){
           //Serial.println(currentVal);          
         }
         else;
-
-    
     }
+    else;
 
   } 
-  else {
-    if (snackRandom < snackChance) {
+  else 
+  {
+    if (snackRandom < snackChance) 
+    {
     
         snackLength = map(analogRead(A2), 0, 1024, 0, (durationMaximum*timeMultiplier)/10); // Control the amount of Random Snack
         //snackLength = int(targetSpeed/3);
@@ -311,49 +304,76 @@ void snackDecision(){
         
         delaySnack(delaySnackLength);
     }
+    else;
   }
-  
-  
 
     plotCycle();
     checkButtons();
-
-  
 }
 
 void scaledLowDelay(){
-        if ((scaledVal >= 0) && (scaledVal <= .1)) {
-               
-               // Delay between cycles
-               for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                    strip.setPixelColor(p, 0, 0, 0);
-                }
-                pixel.setPixelColor(0, 0, 0, 0);
-                inner.setPixelColor(0, 0, 0, 0);
-                showLEDS();
-
-                strip.setBrightness(0);
-                FastLED.setBrightness(0);
-                pixel.setBrightness(0);
-                inner.setBrightness(0);
-                showLEDS();
-                
-                delayA2(darkDelay);
-
-                if (plotterPrint == true)
-                {
-                  //Serial.println("WaitDelay is True");
-                  //Serial.println(scaledVal);
-                }
-                else;
-                
-                currentVal = 2;
-           
+  if ((scaledVal >= 0) && (scaledVal <= .1)) 
+  {
+         
+         // Delay between cycles
+         for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+              strip.setPixelColor(p, 0, 0, 0);
           }
-}
-void mountainzColorMap(){
+          pixel.setPixelColor(0, 0, 0, 0);
+          inner.setPixelColor(0, 0, 0, 0);
+          showLEDS();
 
-   if (Bank == 1)
+          strip.setBrightness(0);
+          FastLED.setBrightness(0);
+          pixel.setBrightness(0);
+          inner.setBrightness(0);
+          showLEDS();
+          
+          delayA2(darkDelay);
+
+          if (plotterPrint == true)
+          {
+            //Serial.println("WaitDelay is True");
+            //Serial.println(scaledVal);
+          }
+          else;
+          
+          currentVal = 2;
+     
+    }
+    else;
+
+}
+
+void mountainzSetBrightness()
+{
+  strip.setBrightness(MaxBrightReduction);
+  FastLED.setBrightness(MaxBrightReduction);
+  pixel.setBrightness(scaledVal);
+  inner.setBrightness(scaledVal);
+  showLEDS();
+}
+
+void mountainzSetDark()
+{
+  strip.setBrightness(MaxBrightReduction);
+  FastLED.setBrightness(0);
+  pixel.setBrightness(0);
+  inner.setBrightness(0);
+  showLEDS();
+
+  for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+    strip.setPixelColor(p, 0,0,0);
+
+  }
+  pixel.setPixelColor(0, 0,0,0);
+  inner.setPixelColor(0, 0,0,0);
+  showLEDS();
+}
+
+void mountainColorMap2()
+{
+    if (Bank == 1)
     {
   
       if (Mode == 6){
@@ -365,536 +385,453 @@ void mountainzColorMap(){
           color = 3;
       }
     }  
-else  if (Bank == 2)
-  {
-    
-      if (Mode == 4){
-        
-          color = 6;
-      }
-      if (Mode == 5){
-        
-          color = 5;
-      }
-      if (Mode == 6){
-        
-          color = 5;
-      }
-  }
-else  if (Bank == 3)
-  {
+    else  if (Bank == 4)
+    {
       
-      if (Mode == 4){
-        
-          color = 4;
-      }
-      if (Mode == 5){
-        
-          color = 4;
-      }
-  }
-else  if (Bank == 4)
-  {
-    
-      if (Mode == 2){
-        
-          color = 6;
-      }
-      if (Mode == 3){
-        
-          color = 5;
-      }
-      if (Mode == 4){
-        
-          color = 5;
-      }
-  }
-else;
+        if (Mode == 2){
+          
+            color = 6;
+        }
+        else if (Mode == 3){
+          
+            color = 5;
+        }
+        else if (Mode == 4){
+          
+            color = 5;
+        }
+        else;
+    }
+    else;
 
-    // yann's simple system for setitng single pixel color with variable brightness
-    
     scaledVal = mapfloat(currentVal, 0, 255, 0, maximumScale);
     MaxBrightReduction = constrain(currentVal, 0, MaxBright);
+
+
+}
+void mountainzColorMap(){
+
+/**
+
+  A map of Mountainz Colors across Banks
+  
+*/
+
+  if (Bank == 1)
+  {
+
+    if (Mode == 6){
+
+      color = 1;
+    }
+    if (Mode == 7){
+
+      color = 3;
+    }
+  }  
+  else  if (Bank == 4)
+  {
+
+    if (Mode == 2){
+
+      color = 4;
+    }
+    else if (Mode == 3){
+
+      color = 6;
+    }
+    else if (Mode == 4){
+
+      color = 5;
+    }
+    else;
+  }
+  else;
+
+// yann's simple system for setitng single pixel color with variable brightness
+
+  scaledVal = mapfloat(currentVal, 0, 255, 0, maximumScale);
+  MaxBrightReduction = constrain(currentVal, 0, MaxBright);
     
-      //Serial.println(scaledVal);
-      if (color == 0) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-        
-        for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                strip.setPixelColor(p, 255, 0, 255);
-         }
-        pixel.setPixelColor(0, 255, 0, 255);
-        inner.setPixelColor(0, 255, 0, 255);
-        showLEDS();
+  //Serial.println(scaledVal);
+
+/**
+
+  Mountainz Single Colors
+  
+*/
+
+  if (color == 0) 
+  {
+    mountainzSetBrightness();
+
+    for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+      strip.setPixelColor(p, 255, 0, 255);
+    }
+    pixel.setPixelColor(0, 255, 0, 255);
+    inner.setPixelColor(0, 255, 0, 255);
+    showLEDS();
+  }
+
+  else if (color == 1) 
+  {
+    mountainzSetBrightness();
+
+    for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+      strip.setPixelColor(p, 0, 255, 255);
+    }
+    pixel.setPixelColor(0, 0, 255, 255);
+    inner.setPixelColor(0, 0, 255, 255);
+    showLEDS();
+  }
+
+  else if (color == 2) 
+  {
+    mountainzSetBrightness();
+
+    for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+      strip.setPixelColor(p, 0, 0, 255);
+    }
+    pixel.setPixelColor(0, 0, 0, 255);
+    inner.setPixelColor(0, 0, 0, 255);
+    showLEDS();
+  }
+
+/**
+
+  Mountainz Multi-Colors
+
+  A wacky system for setitng triple pixel color with variable brightness
+  
+*/
+
+  else if (color == 3) 
+  {
+    if ((currentVal >= 0) && (currentVal <= 2)) 
+    {
+      mountainzSetDark();
+    }
+    else if ((currentVal >= 3) && (currentVal <= 60)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, (currentVal/2), 0, currentVal);
       }
-    
-      if (color == 1) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-         
-        for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                strip.setPixelColor(p, 0, 255, 255);
-        }
-        pixel.setPixelColor(0, 0, 255, 255);
-        inner.setPixelColor(0, 0, 255, 255);
-        showLEDS();
+      pixel.setPixelColor(0, (currentVal/2), 0, currentVal);
+      inner.setPixelColor(0, (currentVal/2), 0, currentVal);
+      showLEDS();
+    }
+    else if ((currentVal >= 60) && (currentVal <= 200)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 10, (currentVal/2), currentVal);
+
       }
-    
-      if (color == 2) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-         
-        for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                strip.setPixelColor(p, 0, 0, 255);
-        }
-        pixel.setPixelColor(0, 0, 0, 255);
-        inner.setPixelColor(0, 0, 0, 255);
-        showLEDS();
+      pixel.setPixelColor(0, 10, (currentVal/2), currentVal);
+      inner.setPixelColor(0, 10, (currentVal/2), currentVal);
+      showLEDS();
+    }
+    else if ((currentVal >= 190) && (currentVal <= 255)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, currentVal, currentVal, 0);
+        FastLED.show();
       }
-    
-      // damian's wacky system for setitng triple pixel color with variable brightness
-    
-      
-      if (color == 3) {
-        if ((currentVal >= 0) && (currentVal <= 2)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(0);
-              pixel.setBrightness(0);
-              inner.setBrightness(0);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, 0,0,0);
+      pixel.setPixelColor(0, currentVal, currentVal, 0);
+      inner.setPixelColor(0, currentVal, currentVal, 0);
+      showLEDS();
+    }
+    else;
+  }
+  else if (color == 4) 
+  {
+    if ((currentVal >= 0) && (currentVal <= 2)) 
+    {
+      mountainzSetDark();
+    }
+    else if ((currentVal >= 3) && (currentVal <= 40)) 
+    {
+      mountainzSetBrightness();
 
-              }
-              pixel.setPixelColor(0, 0,0,0);
-              inner.setPixelColor(0, 0,0,0);
-              showLEDS();
-            }
-        if ((currentVal >= 3) && (currentVal <= 60)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-          
-          for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                strip.setPixelColor(p, (currentVal/2), 0, currentVal);
-        }
-        pixel.setPixelColor(0, (currentVal/2), 0, currentVal);
-        inner.setPixelColor(0, (currentVal/2), 0, currentVal);
-        showLEDS();
-        }
-      
-        if ((currentVal >= 60) && (currentVal <= 200)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-          
-          
-          for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                strip.setPixelColor(p, 10, (currentVal/2), currentVal);
-
-          }
-          pixel.setPixelColor(0, 10, (currentVal/2), currentVal);
-          inner.setPixelColor(0, 10, (currentVal/2), currentVal);
-          showLEDS();
-        }
-      
-        if ((currentVal >= 190) && (currentVal <= 255)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-          
-          for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                strip.setPixelColor(p, currentVal, currentVal, 0);
-                FastLED.show();
-          }
-        pixel.setPixelColor(0, currentVal, currentVal, 0);
-        inner.setPixelColor(0, currentVal, currentVal, 0);
-        showLEDS();
-        }
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 130,216,189);
+        FastLED.show();
       }
-      if (color == 4) {
-            if ((currentVal >= 0) && (currentVal <= 2)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(0);
-              pixel.setBrightness(0);
-              inner.setBrightness(0);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, 0,0,0);
 
-              }
-              pixel.setPixelColor(0, 0,0,0);
-              inner.setPixelColor(0, 0,0,0);
-              showLEDS();
-            }
-            if ((currentVal >= 3) && (currentVal <= 40)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, colorRed);
-              }
-              
-              pixel.setPixelColor(0, colorRed); 
-              inner.setPixelColor(0, colorRed); 
-              showLEDS();
-            }
-            if ((currentVal >= 41) && (currentVal <= 80)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, colorOrange);
-              }
-              
-              pixel.setPixelColor(0, colorOrange); 
-              inner.setPixelColor(0, colorOrange);
-              showLEDS();
-            }
-            if ((currentVal >= 81) && (currentVal <= 120)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, colorYellow);
-              }
-              
-              pixel.setPixelColor(0, colorYellow);
-              inner.setPixelColor(0, colorYellow);
-              showLEDS();
-            }
-            if ((currentVal >= 121) && (currentVal <= 160)) {
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, colorGreen);
-              }
-              
-              pixel.setPixelColor(0, colorGreen); 
-              inner.setPixelColor(0, colorGreen); 
-              showLEDS();
-            }
-            if ((currentVal >= 161) && (currentVal <= 200)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, colorBlue);
-              }
-              
-              pixel.setPixelColor(0, colorBlue); 
-              inner.setPixelColor(0, colorBlue); 
-              showLEDS();
-            }
-            if ((currentVal >= 201) && (currentVal <= 240)) {
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, colorPurple);
-              }
-              
-              pixel.setPixelColor(0, colorPurple); 
-              inner.setPixelColor(0, colorPurple); 
-              showLEDS();
-            }
-            if ((currentVal >= 241) && (currentVal <= 260)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, colorPink);
+      pixel.setPixelColor(0, 130,216,189); 
+      inner.setPixelColor(0, 130,216,189); 
+      showLEDS();
+    }
+    else if ((currentVal >= 41) && (currentVal <= 80)) 
+    {
+      mountainzSetBrightness();
 
-              }
-              
-              pixel.setPixelColor(0, colorPink); 
-              inner.setPixelColor(0, colorPink); 
-              showLEDS();
-            }
-          }
-          if (color == 5) {
-            if ((currentVal >= 0) && (currentVal <= 2)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(0);
-              pixel.setBrightness(0);
-              inner.setBrightness(0);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, 0,0,0);
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 171,253,145);
+      }
 
-              }
-              pixel.setPixelColor(0, 0,0,0);
-              inner.setPixelColor(0, 0,0,0);
-              showLEDS();
-            }
-            if ((currentVal >= 3) && (currentVal <= 40)) {
-              strip.setBrightness(MaxBrightReduction);FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, 3,2,93);
+      pixel.setPixelColor(0, 171,253,145); 
+      inner.setPixelColor(0, 171,253,145); 
+      showLEDS();
+    }
+    else if ((currentVal >= 81) && (currentVal <= 120)) 
+    {
+      mountainzSetBrightness();
 
-              }
-              pixel.setPixelColor(0, 3,2,93);
-              inner.setPixelColor(0, 3,2,93);
-              showLEDS();
-            }
-            if ((currentVal >= 41) && (currentVal <= 80)) {
-              strip.setBrightness(MaxBrightReduction);FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, 3,29,255);
-              }
-              
-              pixel.setPixelColor(0, 3,29,255); 
-              inner.setPixelColor(0, 3,29,255); 
-              showLEDS();
-            }
-            if ((currentVal >= 81) && (currentVal <= 120)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, 0,255,81);
-              }
-              
-              pixel.setPixelColor(0, 0,255,81); 
-              inner.setPixelColor(0, 0,255,81); 
-              showLEDS();
-            }
-            if ((currentVal >= 121) && (currentVal <= 160)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, 37,255,0);
-              }
-              
-              pixel.setPixelColor(0, 37,255,0); 
-              inner.setPixelColor(0, 37,255,0); 
-              showLEDS();
-            }
-            if ((currentVal >= 161) && (currentVal <= 200)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, 255,0,255);
-                      FastLED.show();
-              }
-              
-              pixel.setPixelColor(0, 255,0,255); 
-              inner.setPixelColor(0, 255,0,255); 
-              showLEDS();
-            }
-            if ((currentVal >= 201) && (currentVal <= 240)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, 255,0,157);
-              }
-              
-              pixel.setPixelColor(0, 255,0,157); 
-              inner.setPixelColor(0, 255,0,157); 
-              showLEDS();
-            }
-            if ((currentVal >= 241) && (currentVal <= 260)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, 35,0,255);
-              }
-              
-              pixel.setPixelColor(0, 35,0,255);
-              inner.setPixelColor(0, 35,0,255); 
-              showLEDS();
-            }
-          }
-          if (color == 6) {
-            if ((currentVal >= 0) && (currentVal <= 2)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(0);
-              pixel.setBrightness(0);
-              inner.setBrightness(0);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, 0,0,0);
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 131,197,123);
+      }
 
-              }
-              pixel.setPixelColor(0, 0,0,0);
-              inner.setPixelColor(0, 0,0,0);
-              showLEDS();
-            }
-            if ((currentVal >= 3) && (currentVal <= 40)) {
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, 20,0,255);
-                      FastLED.show();
-              }
-              
-              pixel.setPixelColor(0, 20,0,255); 
-              inner.setPixelColor(0, 20,0,255); 
-              showLEDS();
-            }
-            if ((currentVal >= 41) && (currentVal <= 80)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, 255,0,255);
-              }
+      pixel.setPixelColor(0, 131,197,123); 
+      inner.setPixelColor(0, 131,197,123); 
+      showLEDS();
+    }
+    else if ((currentVal >= 121) && (currentVal <= 160)) 
+    {
+      mountainzSetBrightness();
 
-              pixel.setPixelColor(0, colorOrange); 
-              pixel.setPixelColor(0, colorOrange); 
-              showLEDS();
-            }
-            if ((currentVal >= 81) && (currentVal <= 120)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, 255,0,104);
-              }
-              
-              pixel.setPixelColor(0, 255,0,104); 
-              inner.setPixelColor(0, 255,0,104); 
-              showLEDS();
-            }
-            if ((currentVal >= 121) && (currentVal <= 160)) {
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, 255,0,0);
-              }
-              
-              pixel.setPixelColor(0, 255,0,0); 
-              inner.setPixelColor(0, 255,0,0); 
-              showLEDS();
-            }
-            if ((currentVal >= 161) && (currentVal <= 200)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, 255,41,0);
-                      
-              }
-               
-              pixel.setPixelColor(0, 255,41,0); 
-              inner.setPixelColor(0, 255,41,0); 
-              showLEDS();
-            }
-            if ((currentVal >= 201) && (currentVal <= 240)) {
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, 255,255,0);
-              }
-              
-              pixel.setPixelColor(0, 255,255,0); 
-              inner.setPixelColor(0, 255,255,0); 
-              showLEDS();
-            }
-            if ((currentVal >= 241) && (currentVal <= 260)) {
-              
-              strip.setBrightness(MaxBrightReduction);
-              FastLED.setBrightness(MaxBrightReduction);
-              pixel.setBrightness(scaledVal);
-              inner.setBrightness(scaledVal);
-              showLEDS();
-              
-              for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-                      strip.setPixelColor(p, 255,255,255);
-                      
-              }
-                           
-              pixel.setPixelColor(0, 255,255,255);
-              inner.setPixelColor(0, 255,255,255); 
-              showLEDS();
-            }
-          }
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 0,255,0);
+      }
+
+      pixel.setPixelColor(0, 0,255,0); 
+      inner.setPixelColor(0, 0,255,0); 
+      showLEDS();
+    }
+    else if ((currentVal >= 161) && (currentVal <= 200)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 121,141,56);
+
+      }
+
+      pixel.setPixelColor(0, 121,141,56); 
+      inner.setPixelColor(0, 121,141,56); 
+      showLEDS();
+    }
+    else if ((currentVal >= 201) && (currentVal <= 240)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 0,251,163);
+      }
+
+      pixel.setPixelColor(0, 0,251,163); 
+      inner.setPixelColor(0, 0,251,163); 
+      showLEDS();
+    }
+    else if ((currentVal >= 241) && (currentVal <= 260)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 173,255,0);
+
+      }
+
+      pixel.setPixelColor(0, 173,255,0);
+      inner.setPixelColor(0, 173,255,0); 
+      showLEDS();
+    }
+    else;
+
+  }
+  else if (color == 5) {
+    if ((currentVal >= 0) && (currentVal <= 2)) 
+    {
+      mountainzSetDark();
+    }
+    else if ((currentVal >= 3) && (currentVal <= 40)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 3,2,93);
+
+      }
+      pixel.setPixelColor(0, 3,2,93);
+      inner.setPixelColor(0, 3,2,93);
+      showLEDS();
+    }
+    else if ((currentVal >= 41) && (currentVal <= 80)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 3,29,255);
+      }
+
+      pixel.setPixelColor(0, 3,29,255); 
+      inner.setPixelColor(0, 3,29,255); 
+      showLEDS();
+    }
+    else if ((currentVal >= 81) && (currentVal <= 120)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 0,255,81);
+      }
+
+      pixel.setPixelColor(0, 0,255,81); 
+      inner.setPixelColor(0, 0,255,81); 
+      showLEDS();
+    }
+    else if ((currentVal >= 121) && (currentVal <= 160)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 37,255,0);
+      }
+
+      pixel.setPixelColor(0, 37,255,0); 
+      inner.setPixelColor(0, 37,255,0); 
+      showLEDS();
+    }
+    else if ((currentVal >= 161) && (currentVal <= 200)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 255,0,255);
+        FastLED.show();
+      }
+
+      pixel.setPixelColor(0, 255,0,255); 
+      inner.setPixelColor(0, 255,0,255); 
+      showLEDS();
+    }
+    else if ((currentVal >= 201) && (currentVal <= 240)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 255,0,157);
+      }
+
+      pixel.setPixelColor(0, 255,0,157); 
+      inner.setPixelColor(0, 255,0,157); 
+      showLEDS();
+    }
+    else if ((currentVal >= 241) && (currentVal <= 260)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 35,0,255);
+      }
+
+      pixel.setPixelColor(0, 35,0,255);
+      inner.setPixelColor(0, 35,0,255); 
+      showLEDS();
+    }
+    else;
+  }
+  else if (color == 6) 
+  {
+    if ((currentVal >= 0) && (currentVal <= 2)) 
+    {
+      mountainzSetDark();
+    }
+    else if ((currentVal >= 3) && (currentVal <= 40)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 20,0,255);
+        FastLED.show();
+      }
+
+      pixel.setPixelColor(0, 20,0,255); 
+      inner.setPixelColor(0, 20,0,255); 
+      showLEDS();
+    }
+    else if ((currentVal >= 41) && (currentVal <= 80)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 255,0,255);
+      }
+
+      pixel.setPixelColor(0, colorOrange); 
+      inner.setPixelColor(0, colorOrange); 
+      showLEDS();
+    }
+    else if ((currentVal >= 81) && (currentVal <= 120)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 255,0,104);
+      }
+
+      pixel.setPixelColor(0, 255,0,104); 
+      inner.setPixelColor(0, 255,0,104); 
+      showLEDS();
+    }
+    else if ((currentVal >= 121) && (currentVal <= 160)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 255,0,0);
+      }
+
+      pixel.setPixelColor(0, 255,0,0); 
+      inner.setPixelColor(0, 255,0,0); 
+      showLEDS();
+    }
+    else if ((currentVal >= 161) && (currentVal <= 200)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 255,41,0);
+
+      }
+
+      pixel.setPixelColor(0, 255,41,0); 
+      inner.setPixelColor(0, 255,41,0); 
+      showLEDS();
+    }
+    else if ((currentVal >= 201) && (currentVal <= 240)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 255,255,0);
+      }
+
+      pixel.setPixelColor(0, 255,255,0); 
+      inner.setPixelColor(0, 255,255,0); 
+      showLEDS();
+    }
+    else if ((currentVal >= 241) && (currentVal <= 260)) 
+    {
+      mountainzSetBrightness();
+
+      for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
+        strip.setPixelColor(p, 255,255,255);
+
+      }
+
+      pixel.setPixelColor(0, 255,255,255);
+      inner.setPixelColor(0, 255,255,255); 
+      showLEDS();
+    }
+    else;
+
+  }
 
 }
 

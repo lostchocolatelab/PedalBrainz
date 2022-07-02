@@ -167,8 +167,10 @@ void Bank4()
       {
 
         //Call the main routine and loop the thing
-        mountainSnack ();
-        reRandom = false;
+        fire1();
+        //dripz();
+        //meteorz();
+        //meteorz2();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -200,14 +202,14 @@ void Bank4()
 
         // Call the main routine and loop the thing
         mountainSnack ();
-        reRandom = true;
+        reRandom = false;
       }
         // Wait for the Mode Change
         modeChangeWait();
     }
   }
 
-  // RainbowQuad
+  // 
   if (Mode == 3)
   {
     if (!waitingFlag)
@@ -239,7 +241,7 @@ void Bank4()
     }
   }
 
-  // RainbowMountainRepeat
+  // 
   if (Mode == 4)
   {
     if (!waitingFlag)
@@ -271,7 +273,7 @@ void Bank4()
     }
   }
 
-  // RainbowMountainRandom
+  // 
   if (Mode == 5)
   {
     if (!waitingFlag)
@@ -303,7 +305,7 @@ void Bank4()
     }
   }
 
-  // RainbowMountainPulse
+  // 
   if (Mode == 6)
   {
     if (!waitingFlag)
@@ -334,7 +336,7 @@ void Bank4()
         modeChangeWait();
     }
   }
-  // RainbowSquarez
+  // 
   if (Mode == 7)
   {
     if (!waitingFlag)
@@ -358,7 +360,10 @@ void Bank4()
       {
 
         //Call the main routine and loop the thing
-        RainbowSquarez();
+        //fire1();
+        dripz();
+        //meteorz();
+        //meteorz2();
         
       }
         // Wait for the Mode Change
@@ -366,7 +371,7 @@ void Bank4()
     }
   }
 
- // RainbowSquarez
+ // 
   if (Mode == 8)
   {
     if (!waitingFlag)
@@ -390,7 +395,10 @@ void Bank4()
       {
 
         //Call the main routine and loop the thing
-        RainbowSquarez();
+        //fire1();
+        //dripz();
+        meteorz();
+        //meteorz2();
         
       }
         // Wait for the Mode Change
@@ -398,7 +406,7 @@ void Bank4()
     }
   }
 
-  // Strange Attractor 2
+  // 
   if (Mode == 9)
   {
     if (!waitingFlag)
@@ -424,16 +432,17 @@ void Bank4()
       {
 
         //Call the main routine and loop the thing
-        increaseValue = true;
-        //fadeSpeed = 10;
-        RainbowSquarez();
+        //fire1();
+        //dripz();
+        //meteorz();
+        meteorz2();
       }
         // Wait for the Mode Change
         modeChangeWait();
     }
   }
 
-  // Strange Attractor 3
+  // 
   if (Mode == 10)
   {
     if (!waitingFlag)

@@ -46,12 +46,12 @@
   A1 = Maximum Brightness
   A2 = Saw Direction 
 
-  Mode 7 | Rainbow Squarez 
+  Mode 8 | Rainbow Squarez 
   A0 = Rainbow Cycle Speed
   A1 = Maximum Brightness
   A2 = Duration when LED is fully off (It's Dark)
 
-  Mode 8 | Rainbow Squarez Modulate
+  Mode 9 | Rainbow Squarez Modulate
   A0 = Rainbow Cycle Speed
   A1 = Maximum Brightness
   A2 = Duration when LED is fully off (It's Dark)  
