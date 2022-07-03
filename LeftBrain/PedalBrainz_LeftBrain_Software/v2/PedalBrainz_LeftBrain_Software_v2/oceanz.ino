@@ -152,11 +152,11 @@ void pacifica_loop()
   sCIStart3 -= (deltams1 * beatsin88(501,5,7));
   sCIStart4 -= (deltams2 * beatsin88(257,4,6));
 
-  Serial.println("Speedfactor1 : " + String(speedfactor1));
-  Serial.println("Speedfactor2 : " + String(speedfactor2));
-  Serial.println("deltams1 : " + String(deltams1));
-  Serial.println("deltams2 : " + String(deltams2));
-  Serial.println("Control Amount : " + String(controlAmount));
+  // Serial.println("Speedfactor1 : " + String(speedfactor1));
+  // Serial.println("Speedfactor2 : " + String(speedfactor2));
+  // Serial.println("deltams1 : " + String(deltams1));
+  // Serial.println("deltams2 : " + String(deltams2));
+  // Serial.println("Control Amount : " + String(controlAmount));
 
   // Clear out the LED array to a dim background blue-green
   //fill_solid( leds, NUM_LEDS, CRGB( 2, 6, 10));

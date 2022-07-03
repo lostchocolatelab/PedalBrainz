@@ -410,6 +410,10 @@ void mountainzColorMap(){
 
       color = 5;
     }
+    else if (Mode == 5){
+
+      color = 4;
+    }
     else;
   }
   else;

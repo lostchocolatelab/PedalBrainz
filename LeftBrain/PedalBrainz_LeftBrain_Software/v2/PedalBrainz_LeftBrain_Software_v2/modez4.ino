@@ -297,6 +297,7 @@ void Bank4()
       {
 
         //Call the main routine and loop the thing
+        dripz();
         mountainSnack ();
         reRandom = true;
       }
@@ -329,8 +330,10 @@ void Bank4()
       {
 
         //Call the main routine and loop the thing
-        mountainSnack ();
-        reRandom = true;
+        //fire1();
+        dripz();
+        //meteorz();
+        //meteorz2();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -361,8 +364,8 @@ void Bank4()
 
         //Call the main routine and loop the thing
         //fire1();
-        dripz();
-        //meteorz();
+        //dripz();
+        meteorz();
         //meteorz2();
         
       }
@@ -397,8 +400,8 @@ void Bank4()
         //Call the main routine and loop the thing
         //fire1();
         //dripz();
-        meteorz();
-        //meteorz2();
+        //meteorz();
+        meteorz2();
         
       }
         // Wait for the Mode Change
@@ -432,10 +435,7 @@ void Bank4()
       {
 
         //Call the main routine and loop the thing
-        //fire1();
-        //dripz();
-        //meteorz();
-        meteorz2();
+        oceanz();
       }
         // Wait for the Mode Change
         modeChangeWait();
@@ -466,7 +466,7 @@ void Bank4()
       {
 
         // Call the main routine and loop the thing
-        //valueA0  = 7;
+        fire1();
         oceanz();
       }
         // Wait for the Mode Change

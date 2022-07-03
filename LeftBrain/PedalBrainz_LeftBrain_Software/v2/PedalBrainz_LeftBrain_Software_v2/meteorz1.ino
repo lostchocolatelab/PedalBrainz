@@ -20,8 +20,6 @@ void meteorz()
   darkDelay = darkDelay+randomAmountA2;
   delayA2(darkDelay);
 
-
-
 }
 
 void meteorShower(){
