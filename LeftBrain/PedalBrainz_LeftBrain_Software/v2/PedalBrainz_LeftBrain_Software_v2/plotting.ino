@@ -73,8 +73,6 @@ if (Bank == 1)
     printStrangeXYZ(); // This one is the coolest
   }
   else;
-
-
 }
 else if (Bank == 2)
 {
@@ -151,9 +149,10 @@ else if (Bank == 3)
 }
 else if (Bank == 4)
 {
-  if ((Mode >= 1) && (Mode <= 10))
+  if ((Mode >= 2) && (Mode <= 4))
   {
-      //averageLEDSPlot();
+    EVERY_N_MILLISECONDS( 10 ) 
+    {
       //Print some things
       Serial.print(",");
       Serial.println(currentVal);
@@ -161,6 +160,7 @@ else if (Bank == 4)
       // Serial.print(avgLight);
       // Serial.print(",");
       // Serial.println(avgLightInner);
+    }
   }
   else
   {
@@ -185,12 +185,15 @@ else
 
 void printAverage()
 {
+  EVERY_N_MILLISECONDS( 10 ) 
+  {
     Serial.print(","); //Un-comment this for a smooth line
     Serial.print(avgLight);
     Serial.print(","); //Un-comment this for a smooth line
     Serial.print(scaledBright);
     Serial.print(","); //Un-comment this for a smooth line
     Serial.println(avgLightInner);
+  }
 }
 void printStrangeXYZ()
 {

@@ -11,25 +11,25 @@
   -Loop the Mode
   -Wait for the Mode Change
 
-  Mode 1 | Mountainz Random Repeat
+  Mode 1 | Firez
   A0 = Cycle Speed
-  A1 = Amount of Randomness
-  A2 = Chance of Snack
+  A1 = Maximum Brightness
+  A2 = 
 
-  Mode 2 | Mountainz Random Random
+  Mode 2 | Rolling Hillz Random Random
   A0 = Cycle Speed
-  A1 = Amount of Randomness
-  A2 = Chance of Snack
+  A1 = Chance of Snack
+  A2 = Amount of Randomness
 
-  Mode 3 | Mountainz Random Random
+  Mode 3 | Sunset Hillz Random Random
   A0 = Cycle Speed
-  A1 = Amount of Randomness
-  A2 = Chance of Snack
+  A1 = Chance of Snack
+  A2 = Amount of Randomness
 
-  Mode 4 | 
-  A0 = Fade Speed
-  A1 = Duration of Maximum Brightness
-  A2 = Duration of Minimum Brightness
+  Mode 4 | Shallow Mountainz
+  A0 = Cycle Speed
+  A1 = Dark Duration
+  A2 = Amount of Randomness
 
   Mode 5 | 
   A0 = Fade Speed
@@ -202,7 +202,7 @@ void Bank4()
 
         // Call the main routine and loop the thing
         mountainSnack ();
-        reRandom = false;
+        reRandom = true;
       }
         // Wait for the Mode Change
         modeChangeWait();

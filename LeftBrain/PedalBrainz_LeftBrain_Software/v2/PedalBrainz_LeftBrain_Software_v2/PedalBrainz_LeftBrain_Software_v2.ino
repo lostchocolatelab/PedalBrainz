@@ -362,6 +362,7 @@ int delaySnackLength; // the addition of snackLength & snackLengthRandom
 
 int sumArray[loopLength];
 int scaledVal;
+int scaledValTemp;
 boolean waitDelay = true;
 
 float randomAmount;
@@ -539,8 +540,8 @@ void setup() {
   // Bank = 1;
   // Mode = 0;
 
-  Bank = 1;
-  Mode = 0;
+  Bank = 4;
+  Mode = 7;
 
   timeMultiplier = 1;
 
@@ -566,7 +567,7 @@ void setup() {
   initial = true;
 
   setRandoms();
-  plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
+  plotterPrint = true; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
   startMillis = millis();  //initial start time
 }
 

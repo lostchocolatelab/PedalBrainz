@@ -214,32 +214,35 @@ void mountainSnack() {
 
     //Serial.println(scaledVal);
 
-    if (Bank == 4 && Mode == 4)
+    if (Bank == 1)
     {
-
-    }
-    else if ((scaledVal >= 0) && (scaledVal <= 10)) {
+      if ((scaledVal >= 0) && (scaledVal <= 10)) 
+      {
           
-            // Slow down the simulation when the value is low
-            
-            strangeRandom = random(20, 200);
-            strangeSlowAmount = (strangeRandom+(delayAmount*3));
-            delay(strangeSlowAmount);
+      // Slow down the simulation when the value is low
+      
+      strangeRandom = random(20, 200);
+      strangeSlowAmount = (strangeRandom+(delayAmount*3));
+      delay(strangeSlowAmount);
 
-            if (plotterPrint == true)
-            {
-              //Serial.println("StrangeSlow: " + String(strangeSlowAmount));
-              //Serial.println("currentVal: " + String(currentVal));
-              //Serial.println("scaledVal: " + String(scaledVal));
-              //Serial.println("ScaledVal: " + String(scaledVal));
-              //Serial.println("CurrentVal: " + String(currentVal));
-            }
-            else;
+      if (plotterPrint == true)
+      {
+        //Serial.println("StrangeSlow: " + String(strangeSlowAmount));
+        //Serial.println("currentVal: " + String(currentVal));
+        //Serial.println("scaledVal: " + String(scaledVal));
+        //Serial.println("ScaledVal: " + String(scaledVal));
+        //Serial.println("CurrentVal: " + String(currentVal));
+      }
+      else;
 
-            showLEDS();
+      showLEDS();
+      }
     }  
+    else if (Bank == 4 && Mode == 4)
+    {
+      //scaledLowDelay();
+    }
     else;
-        
 
   plotCycle();
   checkButtons();
@@ -248,7 +251,8 @@ void mountainSnack() {
   // pixel.setPixelColor(0, 64, 0, 0); pixel.show();delay(1000); //red brightness value 0-255
 }
 
-void snackDecision(){
+void snackDecision()
+{
   // if you've decided to have your snack
 
   if (Bank == 4 && Mode == 4){
@@ -258,11 +262,11 @@ void snackDecision(){
                
         snackChance = 1024;
                    
-        snackLength = map(analogRead(A2), 0, 1024, 0, (durationMaximum*timeMultiplier)); // Control the amount of Random Snack
+        snackLength = map(analogRead(A1), 0, 1024, (durationMaximum*timeMultiplier)/10, 0); // Control the amount of Random Snack
         //snackLength = int(targetSpeed/3);
         lastMillis += snackLength;
         snackRandom = 1024;
-        snackLengthRandom = random(1000)-50;
+        snackLengthRandom = random((durationMaximum*timeMultiplier)/10)-50;
         //snackLengthRandom = random(snackLength+1000)-(snackLength+50);
         delaySnackLength = snackLength+snackLengthRandom;
         //delaySnackLength = snackLength;
@@ -290,7 +294,7 @@ void snackDecision(){
     if (snackRandom < snackChance) 
     {
     
-        snackLength = map(analogRead(A2), 0, 1024, 0, (durationMaximum*timeMultiplier)/10); // Control the amount of Random Snack
+        snackLength = map(analogRead(A1), 0, 1024, 0, (durationMaximum*timeMultiplier)/10); // Control the amount of Random Snack
         //snackLength = int(targetSpeed/3);
         lastMillis += snackLength;
         snackRandom = 1024;
@@ -304,14 +308,14 @@ void snackDecision(){
         
         delaySnack(delaySnackLength);
     }
-    else;
   }
 
     plotCycle();
     checkButtons();
 }
 
-void scaledLowDelay(){
+void scaledLowDelay()
+{
   if ((scaledVal >= 0) && (scaledVal <= .1)) 
   {
          
@@ -371,44 +375,6 @@ void mountainzSetDark()
   showLEDS();
 }
 
-void mountainColorMap2()
-{
-    if (Bank == 1)
-    {
-  
-      if (Mode == 6){
-        
-          color = 1;
-      }
-      if (Mode == 7){
-        
-          color = 3;
-      }
-    }  
-    else  if (Bank == 4)
-    {
-      
-        if (Mode == 2){
-          
-            color = 6;
-        }
-        else if (Mode == 3){
-          
-            color = 5;
-        }
-        else if (Mode == 4){
-          
-            color = 5;
-        }
-        else;
-    }
-    else;
-
-    scaledVal = mapfloat(currentVal, 0, 255, 0, maximumScale);
-    MaxBrightReduction = constrain(currentVal, 0, MaxBright);
-
-
-}
 void mountainzColorMap(){
 
 /**
@@ -450,7 +416,8 @@ void mountainzColorMap(){
 
 // yann's simple system for setitng single pixel color with variable brightness
 
-  scaledVal = mapfloat(currentVal, 0, 255, 0, maximumScale);
+  scaledValTemp = mapfloat(currentVal, 0, 255, 0, maximumScale);
+  scaledVal = constrain(scaledValTemp, 0, 255);
   MaxBrightReduction = constrain(currentVal, 0, MaxBright);
     
   //Serial.println(scaledVal);
@@ -559,12 +526,12 @@ void mountainzColorMap(){
       mountainzSetBrightness();
 
       for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-        strip.setPixelColor(p, 130,216,189);
+        strip.setPixelColor(p, 2,255,27);
         FastLED.show();
       }
 
-      pixel.setPixelColor(0, 130,216,189); 
-      inner.setPixelColor(0, 130,216,189); 
+      pixel.setPixelColor(0, 2,255,27); 
+      inner.setPixelColor(0, 2,255,27); 
       showLEDS();
     }
     else if ((currentVal >= 41) && (currentVal <= 80)) 
@@ -572,11 +539,11 @@ void mountainzColorMap(){
       mountainzSetBrightness();
 
       for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-        strip.setPixelColor(p, 171,253,145);
+        strip.setPixelColor(p, 0,150,0);
       }
 
-      pixel.setPixelColor(0, 171,253,145); 
-      inner.setPixelColor(0, 171,253,145); 
+      pixel.setPixelColor(0, 0,150,0); 
+      inner.setPixelColor(0, 0,150,0); 
       showLEDS();
     }
     else if ((currentVal >= 81) && (currentVal <= 120)) 
@@ -584,11 +551,11 @@ void mountainzColorMap(){
       mountainzSetBrightness();
 
       for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-        strip.setPixelColor(p, 131,197,123);
+        strip.setPixelColor(p, 0,255,35);
       }
 
-      pixel.setPixelColor(0, 131,197,123); 
-      inner.setPixelColor(0, 131,197,123); 
+      pixel.setPixelColor(0, 0,255,35); 
+      inner.setPixelColor(0, 0,255,35); 
       showLEDS();
     }
     else if ((currentVal >= 121) && (currentVal <= 160)) 
@@ -596,11 +563,11 @@ void mountainzColorMap(){
       mountainzSetBrightness();
 
       for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-        strip.setPixelColor(p, 0,255,0);
+        strip.setPixelColor(p, 39,255,2);
       }
 
-      pixel.setPixelColor(0, 0,255,0); 
-      inner.setPixelColor(0, 0,255,0); 
+      pixel.setPixelColor(0, 39,255,2); 
+      inner.setPixelColor(0, 39,255,2); 
       showLEDS();
     }
     else if ((currentVal >= 161) && (currentVal <= 200)) 
@@ -608,12 +575,12 @@ void mountainzColorMap(){
       mountainzSetBrightness();
 
       for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-        strip.setPixelColor(p, 121,141,56);
+        strip.setPixelColor(p, 36,255,0);
 
       }
 
-      pixel.setPixelColor(0, 121,141,56); 
-      inner.setPixelColor(0, 121,141,56); 
+      pixel.setPixelColor(0, 36,255,0); 
+      inner.setPixelColor(0, 36,255,0); 
       showLEDS();
     }
     else if ((currentVal >= 201) && (currentVal <= 240)) 
@@ -621,11 +588,11 @@ void mountainzColorMap(){
       mountainzSetBrightness();
 
       for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-        strip.setPixelColor(p, 0,251,163);
+        strip.setPixelColor(p, 0,255,10);
       }
 
-      pixel.setPixelColor(0, 0,251,163); 
-      inner.setPixelColor(0, 0,251,163); 
+      pixel.setPixelColor(0, 0,255,10); 
+      inner.setPixelColor(0, 0,255,10); 
       showLEDS();
     }
     else if ((currentVal >= 241) && (currentVal <= 260)) 
@@ -633,18 +600,18 @@ void mountainzColorMap(){
       mountainzSetBrightness();
 
       for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
-        strip.setPixelColor(p, 173,255,0);
+        strip.setPixelColor(p, 0,255,70);
 
       }
 
-      pixel.setPixelColor(0, 173,255,0);
-      inner.setPixelColor(0, 173,255,0); 
+      pixel.setPixelColor(0, 0,255,70);
+      inner.setPixelColor(0, 0,255,70); 
       showLEDS();
     }
     else;
-
   }
-  else if (color == 5) {
+  else if (color == 5) 
+  {
     if ((currentVal >= 0) && (currentVal <= 2)) 
     {
       mountainzSetDark();

@@ -9,12 +9,18 @@ uint8_t hue = 32;
 byte idex = 255;
 byte meteorLength = 29;
 
-void meteorz(){
- meteorShower(); 
- darkDelay = map(analogRead(A2), 0, 1024, 0, 300); 
- Serial.println("darkDelay : " + String(darkDelay));
- delayA2(darkDelay);
- maxBrightnessAdjust();
+void meteorz()
+{
+  maxBrightnessAdjust();
+
+  meteorShower(); 
+
+  darkDelay = map(analogRead(A2), 0, 1024, (speedMinimum/30), 0); 
+  randomAmountA2 = random(-500, darkDelay+100);
+  darkDelay = darkDelay+randomAmountA2;
+  delayA2(darkDelay);
+
+
 
 }
 
@@ -23,9 +29,8 @@ void meteorShower(){
   //A1 potentiometer controls for maximum brightness
   maxBrightnessAdjust();
 
-  fadeSpeed = map(analogRead(A0), 0, 1024, 9000, 1000);
+  fadeSpeed = map(analogRead(A0), 0, 1024, speedMinimum, 100);
   
-
   // slide all the pixels down one in the array
   memmove8( &leds[1], &leds[0], (NUM_LEDS - 1) * 3 );
 
