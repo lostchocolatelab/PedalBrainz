@@ -306,7 +306,7 @@ void doubleClickEventUp()
 
 
 
-  if ((Bank >= 1) && (Bank <= 5))
+  if ((Bank >= 1) && (Bank <= 4))
   {
     if (Mode == 999)
     {
@@ -328,7 +328,7 @@ void doubleClickEventUp()
 
 
   }
-  else if (Bank == 6)
+  else if (Bank == 5)
   {
     if (Mode == 999)
     {
@@ -497,7 +497,7 @@ void doubleClickEventDown()
 
   Serial.println("doubleclick down");
 
-  if ((Bank >= 2) && (Bank <= 6))
+  if ((Bank >= 2) && (Bank <= 5))
   {
     Serial.println("Inner");
 
@@ -535,7 +535,7 @@ void doubleClickEventDown()
     }
     else
     {
-      Bank = 6;
+      Bank = 5;
       Mode = 1;
       Serial.println("Bank Change = " + String(Bank));
       writeStartupDataz();

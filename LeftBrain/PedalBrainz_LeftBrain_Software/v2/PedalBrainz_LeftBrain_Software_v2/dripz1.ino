@@ -91,10 +91,28 @@ void dripz()
   	{
   		leds[led_pos] = CHSV(0,0,0);
 
-  		darkDelay = map(analogRead(A2), 0, 1024, speedMinimum/2, 100); 
+		if (Bank == 4 && Mode == 4)
+		{
+			darkDelay = map(analogRead(A2), 0, 1024, speedMinimum/2, 100); 
+			randomAmountA2 = random(-1000, darkDelay+5000);
+			darkDelay = darkDelay+randomAmountA2;
+  		delayA2(darkDelay);
+		}
+		else if (Bank == 4 && Mode == 4)
+		{
+			darkDelay = map(analogRead(A2), 0, 1024, speedMinimum/2, 100); 
+			randomAmountA2 = random(-1000, darkDelay+5000);
+			darkDelay = darkDelay+randomAmountA2;
+  		delayA2(darkDelay);			
+		}
+		else
+		{
+			darkDelay = map(analogRead(A2), 0, 1024, speedMinimum/2, 100); 
 			randomAmountA2 = random(-500, darkDelay+1000);
 			darkDelay = darkDelay+randomAmountA2;
   		delayA2(darkDelay);
+		}
+
 
 		if (MIRROR) leds[inv_led_pos] = CHSV(0,0,0);
 

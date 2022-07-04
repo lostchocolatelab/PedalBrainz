@@ -149,7 +149,7 @@ else if (Bank == 3)
 }
 else if (Bank == 4)
 {
-  if ((Mode >= 2) && (Mode <= 4))
+  if ((Mode >= 2) && (Mode <= 3))
   {
     EVERY_N_MILLISECONDS( 10 ) 
     {

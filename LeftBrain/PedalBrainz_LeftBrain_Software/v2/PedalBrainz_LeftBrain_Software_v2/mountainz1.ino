@@ -118,7 +118,8 @@ void mountainSnack() {
   speedControl = float(valueA0) / 256; // speed control bit shifted and then goes from 0-1
   randomAmount = float(valueA2) / 2048; // random depth from 0-0.5
 
-  if (Bank == 4 && Mode == 4){
+  if (Bank == 4 && Mode == 5)
+  {
     
   }
   else{
@@ -238,7 +239,7 @@ void mountainSnack() {
       showLEDS();
       }
     }  
-    else if (Bank == 4 && Mode == 4)
+    else if (Bank == 4 && Mode == 5)
     {
       //scaledLowDelay();
     }
@@ -255,7 +256,8 @@ void snackDecision()
 {
   // if you've decided to have your snack
 
-  if (Bank == 4 && Mode == 4){
+  if (Bank == 4 && Mode == 4)
+  {
 
     if ((scaledVal >= 0) && (scaledVal <= .1)) 
     {
@@ -275,16 +277,43 @@ void snackDecision()
         delaySnack(delaySnackLength);
         //delayA2(darkDelay);
 
-        if (plotterPrint == true)
-        {
-          //Serial.println("SNACK TIME");
-          //Serial.println(snackLength+snackLengthRandom);
-          //Serial.println("delaySnackLength :" + String(delaySnackLength));
-          //Serial.println("WaitDelay is True");
-          //Serial.println(scaledVal);
-          //Serial.println(currentVal);          
-        }
-        else;
+        //Serial.println("SNACK TIME");
+        //Serial.println(snackLength+snackLengthRandom);
+        //Serial.println("delaySnackLength :" + String(delaySnackLength));
+        //Serial.println("WaitDelay is True");
+        //Serial.println(scaledVal);
+        //Serial.println(currentVal);          
+    }
+    else;
+
+  }
+  else if (Bank == 4 && Mode == 5)
+  {
+
+    if ((scaledVal >= 0) && (scaledVal <= .1)) 
+    {
+               
+        snackChance = 1024;
+                   
+        snackLength = map(analogRead(A1), 0, 1024, (durationMaximum*timeMultiplier)/10, 0); // Control the amount of Random Snack
+        //snackLength = int(targetSpeed/3);
+        lastMillis += snackLength;
+        snackRandom = 1024;
+        snackLengthRandom = random((durationMaximum*timeMultiplier)/10)-50;
+        //snackLengthRandom = random(snackLength+1000)-(snackLength+50);
+        delaySnackLength = snackLength+snackLengthRandom;
+        //delaySnackLength = snackLength;
+        //delay(snackLength+snackLengthRandom);
+        
+        delaySnack(delaySnackLength);
+        //delayA2(darkDelay);
+
+        //Serial.println("SNACK TIME");
+        //Serial.println(snackLength+snackLengthRandom);
+        //Serial.println("delaySnackLength :" + String(delaySnackLength));
+        //Serial.println("WaitDelay is True");
+        //Serial.println(scaledVal);
+        //Serial.println(currentVal);       
     }
     else;
 
@@ -408,11 +437,11 @@ void mountainzColorMap(){
     }
     else if (Mode == 4){
 
-      color = 5;
+      color = 4;
     }
     else if (Mode == 5){
 
-      color = 4;
+      color = 5;
     }
     else;
   }

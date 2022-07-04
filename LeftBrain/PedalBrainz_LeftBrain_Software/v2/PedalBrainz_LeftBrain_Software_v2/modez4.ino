@@ -12,9 +12,9 @@
   -Wait for the Mode Change
 
   Mode 1 | Firez
-  A0 = Cycle Speed
+  A0 = Sparking
   A1 = Maximum Brightness
-  A2 = 
+  A2 = Cooling
 
   Mode 2 | Rolling Hillz Random Random
   A0 = Cycle Speed
@@ -26,37 +26,37 @@
   A1 = Chance of Snack
   A2 = Amount of Randomness
 
-  Mode 4 | Shallow Mountainz
+  Mode 4 | Shallow Hillz
   A0 = Cycle Speed
   A1 = Dark Duration
   A2 = Amount of Randomness
 
-  Mode 5 | 
+  Mode 5 | Shallow Mountainz
+  A0 = Cycle Speed
+  A1 = Dark Duration
+  A2 = Amount of Randomness
+
+  Mode 6 | Dripz
+  A0 = Fade Speed
+  A1 = Maximum Brightness
+  A2 = Dark Duration 
+
+  Mode 7 | Meteorz1
   A0 = Fade Speed
   A1 = Duration of Maximum Brightness
   A2 = Duration of Minimum Brightness
 
-  Mode 6 | 
+  Mode 8 | Meteorz2
   A0 = Fade Speed
   A1 = Duration of Maximum Brightness
   A2 = Duration of Minimum Brightness
 
-  Mode 7 | 
+  Mode 9 | Oceanz
   A0 = Fade Speed
-  A1 = Duration of Maximum Brightness
-  A2 = Duration of Minimum Brightness
+  A1 = Maximum Brightness
+  A2 = Color Hue Shift
 
-  Mode 8 | 
-  A0 = Fade Speed
-  A1 = Duration of Maximum Brightness
-  A2 = Duration of Minimum Brightness
-
-  Mode 9 | 
-  A0 = Fade Speed
-  A1 = Duration of Maximum Brightness
-  A2 = Duration of Minimum Brightness
-
-  Mode 10 | Oceanz
+  Mode 10 | Fire Oceanz
   A0 = Fade Speed
   A1 = Maximum Brightness
   A2 = Color Hue Shift
@@ -265,6 +265,7 @@ void Bank4()
       {
 
         //Call the main routine and loop the thing
+        dripz();
         mountainSnack ();
         reRandom = true;
       }
