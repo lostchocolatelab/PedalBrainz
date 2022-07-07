@@ -17,10 +17,11 @@
 #define VOLTS 5
 
 //#include <Adafruit_DotStar.h>
+//#include <Adafruit_NeoPixel.h>
+
 #include <FlashAsEEPROM_SAMD.h>
 #include <MultiMap.h>
 
-#include <Adafruit_NeoPixel.h>
 #include <FastLED_NeoPixel.h>
 #include <FastLED.h>
 // Declare our NeoPixel strip object:
