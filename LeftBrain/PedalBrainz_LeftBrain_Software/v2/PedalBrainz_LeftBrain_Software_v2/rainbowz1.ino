@@ -369,7 +369,7 @@ else;
 if (Bank == 1){
   if (Mode == 4) {
 
-      //Change the maximum brightness of the LED using potantiometer A2
+      //Change the maximum brightness of the LED using potantiometer A1
       rainbowBright = map(analogRead(A1), 0, 1024, 0, 100);
       MaxBrightReduction = map(analogRead(A1), 0, 1024, 0, MaxBright);
       pixel.setBrightness(rainbowBright);
@@ -381,7 +381,7 @@ if (Bank == 1){
     }
     if (Mode == 5) {
 
-      //Change the maximum brightness of the LED using potantiometer A2
+      //Change the maximum brightness of the LED using potantiometer A1
 
       valueA1 = map(analogRead(A1), 0, 1024, 255, 0);
       randomAmount = random(0, 255);
@@ -394,7 +394,7 @@ if (Bank == 1){
 if (Bank == 2){
     if (Mode == 1) {
 
-      //Change the maximum brightness of the LED using potantiometer A2
+      //Change the maximum brightness of the LED using potantiometer A1
       rainbowBright = map(analogRead(A1), 0, 1024, 0, 100);
       MaxBrightReduction = map(analogRead(A1), 0, 1024, 0, MaxBright);
       pixel.setBrightness(rainbowBright);
@@ -406,7 +406,7 @@ if (Bank == 2){
     }
     if (Mode == 2) {
 
-      //Change the maximum brightness of the LED using potantiometer A2
+      //Change the maximum brightness of the LED using potantiometer A1
 
       valueA1 = map(analogRead(A1), 0, 1024, 0, 255);
       randomAmount = random(0, 255);
@@ -519,7 +519,7 @@ else;
 if (Bank == 1){
   if (Mode == 4) {
 
-      //Change the maximum brightness of the LED using potantiometer A2
+      //Change the maximum brightness of the LED using potantiometer A1
       rainbowBright = map(analogRead(A1), 0, 1024, 0, 100);
       MaxBrightReduction = map(analogRead(A1), 0, 1024, 0, MaxBright);
       pixel.setBrightness(rainbowBright);
@@ -531,7 +531,7 @@ if (Bank == 1){
     }
     if (Mode == 5) {
 
-      //Change the maximum brightness of the LED using potantiometer A2
+      //Change the maximum brightness of the LED using potantiometer A1
 
       valueA1 = map(analogRead(A1), 0, 1024, 0, 255);
       randomAmount = random(0, 255);
@@ -544,7 +544,7 @@ if (Bank == 1){
 if (Bank == 2){
     if (Mode == 1) {
 
-      //Change the maximum brightness of the LED using potantiometer A2
+      //Change the maximum brightness of the LED using potantiometer A1
       rainbowBright = map(analogRead(A1), 0, 1024, 0, 100);
       MaxBrightReduction = map(analogRead(A1), 0, 1024, 0, MaxBright);
       pixel.setBrightness(rainbowBright);
@@ -556,7 +556,7 @@ if (Bank == 2){
     }
     if (Mode == 2) {
 
-          //Change the maximum brightness of the LED using potantiometer A2
+          //Change the maximum brightness of the LED using potantiometer A1
 
       valueA1 = map(analogRead(A1), 0, 1024, 0, 255);
       randomAmount = random(0, 255);
