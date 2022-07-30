@@ -663,7 +663,9 @@ void delayA2(int count)
       //Serial.println("Bank - " + String(Bank) + " Mode " + String(Mode) + " fadeSpeeed: " + String(darkDelay));
       }
       else {
-        darkDelay = 100;
+      darkDelay = 500;
+      // mapScaledA2();
+      // darkDelay = mapfloat(scaledA2, 0, 2300, (durationMaximum*timeMultiplier), 0);        
       //Serial.println("Else darkDelay: " + String(darkDelay));
       }
 

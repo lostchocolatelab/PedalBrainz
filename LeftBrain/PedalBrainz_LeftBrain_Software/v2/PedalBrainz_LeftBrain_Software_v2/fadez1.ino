@@ -29,7 +29,8 @@ void scalePixelFade (int val){
   ////////////////////
 
 
-void fadez1 () {
+void fadez1 () 
+{
 
   plotCycle();
 

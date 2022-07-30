@@ -76,3 +76,24 @@ void scalePixelBlue (int val){
       //int greenValue = 107;
       
 }
+
+void scalePixelInner (int val){
+
+      // This makes the potentiometer slower to change when reducting from full and gives better control fidelity at higher speeds
+      // This is a map of values for the potentiometer. note: the in array should have increasing values
+      int in[]  = {0  ,  15   , 30  ,  45  ,  60  ,  75 ,   90  ,  105  , 120 ,  135  , 150};
+      // This is a map of values for potentiometer curve type.
+      int out[] = {0   , 1   ,  2 ,    3    , 5    , 7    , 10 ,   15  ,  20 ,   40  ,  140 };  // 11
+      // This maps the potentiometer scale.
+      controlAmount  = val;
+      // This is a multimap that assigns values from the [in] array (potentiometer) to values from the [out] array (curve)
+      x = multiMap(controlAmount, in, out, 11);
+      // This maps the values for the Modez.
+      //redValue = map(x, 0, 255, 0, 255);
+      innerValue = constrain(x, 0.0, 140.0);
+
+      //int redValue = 236;
+      //int blueValue = 73;
+      //int greenValue = 107;
+      
+}

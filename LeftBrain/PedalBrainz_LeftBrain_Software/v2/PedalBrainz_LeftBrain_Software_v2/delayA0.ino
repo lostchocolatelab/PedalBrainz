@@ -974,7 +974,10 @@ void delayA0(int count)
 
       }
       else {
-        fadeSpeed = 7;
+        //fadeSpeed = 7;
+        mapScaledA0();
+        //fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum/(9000/timeMultiplier), 0);
+        fadeSpeed = mapfloat(scaledA0, 0, 2300, speedMinimum/(timeMultiplier), 0);
         //Serial.println("Else fadeSpeeed: " + String(fadeSpeed));
       }
 

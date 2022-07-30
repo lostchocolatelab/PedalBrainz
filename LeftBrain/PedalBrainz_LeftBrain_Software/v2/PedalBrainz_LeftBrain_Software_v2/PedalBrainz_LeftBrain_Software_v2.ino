@@ -472,6 +472,7 @@ int avgLight0;
 int avgLight1;
 int avgLight2;
 int avgLightInner;
+float innerValue;
 
 /**
 
@@ -541,8 +542,8 @@ void setup() {
   // Bank = 1;
   // Mode = 0;
 
-  Bank = 1;
-  Mode = 0;
+  Bank = 6;
+  Mode = 103;
 
   timeMultiplier = 1;
 
@@ -568,7 +569,7 @@ void setup() {
   initial = true;
 
   setRandoms();
-  plotterPrint = true; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
+  plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
   startMillis = millis();  //initial start time
 }
 

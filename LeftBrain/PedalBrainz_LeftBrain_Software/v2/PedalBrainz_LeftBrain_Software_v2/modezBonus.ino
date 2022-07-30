@@ -127,6 +127,35 @@ void modezBonus()
       modeChangeWait();
     }
   }
+  if (Mode == 103)  //  Curve Tes
+  {
+    if (!waitingFlag)
+    {
+      // Flash the pixel at the start of a mode chnage
+      //modeFlash();
+
+      modeStartupBank1();
+
+      //writeStartupDataz();
+
+      //Do the last thing and WaitForModeChange
+
+      waitingFlag = true;
+      WaitForModeChange = true;
+      Serial.println(" WaitForModeChange = True");
+    }
+    else
+    {
+      if (WaitForModeChange)
+      {
+
+      // Call the main routine and loop the thing
+        testCurve();
+      }
+      // Wait for the Mode Change
+      modeChangeWait();
+    }
+  }  
   if (Mode == 999)  //  Memory Game
   {
     if (!waitingFlag)

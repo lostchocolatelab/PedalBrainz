@@ -658,7 +658,10 @@ void delayA1(int count)
         fadeSpeed = map(scaledA1, 0, 2300, speedMinimum, 10);
       }
       else {
-        fullDelay = 100;
+        fullDelay = 500;
+          // mapScaledA1();
+          // fullDelay = mapfloat(scaledA1, 0, 2300, (durationMaximum*timeMultiplier), 0);
+
               //Serial.println("Else fullDelay: " + String(fullDelay));
       }
 
