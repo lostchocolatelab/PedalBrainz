@@ -274,6 +274,19 @@ boolean plotterPrint = true;
 */
 
 //Coordinates for the lorenz function
+float la = 10.0;
+float lb = 28.0;
+float lc = 8.0 / 3.0;
+
+float lx = 0;
+float ly = 0;
+float lz = 0;
+
+float ldx = 0;
+float ldy = 0;
+float ldz = 0;
+
+//Coordinates for other attractorz
 float w = 0;
 float x = 0;
 float y = 0;
@@ -558,8 +571,8 @@ void setup() {
   // Bank = 1;
   // Mode = 0;
 
-  Bank = 3;
-  Mode = 2;
+  Bank = 1;
+  Mode = 0;
 
   timeMultiplier = 1;
 
@@ -585,7 +598,7 @@ void setup() {
   initial = true;
 
   setRandoms();
-  plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
+  plotterPrint = true; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
   startMillis = millis();  //initial start time
 }
 

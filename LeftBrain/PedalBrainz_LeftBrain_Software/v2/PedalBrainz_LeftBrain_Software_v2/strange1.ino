@@ -211,13 +211,13 @@ void strangeSlow2() {
 
   maxBrightnessAdjust();
 
-  if ((strangeSlowCount >= 0) && (strangeSlowCount <= 20)) {
+  if ((strangeSlowCount >= 0) && (strangeSlowCount <= 10)) {
        strangeSlowCount = strangeSlowCount + 1;
   }
   else 
   {
     // Slow down the simulation when the value is low
-  if ((scaledY >= 0) && (scaledY <= 50)) {
+  if ((scaledY >= 0) && (scaledY <= 5)) {
       valueA0 = map(analogRead(A0), 0, 1024, 1000, 0);
       strangeRandom = random(20, 200);
       strangeSlowAmount = (strangeRandom + valueA0);
@@ -282,13 +282,13 @@ void lorenzFunction() {
   // I divided each equation in two steps:
   // Before I calculation and sum to the old value in the same step, now I divided it
 
-  dx = (a * (y - x)) * dt;
-  dy = (x * (b - z) - y) * dt;
-  dz = ((x * y) - (c * z)) * dt;
+  dx = (la * (ly - lx)) * dt;
+  dy = (lx * (lb - lz) - ly) * dt;
+  dz = ((lx * ly) - (lc * lz)) * dt;
 
-  x += dx;
-  y += dy;
-  z += dz;
+  lx += dx;
+  ly += dy;
+  lz += dz;
 
   /*
   I don't know exactly what range of values can the lorenz return
@@ -297,15 +297,15 @@ void lorenzFunction() {
 
   */
 
-  updateScaling(0, 0, 1, 0, x);
-  updateScaling(0, 1, 1, 1, y);
-  updateScaling(0, 2, 1, 2, z);
+  updateScaling(0, 0, 1, 0, lx);
+  updateScaling(0, 1, 1, 1, ly);
+  updateScaling(0, 2, 1, 2, lz);
 
   //Values are scaled to 0-255 to adapt to the analogWrite function
 
-  scaledX = mapfloat(x, scalings[0][0], scalings[1][0], 0, 255);
-  scaledY = mapfloat(y, scalings[0][1], scalings[1][1], 0, 255);
-  scaledZ = mapfloat(z, scalings[0][2], scalings[1][2], 0, 255);
+  scaledX = mapfloat(lx, scalings[0][0], scalings[1][0], 0, 255);
+  scaledY = mapfloat(ly, scalings[0][1], scalings[1][1], 0, 255);
+  scaledZ = mapfloat(lz, scalings[0][2], scalings[1][2], 0, 255);
 
   scaledXInner = mapfloat(scaledX, 0, 255, 0, 190);
   scaledYInner = mapfloat(scaledY, 0, 255, 0, 190);
@@ -394,4 +394,43 @@ void updateScaling(byte rowA, byte cellA, byte rowB, byte cellB, float checkValu
     // Serial.print(",");
     // Serial.println(scalings[rowB][cellB]);  
 
+}
+
+void zeroVariables()
+{
+//Constants for the lorenz function, KEEP UNCHANGED
+// a = 0;
+// b = 0;
+// c = 0;
+// d = 0;
+// e = 0;
+// f = 0;
+// g = 0;
+
+// w = 0;
+// x = 0;
+// y = 0;
+// z = 0;
+// scaledX = 0;
+// scaledY = 0;
+// scaledZ = 0;
+// effectiveR = 0;
+// effectiveG = 0;
+// effectiveB = 0;
+
+//Variables for lorenz function
+// dx = 0;
+// dy = 0;
+// dz = 0;
+
+}
+
+void strangeDelayReset()
+{
+  strangeRandom = 0;
+  strangeSlowAmount = 0;
+  delayAmount = 0;
+  fadeSpeed = 0;
+  darkDelay = 0;
+  fullDelay = 0;
 }

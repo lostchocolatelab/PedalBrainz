@@ -65,6 +65,7 @@
 void modeStartupBank1() {
 
   maxBrightnessSet();
+  //zeroVariables();
 
   //  Set Up something before jumping into the Mode Routine
   
@@ -387,9 +388,11 @@ void Bank1()
 
       //Do the last thing and WaitForModeChange
 
-      x = 0.01;
-      y = 0.3;
-      z = 0.7;
+      strangeDelayReset();
+
+      lx = 0.01;
+      ly = 0.3;
+      lz = 0.7;
 
       waitingFlag = true;
       WaitForModeChange = true;
@@ -422,9 +425,11 @@ void Bank1()
 
       //Do the last thing and WaitForModeChange
 
-      x = 0.1;
-      y = 2;
-      z = 1;
+      strangeDelayReset();
+
+      lx = 0.1;
+      ly = 2;
+      lz = 1;
 
       waitingFlag = true;
       WaitForModeChange = true;
@@ -457,9 +462,11 @@ void Bank1()
 
       //Do the last thing and WaitForModeChange
 
-      x = 0.5;
-      y = 0.9;
-      z = 0.1;
+      strangeDelayReset();
+
+      lx = 0.5;
+      ly = 0.9;
+      lz = 0.1;
 
       waitingFlag = true;
       WaitForModeChange = true;
