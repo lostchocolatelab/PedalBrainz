@@ -38,6 +38,24 @@ void maxBrightnessAdjust()
   //Serial.println("MaxBrightReduction : " + String(MaxBrightReduction));
 }
 
+void maxBrightnessAdjustInner()
+{
+  //A1 potentiometer controls for maximum brightness
+  maxBrightness = map(analogRead(A1), 0, 1024, 0, maxBrightnessTemp);
+  MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
+  strip.setBrightness(MaxBrightReduction);
+
+  scalePixelInner(maxBrightness);
+  pixel.setBrightness(innerValue);  
+  inner.setBrightness(innerValue);
+  
+  FastLED.setBrightness(MaxBrightReduction);
+
+  //Serial.println("maxBrightness : " + String(maxBrightness));
+  //Serial.println("MaxBright : " + String(MaxBright));
+  //Serial.println("MaxBrightReduction : " + String(MaxBrightReduction));
+}
+
 void darkLEDS() 
 {
 

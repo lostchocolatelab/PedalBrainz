@@ -42,12 +42,12 @@ void RainbowQuad() {
     else if (Mode == 3) {
         //randomOnce = 0;
         setRandomBrightsOnce();
-        colorStairz();
+        colorStairzOnce();
         rainbowStairz1();
     }
     else if (Mode == 4) {
         setRandomBrights();
-        colorStairz();
+        colorStairzRandom();
         rainbowStairz1();
     }
     else if (Mode == 5) {
@@ -58,12 +58,12 @@ void RainbowQuad() {
     else if (Mode == 6) {
         //randomOnce = 0;
         setRandomBrightsOnce();
-        colorSawz();
+        colorSawzOnce();
         rainbowSawz1();
     }
     else if (Mode == 7) {
         setRandomBrights();
-        colorSawz();
+        colorSawzRandom();
         rainbowSawz1();
     }
     else;
@@ -71,6 +71,18 @@ void RainbowQuad() {
     //darkLEDSDelay();
 
 }
+
+// uint32_t colorBlueDark = 0x0000FF;
+// uint32_t colorBlueLight = 0x004EFF;
+// uint32_t colorBlueLightest = 0x5AFFFF;
+// uint32_t colorBlueTurquoise = 0x00FFFF;
+// uint32_t colorGreenDark = 0x00FF00;
+// uint32_t colorGreenLight = 0x38FF00;
+// uint32_t colorGreenMint = 0x00FF2C;
+// uint32_t colorGreenPea = 0x64FF00;
+// uint32_t colorRedDark = 0xFF0000;
+// uint32_t colorRedLight = 0xFF0020;
+// uint32_t colorRedPurple = 0xFF00FF;
 
 void colorStairz()
 {
@@ -82,6 +94,26 @@ colorfive = 0x0400FF;
 colorsix = 0x2600CA;
 }
 
+void colorStairzOnce()
+{
+colorone = colorBlueDark;
+colortwo = colorBlueLight;
+colorthree = colorBlueLightest;
+colorfour = colorGreenDark;
+colorfive = colorGreenLight;
+colorsix = colorGreenMint;
+}
+
+void colorStairzRandom()
+{
+colorone = colorRedDark;
+colortwo = colorRedLight;
+colorthree = colorRedPurple;
+colorfour = colorPink;
+colorfive = colorGreenPea;
+colorsix = colorYellow;
+}
+
 void colorSawz()
 {
 colorone = 0x3800ff;
@@ -91,6 +123,28 @@ colorfour = 0x8900ff;
 colorfive = 0xff0000;
 colorsix = 0x56ff00;
 }
+
+void colorSawzOnce()
+{
+colorone = colorBlueDark;
+colortwo = colorBlueLight;
+colorthree = colorBlueLightest;
+colorfour = colorGreenDark;
+colorfive = colorGreenLight;
+colorsix = colorGreenMint;
+}
+
+void colorSawzRandom()
+{
+colorone = colorRedDark;
+colortwo = colorRedLight;
+colorthree = colorRedPurple;
+colorfour = colorPink;
+colorfive = colorGreenPea;
+colorsix = colorYellow;
+}
+
+
 
 void rainbowSawz1(){
 

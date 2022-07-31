@@ -56,6 +56,11 @@
   A1 = Maximum Brightness
   A2 = Duration when LED is fully off (It's Dark)  
 
+  Mode 9 | Twinkelz
+  A0 = TWINKLE_SPEED
+  A1 = MAXIMUM BRIGHTNESS
+  A2 = TWINKLE_DENSITY
+
 */
 
 void modeStartupBank3(){

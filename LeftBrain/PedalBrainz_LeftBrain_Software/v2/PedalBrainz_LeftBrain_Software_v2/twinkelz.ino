@@ -138,8 +138,14 @@ void twinkelz()
   uint8_t avgLight2 = leds[2].getAverageLight();
   //Serial.println("Average : " + String(avgLight*3));
 
-  pixel.setPixelColor(0, avgLight0,avgLight1,avgLight2); 
-  inner.setPixelColor(0, avgLight0,avgLight1,avgLight2); 
+  scalePixelInnerRed(avgLight0);
+  scalePixelInnerBlue(avgLight1);
+  scalePixelInnerGreen(avgLight2);
+  pixel.setPixelColor(0, innerValueRed, innerValueGreen, innerValueBlue);
+  inner.setPixelColor(0, innerValueRed, innerValueGreen, innerValueBlue);
+  
+  // pixel.setPixelColor(0, avgLight0,avgLight1,avgLight2); 
+  // inner.setPixelColor(0, avgLight0,avgLight1,avgLight2); 
   
   showLEDS();
   FastLED.show();

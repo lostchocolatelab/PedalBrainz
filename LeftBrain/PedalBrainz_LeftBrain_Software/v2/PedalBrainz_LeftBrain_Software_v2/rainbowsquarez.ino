@@ -19,6 +19,9 @@ void brightnessA1(){
 
     //A1 potentiometer controls for maximum brightness
     maxBrightnessAdjust();
+    scalePixelInner(maxBrightness);
+    pixel.setBrightness(innerValue);  
+    inner.setBrightness(innerValue);
     showLEDS();
 
     // Serial.println("maxBrightnessTemp " + String(maxBrightnessTemp));

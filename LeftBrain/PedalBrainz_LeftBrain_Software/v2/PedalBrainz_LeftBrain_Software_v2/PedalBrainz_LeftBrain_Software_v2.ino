@@ -175,6 +175,19 @@ uint32_t colorBlue = 0x0000FF;
 uint32_t colorPurple = 0x660CCF;
 uint32_t colorPink = 0xFF69B4;
 
+uint32_t colorBlueDark = 0x0000FF;
+uint32_t colorBlueLight = 0x004EFF;
+uint32_t colorBlueLightest = 0x5AFFFF;
+uint32_t colorBlueTurquoise = 0x00FFFF;
+uint32_t colorGreenDark = 0x00FF00;
+uint32_t colorGreenLight = 0x38FF00;
+uint32_t colorGreenMint = 0x00FF2C;
+uint32_t colorGreenPea = 0x64FF00;
+uint32_t colorRedDark = 0xFF0000;
+uint32_t colorRedLight = 0xFF0020;
+uint32_t colorRedPurple = 0xFF00FF;
+
+
 uint32_t CurrentColor = Sketch2Pink;
 
 int rainbowBright = 255;
@@ -572,7 +585,7 @@ void setup() {
   initial = true;
 
   setRandoms();
-  plotterPrint = true; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
+  plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
   startMillis = millis();  //initial start time
 }
 
