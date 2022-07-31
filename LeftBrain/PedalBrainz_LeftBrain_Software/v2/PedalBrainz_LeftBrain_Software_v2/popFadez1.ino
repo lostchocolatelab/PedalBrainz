@@ -55,6 +55,7 @@ void popFade() {
   show_at_max_brightness_for_power();
   
   delayA0(fadeSpeed);
+  checkButtons();
 
 } // loop()
 
@@ -64,6 +65,7 @@ void pop_fade() {
 
     maxBrightnessAdjust();
     averageLEDS();
+    checkButtons();
 
     thisdelay = map(analogRead(A0), 0, 1024, 0, 200);
     ranamount = map(analogRead(A2), 0, 1024, 1000, 20);   

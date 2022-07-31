@@ -19,6 +19,7 @@ void meteorz()
   randomAmountA2 = random(-500, darkDelay+100);
   darkDelay = darkDelay+randomAmountA2;
   delayA2(darkDelay);
+  checkButtons();
 
 }
 
@@ -83,4 +84,5 @@ void meteorShower(){
   FastLED.show();  
   // control the animation speed/frame rate
   delayA0(fadeSpeed);
+  checkButtons();
 }

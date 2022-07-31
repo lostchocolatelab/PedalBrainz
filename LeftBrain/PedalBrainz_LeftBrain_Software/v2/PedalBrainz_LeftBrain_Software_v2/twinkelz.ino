@@ -114,6 +114,7 @@ void setupTwinkelz(){
 void twinkelz()
 {
   maxBrightnessAdjust();
+  checkButtons();
 
   if (initial == true) {
     setupTwinkelz();
@@ -149,6 +150,7 @@ void twinkelz()
   
   showLEDS();
   FastLED.show();
+  checkButtons();
 }
 
 

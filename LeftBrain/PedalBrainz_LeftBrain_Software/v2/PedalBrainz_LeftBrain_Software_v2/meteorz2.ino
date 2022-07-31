@@ -19,6 +19,7 @@ void meteorz2(){
  meteorShower2();
  darkDelay = map(analogRead(A2), 0, 1024, 300, 0); 
  delayA2(darkDelay);
+ checkButtons();
 }
 
 

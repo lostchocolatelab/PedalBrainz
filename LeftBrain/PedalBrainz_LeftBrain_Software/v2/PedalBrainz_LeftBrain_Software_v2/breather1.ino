@@ -26,6 +26,7 @@ void breather1() {
     inner.setPixelColor(0, 36, 0, 100);
 
     maxBrightnessAdjust();
+    checkButtons();
 
     fadeSpeed = map(analogRead(A0), 0, 1024, 0, 5000);
     darkDelay = map(analogRead(A2), 0, 1024, 0, 100); 

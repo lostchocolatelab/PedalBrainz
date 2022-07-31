@@ -23,6 +23,7 @@ void dripz()
 
   //A1 potentiometer controls for maximum brightness
   maxBrightnessAdjust();
+  checkButtons();
 
   fadeSpeed = map(analogRead(A0), 0, 1024, 2, 60);
   //darkDelay = map(analogRead(A2), 0, 1024, speedMinimum/2, 100); 

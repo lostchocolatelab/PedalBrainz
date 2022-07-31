@@ -88,8 +88,8 @@ void fadez1 ()
       leds[i] = CRGB(redValue, 0, redValue);
     }
 
-    pixel.setPixelColor(0, redValue, 0, redValue);
-    inner.setPixelColor(0, redValue, 0, redValue);
+    pixel.setPixelColor(0, redValue, 0, 0);
+    inner.setPixelColor(0, redValue, 0, 0);
 
     showLEDS();
     FastLED.show();
@@ -280,8 +280,8 @@ void fadez2()
     leds[i] = CRGB(redValue, 0, redValue);
     }
 
-    pixel.setPixelColor(0, redValue, 0, redValue);
-    inner.setPixelColor(0, redValue, 0, redValue);
+    pixel.setPixelColor(0, redValue, 0, 0);
+    inner.setPixelColor(0, redValue, 0, 0);
 
     delayA0(fadeSpeed);
     //FastLED.delay(fadeSpeed);
@@ -838,8 +838,8 @@ void trianglez1()
     leds[i] = CRGB(redValue, 0, redValue);
     }
 
-    pixel.setPixelColor(0, redValue, 0, redValue);
-    inner.setPixelColor(0, redValue, 0, redValue);
+    pixel.setPixelColor(0, redValue, 0, 0);
+    inner.setPixelColor(0, redValue, 0, 0);
 
     //  Slow down the fade by an amount from A0
 
@@ -940,8 +940,8 @@ void fadeFillPixelsSawzUp()
       leds[i] = CRGB(redValue/6, 0, redValue);
       }
 
-      pixel.setPixelColor(0, redValue/6, 0, redValue);
-      inner.setPixelColor(0, redValue/6, 0, redValue);
+      pixel.setPixelColor(0, redValue, 0, 0);
+      inner.setPixelColor(0, redValue, 0, 0);
     }
     else{
       scalePixelRed(fadeAmount);
@@ -952,8 +952,8 @@ void fadeFillPixelsSawzUp()
       leds[i] = CRGB(redValue/10, 0, redValue);
       }
 
-      pixel.setPixelColor(0, redValue/10, 0, redValue);
-      inner.setPixelColor(0, redValue/10, 0, redValue);
+      pixel.setPixelColor(0, redValue, 0, 0);
+      inner.setPixelColor(0, redValue, 0, 0);
     }
 }
 
@@ -1050,8 +1050,8 @@ void fadeFillPixelsSawzDown()
       leds[i] = CRGB(0, redValue/2, redValue/2);
       }
 
-      pixel.setPixelColor(0, 0, redValue/2, redValue/2);
-      inner.setPixelColor(0, 0, redValue/2, redValue/2);
+      pixel.setPixelColor(0, redValue, 0, 0);
+      inner.setPixelColor(0, redValue, 0, 0);
     }
     else{
       scalePixelRed(fadeAmount);
@@ -1062,8 +1062,8 @@ void fadeFillPixelsSawzDown()
       leds[i] = CRGB(0, redValue/2, redValue/2.6);
       }
 
-      pixel.setPixelColor(0, 0, redValue/2, redValue/2.6);
-      inner.setPixelColor(0, 0, redValue/2, redValue/2.6);
+      pixel.setPixelColor(0, redValue, 0, 0);
+      inner.setPixelColor(0, redValue, 0, 0);
     }
 
 }

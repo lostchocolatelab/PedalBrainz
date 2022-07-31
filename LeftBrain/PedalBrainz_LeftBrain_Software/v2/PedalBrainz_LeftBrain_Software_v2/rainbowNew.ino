@@ -99,9 +99,9 @@ void mode_colorwheel() {
     strip.setPixelColor(i,
       hsv2rgb(t + j * 1530 / 12, 255, 255, false));
     pixel.setPixelColor(i,
-      hsv2rgb(t + j * 1530 / 12, 255, 255, false));
+      hsv2rgb(t + j * 1530 / 12, 190, 190, false));
     inner.setPixelColor(i,
-      hsv2rgb(t + j * 1530 / 12, 255, 255, false));  
+      hsv2rgb(t + j * 1530 / 12, 190, 190, false));  
     //delayA0(fadeSpeed);
     //count = count+1; 
   }
@@ -122,9 +122,9 @@ void mode_colorwheel_intro() {
       hsv2rgb(t + j * 1530 / 12, 255, 255, false));
     }
     pixel.setPixelColor(i,
-      hsv2rgb(t + j * 1530 / 12, 255, 255, false));
+      hsv2rgb(t + j * 1530 / 12, 190, 190, false));
     inner.setPixelColor(i,
-      hsv2rgb(t + j * 1530 / 12, 255, 255, false));  
+      hsv2rgb(t + j * 1530 / 12, 190, 190, false));  
     //delayA0(fadeSpeed);
     //count = count+1; 
   
@@ -144,12 +144,16 @@ void mode_colorwheel_gamma() {
   //uint32_t t = millis();
   for(uint8_t i=0; i<10; i++) {
     uint8_t j = i + (i > 4);
+
+    redValue = t + j * 1530 / 12;
+    //Serial.println("redValue" + redValue);
+
     strip.setPixelColor(i,
-      hsv2rgb(t + j * 1530 / 12, 255, 255, true));
+      hsv2rgb(redValue, 190, 190, true));
     pixel.setPixelColor(i,
-      hsv2rgb(t + j * 1530 / 12, 255, 255, true));
+      hsv2rgb(redValue, 190, 190, true));
     inner.setPixelColor(i,
-      hsv2rgb(t + j * 1530 / 12, 255, 255, true));  
+      hsv2rgb(redValue, 190, 190, true));  
     //delayA0(fadeSpeed);   
   }
   //count = count+1;

@@ -4,6 +4,7 @@
 void alienGardenz() { 
 
   maxBrightnessAdjust();
+  checkButtons();
 
   fadeSpeed = map(analogRead(A0), 0, 1024, 300, 0);
   darkDelay = map(analogRead(A2), 0, 1024, 0, 300); 

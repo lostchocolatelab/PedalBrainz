@@ -43,6 +43,7 @@ void Fire2012()
   static byte heat[NUM_LEDS];
 
     maxBrightnessAdjust();
+    checkButtons();
 
     SPARKING = map(analogRead(A0), 0, 1024, 10, 200);
     COOLING = map(analogRead(A2), 0, 1024, 100, 10);    

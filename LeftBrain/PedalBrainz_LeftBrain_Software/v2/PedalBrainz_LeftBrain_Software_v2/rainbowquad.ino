@@ -301,6 +301,7 @@ void rainbowStairz1(){
                         showQuad(); 
                     } 
                     else;
+                    checkButtons();
                 }
 
                 delayA1(fullDelay);
@@ -329,7 +330,8 @@ void rainbowStairz1(){
 
                         showQuad(); 
                     } 
-                    else;                    
+                    else;   
+                    checkButtons();                 
                 }
                 
             }
@@ -362,6 +364,7 @@ void quadNumber(int quadStep)
         for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
             strip.setPixelColor(p, colorone);
         }
+        checkButtons();
     }
     else if (quadStep == 1) 
     {
@@ -374,6 +377,7 @@ void quadNumber(int quadStep)
         for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
             strip.setPixelColor(p, colortwo);
         }
+        checkButtons();
     }
     else if (quadStep == 2) 
     {
@@ -386,6 +390,7 @@ void quadNumber(int quadStep)
             strip.setPixelColor(p, colorthree);
 
         }
+        checkButtons();
     }
     else if (quadStep == 3) 
     {
@@ -397,6 +402,7 @@ void quadNumber(int quadStep)
         for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
             strip.setPixelColor(p, colorfour);
         }
+        checkButtons();
     }
     else if (quadStep == 4) 
     {
@@ -408,6 +414,7 @@ void quadNumber(int quadStep)
         for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
             strip.setPixelColor(p, colorfive);
         }
+        checkButtons();
     }
     else if (quadStep == 5) 
     {
@@ -419,9 +426,12 @@ void quadNumber(int quadStep)
         for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
             strip.setPixelColor(p, colorsix);
         }
+        checkButtons();
     }
     else;
 
+    checkButtons();
+    
     // Delay the change to the next color by the amount of A0
     //delayA0(fadeSpeed);
 
