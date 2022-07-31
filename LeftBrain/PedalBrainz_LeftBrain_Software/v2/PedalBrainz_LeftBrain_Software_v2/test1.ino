@@ -135,20 +135,20 @@ void testCurve()
     //A1 potentiometer controls for maximum brightness
     //maxBrightness = map(analogRead(A1), 0, 1024, 0, maxBrightnessTemp);
     MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
-    pixel.setBrightness(maxBrightness);
     strip.setBrightness(MaxBrightReduction);
     FastLED.setBrightness(MaxBrightReduction);
+    pixel.setBrightness(maxBrightness);
     inner.setBrightness(maxBrightness);
 
     //for (int p = 0; p < strip.numPixels(); p++) {     // For each pixel in strip...
-    for (int i = 0; i < NUM_LEDS; i++) {     // For each pixel in strip...
-      //strip.setPixelColor(p, (i/5), 0, i);
-      //strip.setPixelColor(p, (redValue), 0, redValue);
-      leds[i] = CRGB(innerValue, innerValue, innerValue);
-    }
+    // for (int i = 0; i < NUM_LEDS; i++) {     // For each pixel in strip...
+    //   //strip.setPixelColor(p, (i/5), 0, i);
+    //   //strip.setPixelColor(p, (redValue), 0, redValue);
+    //   leds[i] = CRGB(innerValue, innerValue, innerValue);
+    // }
 
-    pixel.setPixelColor(0, innerValue, 0, 0);
-    inner.setPixelColor(0, innerValue, 0, 0);
+    pixel.setPixelColor(0, 0, 0, innerValue);
+    inner.setPixelColor(0, 0, 0, innerValue);
 
     showLEDS();
     FastLED.show();

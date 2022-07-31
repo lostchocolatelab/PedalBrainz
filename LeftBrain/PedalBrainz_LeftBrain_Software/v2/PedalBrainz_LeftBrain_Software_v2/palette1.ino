@@ -589,8 +589,9 @@ void FillLEDsFromPaletteColors2( uint8_t startIndex)
         // pixel.setBrightness(avgLightInner);
         // inner.setBrightness(avgLightInner);
 
-        pixel.setPixelColor(0, startIndex,startIndex,0); 
-        inner.setPixelColor(0, startIndex,startIndex,0);  
+        scalePixelInner(startIndex);
+        pixel.setPixelColor(0, innerValue,0,0); 
+        inner.setPixelColor(0, innerValue,0,0);  
 
         // showLEDS();
 
