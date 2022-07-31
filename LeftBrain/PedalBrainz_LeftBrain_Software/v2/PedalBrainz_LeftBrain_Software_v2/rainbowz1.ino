@@ -106,8 +106,11 @@ void setRGBpoint(int pixelnumber, uint8_t redValue, uint8_t greenValue, uint8_t 
   for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
     strip.setPixelColor(p, redValue, greenValue, blueValue);
   }
-  pixel.setPixelColor(0, redValue, greenValue, blueValue);
-  inner.setPixelColor(0, redValue, greenValue, blueValue);
+  scalePixelInnerRed(redValue);
+  scalePixelInnerBlue(blueValue);
+  scalePixelInnerGreen(greenValue);
+  pixel.setPixelColor(0, innerValueRed, innerValueGreen, innerValueBlue);
+  inner.setPixelColor(0, innerValueRed, innerValueGreen, innerValueBlue);
   
   //Serial.println(redValue);
   //Serial.println(greenValue);
@@ -145,8 +148,11 @@ void trueHSV(int pixelnumber, int angle)
   for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
     strip.setPixelColor(p, redValue, greenValue, blueValue);
   }
-  pixel.setPixelColor(0, redValue, greenValue, blueValue);
-  inner.setPixelColor(0, redValue, greenValue, blueValue);
+  scalePixelInnerRed(redValue);
+  scalePixelInnerBlue(blueValue);
+  scalePixelInnerGreen(greenValue);
+  pixel.setPixelColor(0, innerValueRed, innerValueGreen, innerValueBlue);
+  inner.setPixelColor(0, innerValueRed, innerValueGreen, innerValueBlue);
   showLEDS();
 
 }
@@ -174,8 +180,11 @@ void powerHSV(int pixelnumber, int angle)
   for(int p=0; p<strip.numPixels(); p++) { // For each pixel in strip...
     strip.setPixelColor(p, redValue, greenValue, blueValue);
   }
-  pixel.setPixelColor(0, redValue, greenValue, blueValue);
-  inner.setPixelColor(0, redValue, greenValue, blueValue);
+  scalePixelInnerRed(redValue);
+  scalePixelInnerBlue(blueValue);
+  scalePixelInnerGreen(greenValue);
+  pixel.setPixelColor(0, innerValueRed, innerValueGreen, innerValueBlue);
+  inner.setPixelColor(0, innerValueRed, innerValueGreen, innerValueBlue);
   showLEDS();
 }
 
