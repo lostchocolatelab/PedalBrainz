@@ -301,8 +301,10 @@ void quadNumber(int quadStep)
 
     if (quadStep == 0) 
     {
-        pixel.setPixelColor(0, colorone);
-        inner.setPixelColor(0, colorone);
+        // pixel.setPixelColor(0, colorone);
+        // inner.setPixelColor(0, colorone);
+        pixel.setPixelColor(0, colorRed);
+        inner.setPixelColor(0, colorRed);
         for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
             strip.setPixelColor(p, colorone);
         }
@@ -311,8 +313,10 @@ void quadNumber(int quadStep)
     {
         //Serial.println("colortwo");
 
-        pixel.setPixelColor(0, colortwo);
-        inner.setPixelColor(0, colortwo);
+        // pixel.setPixelColor(0, colortwo);
+        // inner.setPixelColor(0, colortwo);
+        pixel.setPixelColor(0, colorRed);
+        inner.setPixelColor(0, colorRed);
         for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
             strip.setPixelColor(p, colortwo);
         }
@@ -320,8 +324,10 @@ void quadNumber(int quadStep)
     else if (quadStep == 2) 
     {
         //Serial.println("colorthree");
-        pixel.setPixelColor(0, colorthree);
-        inner.setPixelColor(0, colorthree);
+        // pixel.setPixelColor(0, colorthree);
+        // inner.setPixelColor(0, colorthree);
+        pixel.setPixelColor(0, colorRed);
+        inner.setPixelColor(0, colorRed);
         for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
             strip.setPixelColor(p, colorthree);
 
@@ -330,8 +336,10 @@ void quadNumber(int quadStep)
     else if (quadStep == 3) 
     {
         //Serial.println("colorfour");
-        pixel.setPixelColor(0, colorfour);
-        inner.setPixelColor(0, colorfour);
+        // pixel.setPixelColor(0, colorfour);
+        // inner.setPixelColor(0, colorfour);
+        pixel.setPixelColor(0, colorRed);
+        inner.setPixelColor(0, colorRed);
         for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
             strip.setPixelColor(p, colorfour);
         }
@@ -339,8 +347,10 @@ void quadNumber(int quadStep)
     else if (quadStep == 4) 
     {
         //Serial.println("colorfive");
-        pixel.setPixelColor(0, colorfive);
-        inner.setPixelColor(0, colorfive);
+        // pixel.setPixelColor(0, colorfive);
+        // inner.setPixelColor(0, colorfive);
+        pixel.setPixelColor(0, colorRed);
+        inner.setPixelColor(0, colorRed);
         for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
             strip.setPixelColor(p, colorfive);
         }
@@ -348,8 +358,10 @@ void quadNumber(int quadStep)
     else if (quadStep == 5) 
     {
         //Serial.println("colorsix");
-        pixel.setPixelColor(0, colorsix);
-        inner.setPixelColor(0, colorsix);
+        // pixel.setPixelColor(0, colorsix);
+        // inner.setPixelColor(0, colorsix);
+        pixel.setPixelColor(0, colorRed);
+        inner.setPixelColor(0, colorRed);
         for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
             strip.setPixelColor(p, colorsix);
         }
@@ -445,7 +457,9 @@ void brightnessNumber(int brightnessCount)
     {
         //randomBright0 = 50;
 
-        InnerBrightReductionQuad = map(randomBright0, 0, 255, 0, 190);
+        //InnerBrightReductionQuad = map(randomBright0, 0, 255, 0, 190);
+        scalePixelInner(randomBright0);
+        InnerBrightReductionQuad = innerValue;
         MaxBrightReductionQuad = map(randomBright0, 0, 255, 0, MaxBright);
 
         //Serial.println("brightnessCount variable: " + String(brightnessCount));
@@ -455,7 +469,9 @@ void brightnessNumber(int brightnessCount)
     {
         //randomBright1 = 90;
 
-        InnerBrightReductionQuad = map(randomBright1, 0, 255, 0, 190);
+        //InnerBrightReductionQuad = map(randomBright1, 0, 255, 0, 190);
+        scalePixelInner(randomBright1);
+        InnerBrightReductionQuad = innerValue;
         MaxBrightReductionQuad = map(randomBright1, 0, 255, 0, MaxBright);
 
         //Serial.println("brightnessCount variable: " + String(brightnessCount));
@@ -465,7 +481,9 @@ void brightnessNumber(int brightnessCount)
     {
         //randomBright2 = 155;
 
-        InnerBrightReductionQuad = map(randomBright2, 0, 255, 0, 190);
+        //InnerBrightReductionQuad = map(randomBright2, 0, 255, 0, 190);
+        scalePixelInner(randomBright2);
+        InnerBrightReductionQuad = innerValue;
         MaxBrightReductionQuad = map(randomBright2, 0, 255, 0, MaxBright);
 
         //Serial.println("brightnessCount variable: " + String(brightnessCount));
@@ -475,7 +493,9 @@ void brightnessNumber(int brightnessCount)
     {
         //randomBright3 = 255; 
 
-        InnerBrightReductionQuad = map(randomBright3, 0, 255, 0, 190);
+        //InnerBrightReductionQuad = map(randomBright3, 0, 255, 0, 190);
+        scalePixelInner(randomBright3);
+        InnerBrightReductionQuad = innerValue;
         MaxBrightReductionQuad = map(randomBright3, 0, 255, 0, MaxBright);
 
         //Serial.println("brightnessCount variable: " + String(brightnessCount));
@@ -488,9 +508,9 @@ void brightnessStatic()
 {
     checkButtons();
 
-    randomBright0 = 50;
-    randomBright1 = 90;
-    randomBright2 = 155;
+    randomBright0 = 44;
+    randomBright1 = 50;
+    randomBright2 = 90;
     randomBright3 = 255;
 }
 
@@ -510,10 +530,10 @@ void setRandomBrightsOnce() {
 
     if (randomOnce == 0) {
 
-        randomBright0  = random(0, 255);
-        randomBright1  = random(0, 255);
-        randomBright2  = random(0, 255);
-        randomBright3  = random(0, 255);
+        randomBright0  = random(44, 255);
+        randomBright1  = random(44, 255);
+        randomBright2  = random(44, 255);
+        randomBright3  = random(44, 255);
 
         randomOnce = 1;
 
