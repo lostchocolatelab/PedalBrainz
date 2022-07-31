@@ -188,6 +188,8 @@ void printAverage()
   EVERY_N_MILLISECONDS( 10 ) 
   {
     Serial.print(","); //Un-comment this for a smooth line
+    Serial.print(innerValue);
+    Serial.print(","); //Un-comment this for a smooth line
     Serial.print(avgLight);
     Serial.print(","); //Un-comment this for a smooth line
     Serial.print(scaledBright);

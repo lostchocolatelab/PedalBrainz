@@ -101,12 +101,14 @@ void averageLEDS(){
   avgLight2 = leds[2].getAverageLight();
   avgLight = avgLight0+avgLight1+avgLight2;
   avgLightInner = map(avgLight, 0, 255, 0, 190);
+
   //avgLight = avgLight1;
 
   //Serial.println("Average : " + String(avgLight));
 
-  pixel.setPixelColor(0, avgLightInner,avgLightInner,avgLightInner); 
-  inner.setPixelColor(0, avgLightInner,avgLightInner,avgLightInner);  
+  scalePixelInner(avgLightInner);
+  pixel.setPixelColor(0, innerValue,0,0); 
+  inner.setPixelColor(0, innerValue,0,0);  
 
   showLEDS();
 }
@@ -122,12 +124,15 @@ void averageLEDSBrightness(){
 
   avgLightInner = mapfloat(scaledBright, 0, 190, 0, 190);
 
+  scalePixelInner(avgLightInner);
+
   //Serial.println("Average : " + String(avgLight));
   pixel.setBrightness(avgLightInner);
   inner.setBrightness(avgLightInner);
 
-  pixel.setPixelColor(0, avgLightInner,avgLightInner,avgLightInner); 
-  inner.setPixelColor(0, avgLightInner,avgLightInner,avgLightInner);  
+  
+  pixel.setPixelColor(0, innerValue,0,0); 
+  inner.setPixelColor(0, innerValue,0,0);  
 
   showLEDS();
 }
@@ -138,12 +143,15 @@ void averageLEDSBrightnessPalette(){
 
   avgLightInner = mapfloat(scaledBright, 0, 190.0, -5, 600.0);
 
+  scalePixelInner(avgLightInner);
+  
   //Serial.println("Average : " + String(avgLight));
   pixel.setBrightness(avgLightInner);
   inner.setBrightness(avgLightInner);
 
-  pixel.setPixelColor(0, avgLightInner,avgLightInner,avgLightInner); 
-  inner.setPixelColor(0, avgLightInner,avgLightInner,avgLightInner);  
+  
+  pixel.setPixelColor(0, innerValue,0,0); 
+  inner.setPixelColor(0, innerValue,0,0);  
 
   //showLEDS();
 }
@@ -161,6 +169,7 @@ void averageLEDSPlot(){
 
   avgLightInner = mapfloat(scaledBright, 0, 190, 0, 190);
 
+  scalePixelInner(avgLightInner);
 }
 
 void pixelScaling()
