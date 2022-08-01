@@ -97,21 +97,21 @@ colorsix = 0x2600CA;
 void colorStairzOnce()
 {
 colorone = colorBlueDark;
-colortwo = colorBlueLight;
-colorthree = colorBlueLightest;
-colorfour = colorGreenDark;
-colorfive = colorGreenLight;
-colorsix = colorGreenMint;
+colortwo = colorRedLight;
+colorthree = colorBlueLight;
+colorfour = colorRedPurple;
+colorfive = colorBlueLightest;
+colorsix = colorPink;
 }
 
 void colorStairzRandom()
 {
-colorone = colorRedDark;
-colortwo = colorRedLight;
-colorthree = colorRedPurple;
-colorfour = colorPink;
-colorfive = colorGreenPea;
-colorsix = colorYellow;
+colorone = colorGreenPea;
+colortwo = colorGreen;
+colorthree = colorYellow;
+colorfour = colorPurple;
+colorfive = colorRedLight;
+colorsix = colorBlueTurquoise;
 }
 
 void colorSawz()
@@ -127,21 +127,21 @@ colorsix = 0x56ff00;
 void colorSawzOnce()
 {
 colorone = colorBlueDark;
-colortwo = colorBlueLight;
-colorthree = colorBlueLightest;
-colorfour = colorGreenDark;
-colorfive = colorGreenLight;
-colorsix = colorGreenMint;
+colortwo = colorRedLight;
+colorthree = colorBlueLight;
+colorfour = colorRedPurple;
+colorfive = colorBlueLightest;
+colorsix = colorPink;
 }
 
 void colorSawzRandom()
 {
-colorone = colorRedDark;
-colortwo = colorRedLight;
-colorthree = colorRedPurple;
-colorfour = colorPink;
-colorfive = colorGreenPea;
-colorsix = colorYellow;
+colorone = colorGreenPea;
+colortwo = colorGreen;
+colorthree = colorYellow;
+colorfour = colorPurple;
+colorfive = colorRedLight;
+colorsix = colorBlueTurquoise;
 }
 
 

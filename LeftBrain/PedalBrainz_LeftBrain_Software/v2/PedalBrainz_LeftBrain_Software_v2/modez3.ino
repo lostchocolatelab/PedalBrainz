@@ -131,6 +131,7 @@ void Bank3()
 
 
   plotCycle();
+  checkButtons();
 
   /**
 
@@ -166,6 +167,7 @@ void Bank3()
       if (WaitForModeChange)
       {
 
+        checkButtons();
         // Call the main routine and loop the thing
         valueA0  = 7;
         rainbowNew();
@@ -201,6 +203,7 @@ void Bank3()
       if (WaitForModeChange)
       {
 
+        checkButtons();
         //Call the main routine and loop the thing
         fadeUp = true;
         RainbowQuad();
@@ -236,6 +239,7 @@ void Bank3()
       if (WaitForModeChange)
       {
 
+        checkButtons();
         // Call the main routine and loop the thing
         RainbowQuad();
       }
@@ -267,6 +271,7 @@ void Bank3()
       if (WaitForModeChange)
       {
 
+        checkButtons();
         // Call the main routine and loop the thing
         RainbowQuad();
       }
@@ -300,6 +305,7 @@ void Bank3()
       if (WaitForModeChange)
       {
 
+        checkButtons();
         //Call the main routine and loop the thing
         RainbowQuad();
       }
@@ -333,6 +339,7 @@ void Bank3()
       if (WaitForModeChange)
       {
 
+        checkButtons();
         //Call the main routine and loop the thing
         RainbowQuad();
       }
@@ -366,6 +373,7 @@ void Bank3()
       if (WaitForModeChange)
       {
 
+        checkButtons();
         //Call the main routine and loop the thing
         RainbowQuad();
       }
@@ -396,6 +404,7 @@ void Bank3()
       if (WaitForModeChange)
       {
 
+        checkButtons();
         //Call the main routine and loop the thing
         RainbowSquarez();
         
@@ -428,6 +437,7 @@ void Bank3()
       if (WaitForModeChange)
       {
 
+        checkButtons();
         //Call the main routine and loop the thing
         //increaseValue = true;
         //fadeSpeed = 10;
@@ -462,6 +472,7 @@ void Bank3()
       if (WaitForModeChange)
       {
 
+        checkButtons();
         //Call the main routine and loop the thing
         popFade();
         //twinkelz();
