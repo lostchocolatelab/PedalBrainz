@@ -154,6 +154,8 @@ void Bank3()
 
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank3();
+
+      maxBrightness = 255;
       
       //writeStartupDataz();
       
