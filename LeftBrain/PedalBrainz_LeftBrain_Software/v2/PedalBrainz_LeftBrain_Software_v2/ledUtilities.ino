@@ -13,8 +13,8 @@ void maxBrightnessSet(){
 
   MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
   pixel.setBrightness(maxBrightness);
-  strip.setBrightness(MaxBrightReduction);
   inner.setBrightness(maxBrightness);
+  strip.setBrightness(MaxBrightReduction);
   FastLED.setBrightness(MaxBrightReduction);
   showLEDS();
 

@@ -209,10 +209,10 @@ void play_sequence() {    //  This is the loop when the sequence is playing back
 void record_sequence() {    //  This is the loop when the sequence is recording
 
   //Serial.println("Recording Sequence ");
-  maxBrightness = map(analogRead(A1), 0, 1024, 10, maxBrightnessTemp);
-  MaxBrightReduction = constrain(maxBrightness, 0, MaxBright);
+  maxBrightness = map(analogRead(A1), 0, 1024, 5, maxBrightnessTemp);
+  MaxBrightLightLoopz = constrain(maxBrightness, 0, MaxBright);
   pixel.setBrightness(maxBrightness);
-  strip.setBrightness(MaxBrightReduction);
+  strip.setBrightness(MaxBrightLightLoopz);
   inner.setBrightness(maxBrightness);
 
   checkMillis = 50;

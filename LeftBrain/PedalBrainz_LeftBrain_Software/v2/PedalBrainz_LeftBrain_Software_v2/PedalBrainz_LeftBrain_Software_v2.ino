@@ -191,7 +191,7 @@ uint32_t colorRedPurple = 0xFF00FF;
 uint32_t CurrentColor = Sketch2Pink;
 
 int rainbowBright = 255;
-int rainbowBrightReducation;
+int rainbowBrightReduction;
 
 /**
 
@@ -264,6 +264,7 @@ int MaxBright = 255; // Strip Max Bright
 int MaxBrightTemp = 190;
 int MaxBrightReduction;
 int MaxBrightRainbow;
+int MaxBrightLightLoopz;
 
 boolean plotterPrint = true;
 

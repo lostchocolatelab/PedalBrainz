@@ -207,8 +207,8 @@ if (Bank == 1){
     if (Mode == 5) {
 
     //Randomize the maximum brightness of the LED using potantiometer A1
-    rainbowBrightReducation = valueA1 - (randomAmount);
-    rainbowBright = constrain(rainbowBrightReducation, 0, 255);
+    rainbowBrightReduction = valueA1 - (randomAmount);
+    rainbowBright = constrain(rainbowBrightReduction, 0, 255);
     //MaxBrightReduction = MaxBright - (randomAmount*2);
     MaxBrightRainbow = constrain(rainbowBright, 0, MaxBright);
     pixel.setBrightness(rainbowBright);
@@ -219,7 +219,7 @@ if (Bank == 1){
     Serial.println("Mode 5 rainbowBright: " + String(rainbowBright));
     //Serial.println("Mode 5 MaxBright " + String(MaxBright));
     //Serial.println("Mode 5 MaxBrightRainbow: " + String(MaxBrightRainbow));
-    Serial.println("Mode 5 rainbowBrightReducation: " + String(rainbowBrightReducation));
+    Serial.println("Mode 5 rainbowBrightReduction: " + String(rainbowBrightReduction));
     //Serial.println("---------");
     
   }

@@ -72,7 +72,7 @@ void modeStartupBank1() {
     if (Mode == 1)
     {
 
-      valueA1 = map(analogRead(A1), 0, 1024, 0, 20);
+      //valueA1 = map(analogRead(A1), 0, 1024, 0, 20);
       for (int p = 0; p < strip.numPixels(); p++) {       // For each pixel in strip...
         strip.setPixelColor(p, 0, 0, 0);
       }
@@ -158,6 +158,8 @@ void Bank1()
       // Do some startup stuff for this Bank/ Mode if anything needs to be done
       modeStartupBank1();
 
+      maxBrightness = 255;
+      
       //writeStartupDataz();
 
       //Do the last thing and WaitForModeChange
