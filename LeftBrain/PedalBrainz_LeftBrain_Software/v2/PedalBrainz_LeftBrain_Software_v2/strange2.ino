@@ -204,7 +204,11 @@ void attractorzPixel2()
         // pixel.setPixelColor(0, (scaledInnerCombined), (scaledInnerCombined), (scaledInnerCombined));   
         // inner.setPixelColor(0, (scaledInnerCombined), (scaledInnerCombined), (scaledInnerCombined)); 
 
-      attractorzPixel();
+        attractorzPixel();
+        scaledVal = map(scaledX, 0, 255, 255, 0);
+        leds[1].fadeLightBy(scaledVal);
+        leds[2].fadeLightBy(scaledVal);
+
 
     }
     else if (attractorzLEDType == 2)
@@ -217,7 +221,10 @@ void attractorzPixel2()
         // pixel.setPixelColor(0, (scaledInnerCombined), (0), (scaledInnerCombined));   
         // inner.setPixelColor(0, (scaledInnerCombined), (0), (scaledInnerCombined)); 
 
-      attractorzPixel();
+        attractorzPixel();
+        scaledVal = map(scaledX, 0, 255, 255, 0);
+        leds[0].fadeLightBy(scaledVal);
+        leds[2].fadeLightBy(scaledVal);
           
     }
     else if (attractorzLEDType == 3)
@@ -231,7 +238,10 @@ void attractorzPixel2()
         // pixel.setPixelColor(0, (scaledInnerCombined), (0), (0));   
         // inner.setPixelColor(0, (scaledInnerCombined), (0), (0));    
 
-        attractorzPixel();    
+        attractorzPixel(); 
+        scaledVal = map(scaledX, 0, 255, 255, 0);
+        leds[0].fadeLightBy(scaledVal);
+        leds[1].fadeLightBy(scaledVal);      
     }
     else;      
 

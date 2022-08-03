@@ -598,7 +598,7 @@ void setup() {
   initial = true;
 
   setRandoms();
-  plotterPrint = false; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
+  plotterPrint = true; // This prints to the Serial.Plotter and when set to True can slow down some Modez. Set to False to remove Serial Plotting of Values
   startMillis = millis();  //initial start time
 }
 
