@@ -14,7 +14,7 @@
   Mode 1 - 10 | Attractorz
   A0 = Cycle Speed
   A1 = Maximum Brightness
-  A2 = Roughness
+  A2 = Complexity
 
 */
 
