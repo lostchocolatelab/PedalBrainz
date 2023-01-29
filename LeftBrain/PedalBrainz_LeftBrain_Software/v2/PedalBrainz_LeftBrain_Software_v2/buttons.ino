@@ -59,33 +59,52 @@ int checkButtonUp()
   int eventUp = 0;
   buttonValUp = digitalRead(buttonPinUp);
 
-      // Button pressed down
+      // Button pressed
   if (buttonValUp == LOW && buttonLastUp == HIGH && (millis() - upTime) > debounce)
   {
+    Serial.println("checkButtonUp: button pressed");
     downTime = millis();
     ignoreUpUp = false;
     waitForUpUp = false;
     singleOKUp = true;
     holdEventPastUp = false;
     longHoldEventPastUp = false;
-    if ((millis() - upTime) < DCgap && DConUpUp == false && DCwaitingUp == true) DConUpUp = true;
-    else DConUpUp = false;
+    if ((millis() - upTime) < DCgap && DConUpUp == false && DCwaitingUp == true)
+    {
+      Serial.println("doubleclick Up true"); //leave in as kludge fix
+      DConUpUp = true;
+    }
+    else
+    {
+      Serial.println("doubleclick Up false"); //leave in as kludge fix
+       DConUpUp = false;
+    }
     DCwaitingUp = false;
   }
 
       // Button released
-  else if (buttonValUp == HIGH && buttonLastUp == LOW && (millis() - downTime) > debounce)
+  if (buttonValUp == HIGH && buttonLastUp == LOW && (millis() - downTime) > debounce)
   {
-    if (not ignoreUpUp)
+    Serial.println("checkButtonUp: button released");
+    if (ignoreUpUp)
+    {
+      Serial.println("checkButtonUp: ignoreUpUp");
+    }
+    else
     {
       upTime = millis();
-      if (DConUpUp == false) DCwaitingUp = true;
-      else
+      if (DConUpUp)
       {
+        Serial.println("doubleclick Up true"); //leave in as kludge fix
         eventUp = 2;
         DConUpUp = false;
         DCwaitingUp = false;
         singleOKUp = false;
+      }
+      else
+      {
+        Serial.println("doubleclick Up false"); //leave in as kludge fix
+        DCwaitingUp = true;
       }
     }
   }
@@ -131,33 +150,52 @@ int checkButtonDown()
   int eventDown = 0;
   buttonValDown = digitalRead(buttonPinDown);
 
-      // Button pressed down
+      // Button pressed
   if (buttonValDown == LOW && buttonLastDown == HIGH && (millis() - upTime) > debounce)
   {
+    Serial.println("checkButtonDown: button pressed");
     downTime = millis();
     ignoreUpDown = false;
     waitForUpDown = false;
     singleOKDown = true;
     holdEventPastDown = false;
     longHoldEventPastDown = false;
-    if ((millis() - upTime) < DCgap && DConUpDown == false && DCwaitingDown == true) DConUpDown = true;
-    else DConUpDown = false;
+    if ((millis() - upTime) < DCgap && DConUpDown == false && DCwaitingDown == true)
+    {
+       Serial.println("doubleclick Down true"); //leave in as kludge fix
+       DConUpDown = true;
+    }
+    else
+    {
+       Serial.println("doubleclick Down false"); //leave in as kludge fix
+       DConUpDown = false;
+    }
     DCwaitingDown = false;
   }
 
       // Button released
-  else if (buttonValDown == HIGH && buttonLastDown == LOW && (millis() - downTime) > debounce)
+  if (buttonValDown == HIGH && buttonLastDown == LOW && (millis() - downTime) > debounce)
   {
-    if (not ignoreUpDown)
+    Serial.println("checkButtonDown: button released"); //leave in as kludge fix
+    if (ignoreUpDown)
+    {
+      Serial.println("checkButtonDown: ignoreUpDown"); //leave in as kludge fix
+    }
+    else
     {
       upTime = millis();
-      if (DConUpDown == false) DCwaitingDown = true;
-      else
+      if (DConUpDown) 
       {
+        Serial.println("doubleclick Down true");
         eventDown = 2;
         DConUpDown = false;
         DCwaitingDown = false;
         singleOKDown = false;
+      }
+      else
+      {
+         Serial.println("doubleclick Down false");
+         DCwaitingDown = true;
       }
     }
   }
@@ -239,15 +277,15 @@ void clickEventUp()
     if (9 >= Mode)
     {
       Mode = Mode + 1;
-      Serial.println("Mode Change = " + String(Mode));
-      Serial.println("Totally advancing Modez Now");
+      //Serial.println("Mode Change = " + String(Mode));
+      //Serial.println("Totally advancing Modez Now");
       writeStartupDataz();
     }
     else if (Mode == 10)
     {
       Mode = 1;
-      Serial.println("Mode Change = " + String(Mode));
-      Serial.println("Totally advancing Modez Now");
+      //Serial.println("Mode Change = " + String(Mode));
+      //Serial.println("Totally advancing Modez Now");
       writeStartupDataz();
     }
     else if (Mode == 99)
@@ -288,8 +326,8 @@ void clickEventUp()
       //Serial.println("Totally advancing Modez Now");
       //delay(200);
 
-    Serial.println("Current speedMinimum =  " + String(speedMinimum));
-    Serial.println("Current durationMaximum =  " + String(durationMaximum));        
+    //Serial.println("Current speedMinimum =  " + String(speedMinimum));
+    //Serial.println("Current durationMaximum =  " + String(durationMaximum));        
   }
 }
 
@@ -424,16 +462,16 @@ void clickEventDown()
     if ((Mode >= 2) && (Mode <= 10))
     {
       Mode = Mode - 1;
-      Serial.println("Mode Change between 2 and 9 = " + String(Mode));
-      Serial.println("Totally REVERSING Modez Now");
+      //Serial.println("Mode Change between 2 and 9 = " + String(Mode));
+      //Serial.println("Totally REVERSING Modez Now");
       writeStartupDataz();
     }
 
     else if (Mode == 1)
     {
       Mode = 10;
-      Serial.println("Mode Change = " + String(Mode));
-      Serial.println("Totally REVERSING Modez Now");
+      //Serial.println("Mode Change = " + String(Mode));
+      //Serial.println("Totally REVERSING Modez Now");
       writeStartupDataz();
     }
     else if (Mode == 99)
@@ -479,8 +517,8 @@ void clickEventDown()
       //Serial.println("Totally REVERSING Modez Now = " + String(Mode));
       //delay(200);
 
-    Serial.println("Current speedMinimum =  " + String(speedMinimum));
-    Serial.println("Current durationMaximum =  " + String(durationMaximum));       
+    //Serial.println("Current speedMinimum =  " + String(speedMinimum));
+    //Serial.println("Current durationMaximum =  " + String(durationMaximum));       
 
   }
 }
