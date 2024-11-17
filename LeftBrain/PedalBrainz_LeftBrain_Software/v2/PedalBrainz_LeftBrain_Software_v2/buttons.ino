@@ -22,8 +22,7 @@ int holdTime = 1000;       // ms hold period: how long to wait for press+hold ev
 int longHoldTime = 3000;       // ms long hold period: how long to wait for press+hold event
 
       // Button variables
-boolean buttonValUp = HIGH;       // value read from button
-boolean buttonValDown = HIGH;       // value read from button
+
 boolean buttonLastUp = HIGH;       // buffered value of the button’s previous state
 boolean buttonLastDown = HIGH;       // buffered value of the button’s previous state
 
@@ -57,7 +56,7 @@ int checkButtonUp()
 {
 
   int eventUp = 0;
-  buttonValUp = digitalRead(buttonPinUp);
+  //buttonValUp = digitalRead(buttonPinUp);
 
       // Button pressed
   if (buttonValUp == LOW && buttonLastUp == HIGH && (millis() - upTime) > debounce)
@@ -148,7 +147,7 @@ int checkButtonDown()
 {
 
   int eventDown = 0;
-  buttonValDown = digitalRead(buttonPinDown);
+  //buttonValDown = digitalRead(buttonPinDown);
 
       // Button pressed
   if (buttonValDown == LOW && buttonLastDown == HIGH && (millis() - upTime) > debounce)

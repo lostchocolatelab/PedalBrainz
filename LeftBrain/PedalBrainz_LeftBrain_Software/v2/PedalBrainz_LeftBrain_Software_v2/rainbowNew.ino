@@ -57,8 +57,10 @@ uint32_t hsv2rgb(int32_t h, uint8_t s, uint8_t v, boolean gc=false) {
           if (Mode == 1){
     
                 
-                v1 = map(analogRead(A1), 0, 1024, 0, 255);
-                s2 = map(analogRead(A2), 0, 1024, 255, 0);
+                //v1 = map(analogRead(A1), 0, 1024, 0, 255);
+                v1 = 10;
+                //s2 = map(analogRead(A2), 0, 1024, 255, 0);
+                s2 = 0;
                 //strip.setBrightness(MaxBrightReduction);
                 
          }
@@ -91,7 +93,10 @@ void rainbowNew(){
 // Rotating color wheel, using 'raw' RGB values (no gamma correction).
 // Average current use is about 1/2 of the max-all-white case.
 void mode_colorwheel() {
-  valueA0  = map(analogRead(A0), 0, 1024, 1, 7);
+  touch1 = qt_1.measure();
+  Serial.print("touch1: "); Serial.print(touch1);
+  valueA0  = map(touch1, 0, 1024, 7, 1);
+  //valueA0  = map(analogRead(A0), 0, 1024, 1, 7);
   uint32_t t = millis()*valueA0;
   //uint32_t t = millis();
   for(uint8_t i=0; i<10; i++) {
@@ -138,8 +143,10 @@ void mode_colorwheel_intro() {
 // than the 'raw' case, but not tremendously so, as only 1/3 of pixels at
 // any time are in transition cases (else 100% on or off).
 void mode_colorwheel_gamma() {
-  
-  valueA0  = map(analogRead(A0), 0, 1024, 1, 7);
+  touch1 = qt_1.measure();
+  Serial.print("touch1: "); Serial.print(touch1);
+  valueA0  = map(touch1, 0, 1024, 7, 1);
+  //valueA0  = map(analogRead(A0), 0, 1024, 1, 7);
   uint32_t t = millis()*valueA0;
   //uint32_t t = millis();
   for(uint8_t i=0; i<10; i++) {

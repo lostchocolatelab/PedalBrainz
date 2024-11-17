@@ -15,7 +15,9 @@ void mapScaledA0() {
         // This is a map of values for potentiometer curve type.
         int scaleAout[] = { 2300, 2298, 2296, 2295, 2292, 2200, 2100, 2000, 1800, 1300, 0 };         // 11
         // This maps the potentiometer scale.
-        controlAmount  = map(analogRead(A0), 0, 1024, 255, 0);
+        //controlAmount  = map(analogRead(A0), 0, 1024, 255, 0);
+        touch1 = qt_1.measure();
+        controlAmount  = map(touch1, 0, 1024, 255, 0);
         // This is a multimap that assigns values from the [in] array (potentiometer) to values from the [out] array (curve)
         scaledA0 = multiMap(controlAmount, scaleAin, scaleAout, 11);
         // This maps the values for the Modez.

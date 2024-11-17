@@ -30,10 +30,10 @@ const int LED_BLUE    = 2;     // Blue LED pin
 const int LED_GREEN   = 1;     // Green LED pin
 const int LED_RED     = 2;     // Red LED pin
 
-const int BUTTON_YELLOW = A9;      // Yellow button input pin
-const int BUTTON_BLUE   = A10;      // Blue button input pin
-const int BUTTON_GREEN  = A9;      // Green button input pin
-const int BUTTON_RED    = A10;      // Red button input pin
+const int BUTTON_YELLOW = A1;      // Yellow button input pin
+const int BUTTON_BLUE   = A1;      // Blue button input pin
+const int BUTTON_GREEN  = A2;      // Green button input pin
+const int BUTTON_RED    = A2;      // Red button input pin
 
 const int MAX_DIFFICULTY_LEVEL    = 9;      // Maximum difficulty level (LED flash sequence length)
 

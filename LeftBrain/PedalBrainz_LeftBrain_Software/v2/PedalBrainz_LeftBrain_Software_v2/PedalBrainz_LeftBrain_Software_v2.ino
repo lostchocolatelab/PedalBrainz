@@ -11,10 +11,10 @@
 
 */
 
-#define NUMPIXELS 3 // Number of LEDs in strip
-#define PINSTRIP 4 // Pin used for the strip (knobs)
+#define NUMPIXELS 4 // Number of LEDs in strip
+#define PINSTRIP 0 // Pin used for the strip (knobs)
 #define MAX_POWER 100
-#define VOLTS 5
+#define VOLTS 3
 
 //#include <Adafruit_DotStar.h>
 //#include <Adafruit_NeoPixel.h>
@@ -26,9 +26,9 @@
 #include <FastLED.h>
 // Declare our NeoPixel strip object:
 //Adafruit_NeoPixel strip(NUMPIXELS, 4, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel inner(1, 3, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel strip(3, 3, NEO_GRB + NEO_KHZ800);
 //Adafruit_NeoPixel pixel(1, 7); // SEEED XIAO
-Adafruit_NeoPixel pixel(1, PIN_NEOPIXEL);
+Adafruit_NeoPixel pixel(1, 2);
 
 //FastLED_NeoPixel <NUMPIXELS, 4, NEO_GRB + NEO_KHZ800> strip;
 //FastLED_NeoPixel <1, 3, NEO_GRB + NEO_KHZ800> inner;
@@ -40,12 +40,13 @@ Adafruit_NeoPixel pixel(1, PIN_NEOPIXEL);
 //CRGBArray<NUM_LEDS_INNER> ledsInner;
 //FastLED_NeoPixel_Variant inner(ledsInner, NUM_LEDS_INNER);
 
-#define NUM_LEDS 3
+#define LED_PIN 7
+#define NUM_LEDS 4
 
 //CRGB leds[NUM_LEDS];
 CRGBArray <NUM_LEDS> leds;
 //FastLED_NeoPixel_Variant strip(leds, NUM_LEDS);
-FastLED_NeoPixel_Variant strip(leds, NUM_LEDS);
+FastLED_NeoPixel_Variant inner(leds, NUM_LEDS);
 
 
 
@@ -74,9 +75,24 @@ int valueA2 = 0;
 
 */
 
+#include "Adafruit_FreeTouch.h"
+
+// Create the two touch pads on pins 1 and 2:
+Adafruit_FreeTouch qt_1 = Adafruit_FreeTouch(1, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
+Adafruit_FreeTouch qt_2 = Adafruit_FreeTouch(2, OVERSAMPLE_4, RESISTOR_50K, FREQ_MODE_NONE);
+
 // Setting the Button Pins
-const int buttonPinUp = A9;     // Button Up
-const int buttonPinDown =  A10;      // Button Down
+//const int buttonPinUp = A9;     // Button Up
+//const int buttonPinDown =  A10;      // Button Down
+
+const int buttonPinUp = 0;     // Button Up
+const int buttonPinDown =  0;      // Button Down
+
+uint16_t touch1 = qt_1.measure();
+uint16_t touch2 = qt_2.measure();
+
+bool buttonValUp = HIGH;
+bool buttonValDown = HIGH;
 
 bool buttonLongHoldUp;
 bool buttonLongHoldDown;
@@ -535,20 +551,24 @@ void setup() {
   Serial.begin(115200);
 
   // Setup the buttons
-  pinMode(buttonPinUp, INPUT_PULLUP);
-  pinMode(buttonPinDown, INPUT_PULLUP);
+  //pinMode(buttonPinUp, INPUT_PULLUP);
+  //pinMode(buttonPinDown, INPUT_PULLUP);
+
+  qt_1.begin(); 
+  qt_2.begin(); 
   
   /* Start the DotStar LED */
   pixel.begin();
   //strip.begin(); LEDS.addLeds<LED_TYPE,LED_PIN,COLOR_ORDER>(leds,NUM_LEDS);
-  strip.begin(FastLED.addLeds<WS2812B, PINSTRIP, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip));
+  //inner.begin(FastLED.addLeds<WS2812B, PINSTRIP, GRB>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip));
   //inner.begin(FastLED.addLeds<WS2812B, 3, GRB>(ledsInner, NUM_LEDS_INNER).setCorrection(TypicalLEDStrip));
-  inner.begin();
+  strip.begin();
 
   //FastLED.setMaxPowerInVoltsAndMilliamps( VOLTS, MAX_POWER);
   //FastLED.setMaxRefreshRate(10000);
   //FastLED.setDither(BINARY_DITHER);
-  
+
+
   pixel.setBrightness(maxBrightness);
   strip.setBrightness(maxBrightness);
   inner.setBrightness(maxBrightness);
@@ -572,8 +592,8 @@ void setup() {
   // Bank = 1;
   // Mode = 0;
 
-  Bank = 1;
-  Mode = 0;
+  Bank = 3;
+  Mode = 1;
 
   timeMultiplier = 1;
 
@@ -617,7 +637,9 @@ void loop() {
   checkResetDefault();
   Routines();
 
-  
+  MaxBright = 50;
+  maxBrightness = 50;
+
 
   //Explicit Functions and Modes can be set here, instead of the Routines
   //mountainSnack();
